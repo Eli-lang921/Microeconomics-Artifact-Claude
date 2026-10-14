@@ -1,0 +1,481 @@
+{
+  "lessons": {
+    "l1": {
+      "practice": {
+        "l1-airport": {
+          "ok": true
+        },
+        "l1-burger-price": {
+          "ok": true
+        },
+        "l1-capital": {
+          "ok": true
+        },
+        "l1-college-mc": {
+          "ok": true
+        },
+        "l1-def": {
+          "ok": true
+        },
+        "l1-econdef": {
+          "ok": true
+        },
+        "l1-g-budget": {
+          "ok": true
+        },
+        "l1-g-college": {
+          "ok": true
+        },
+        "l1-g-lunch": {
+          "ok": true
+        },
+        "l1-g-maxunits": {
+          "ok": true
+        },
+        "l1-g-time": {
+          "ok": true
+        },
+        "l1-gr-intercepts": {
+          "ok": true
+        },
+        "l1-gr-outside": {
+          "ok": true
+        },
+        "l1-gr-shift": {
+          "ok": true
+        },
+        "l1-land": {
+          "ok": true
+        },
+        "l1-macro2": {
+          "ok": true
+        },
+        "l1-micro": {
+          "ok": true
+        },
+        "l1-normative2": {
+          "ok": true
+        },
+        "l1-notfactor": {
+          "ok": true
+        },
+        "l1-positive": {
+          "ok": true
+        },
+        "l1-shift": {
+          "ok": true
+        },
+        "l1-tf-capital-money": {
+          "ok": true
+        },
+        "l1-tf-diff": {
+          "ok": true
+        },
+        "l1-tf-free": {
+          "ok": true
+        },
+        "l1-tf-positive-true": {
+          "ok": true
+        },
+        "l1-tf-rich": {
+          "ok": true
+        },
+        "l1-tf-sum": {
+          "ok": true
+        },
+        "l1-tradeoff": {
+          "ok": true
+        }
+      }
+    },
+    "l2": {
+      "practice": {
+        "l2-bowed": {
+          "ok": true
+        },
+        "l2-g-ppf": {
+          "ok": true
+        },
+        "l2-gr-biased": {
+          "ok": true
+        },
+        "l2-gr-points": {
+          "ok": true
+        },
+        "l2-inside": {
+          "ok": true
+        },
+        "l2-prodeff": {
+          "ok": true
+        },
+        "l2-rubber": {
+          "ok": true
+        },
+        "l2-shift": {
+          "ok": true
+        },
+        "l2-straight": {
+          "ok": true
+        },
+        "l2-tf-unemp": {
+          "ok": true
+        }
+      }
+    }
+  },
+  "mastered": {},
+  "quiz": {
+    "attempts": 0,
+    "best": null,
+    "last": null
+  },
+  "reports": [],
+  "review": {
+    "c-l2-0": {
+      "box": 0,
+      "due": 1791950400000,
+      "t": 1791932308406
+    },
+    "c-l2-1": {
+      "box": 2,
+      "due": 1792468800000,
+      "t": 1791932215513
+    },
+    "c-l2-10": {
+      "box": 0,
+      "due": 1791950400000,
+      "t": 1791932578965
+    },
+    "c-l2-11": {
+      "box": 2,
+      "due": 1792468800000,
+      "t": 1791932531090
+    },
+    "c-l2-12": {
+      "box": 0,
+      "due": 1791950400000,
+      "t": 1791932268827
+    },
+    "c-l2-13": {
+      "box": 0,
+      "due": 1791950400000,
+      "t": 1791932604739
+    },
+    "c-l2-2": {
+      "box": 2,
+      "due": 1792468800000,
+      "t": 1791932597301
+    },
+    "c-l2-3": {
+      "box": 0,
+      "due": 1791950400000,
+      "t": 1791932583527
+    },
+    "c-l2-4": {
+      "box": 0,
+      "due": 1791950400000,
+      "t": 1791932284455
+    },
+    "c-l2-5": {
+      "box": 0,
+      "due": 1791950400000,
+      "t": 1791932178990
+    },
+    "c-l2-6": {
+      "box": 2,
+      "due": 1792468800000,
+      "t": 1791932549754
+    },
+    "c-l2-7": {
+      "box": 0,
+      "due": 1791950400000,
+      "t": 1791932247641
+    },
+    "c-l2-8": {
+      "box": 2,
+      "due": 1792468800000,
+      "t": 1791932315630
+    },
+    "c-l2-9": {
+      "box": 2,
+      "due": 1792468800000,
+      "t": 1791932235093
+    },
+    "l1-airport": {
+      "box": 2,
+      "due": 1792382400000,
+      "t": 1791815007978
+    },
+    "l1-burger-price": {
+      "box": 2,
+      "due": 1792382400000,
+      "t": 1791815081872
+    },
+    "l1-capital": {
+      "box": 2,
+      "due": 1792382400000,
+      "t": 1791805445683
+    },
+    "l1-college-mc": {
+      "box": 2,
+      "due": 1792382400000,
+      "t": 1791814898942
+    },
+    "l1-def": {
+      "box": 2,
+      "due": 1792382400000,
+      "t": 1791805434977
+    },
+    "l1-econdef": {
+      "box": 2,
+      "due": 1792382400000,
+      "t": 1791815050368
+    },
+    "l1-g-budget": {
+      "box": 2,
+      "due": 1792382400000,
+      "t": 1791805480153
+    },
+    "l1-g-college": {
+      "box": 0,
+      "due": 1791950400000,
+      "t": 1791929946723
+    },
+    "l1-g-lunch": {
+      "box": 2,
+      "due": 1792382400000,
+      "t": 1791805537665
+    },
+    "l1-g-maxunits": {
+      "box": 2,
+      "due": 1792382400000,
+      "t": 1791814928928
+    },
+    "l1-g-time": {
+      "box": 2,
+      "due": 1792382400000,
+      "t": 1791815028679
+    },
+    "l1-gr-intercepts": {
+      "box": 2,
+      "due": 1792382400000,
+      "t": 1791814954470
+    },
+    "l1-gr-outside": {
+      "box": 2,
+      "due": 1792382400000,
+      "t": 1791805569783
+    },
+    "l1-gr-shift": {
+      "box": 2,
+      "due": 1792382400000,
+      "t": 1791815108942
+    },
+    "l1-land": {
+      "box": 2,
+      "due": 1792382400000,
+      "t": 1791805516451
+    },
+    "l1-macro2": {
+      "box": 2,
+      "due": 1792382400000,
+      "t": 1791814873287
+    },
+    "l1-normative2": {
+      "box": 2,
+      "due": 1792382400000,
+      "t": 1791814859251
+    },
+    "l1-notfactor": {
+      "box": 2,
+      "due": 1792382400000,
+      "t": 1791814989003
+    },
+    "l1-positive": {
+      "box": 2,
+      "due": 1792382400000,
+      "t": 1791805609581
+    },
+    "l1-shift": {
+      "box": 2,
+      "due": 1792382400000,
+      "t": 1791805440424
+    },
+    "l1-tf-capital-money": {
+      "box": 2,
+      "due": 1792382400000,
+      "t": 1791815088009
+    },
+    "l1-tf-diff": {
+      "box": 2,
+      "due": 1792382400000,
+      "t": 1791815040606
+    },
+    "l1-tf-free": {
+      "box": 2,
+      "due": 1792382400000,
+      "t": 1791805457738
+    },
+    "l1-tf-positive-true": {
+      "box": 2,
+      "due": 1792382400000,
+      "t": 1791814864790
+    },
+    "l1-tf-rich": {
+      "box": 2,
+      "due": 1792382400000,
+      "t": 1791805489113
+    },
+    "l1-tf-sum": {
+      "box": 2,
+      "due": 1792382400000,
+      "t": 1791814960299
+    },
+    "l1-tradeoff": {
+      "box": 2,
+      "due": 1792382400000,
+      "t": 1791814977898
+    },
+    "l2-bowed": {
+      "box": 2,
+      "due": 1792468800000,
+      "t": 1791931048932
+    },
+    "l2-g-ppf": {
+      "box": 2,
+      "due": 1792468800000,
+      "t": 1791931287392
+    },
+    "l2-gr-biased": {
+      "box": 2,
+      "due": 1792468800000,
+      "t": 1791931129137
+    },
+    "l2-gr-points": {
+      "box": 2,
+      "due": 1792468800000,
+      "t": 1791931012078
+    },
+    "l2-inside": {
+      "box": 2,
+      "due": 1792468800000,
+      "t": 1791930439245
+    },
+    "l2-prodeff": {
+      "box": 2,
+      "due": 1792468800000,
+      "t": 1791931466821
+    },
+    "l2-rubber": {
+      "box": 2,
+      "due": 1792468800000,
+      "t": 1791931116809
+    },
+    "l2-shift": {
+      "box": 2,
+      "due": 1792468800000,
+      "t": 1791930461210
+    },
+    "l2-straight": {
+      "box": 2,
+      "due": 1792468800000,
+      "t": 1791931360670
+    },
+    "l2-tf-unemp": {
+      "box": 2,
+      "due": 1792468800000,
+      "t": 1791931065370
+    }
+  },
+  "updated": 1791932604739,
+  "v": 1,
+  "writing": {
+    "w-l2-1": {
+      "at": 1791931690021,
+      "max": 4,
+      "result": {
+        "error": "The PPF is called the 'Productivity possibilities frontier' and described as a company's allocation; it is the production possibilities frontier and shows an entire economy's output choices, not a single company's.",
+        "fix": "Explain that resources are not equally good at making both goods, so each additional boot costs more jackets than the last (for example 10, then 20, 30, 40 jackets). Then say this rising opportunity cost makes the curve steeper as you move along it, which creates the bowed-out shape.",
+        "points": [
+          {
+            "met": false,
+            "note": "The answer never says resources are specialized or better suited to making one good than the other."
+          },
+          {
+            "met": false,
+            "note": "It mentions a trade-off between jackets and boots but does not say the opportunity cost rises as more of one good is made."
+          },
+          {
+            "met": false,
+            "note": "No numbers or specific figures from the boots and jackets example are used."
+          },
+          {
+            "met": false,
+            "note": "It does not link opportunity cost to the bowed-out shape of the curve."
+          }
+        ],
+        "strength": "You correctly identified the basic trade-off idea: producing more jackets means giving up boots."
+      },
+      "score": 0,
+      "text": "The Productivity possibilitie frontier represents an economies productive allocation. This means a company can only produce more of something by taking away from something. In this case, the more jackets produced equals less boots."
+    },
+    "w-l2-2": {
+      "at": 1791931956155,
+      "max": 4,
+      "result": {
+        "error": "Saying the economy cannot produce 'that good' is slightly off: the outside point is an unattainable combination of two goods, not a single good the economy can't make.",
+        "fix": "Add a real-world cause for a point inside the curve, such as a recession with high unemployment where resources sit idle, and then explain that an outside point only becomes reachable if the PPF shifts outward through more workers, better technology, or trade.",
+        "points": [
+          {
+            "met": true,
+            "note": "You correctly say a point on the PPF means the economy is efficient, though you don't mention that all resources are fully used or that gaining more of one good means giving up some of the other."
+          },
+          {
+            "met": false,
+            "note": "You correctly say an inside point means producing less than possible, but you give no cause or example such as unemployment or a recession, which this point requires."
+          },
+          {
+            "met": true,
+            "note": "You say an outside point is something the economy cannot produce, which captures that it is unattainable, though 'that good' should be 'that combination of goods' and you could add 'with current resources and technology'."
+          },
+          {
+            "met": false,
+            "note": "You don't say what could make an outside point reachable, such as more resources, better technology, or trade."
+          }
+        ],
+        "strength": "You correctly link the three regions to inefficiency, efficiency, and unattainability, which shows you have the core idea of the PPF."
+      },
+      "score": 2,
+      "text": "A point inside a PPF is the economy is not producing as many goods as it could. On the PPF would mean the economy is efficient. Outside the PPF is that the economy cannot produce that good."
+    },
+    "w-l2-3": {
+      "at": 1791932110457,
+      "max": 4,
+      "result": {
+        "error": "Saying that consumer goods production today 'decreases' the future PPF is misleading: consuming more now doesn't shrink the PPF, it just means the PPF grows more slowly (or stays about the same) than it would with more capital investment.",
+        "fix": "Say explicitly that making more capital goods today means giving up some consumer goods now (the opportunity cost), and that this is the trade-off of less consumption today for more growth later.",
+        "points": [
+          {
+            "met": true,
+            "note": "The student describes capital goods as 'goods that produce other goods,' which correctly captures their role."
+          },
+          {
+            "met": false,
+            "note": "The answer never says that producing more capital goods means giving up consumer goods today, so the opportunity cost is not stated."
+          },
+          {
+            "met": true,
+            "note": "The student says producing more capital goods tends to expand the PPF outward in the future."
+          },
+          {
+            "met": false,
+            "note": "The answer contrasts the two choices but never frames it as consumption now versus growth later, and the trade-off is only implied."
+          }
+        ],
+        "strength": "You correctly link capital goods, which are goods that produce other goods, to an outward shift of the PPF."
+      },
+      "score": 2,
+      "text": "Producing more capital goods or goods that produce other goods generally expand the countries PPF curve outward. Consumer goods today tend to decreese or maintain the countries PPF curve in the future."
+    }
+  }
+}
