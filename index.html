@@ -1575,6 +1575,8 @@ What the student is looking at:
 ${String(ctx).slice(0,6000)}
 """`;
 }
+/* Explanations and writing grades run on Opus with low thinking (Eli's choice). If Opus can't answer, the platform falls back to the complex tier. */
+const OPUS_LOW = { model:'claude-opus-5-5', modelTier:'complex', effort:'low' };
 function explainBox(key, getCtx, mode=()=>'full', label='Explain this'){
   const wrap = document.createElement('div'); wrap.className='xp';
   const u = 'xp' + Math.random().toString(36).slice(2,7);
@@ -1597,7 +1599,7 @@ function explainBox(key, getCtx, mode=()=>'full', label='Explain this'){
     busy = true; ac = new AbortController(); stop.hidden = false; $$('button,input', ctl).forEach(x=>{ if(x!==stop) x.disabled=true; });
     drawThread('');
     try{
-      const r = await sample(T.msgs, { signal: ac.signal, onText: ({text}) => drawThread(text) });
+      const r = await sample(T.msgs, { ...OPUS_LOW, signal: ac.signal, onText: ({text}) => drawThread(text) });
       T.msgs.push({ role:'assistant', content: r.text || '' });
       XP_CACHE.set(T.sig, T);
     }catch(e){
@@ -1716,7 +1718,7 @@ function writeCard(wid){
     go.disabled=true; stop.hidden=false; ctl=new AbortController();
     out.innerHTML='<p class="msg">Claude is reading your answer. This can take up to a minute…</p>';
     try{
-      const r = await sample.json(gradePrompt(w, text), { signal: ctl.signal });
+      const r = await sample.json(gradePrompt(w, text), { ...OPUS_LOW, signal: ctl.signal });
       if(!r || !Array.isArray(r.points)) throw { code:'invalid_json' };
       const clean = { points: w.checklist.map((_,i)=>({ met: !!(r.points[i]&&r.points[i].met), note: String((r.points[i]&&r.points[i].note)||'').slice(0,300) })), strength:String(r.strength||'').slice(0,400), fix:String(r.fix||'').slice(0,500), error:String(r.error||'').slice(0,300) };
       const at = Date.now();
