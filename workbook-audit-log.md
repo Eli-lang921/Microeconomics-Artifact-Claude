@@ -12,11 +12,11 @@ Lesson 2
 - Lesson 3 question l3-g-oc (Claude's explanation) · Give enough fraction and "Other goes Over" practice · Question: Do you want 4 new fixed problems in Lesson 3's extra practice (last proposal), or a drill that keeps giving new numbers until you get 5 right in a row?
 
 ## Pending proposals
-- [ ] Lesson 2 flashcards: add a new card at the end of the list, "Specialized resources": what it means that resources are better at making one good than another, with a boots-and-jackets example (your report on card c-l2-5).
-- [ ] Lesson 3 "Countries work the same way": add a small graph of Brazil's and the U.S.'s PPFs, wheat across and sugar cane up, so you can see Brazil's steeper line (your report on that section).
-- [ ] Lesson 2 "Why some PPFs are straight lines": add a small graph showing a straight PPF next to a bowed one (the text describes a picture but shows none).
-- [ ] Lesson 3 extra practice: add 4 new problems at the end of the list that use "Other goes Over" and "Other goes Under" with fractions (your report on l3-g-oc).
-- [ ] Lesson 1 "Resources for firms": list entrepreneurship as the fourth factor of production instead of "many textbooks add" it (the flashcards and questions already treat it as one of four, and so does the CLEP).
+- [x ] Lesson 2 flashcards: add a new card at the end of the list, "Specialized resources": what it means that resources are better at making one good than another, with a boots-and-jackets example (your report on card c-l2-5).
+- [ x] Lesson 3 "Countries work the same way": add a small graph of Brazil's and the U.S.'s PPFs, wheat across and sugar cane up, so you can see Brazil's steeper line (your report on that section).
+- [ x] Lesson 2 "Why some PPFs are straight lines": add a small graph showing a straight PPF next to a bowed one (the text describes a picture but shows none).
+- [ x] Lesson 3 extra practice: add 4 new problems at the end of the list that use "Other goes Over" and "Other goes Under" with fractions (your report on l3-g-oc).
+- [ x] Lesson 1 "Resources for firms": list entrepreneurship as the fourth factor of production instead of "many textbooks add" it (the flashcards and questions already treat it as one of four, and so does the CLEP).
 
 ## Run history (newest first)
 ### 2026-10-16 (second run) · Focus: Lesson 1
