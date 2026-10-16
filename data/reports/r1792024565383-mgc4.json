@@ -1,9 +1,9 @@
 {
   "at": 1792024565383,
   "ctx": "Card as shown:\nFront: Production possibilities frontier (PPF)\nQuestion: What does a production possibilities frontier show, and what is held constant?\nAnswer: The maximum combinations of two goods an economy can produce when it uses all its resources efficiently, with resources and technology held fixed. It is a snapshot at one point in time.\nExample: Boots and jackets: 0 boots and 100 jackets, 20 and 90, 40 and 70, 60 and 40, or 80 and 0.\nWatch out: Prices don't appear anywhere on a PPF.",
-  "fixedAt": 0,
+  "fixedAt": 1792185000000,
   "note": "Is this correct? Doesn't a PPF show the maximum combination of two or more goods an economy can produce...? Through our learned example we use two goods to simplify but in reality it is more.",
-  "reply": "",
-  "status": "open",
+  "reply": "You're right that real economies make many goods. The PPF uses two only so it fits on a graph. The card now says so.",
+  "status": "fixed",
   "where": "card:c-l2-0"
 }

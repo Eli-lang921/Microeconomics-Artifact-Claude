@@ -452,7 +452,7 @@ mc('l1-def','l1','Which of the following best defines <b>opportunity cost</b>?',
   ['The value of the next best alternative given up when a choice is made','The total amount of money spent on a good','The sum of every alternative that could have been chosen','The price of a good after taxes','The price paid minus any discount received'],0,
   '<p>Opportunity cost is the value of your <b>single next best</b> alternative, not the total of every option you passed on. Money spent is often part of it, but time and other options count too.</p>');
 mc('l1-shift','l1','A free concert is tonight. Your next best option was a 4-hour shift that pays $15 an hour. What is the opportunity cost of going to the concert?',
-  ['$60 in wages given up','$0, because the concert is free','$15, one hour of wages','The concert itself','$60 plus the value of the concert'],0,
+  ['$0, because the concert is free','$15, one hour of wages','$60 in wages given up','$60 plus the value of the concert','The concert itself'],2,
   '<p>The ticket price is $0, but going still costs you something. You give up the shift: 4 × $15 = <b>$60</b>. "Free" things can still have a real opportunity cost.</p>');
 mc('l1-capital','l1','In economics, which of the following is an example of <b>capital</b>?',
   ['A delivery van owned by a bakery','$5,000 in the bakery\'s savings account','The wheat field the flour comes from','The baker\'s hours of work','Shares of stock the baker owns'],0,
@@ -485,7 +485,7 @@ lazy('l1-gr-outside','l1',()=>({ type:'mc', kind:'graph',
 mc('l1-positive','l1','Which of the following is a <b>positive</b> statement?',
   ['Raising the minimum wage will reduce the number of jobs for teenagers.','The minimum wage should be raised to $20.','It is unfair that some workers earn so little.','Teenagers ought to work fewer hours.','Teenagers deserve higher pay than they get.'],0,
   '<p>A <b>positive</b> statement describes how the world is or will be. It can be tested with data, even if it turns out false. The others say what <i>should</i> happen or what is fair, so they are <b>normative</b>.</p>');
-mc('l1-micro','l1','Which question is <b>microeconomic</b>?',
+mc('l1-micro','l1','Which of the following questions is <b>microeconomic</b>?',
   ['How will higher coffee-bean prices change what a café charges for a latte?','What causes the national unemployment rate to rise?','Why did the overall price level rise 3% last year?','How fast is the country\'s total output growing?','What happens to total U.S. exports when the dollar strengthens?'],0,
   '<p>Microeconomics looks at individual decision makers: households, workers, firms and single markets, like one café. The other four are about the whole economy, which is <b>macroeconomics</b>.</p>');
 gen('l1-g-college','l1',()=>{
@@ -692,7 +692,7 @@ gen('l3-gr-two','l3',()=>{
     explain:`<p>Opportunity cost of 1 shirt = hats given up = vertical intercept ÷ horizontal intercept. Ana: ${ay}/${ax} = ${fmt(oa)}. Ben: ${by}/${bx} = ${fmt(ob)}.</p><p><b>${ans===0?'Ana':'Ben'}</b> gives up fewer hats per shirt. On a graph like this, the <b>flatter</b> line has the lower cost of the horizontal-axis good.</p>` };
 },'graph');
 mc('l3-terms','l3','The seamstress gives up 2 bread to make a sweater; the baker gives up 3 bread. Which trade price would make <b>both</b> better off?',
-  ['1 sweater for 2.5 bread','1 sweater for 1.5 bread','1 sweater for 3.5 bread','1 sweater for 4 bread','1 sweater for 1 bread'],0,
+  ['1 sweater for 1 bread','1 sweater for 1.5 bread','1 sweater for 2.5 bread','1 sweater for 3.5 bread','1 sweater for 4 bread'],2,
   '<p>The price must sit between the two opportunity costs: more than the 2 bread a sweater costs the seamstress, less than the 3 bread it would cost the baker. Only <b>2.5</b> fits. That\'s why the course example used 2 sweaters for 5 bread.</p>');
 gen('l3-g-max','l3',()=>{
   let m1,m2,l1,l2; do{ m1=pick([4,6,8,10]); m2=pick([2,4,5]); l1=pick([12,16,18,24]); l2=pick([4,6,8]); } while(!(l1/l2 > m1/m2 + 0.4));
@@ -749,7 +749,7 @@ mc('l3-lawyer','l3','A lawyer types faster than her assistant but still pays him
 tf('l3-tf-identical','l3','If two producers have exactly the same opportunity costs, there is no gain from specializing and trading.',true,
   '<p>True. Gains come from <b>differences</b> in opportunity cost. If the costs match, any trade price leaves one side no better off than producing alone.</p>');
 mc('l3-terms2','l3','Country A gives up 4 shirts to make one hat; Country B gives up 1.5 shirts to make one hat. Which price for one hat could benefit <b>both</b> countries?',
-  ['3 shirts','1 shirt','1.25 shirts','5 shirts','6 shirts'],0,
+  ['1 shirt','1.25 shirts','3 shirts','5 shirts','6 shirts'],2,
   '<p>B makes hats cheaply (1.5 shirts) and sells them; A would pay up to 4 shirts. Any price between 1.5 and 4 works, and only <b>3</b> is in that range.</p>');
 mc('l3-meaning','l3','Specializing according to comparative advantage means each producer does which of the following?',
   ['Makes the good it gives up the least to make, and trades for the rest','Makes the good it can produce the most of','Makes everything it needs itself','Makes whatever sells at the highest price','Makes both goods in equal amounts'],0,
@@ -960,6 +960,8 @@ mc('l5-marginaldecision','l5','Which of the following is a <b>marginal</b> decis
   ['Whether a café should stay open one more hour','Whether a country should switch to a command economy','How much the café has spent on rent since it opened','What the café earned last year in total','Whether coffee is a good or a service'],0,
   '<p>"One more hour" is a decision about a little more of something: compare that hour\'s extra revenue to its extra cost.</p>');
 
+['l1-shift','l3-terms','l3-terms2'].forEach(id => { Q[id].keepOrder = true; }); /* number choices stay smallest to largest */
+
 /* ===== Unit quiz (separate pool, 5 choices like the CLEP) ===== */
 const QUIZ = [];
 function qz(id, prompt, options, answer, explain, lesson, keepOrder){ Q[id] = { lesson, type:'mc', kind:'mc', prompt, options, answer, explain, quiz:true, keepOrder:!!keepOrder }; QUIZ.push(id); }
@@ -1005,11 +1007,11 @@ const CARD_LIST = {
     ['Budget constraint','What does a budget constraint (budget line) show, and what does its slope tell you?','Every combination of two goods you can buy if you spend your whole budget. Points on the line spend it all, points inside leave money over, and points outside are unaffordable. Slope = −(price of the horizontal-axis good ÷ price of the vertical-axis good), which is the opportunity cost of one unit of the horizontal-axis good.','$10 budget, burgers $2 (vertical axis), bus tickets $0.50 (horizontal axis): at most 5 burgers or 20 tickets. Slope = −0.50 ÷ 2 = −0.25, so each ticket costs ¼ burger and each burger costs 4 tickets.','A bigger budget shifts the line out parallel. A price change pivots it.']
   ],
   l2:[
-    ['Production possibilities frontier (PPF)','What does a production possibilities frontier show, and what is held constant?','The maximum combinations of two goods an economy can produce when it uses all its resources efficiently, with resources and technology held fixed. It is a snapshot at one point in time.','Boots and jackets: 0 boots and 100 jackets, 20 and 90, 40 and 70, 60 and 40, or 80 and 0.','Prices don\'t appear anywhere on a PPF.'],
+    ['Production possibilities frontier (PPF)','What does a production possibilities frontier show, and what is held constant?','The maximum combinations of two goods an economy can produce when it uses all its resources efficiently, with resources and technology held fixed. It is a snapshot at one point in time. Real economies make many goods; the model uses two so they fit on a graph.','Boots and jackets: 0 boots and 100 jackets, 20 and 90, 40 and 70, 60 and 40, or 80 and 0.','Prices don\'t appear anywhere on a PPF.'],
     ['Point on the PPF','What does a point on the PPF tell you?','The economy is productively efficient: all resources are in use and none are wasted, so producing more of one good requires producing less of the other.','From 40 boots and 70 jackets, getting to 60 boots means dropping to 40 jackets.',''],
     ['Point inside the PPF','What does a point inside the PPF mean, and what typically causes it?','Inefficient production: some resources are idle or misused. The economy could produce more of at least one good, often both, without giving anything up. Common causes are unemployment, a recession or idle factories.','Making 30 boots and 50 jackets when 40 and 70 are possible.','Putting idle workers back to work moves the economy toward the curve. It doesn\'t shift the curve.'],
     ['Point outside the PPF','What does a point outside the PPF mean, and how could the economy get there?','It is unattainable with current resources and technology. Production could reach it only if the PPF shifts out (more resources or better technology). Through trade, a country can consume there, but not produce there.','90 boots and 90 jackets, when the frontier tops out at 80 boots or 100 jackets.',''],
-    ['Law of increasing opportunity cost','What is the law of increasing opportunity cost? Show it with numbers.','As an economy produces more of one good, each additional unit costs more and more of the other good, because the resources moved over are less and less suited to making it.','Each extra 20 boots costs 10, then 20, then 30, then 40 jackets: 0.5, then 1, then 1.5, then 2 jackets per boot.',''],
+    ['Law of increasing opportunity cost','What is the law of increasing opportunity cost?','As an economy produces more of one good, each additional unit costs more and more of the other good, because the resources moved over are less and less suited to making it.','Each extra 20 boots costs 10, then 20, then 30, then 40 jackets: 0.5, then 1, then 1.5, then 2 jackets per boot.',''],
     ['Bowed-out PPF','Why is a typical PPF bowed outward?','Because resources are specialized: they are not equally good at producing both goods. That creates increasing opportunity cost, so the curve gets steeper as you move toward more of the horizontal-axis good.','The first workers switched to boots are natural boot makers, so boots are cheap. The last ones are expert jacket makers, so boots get expensive.',''],
     ['Straight-line PPF','What does a straight-line PPF tell you?','Constant opportunity cost: every unit of one good costs the same amount of the other, because resources are equally good at both. The slope is the same everywhere.','A country can make 100 tons of corn or 50 tons of cotton: each ton of corn always costs 0.5 ton of cotton.','One person\'s single day of work is usually drawn as a straight line, as in Lesson 3.'],
     ['Shift of the PPF','What are the only two things that shift the whole PPF?','A change in the quantity or quality of resources (workers, capital, land), or a change in technology. More or better shifts it out; less shifts it in.','Out: immigration grows the labor force, or a new technology. In: an earthquake destroys factories.','Lower unemployment, choosing a different mix, and price changes do NOT shift the PPF.'],
@@ -2061,7 +2063,7 @@ ${term('Trade-off','Choosing more of one thing means less of another.')}
 <h2>Opportunity cost</h2>
 <div class="analogy"><div class="eyebrow">Analogy</div><p>You have one free Saturday night. You could go to a friend's party, pick up a paid shift, or study. You go to the party. If the shift was your next favorite option, the cost of the party is that shift, not "the shift plus studying plus everything else."</p></div>
 <p><b>Opportunity cost</b> is the value of the <b>next best alternative</b> you give up when you make a choice. Only one option counts: the one you would have picked otherwise.</p>
-<p>Your course's simplest example: you have $5 and want a latte and a notebook. Buy the latte and the opportunity cost is the notebook.</p>
+<p>Your course's simplest example: you have $5, and a latte and a notebook each cost $5. You can only buy one. Buy the latte and the opportunity cost is the notebook.</p>
 <div data-widget="snooze"></div>
 <p>The snooze example shows two big points:</p>
 <ul>
@@ -2196,7 +2198,7 @@ ${term('Input problem','"Takes 1 hour per bread, 2 hours per sweater." Opportuni
 </div>
 <p>Check: the seamstress needs 1 hour per bread and 2 per sweater. Bread costs 1 ÷ 2 = ½ sweater. Same answer as the output method.</p>
 <h3>Countries work the same way</h3>
-<p>The textbook's example: Brazil can grow a lot of sugar cane per acre but not much wheat; the U.S. is the reverse. Brazil has the comparative advantage in sugar cane, the U.S. in wheat. On a graph, Brazil's PPF is steeper.</p>
+<p>The textbook's example: Brazil can grow a lot of sugar cane per acre but not much wheat; the U.S. is the reverse. Brazil has the comparative advantage in sugar cane, the U.S. in wheat. On a graph with wheat on the horizontal axis, Brazil's PPF is steeper: each extra unit of wheat costs Brazil a lot of sugar cane.</p>
 <h3>Where this idea came from</h3>
 <p>Adam Smith showed in 1776 that dividing work into specialized tasks raises output (his pin factory). David Ricardo later showed that trade pays even when one side is better at everything. Paul Krugman's essay below explains why smart people still find that hard to accept.</p>`,
   practice:['l3-defs','l3-g-oc','l3-g-ca','l3-both','l3-input','l3-terms'],

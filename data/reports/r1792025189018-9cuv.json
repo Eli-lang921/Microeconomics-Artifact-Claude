@@ -1,9 +1,9 @@
 {
   "at": 1792025189018,
   "ctx": "Card as shown:\nFront: Law of increasing opportunity cost\nQuestion: What is the law of increasing opportunity cost? Show it with numbers.\nAnswer: As an economy produces more of one good, each additional unit costs more and more of the other good, because the resources moved over are less and less suited to making it.\nExample: Each extra 20 boots costs 10, then 20, then 30, then 40 jackets: 0.5, then 1, then 1.5, then 2 jackets per boot.\nWatch out: ",
-  "fixedAt": 0,
+  "fixedAt": 1792185000000,
   "note": "Do not include numbers in this question.",
-  "reply": "",
-  "status": "open",
+  "reply": "The question now just asks what the law says, with no request for numbers. The numbers stay in the example on the back.",
+  "status": "fixed",
   "where": "card:c-l2-4"
 }
