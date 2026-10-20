@@ -266,6 +266,13 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .fc-foot{gap:4px 16px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+table.wrap-cells th,table.wrap-cells td{white-space:normal;text-align:left;vertical-align:top;min-width:6.5rem;font-size:.92rem}
+table.wrap-cells td:first-child{min-width:5.5rem}
+.qcheck{margin:1.2rem 0;padding:12px;border-left:3px solid var(--g2);background:var(--surface-2);border-radius:var(--r);display:grid;gap:10px}
+.qcheck>.eyebrow{margin:0;color:var(--g2)}
+.cf-nav{justify-content:space-between;margin-top:4px}
+.sort-item .why{margin:6px 0 0;color:var(--muted)}
 </style>
 
 <header class="top">
@@ -551,8 +558,8 @@ mc('l2-inside','l2','An economy is producing at a point <b>inside</b> its produc
   ['It could produce more of at least one good without producing less of the other','It has used up all of its resources','It is producing the mix society wants most','It cannot reach that point with current resources','It must be importing more of both goods'],0,
   '<p>Inside the curve means something is idle or wasted, like unemployed workers or unused factories. Using them would get more of one good, or both, with no sacrifice.</p>');
 mc('l2-shift','l2','Which of the following would shift a country\'s PPF <b>outward</b>?',
-  ['A new technology that makes workers in both industries more productive','Putting unemployed workers back to work','Producing more of one good and less of the other','A shortage of a raw material used in both industries','A rise in the price of one of the goods'],0,
-  '<p>Only more resources or better technology move the whole frontier out. Re-employing idle workers moves the economy <b>toward</b> the curve. Changing the mix is a <b>movement along</b> it. A shortage shifts it <b>in</b>. Prices aren\'t on a PPF at all.</p>');
+  ['A new technology that makes workers in both industries more productive','Putting unemployed workers back to work','Producing more of one good and less of the other','Losing a raw material used in both industries','A rise in the price of one of the goods'],0,
+  '<p>Only more resources or better technology move the whole frontier out. Re-employing idle workers moves the economy <b>toward</b> the curve. Changing the mix is a <b>movement along</b> it. Losing resources shifts it <b>in</b>. Prices aren\'t on a PPF at all.</p>');
 Q['l2-boots'] = { lesson:'l2', type:'num', kind:'num', prompt:'An economy\'s production possibilities for boots and jackets:'+table(['Point','A','B','C','D','E'],[['Boots',0,20,40,60,80],['Jackets',100,90,70,40,0]])+'Moving from point C to point D, what is the opportunity cost of <b>each</b> additional boot, in jackets?',
   answer:1.5, unit:'jackets per boot',
   explain:'<p>Boots go up 20 (40 → 60). Jackets fall 30 (70 → 40). Each boot costs 30 ÷ 20 = <b>1.5 jackets</b>.</p><p>Compare A → B, where each boot cost only 0.5 jackets. The cost keeps rising as you make more boots.</p>' };
@@ -565,9 +572,9 @@ mc('l2-bowed','l2','Why is a typical PPF <b>bowed outward</b>?',
   '<p>The first workers moved into boot-making are the ones best suited to it, so you lose few jackets. Later you must move expert jacket makers, so each extra boot costs more jackets. Rising (increasing) opportunity cost bends the curve outward.</p>');
 tf('l2-tf-unemp','l2','Putting unemployed workers back to work shifts the PPF outward.',false,
   '<p>False. Those workers were already counted in the economy\'s resources. Employing them moves the economy from a point <b>inside</b> the curve toward the curve. The curve itself only shifts when resources or technology change.</p>');
-mc('l2-rubber','l2','Boots use a lot of rubber; jackets use very little. A rubber shortage hits. On a PPF with boots on the horizontal axis, which of the following happens?',
+mc('l2-rubber','l2','Boots use a lot of rubber; jackets use very little. The supply of rubber is cut sharply. On a PPF with boots on the horizontal axis, which of the following happens?',
   ['A biased inward shift: the boots end moves in a lot, the jackets end barely moves','An equal inward shift of the whole curve','An outward shift, because rubber prices rise','A movement along the curve toward more jackets','An outward shift of the jackets end only'],0,
-  '<p>The shortage hurts one industry far more than the other, so the shift is <b>biased</b>. Max boots falls a lot. Max jackets barely changes because jackets hardly use rubber.</p>');
+  '<p>Less rubber hurts one industry far more than the other, so the shift is <b>biased</b>. Max boots falls a lot. Max jackets barely changes because jackets hardly use rubber.</p>');
 lazy('l2-gr-biased','l2',()=>({ type:'mc', kind:'graph',
   prompt:`A country\'s PPF moved from the dashed curve to the solid curve.${gchart({xmax:150,ymax:120,xlab:'Robots',ylab:'Bread',xt:[0,50,100,150],yt:[0,50,100],body:(X,Y)=>gline(bowedPts(90,100),X,Y,'var(--muted)','5 4',2)+gline(bowedPts(135,100),X,Y)})}Which of the following most likely caused this shift?`,
   options:['A new technology that only helps make robots','More workers available to both industries','A drought that hurts the wheat used for bread','Choosing to make more robots and less bread','A fall in unemployment'], answer:0,
@@ -646,7 +653,7 @@ tf('l2-tf-rising','l2','On a bowed-out PPF, the opportunity cost of a good rises
   '<p>True. That\'s the law of increasing opportunity cost: 10, 20, 30, then 40 jackets for each 20 boots in your course\'s example.</p>');
 lazy('l2-gr-equal','l2',()=>({ type:'mc', kind:'graph',
   prompt:`A country\'s PPF moved from the dashed curve to the solid curve.${gchart({xmax:120,ymax:120,xlab:'Food',ylab:'Clothing',xt:[0,50,100],yt:[0,50,100],body:(X,Y)=>gline(bowedPts(100,100),X,Y,'var(--muted)','5 4',2)+gline(bowedPts(75,75),X,Y)})}Which of the following best explains the shift?`,
-  options:['Fewer workers available to both industries','A shortage of a material used only for food','A new technology for both goods','Higher unemployment','Choosing to make more clothing'], answer:0,
+  options:['Fewer workers available to both industries','Losing a material used only for food','A new technology for both goods','Higher unemployment','Choosing to make more clothing'], answer:0,
   explain:'<p>Both ends moved in by the same share: an <b>equal</b> inward shift, from losing a resource both industries use (like workers).</p><p>Higher unemployment would put the economy <b>inside</b> the old curve without moving the curve.</p>' }));
 
 /* ===== Lesson 3: Comparative advantage ===== */
@@ -848,6 +855,32 @@ mc('l4-decentral','l4','Which of the following is an example of <b>decentralized
   ['Millions of shoppers and stores deciding what to buy and sell','A planning board setting tractor output','A king assigning land to vassals','A government setting all wages','Families farming as their ancestors did'],0,
   '<p>Decentralized means spread across many people. That\'s the mark of a market economy.</p>');
 
+/* ===== Lesson 4 quick checks (inline in the lesson; not scheduled from the lesson page, but available in free practice) ===== */
+mc('l4c-forwhom','l4','In a market economy, which of the following mainly decides <b>who receives</b> the goods that are produced?',
+  ['People\'s incomes, earned by selling their resources, together with prices','A central planning board','Custom and family roles','A law giving every household an equal share','The firms\' owners, who choose who may buy'],0,
+  '<p>In a market economy, the "for whom" question is answered by who is willing and able to pay. That depends on income, and income comes from selling land, labor, capital or entrepreneurship in the factor market. Planners decide in a command economy; custom decides in a traditional one.</p>');
+mc('l4c-cmdweak','l4','Which of the following is a common criticism of command economies?',
+  ['Planners lack the information prices provide and people have few rewards for new ideas, so waste and shortages are common','Prices change too often for families to plan','Too many competing firms make similar products','The government plays too small a role','Custom prevents any change in what is produced'],0,
+  '<p>Without market prices, planners must guess what people want and what things really cost, and workers and managers gain little from finding better ways. That leads to waste and shortages, and black markets appear. The last choice describes a traditional economy.</p>');
+mc('l4c-signal','l4','A frost destroys half of one region\'s orange crop, and the price of oranges rises sharply. For orange growers in other regions, the higher price does which of the following?',
+  ['It signals that oranges are scarcer and gives them an incentive to sell more there','It guarantees that every buyer still gets the same amount of oranges','It lowers their cost of growing oranges','It requires them to stop selling oranges','It has no effect, because prices only matter to buyers'],0,
+  '<p>Prices <b>signal</b> scarcity and create an <b>incentive</b> to respond: other growers can earn more by shipping oranges to the region. Higher prices also <b>ration</b> the smaller supply, so buyers do not all get the same amount.</p>');
+tf('l4c-hhroles','l4','In the circular flow model, households are buyers in both the goods and services market and the factor market.',false,
+  '<p>False. Households are <b>buyers</b> in the goods and services market but <b>sellers</b> in the factor market, where they sell land, labor, capital and entrepreneurship. Firms play the opposite roles.</p>');
+mc('l4c-entre','l4','In the circular flow model, profit is the payment for which factor of production?',
+  ['Entrepreneurship','Land','Labor','Capital','Government services'],0,
+  '<p>Each factor has its own payment: land earns <b>rent</b>, labor earns <b>wages</b>, capital earns <b>interest</b>, and entrepreneurship earns <b>profit</b>.</p>');
+mc('l4c-profit','l4','A firm collects $2,000 in revenue in a week. It pays $1,200 in wages, $300 in rent and $200 in interest. What is the owner\'s profit?',
+  ['$100','$300','$500','$800','$1,700'],1,
+  '<p>Profit is what is left after the other factor payments: $2,000 − $1,200 − $300 − $200 = <b>$300</b>. $1,700 is the total of the other payments, not the profit.</p>');
+Q['l4c-profit'].keepOrder = true;
+mc('l4c-commons','l4','A lake that anyone may fish in, and that no one owns, is quickly overfished. Which of the following best explains why?',
+  ['Each fisher keeps the full gain from an extra fish but shares the cost of a smaller fish stock with everyone','Fish are free goods, so they are not scarce','The government owns the lake and sets the catch','Fishers prefer to catch fewer fish than they could','The price of fish is too low for anyone to want them'],0,
+  '<p>This is the <b>tragedy of the commons</b>. Without property rights, each user compares their own full gain with only their small share of the cost, so everyone uses too much. Fish in an open lake are clearly scarce; that is why overuse hurts.</p>');
+mc('l4c-rights','l4','Which of the following best explains why secure property rights encourage people to maintain and improve what they own?',
+  ['Owners keep the gains from improving a resource and bear the cost of neglecting it','Owners are required by law to improve their property','Property rights make all goods free','Property rights let the government decide how resources are used','Owners cannot sell what they own, so they must keep it in good shape'],0,
+  '<p>Property rights tie the costs and benefits of a choice to the person making it. An owner who fixes up a house can sell it for more; one who neglects it loses value. The last choice is backwards: the right to <b>transfer</b> is one of the four parts of property rights.</p>');
+
 /* ===== Lesson 5: Marginal analysis and incentives ===== */
 mc('l5-def','l5','Marginal analysis compares which of the following?',
   ['The extra benefit and extra cost of doing a little more (or less) of something','The total benefit and total cost of everything you do','Your income with other people\'s income','Past spending with future spending','Your choices with your friends\' choices'],0,
@@ -876,10 +909,10 @@ gen('l5-gr-mb','l5',()=>{
 },'graph');
 mc('l5-incentive','l5','Which of the following is an <b>incentive</b>?',
   ['A tax credit for companies that hire apprentices','A tax on sugary drinks','A fine for returning library books late','A pollution tax','Higher highway tolls at rush hour'],0,
-  '<p>The tax credit raises the <b>benefit</b> of hiring apprentices. The other four raise the <b>cost</b> of a choice, so they are disincentives.</p>');
+  '<p>The tax credit lowers the net <b>cost</b> of hiring apprentices, which makes hiring more attractive: an incentive. The other four raise the <b>cost</b> of a choice, so they are disincentives.</p>');
 mc('l5-dis','l5','Which of the following is a <b>disincentive</b>?',
   ['A tax on cigarettes','A buy-one-get-one-free sale','Bonus points for coming to class','A tax credit for buying solar panels','Free samples at a grocery store'],0,
-  '<p>A disincentive raises the <b>cost</b> of a choice, so people do less of it. The tax makes smoking pricier. The other four raise the <b>benefit</b> of a choice: incentives.</p>');
+  '<p>A disincentive raises the <b>cost</b> of a choice (or lowers its benefit), so people do less of it. The tax makes smoking pricier. The other four make a choice more rewarding or cheaper: incentives.</p>');
 gen('l5-g-sunk','l5',()=>{
   const Sx=pick([2,3,5])*1e6, C=pick([400,600,800,1000])*1e3, R=pick([300,500,700,900,1200])*1e3; const ans=R-C;
   return { type:'num', kind:'num', prompt:`A company has already spent ${money(Sx)} developing a product; that money can\'t be recovered. Finishing it would cost ${money(C)} more and bring in ${money(R)} in revenue. Counting only future money, what is the net gain (or loss) from finishing? (Use a minus sign for a loss.)`,
@@ -927,8 +960,8 @@ gen('l5-g-net','l5',()=>{
     answer:ans, unit:'dollars', explain:`<p>Buy slices worth at least ${money(P)}: ${bought.length} slices. Net gain on each: ${bought.map(x=>money(x-P)).join(' + ')} = <b>${money(ans)}</b>.</p><p>Any more slices would subtract from this total.</p>` };
 });
 mc('l5-calorie','l5','Posting calorie counts on fast-food menus works mainly as which of the following?',
-  ['A disincentive, by making the health cost of a choice more visible','An incentive to eat more','A sunk cost','A tax','A subsidy'],0,
-  '<p>Your course lists calorie reports as a disincentive: they raise the perceived cost of high-calorie choices.</p>');
+  ['Information that makes the health cost of a choice more visible, which can discourage it','An incentive to eat more','A sunk cost','A tax','A subsidy'],0,
+  '<p>Calorie counts don\'t change the price; they are <b>information</b>. By making the health cost easier to see, they can raise the <b>perceived</b> cost of high-calorie choices, so some people choose differently. A tax, by contrast, changes the actual cost.</p>');
 tf('l5-tf-incent','l5','Incentives and disincentives work by changing the costs or benefits of a choice.',true,
   '<p>True. Change the MB or MC and you can change where MB ≥ MC stops, which changes the decision.</p>');
 mc('l5-study','l5','You\'re deciding whether to study one more hour tonight. Marginal thinking says to compare which of the following?',
@@ -983,15 +1016,15 @@ qz('u1-cf','In the circular flow model, households in the goods and services mar
 qz('u1-capital','Which of the following is an example of the factor of production called capital?',['A factory\'s machinery','A company\'s cash in the bank','The workers on a factory floor','An oil field','The company\'s stock price'],0,'<p>Capital is human-made tools used to produce other goods. Cash is financial capital, workers are labor, the oil field is land, and a stock price is just a price.</p>','l1');
 qz('u1-coffee','Sam values his 1st, 2nd, 3rd and 4th coffee of the week at $5.00, $3.50, $2.25 and $1.00. Coffee costs $2.50. How many will he buy?',['0','1','2','3','4'],2,'<p>Buy while marginal benefit ≥ price. $5.00 and $3.50 beat $2.50; the third is worth $2.25, less than its price. He buys <b>2</b>.</p>','l5',true);
 qz('u1-sunk','A company has spent $2 million developing a product. Finishing it will cost $1 million more and bring in $800,000. What should it do?',['Stop, because the remaining $1 million cost is more than the $800,000 it would bring in','Finish, so the $2 million isn\'t wasted','Finish, because total spending would be $3 million','Stop, because $2 million is more than $800,000','Finish, because revenue is positive'],0,'<p>The $2 million is sunk. Looking forward: spend $1,000,000 to get $800,000 = a $200,000 loss. Stop. The "$2 million is more than $800,000" answer reaches the right action for the wrong reason.</p>','l5');
-qz('u1-subsidy','A government subsidy for buying solar panels is an example of which of the following?',['An incentive that raises the benefit of buying solar panels','A disincentive that raises the cost of buying solar panels','A sunk cost','A command economy','A price ceiling'],0,'<p>A subsidy makes the choice more rewarding, so it is an incentive. A tax on solar panels would be the matching disincentive.</p>','l5');
-qz('u1-factorflow','In the circular flow model, which of the following flows from households to firms through the factor market?',['Labor, land and capital','Wages, rent, interest and profit payments','Goods and services','Spending on goods and services','Taxes'],0,'<p>In the factor market households <b>sell</b> resources (labor, land, capital, entrepreneurship) to firms, and the money (wages, rent, interest, profit) flows the other way. Goods flow from firms to households in the product market, paid for by household spending there. Taxes are not part of the simple two-sector model.</p>','l4');
+qz('u1-subsidy','A government subsidy for buying solar panels is an example of which of the following?',['An incentive that lowers the cost of buying solar panels','A disincentive that raises the cost of buying solar panels','A sunk cost','A command economy','A price ceiling'],0,'<p>A subsidy pays part of the price, so it lowers the cost of the choice: an incentive. A tax on solar panels would be the matching disincentive.</p>','l5');
+qz('u1-factorflow','In the circular flow model, which of the following flows from households to firms through the factor market?',['Land, labor, capital and entrepreneurship','Wages, rent, interest and profit payments','Goods and services','Spending on goods and services','Taxes'],0,'<p>In the factor market households <b>sell</b> resources (labor, land, capital, entrepreneurship) to firms, and the money (wages, rent, interest, profit) flows the other way. Goods flow from firms to households in the product market, paid for by household spending there. Taxes are not part of the simple two-sector model.</p>','l4');
 
 /* ===== Flashcards (key terms) =====
    Each card: [term, question on the front, answer, example, common mistake]. Order matters: ids are c-<lesson>-<index>,
    which the review schedule uses, so new built-in cards go at the END of a lesson's list. */
 const CARD_LIST = {
   l1:[
-    ['Scarcity','What is scarcity, and why doesn\'t more money make it go away?','Scarcity means people\'s wants are greater than the resources available to satisfy them, so choices can\'t be avoided. The resources are things like time, workers, land and machines. Money is only a claim on those resources; printing or earning more of it doesn\'t create more of them.','A billionaire still has 24 hours in a day: an hour in a meeting is an hour not spent with family.','Scarcity is not a shortage. A shortage is temporary (a price set too low); scarcity is permanent and affects everyone.'],
+    ['Scarcity','What is scarcity, and why doesn\'t more money make it go away?','Scarcity means people\'s wants are greater than the resources available to satisfy them, so choices can\'t be avoided. The resources are things like time, workers, land and machines. Money is only a claim on those resources; printing or earning more of it doesn\'t create more of them.','A billionaire still has 24 hours in a day: an hour in a meeting is an hour not spent with family.','Scarcity is not a shortage. A shortage means quantity demanded is greater than quantity supplied at the current price; it can last when a price is held below equilibrium. Scarcity is the broader, permanent condition of limited resources relative to wants, and it affects everyone.'],
     ['Economics','What does economics study, in one sentence?','How people, businesses and societies choose to use scarce resources to meet their wants, and what happens as a result of those choices.','Deciding whether to spend Saturday working a $15-an-hour shift or studying is an economic choice, even though no money changes hands if you study.','Economics isn\'t only about money or the stock market. It covers any choice made under scarcity.'],
     ['Opportunity cost','What is opportunity cost, and what does it include and leave out?','The value of the single next best alternative you give up when you make a choice. It includes the money you pay plus anything else you give up, such as time or wages. It leaves out every alternative beyond the next best one, and costs you\'d pay no matter what you chose.','You skip a 4-hour shift at $15 an hour to go to a free concert. The opportunity cost is $60 in lost wages, even though the ticket cost $0.','Don\'t add up every option you passed on. Only the next best one counts.'],
     ['Trade-off','What is a trade-off, and how is it related to opportunity cost?','A trade-off is a situation where getting more of one thing means getting less of something else. The opportunity cost is the specific thing you give up in that trade-off.','A city adds $2 million to the police budget and cuts $2 million from parks. The trade-off is police versus parks; the opportunity cost of the extra police spending is the park services lost.',''],
@@ -1015,7 +1048,7 @@ const CARD_LIST = {
     ['Bowed-out PPF','Why is a typical PPF bowed outward?','Because resources are specialized: they are not equally good at producing both goods. That creates increasing opportunity cost, so the curve gets steeper as you move toward more of the horizontal-axis good.','The first workers switched to boots are natural boot makers, so boots are cheap. The last ones are expert jacket makers, so boots get expensive.',''],
     ['Straight-line PPF','What does a straight-line PPF tell you?','Constant opportunity cost: every unit of one good costs the same amount of the other, because resources are equally good at both. The slope is the same everywhere.','A country can make 100 tons of corn or 50 tons of cotton: each ton of corn always costs 0.5 ton of cotton.','One person\'s single day of work is usually drawn as a straight line, as in Lesson 3.'],
     ['Shift of the PPF','What are the only two things that shift the whole PPF?','A change in the quantity or quality of resources (workers, capital, land), or a change in technology. More or better shifts it out; less shifts it in.','Out: immigration grows the labor force, or a new technology. In: an earthquake destroys factories.','Lower unemployment, choosing a different mix, and price changes do NOT shift the PPF.'],
-    ['Biased shift','What is a biased shift, and what would cause one?','A shift in which one end of the PPF moves much more than the other, because the change affects one good\'s production much more than the other\'s.','A rubber shortage pulls in the boots end a lot (boots need rubber) and barely moves the jackets end.','An equal shift comes from a change that hits both goods about the same, like fewer workers overall.'],
+    ['Biased shift','What is a biased shift, and what would cause one?','A shift in which one end of the PPF moves much more than the other, because the change affects one good\'s production much more than the other\'s.','A cut in the rubber supply pulls in the boots end a lot (boots need rubber) and barely moves the jackets end.','An equal shift comes from a change that hits both goods about the same, like fewer workers overall.'],
     ['Movement along the PPF','What causes a movement along the PPF instead of a shift?','Choosing a different combination of the two goods with the same resources and technology. The move shows the opportunity cost of one good in terms of the other.','Building more trucks and fewer cars with the same factories and workers.',''],
     ['Productive efficiency','What is productive efficiency, and where is it on a PPF?','Getting the maximum output from available resources, so you can\'t make more of one good without making less of another. Every point on the PPF has it.','In the boots and jackets example, 40 boots and 70 jackets and 60 boots and 40 jackets are both productively efficient: each is on the frontier.','Contrast with allocative efficiency, which is only one point on the curve.'],
     ['Allocative efficiency','What is allocative efficiency, and how is it different from productive efficiency?','Producing the mix of goods that society values most. It is one particular point on the PPF. Being on the curve (productive efficiency) is necessary but not enough.','A country making only tanks and no food is on its PPF (productively efficient) but almost certainly not allocatively efficient.',''],
@@ -1642,7 +1675,7 @@ function addSectionExplains(container, L, tag){
   sections.forEach(s => {
     const last = s.nodes[s.nodes.length-1], heading = s.h.textContent.trim();
     const holder = document.createElement('div'); holder.className = 'xp-sec';
-    const secCtx = () => `Lesson ${L.n}: ${L.title}\nSection: ${heading}\n\n` + s.nodes.filter(n=>!n.classList.contains('widget')).map(textOf).join('\n');
+    const secCtx = () => `Lesson ${L.n}: ${L.title}\nSection: ${heading}\n\n` + s.nodes.filter(n=>!n.classList.contains('widget') && !n.classList.contains('qcheck')).map(textOf).join('\n');
     holder.appendChild(explainBox(`section:${L.id}|${heading}`, secCtx, () => 'full', 'Explain this section'));
     const rs = document.createElement('span'); rs.className = 'rep-slot'; holder.appendChild(rs);
     mountReport(`section:${L.id}|${heading}`, rs, () => secCtx().slice(0,4000));
@@ -1820,7 +1853,7 @@ const ppfBase = monotone(PPF_X, PPF_Y);
 W.ppf = el => {
   const SH = {
     none:{sx:1,sy:1,txt:'The original frontier: all the boot and jacket combinations this economy can make with its resources today.'},
-    rubber:{sx:0.7,sy:0.97,txt:'Rubber shortage: boots need lots of rubber, jackets need very little. Max boots falls a lot, max jackets barely moves. A <b>biased</b> inward shift.'},
+    rubber:{sx:0.7,sy:0.97,txt:'Less rubber available: boots need lots of rubber, jackets need very little. Max boots falls a lot, max jackets barely moves. A <b>biased</b> inward shift.'},
     workers:{sx:0.8,sy:0.8,txt:'Fewer workers: both industries lose the same resource. An <b>equal</b> inward shift.'},
     tech:{sx:1.2,sy:1.2,txt:'Better technology for both goods: the whole frontier shifts <b>out</b>. Points that were impossible are now reachable.'},
     bootmach:{sx:1.35,sy:1,txt:'A faster boot-stitching machine: only the boot end moves out. A <b>biased</b> outward shift.'}
@@ -1833,7 +1866,7 @@ W.ppf = el => {
   <div class="seg steps" role="group" aria-label="Steps along the curve">${['A→B','B→C','C→D','D→E'].map((s,i)=>`<button data-s="${i}" aria-pressed="false">${s}</button>`).join('')}</div>
   <p class="small muted" style="margin:12px 0 4px">Shift the frontier:</p>
   <div class="seg shifts" role="group" aria-label="Shift the frontier">
-    <button data-k="none" aria-pressed="true">Original</button><button data-k="rubber" aria-pressed="false">Rubber shortage</button><button data-k="workers" aria-pressed="false">Fewer workers</button><button data-k="tech" aria-pressed="false">New technology</button><button data-k="bootmach" aria-pressed="false">Boot machine</button></div>
+    <button data-k="none" aria-pressed="true">Original</button><button data-k="rubber" aria-pressed="false">Less rubber</button><button data-k="workers" aria-pressed="false">Fewer workers</button><button data-k="tech" aria-pressed="false">New technology</button><button data-k="bootmach" aria-pressed="false">Boot machine</button></div>
   <div class="msg shmsg"></div>`;
   const svg=$('svg',el); const x0=50,y0=240,w=310,h=220,xm=120,ym=130;
   const X=v=>x0+w*v/xm, Y=v=>y0-h*v/ym;
@@ -1943,37 +1976,120 @@ W.trade = el => {
 };
 
 W.circular = el => {
-  el.innerHTML = `<p class="widget-title">The circular flow</p><p class="hint">Textbook 1.3 and your course video. Switch between following the stuff and following the money.</p>
-  <div class="seg" role="group" aria-label="Which flow"><button data-m="real" aria-pressed="true">Follow the stuff</button><button data-m="money" aria-pressed="false">Follow the money</button><button data-m="both" aria-pressed="false">Both</button></div>
-  <div class="svgbox" style="margin-top:8px"><svg viewBox="0 0 440 300" width="100%" role="img" aria-label="Circular flow diagram"></svg></div>
+  el.innerHTML = `<p class="widget-title">The circular flow, step by step</p><p class="hint">Textbook 1.3 and your course video. Tap Next to build the diagram one piece at a time.</p>
+  <div class="row cf-nav"><button class="btn ghost sm cf-back">← Back</button><span class="small muted num cf-count"></span><button class="btn sm cf-next">Next →</button></div>
+  <div class="seg cf-mode" role="group" aria-label="Which flow" hidden><button data-m="real" aria-pressed="false">Follow the stuff</button><button data-m="money" aria-pressed="false">Follow the money</button><button data-m="both" aria-pressed="true">Both</button></div>
+  <div class="svgbox" style="margin-top:8px"><svg viewBox="0 0 500 300" width="100%" role="img" aria-label="Circular flow diagram"></svg></div>
   <div class="msg"></div>`;
   const root=$('svg',el);
   const defs=svgEl('defs',{},root);
-  const svg=svgEl('g',{transform:'translate(30,0)'},root);
-  ['real','money'].forEach(k=>{ const m=svgEl('marker',{id:'ar-'+k+'-'+Math.random().toString(36).slice(2,6),viewBox:'0 0 10 10',refX:8,refY:5,markerWidth:7,markerHeight:7,orient:'auto-start-reverse'},defs); svgEl('path',{d:'M0,0 L10,5 L0,10 z',fill:k==='real'?'var(--g1)':'var(--g2)'},m); m.dataset.k=k; });
-  const mk = k => $(`marker[data-k="${k}"]`,root).id;
-  const box=(x,y,wd,ht,label,sub)=>{ svgEl('rect',{x,y,width:wd,height:ht,rx:8,fill:'var(--surface)',stroke:'var(--ink)','stroke-width':1.5},svg); const t=svgEl('text',{x:x+wd/2,y:y+ht/2+(sub?-2:5),'text-anchor':'middle',class:'lbl-ink'},svg); t.textContent=label; if(sub){ const s=svgEl('text',{x:x+wd/2,y:y+ht/2+14,'text-anchor':'middle',class:'lbl'},svg); s.textContent=sub; } };
-  const ell=(cx,cy,label,sub)=>{ svgEl('ellipse',{cx,cy,rx:84,ry:26,fill:'var(--accent-soft)',stroke:'var(--accent)','stroke-width':1.5},svg); const t=svgEl('text',{x:cx,y:cy-1,'text-anchor':'middle',class:'lbl-ink'},svg); t.textContent=label; const s=svgEl('text',{x:cx,y:cy+13,'text-anchor':'middle',class:'lbl'},svg); s.textContent=sub; };
-  const arrows=[
-    {k:'real',d:'M318 128 C318 70 300 46 268 42',lx:328,ly:76,a:'start',t:'Goods &|services'},
-    {k:'real',d:'M112 42 C80 46 62 70 62 128',lx:52,ly:76,a:'end',t:'Goods &|services'},
-    {k:'real',d:'M62 176 C62 230 80 254 112 258',lx:52,ly:218,a:'end',t:'Labor, land,|capital'},
-    {k:'real',d:'M268 258 C300 254 318 230 318 176',lx:328,ly:218,a:'start',t:'Labor, land,|capital'},
-    {k:'money',d:'M92 128 C96 92 110 74 132 64',lx:112,ly:104,a:'start',t:'Spending'},
-    {k:'money',d:'M248 64 C270 74 284 92 288 128',lx:268,ly:104,a:'end',t:'Revenue'},
-    {k:'money',d:'M288 176 C284 208 270 226 248 236',lx:272,ly:196,a:'end',t:'Wages, rent,|interest, profit'},
-    {k:'money',d:'M132 236 C110 226 96 208 92 176',lx:112,ly:202,a:'start',t:'Income'}
+  const svg=svgEl('g',{transform:'translate(60,0)'},root);
+  const uid=Math.random().toString(36).slice(2,6);
+  ['real','money'].forEach(k=>{ const m=svgEl('marker',{id:'ar-'+k+'-'+uid,viewBox:'0 0 10 10',refX:8,refY:5,markerWidth:7,markerHeight:7,orient:'auto-start-reverse'},defs); svgEl('path',{d:'M0,0 L10,5 L0,10 z',fill:k==='real'?'var(--g1)':'var(--g2)'},m); });
+  const layer = () => svgEl('g',{},svg);
+  const L = { hh:layer(), gm:layer(), gReal:layer(), gMoney:layer(), fm:layer(), fReal:layer(), fMoney:layer() };
+  const box=(g,x,y,wd,ht,label,sub)=>{ svgEl('rect',{x,y,width:wd,height:ht,rx:8,fill:'var(--surface)',stroke:'var(--ink)','stroke-width':1.5},g); const t=svgEl('text',{x:x+wd/2,y:y+ht/2-2,'text-anchor':'middle',class:'lbl-ink'},g); t.textContent=label; const s=svgEl('text',{x:x+wd/2,y:y+ht/2+14,'text-anchor':'middle',class:'lbl'},g); s.textContent=sub; };
+  const ell=(g,cx,cy,label,sub)=>{ svgEl('ellipse',{cx,cy,rx:84,ry:26,fill:'var(--accent-soft)',stroke:'var(--accent)','stroke-width':1.5},g); const t=svgEl('text',{x:cx,y:cy-1,'text-anchor':'middle',class:'lbl-ink'},g); t.textContent=label; const s=svgEl('text',{x:cx,y:cy+13,'text-anchor':'middle',class:'lbl'},g); s.textContent=sub; };
+  const arrow=(g,k,d,lx,ly,a,txt)=>{ svgEl('path',{d,fill:'none',stroke:k==='real'?'var(--g1)':'var(--g2)','stroke-width':2.5,'marker-end':`url(#ar-${k}-${uid})`},g); const t=svgEl('text',{x:lx,y:ly,'text-anchor':a,class:'lbl halo',style:`fill:${k==='real'?'var(--g1)':'var(--g2)'};font-weight:600;font-size:12px`},g); txt.split('|').forEach((line,li)=>{ const ts=svgEl('tspan',{x:lx,dy:li?14:0},t); ts.textContent=line; }); };
+  box(L.hh,22,128,100,48,'Households','own resources'); box(L.hh,258,128,100,48,'Firms','make products');
+  ell(L.gm,190,42,'Goods & services market','firms sell, households buy');
+  arrow(L.gReal,'real','M318 128 C318 70 300 46 268 42',328,76,'start','Goods &|services');
+  arrow(L.gReal,'real','M112 42 C80 46 62 70 62 128',52,76,'end','Goods &|services');
+  arrow(L.gMoney,'money','M92 128 C96 92 110 74 132 64',112,104,'start','Spending');
+  arrow(L.gMoney,'money','M248 64 C270 74 284 92 288 128',268,104,'end','Revenue');
+  ell(L.fm,190,258,'Factor market','households sell, firms buy');
+  arrow(L.fReal,'real','M62 176 C62 230 80 254 112 258',52,212,'end','Land, labor,|capital,|entrepreneurship');
+  arrow(L.fReal,'real','M268 258 C300 254 318 230 318 176',328,212,'start','Land, labor,|capital,|entrepreneurship');
+  arrow(L.fMoney,'money','M288 176 C284 208 270 226 248 236',272,196,'end','Wages, rent,|interest, profit');
+  arrow(L.fMoney,'money','M132 236 C110 226 96 208 92 176',112,202,'start','Income');
+  const STEPS = [
+    { on:['hh'], t:'<b>Step 1: the two players.</b> <b>Households</b> are people and families. They own all the resources: their own time and skills (labor), land, savings that pay for machines (capital), and business ideas (entrepreneurship). <b>Firms</b> are businesses. They own nothing to start with in this model; they turn households\' resources into products.' },
+    { on:['hh','gm','gReal'], t:'<b>Step 2: the goods and services market.</b> This is every place products are sold: a grocery store, an app store, a barber shop. <b>Firms sell, households buy.</b> The blue arrows show the stuff: goods and services travel from firms, through this market, to households.' },
+    { on:['hh','gm','gReal','gMoney'], t:'<b>Step 3: money flows the opposite way.</b> Households pay for what they buy. That payment is <b>spending</b> to the household and <b>revenue</b> to the firm. Rule of thumb: every gold money arrow runs against a blue stuff arrow.' },
+    { on:['hh','gm','gReal','gMoney','fm','fReal'], t:'<b>Step 4: the factor market.</b> Firms need inputs, called <b>factors of production</b>. Here the roles flip: <b>households sell, firms buy.</b> A worker sells labor, a landowner leases land, a saver lends money for equipment, an entrepreneur starts and runs a business.' },
+    { on:['hh','gm','gReal','gMoney','fm','fReal','fMoney'], t:'<b>Step 5: factor payments.</b> Firms pay for each factor: <b>wages</b> for labor, <b>rent</b> for land, <b>interest</b> for capital, <b>profit</b> for entrepreneurship. To households, all four are <b>income</b>.' },
+    { on:['hh','gm','gReal','gMoney','fm','fReal','fMoney'], end:true, t:'<b>Step 6: why it is a circle.</b> Follow one dollar: you spend it on lunch (product market), it becomes the restaurant\'s revenue, the restaurant pays it to its cook as wages (factor market), and the cook spends it again. One group\'s spending is the other group\'s income. Use the buttons above to view the stuff and the money separately.' }
   ];
-  ell(190,42,'Goods & services market','firms sell, households buy');
-  ell(190,258,'Factor market','households sell, firms buy');
-  box(22,128,100,48,'Households','own resources'); box(258,128,100,48,'Firms','make products');
-  const g={real:svgEl('g',{},svg),money:svgEl('g',{},svg)};
-  arrows.forEach(a=>{ svgEl('path',{d:a.d,fill:'none',stroke:a.k==='real'?'var(--g1)':'var(--g2)','stroke-width':2.5,'marker-end':`url(#${mk(a.k)})`},g[a.k]); const t=svgEl('text',{x:a.lx,y:a.ly,'text-anchor':a.a,class:'lbl',style:`fill:${a.k==='real'?'var(--g1)':'var(--g2)'};font-weight:600;font-size:12px`},g[a.k]); a.t.split('|').forEach((line,li)=>{ const ts=svgEl('tspan',{x:a.lx,dy:li?14:0},t); ts.textContent=line; }); });
-  const msgs={real:'<b>The stuff</b> (blue): firms send goods and services to households through the goods and services market. Households send their labor, land and capital to firms through the factor market.',
-    money:'<b>The money</b> (gold) runs the opposite way: households spend on goods, which is firms\' revenue. Firms pay wages, rent, interest and profit, which is households\' income. Then it goes around again.',
-    both:'Both loops together: every flow of stuff is matched by a flow of money going the other way. Households are buyers in one market and sellers in the other; so are firms.'};
-  const set=m=>{ g.real.setAttribute('opacity', m==='money'?0.12:1); g.money.setAttribute('opacity', m==='real'?0.12:1); $('.msg',el).innerHTML=msgs[m]; $$('.seg button',el).forEach(b=>b.setAttribute('aria-pressed', b.dataset.m===m)); };
-  $$('.seg button',el).forEach(b=>b.onclick=()=>set(b.dataset.m)); set('real');
+  let step = 0, mode = 'both';
+  const draw = () => {
+    const S = STEPS[step];
+    Object.entries(L).forEach(([k,g]) => {
+      const vis = S.on.includes(k);
+      g.setAttribute('display', vis ? 'inline' : 'none');
+      if(!vis) return;
+      let op = 1;
+      if(S.end){ if(mode==='real' && /Money/.test(k)) op = .12; if(mode==='money' && /Real/.test(k)) op = .12; }
+      else { const newest = S.on.filter(x=>!(STEPS[step-1]||{on:[]}).on.includes(x)); if(step>0 && !newest.includes(k) && k!=='hh') op = .45; }
+      g.setAttribute('opacity', op);
+    });
+    $('.cf-count',el).textContent = `Step ${step+1} of ${STEPS.length}`;
+    $('.cf-back',el).disabled = step===0;
+    $('.cf-next',el).textContent = step===STEPS.length-1 ? 'Start over' : 'Next →';
+    $('.cf-mode',el).hidden = !S.end;
+    $$('.cf-mode button',el).forEach(b=>b.setAttribute('aria-pressed', b.dataset.m===mode));
+    const extra = !S.end ? '' : mode==='real' ? '<br><br><b>The stuff</b> (blue): products go to households; resources go to firms.' : mode==='money' ? '<br><br><b>The money</b> (gold): spending goes to firms as revenue; wages, rent, interest and profit go to households as income.' : '';
+    $('.msg',el).innerHTML = S.t + extra;
+  };
+  $('.cf-back',el).onclick = () => { if(step>0){ step--; draw(); } };
+  $('.cf-next',el).onclick = () => { step = step===STEPS.length-1 ? 0 : step+1; draw(); };
+  $$('.cf-mode button',el).forEach(b=>b.onclick=()=>{ mode=b.dataset.m; draw(); });
+  draw();
+};
+
+W.bakery = el => {
+  el.innerHTML = `<p class="widget-title">One bakery's circle</p><p class="hint">Move the sliders. Profit is whatever is left after the other factor payments, so total household income always equals total spending.</p>
+  <div class="wbox">
+    <div class="slider"><label for="bk-s">Households spend on bread</label><input type="range" id="bk-s" min="1000" max="2000" step="50" value="1500"><output></output></div>
+    <div class="slider"><label for="bk-w">Wages (labor)</label><input type="range" id="bk-w" min="600" max="1300" step="50" value="1000"><output></output></div>
+    <div class="slider"><label for="bk-r">Rent (land)</label><input type="range" id="bk-r" min="100" max="400" step="25" value="200"><output></output></div>
+    <div class="slider"><label for="bk-i">Interest (capital)</label><input type="range" id="bk-i" min="0" max="300" step="25" value="100"><output></output></div>
+  </div>
+  <div class="readout"><div><b class="bk-rev"></b><span>Bakery revenue</span></div><div><b class="bk-pro"></b><span>Profit (entrepreneurship)</span></div><div><b class="bk-inc"></b><span>Total household income</span></div></div>
+  <div class="math bk-math"></div><div class="msg"></div>`;
+  const ins = ['s','w','r','i'].map(k=>$('#bk-'+k,el));
+  const draw = () => {
+    const [s,w,r,i] = ins.map(x=>+x.value);
+    ins.forEach(x=>x.nextElementSibling.textContent = money(+x.value));
+    const p = s - w - r - i, inc = w + r + i + p;
+    $('.bk-rev',el).textContent = money(s);
+    $('.bk-pro',el).textContent = (p<0?'−':'') + money(Math.abs(p));
+    $('.bk-inc',el).textContent = money(inc);
+    $('.bk-math',el).innerHTML = `Profit = ${money(s)} − ${money(w)} − ${money(r)} − ${money(i)} = <b>${p<0?'−':''}${money(Math.abs(p))}</b><br>Income = ${money(w)} + ${money(r)} + ${money(i)} + ${p<0?'(−'+money(Math.abs(p))+')':money(p)} = <b>${money(inc)}</b>, the same as spending`;
+    const m=$('.msg',el);
+    if(p<0){ m.className='msg bad'; m.innerHTML=`The bakery pays out more than it takes in, so the owner's profit is negative: a <b>loss</b> of ${money(-p)}. A business can't keep doing this. In later units you'll see firms cut back or leave the market when this happens.`; }
+    else { m.className='msg good'; m.innerHTML=`Every dollar households spend (${money(s)}) comes back to households as income (${money(inc)}): ${money(w)} to workers, ${money(r)} to the landowner, ${money(i)} to the lender and ${money(p)} to the owner. That is why the model is a circle.`; }
+  };
+  ins.forEach(x=>x.addEventListener('input',draw)); draw();
+};
+
+W.cfsort = el => {
+  const items = [
+    ['You buy a $6 sandwich at a deli.','Product','You (a household) are buying a good. The sandwich goes to you; your $6 goes to the deli as revenue.'],
+    ['A bakery pays its cashier $15 an hour.','Factor','The cashier sells <b>labor</b>. The money is a <b>wage</b>, flowing from the firm to a household.'],
+    ['A family leases a field it owns to a car dealership for $2,000 a month.','Factor','The family is selling the use of <b>land</b>. The payment is <b>rent</b> in the economic sense.'],
+    ['You pay $12 for a haircut.','Product','A haircut is a <b>service</b>, and services are sold in the goods and services market just like goods.'],
+    ['A household lends a bakery $5,000 to buy an oven and is paid $400 in interest.','Factor','The household supplies funds for <b>capital</b> (the oven). The payment for capital is <b>interest</b>.'],
+    ['A shop owner keeps the $300 left over after paying all the shop\'s costs this week.','Factor','The owner supplied <b>entrepreneurship</b>: the idea, the risk and the management. What is left over is <b>profit</b>, the payment for that factor.'],
+    ['A streaming service charges you $10 a month.','Product','You are buying a service from a firm. Your $10 is the firm\'s revenue.'],
+    ['A software company hires a programmer.','Factor','The firm is buying <b>labor</b>. Firms are the buyers in the factor market.']
+  ];
+  const kinds=[['Product','Goods & services market'],['Factor','Factor market']];
+  let right=0, answered=0;
+  el.innerHTML = `<p class="widget-title">Which market is it?</p><p class="hint">For each transaction, pick the market it belongs to. Ask: is a household buying a product, or selling a resource?</p><div class="items"></div><div class="msg score">0 of ${items.length} answered</div>`;
+  const box=$('.items',el);
+  items.forEach(([txt,ans,why])=>{
+    const d=document.createElement('div'); d.className='sort-item';
+    d.innerHTML=`<p>${txt}</p><div class="seg" role="group">${kinds.map(([k,lab])=>`<button data-k="${k}" aria-pressed="false">${lab}</button>`).join('')}</div><p class="small why" hidden></p>`;
+    $$('button',d).forEach(b=>b.onclick=()=>{
+      if(d.dataset.done) return; d.dataset.done=1; answered++;
+      const ok=b.dataset.k===ans; if(ok) right++;
+      b.classList.add(ok?'right':'wrong'); if(!ok) $(`button[data-k="${ans}"]`,d).classList.add('right');
+      $$('button',d).forEach(x=>x.disabled=true);
+      const w=$('.why',d); w.hidden=false; w.innerHTML=(ok?'<b>Right.</b> ':'<b>Not quite.</b> ')+why;
+      $('.score',el).textContent = answered<items.length ? `${right} right out of ${answered} so far` : `${right} of ${items.length} right. ${right===items.length?'Perfect.':'Read the note under any you missed.'}`;
+    });
+    box.appendChild(d);
+  });
 };
 
 W.sort = el => {
@@ -2055,7 +2171,7 @@ const LESSONS = [
 <div class="terms">
 ${term('Scarcity','Wants are greater than the resources available. The basic economic problem.')}
 ${term('Resources for people','Mostly time and money.')}
-${term('Resources for firms','The <b>factors of production</b>: <b>land</b> (natural resources), <b>labor</b> (human work) and <b>capital</b> (tools, machines, buildings). Many textbooks add <b>entrepreneurship</b> as a fourth.')}
+${term('Resources for firms','The <b>factors of production</b>: <b>land</b> (natural resources), <b>labor</b> (human work), <b>capital</b> (tools, machines, buildings) and <b>entrepreneurship</b> (organizing the others and taking the risk).')}
 ${term('Trade-off','Choosing more of one thing means less of another.')}
 </div>
 <p>Watch out for <b>capital</b>. In everyday talk it means money. In economics it means things made to produce other things: an oven, a laptop, a delivery van.</p>
@@ -2133,7 +2249,7 @@ ${term('Outside the curve','<b>Unattainable</b> with today\'s resources and tech
 <p>Only two things shift the whole frontier: a change in <b>resources</b> or a change in <b>technology</b>.</p>
 <ul>
 <li><b>Equal shift:</b> the change hits both goods about the same (fewer workers, better general technology).</li>
-<li><b>Biased shift:</b> the change hits one good more. Rubber is used heavily for boots and barely for jackets, so a rubber shortage pulls in the boots end far more.</li>
+<li><b>Biased shift:</b> the change hits one good more. Rubber is used heavily for boots and barely for jackets, so a cut in the rubber supply pulls in the boots end far more.</li>
 </ul>
 <p>Choosing a different mix is a <b>movement along</b> the curve, not a shift. Putting unemployed workers back to work is a move <b>toward</b> the curve, not a shift.</p>`,
   deeper:`
@@ -2205,48 +2321,130 @@ ${term('Input problem','"Takes 1 hour per bread, 2 hours per sweater." Opportuni
   links:[ {k:'Video',t:'The Principle of Comparative Advantage (60 Second Adventures in Economics)',s:'OpenLearn, The Open University',u:'https://www.open.edu/openlearn/society/politics-policy-people/economics/60-second-adventures-economics-the-principle-comparative-advantage',w:'A short animated take on Ricardo\'s idea with countries instead of people.'},
           {k:'Article',t:'Ricardo\'s Difficult Idea',s:'Paul Krugman, MIT',u:'https://web.mit.edu/krugman/www/ricardo.htm',w:'Go deeper: why comparative advantage is so often misunderstood. Longer, more advanced read.'} ] },
 
-{ id:'l4', title:'Economic Systems', mins:20, src:'Course video 1.4a · Textbook 1.3, 1.4',
-  oneline:'Every society must decide what to make, how much, and who gets it. Systems differ in who decides.',
+{ id:'l4', title:'Economic Systems', mins:40, src:'Course video 1.4a · Textbook 1.3, 1.4',
+  oneline:'Every society must decide what to make, how to make it, and who gets it. Systems differ in who decides, and the circular flow shows how a market economy makes those decisions without anyone in charge.',
   body:`
 <h2>Three questions every economy must answer</h2>
-<ol><li><b>What</b> to produce?</li><li><b>How</b> to produce it (and how much)?</li><li><b>Who</b> receives the output?</li></ol>
+<p>Lesson 1 showed that resources are scarce. Because a society can't make everything, it has to answer three questions, whether it means to or not:</p>
+<ol><li><b>What</b> to produce, and how much? More phones or more laptops? More housing or more parks?</li><li><b>How</b> to produce it? Many workers with simple tools, or a few workers with robots?</li><li><b>For whom</b>? Once the phones exist, who gets them?</li></ol>
+<p>An <b>economic system</b> is a society's way of answering these questions. The systems below differ mainly in <i>who</i> does the deciding.</p>
 <div class="analogy"><div class="eyebrow">Analogy</div><p>Think of a big family potluck. The menu could be the same dishes as every year (<b>tradition</b>). One organizer could assign every dish (<b>command</b>). Everyone could bring what they think people will eat, and popular dishes get copied next year (<b>market</b>). Or the organizer sets a few rules, like "someone brings plates," and leaves the rest free (<b>mixed</b>).</p></div>
 
 <h2>The main systems</h2>
 <div class="terms">
-${term('Traditional','Decisions follow custom. Jobs pass down through families; you consume what you produce. Little change or growth.')}
-${term('Command','A central authority, usually the government, decides what is made and sets prices and wages. The textbook lists Cuba and North Korea.')}
-${term('Market','Decisions are spread across buyers and sellers. Resources and businesses are privately owned; firms supply what people demand.')}
-${term('Mixed','Elements of more than one. Almost every real economy. The U.S. is mixed but leans strongly toward market.')}
+${term('Traditional','Decisions follow custom. Jobs pass down through families, most families farm the way their parents did, and people mostly consume what they produce. The textbook notes there is little economic progress.')}
+${term('Command','A central authority, usually the government, decides what is made, how it is made, what prices are charged and what workers are paid. The textbook lists Cuba and North Korea today.')}
+${term('Market','Decisions are spread across millions of buyers and sellers (<b>decentralized</b>). Resources and businesses are privately owned; firms supply what people demand, and prices come from buyers and sellers, not the government.')}
+${term('Mixed','Elements of more than one. Almost every real economy. The U.S. is mixed but leans strongly toward market; many European countries are market-oriented with more government involvement.')}
 </div>
+<p>Here is how each system answers the three questions, and the trade-off each one makes:</p>
+<div class="tbl-wrap"><table class="wrap-cells"><thead><tr><th></th><th>Traditional</th><th>Command</th><th>Market</th></tr></thead><tbody>
+<tr><td><b>What?</b></td><td>What was always made</td><td>Whatever planners choose, often with production targets</td><td>Whatever buyers are willing to pay for</td></tr>
+<tr><td><b>How?</b></td><td>Methods passed down</td><td>Methods set by planners</td><td>Each firm picks its own methods; competition pushes it toward cheaper, better ones</td></tr>
+<tr><td><b>For whom?</b></td><td>By custom and family role</td><td>Planners decide; some basics, like health care and education, are provided free</td><td>People who can pay. Your income depends on what you earn selling your resources, such as your labor</td></tr>
+<tr><td><b>Strength</b></td><td>Predictable: everyone knows their role</td><td>Can push resources toward the government's goals, such as more equal outcomes</td><td>Strong incentives to work and innovate; wide variety; prices adjust on their own</td></tr>
+<tr><td><b>Weakness</b></td><td>Little growth or change</td><td>Planners lack good information and few people are rewarded for new ideas, so waste and shortages are common; black markets appear</td><td>Some people can't earn enough to buy what they need; some goods are under-provided (like national defense); costs that fall on others are ignored</td></tr>
+</tbody></table></div>
+<p>A mixed economy tries to keep the market's strengths and patch its weaknesses: mostly private businesses and market prices, plus government for things like schools, roads, a safety net and rules against fraud.</p>
 <div data-widget="sort"></div>
+<div data-check="l4c-forwhom,l4c-cmdweak"></div>
+
+<h2>How prices coordinate a market</h2>
+<p>A market economy has no central planner, so what tells a farmer how much wheat to grow or a store how much to stock? <b>Prices.</b> A price does three jobs at once:</p>
+<div class="terms">
+${term('Signal','A price carries information. A rising price says "this is scarcer than before"; a falling price says "there is more than people want."')}
+${term('Incentive','A higher price rewards sellers who produce more and nudges buyers to use less, or switch to something else.')}
+${term('Rationing','When there isn\'t enough to go around, price decides who gets the good: the buyers willing and able to pay that price.')}
+</div>
+<p><b>Example (made-up numbers).</b> A frost destroys half of Florida's orange crop, and the price of orange juice jumps from $4 to $6 a carton. Nobody issued an order, yet:</p>
+<ul><li><b>Signal:</b> growers in California and Brazil learn that oranges are scarce.</li><li><b>Incentive:</b> at $6 it pays them to ship more juice to Florida stores, and shoppers who only half-wanted juice buy milk instead.</li><li><b>Rationing:</b> the juice that is left goes to the people who value it most at $6.</li></ul>
+<p>This is what Adam Smith meant by the <b>invisible hand</b> (see Go deeper): self-interested choices, steered by prices, end up coordinating a whole economy. You'll study exactly how prices are set in Unit 2, Supply and Demand.</p>
+<div data-check="l4c-signal"></div>
+
+<h2>How a market economy flows</h2>
+<p>A market economy has millions of buyers and sellers. To see the big picture, economists use a <b>model</b>: a simplified picture that keeps only the parts you need. The <b>circular flow model</b> shrinks the whole economy down to two players and two markets.</p>
+<div class="tbl-wrap"><table class="wrap-cells"><thead><tr><th></th><th>Goods and services market (product market)</th><th>Factor market (resource market)</th></tr></thead><tbody>
+<tr><td><b>What is sold</b></td><td>Products: food, phones, haircuts, streaming</td><td>Factors of production: land, labor, capital, entrepreneurship</td></tr>
+<tr><td><b>Sellers</b></td><td>Firms</td><td>Households</td></tr>
+<tr><td><b>Buyers</b></td><td>Households</td><td>Firms</td></tr>
+<tr><td><b>Money flow</b></td><td>Household spending → firm revenue</td><td>Wages, rent, interest, profit → household income</td></tr>
+</tbody></table></div>
+<p>Build the diagram one piece at a time:</p>
+<div data-widget="circular"></div>
+<p>Each factor of production earns its own kind of payment:</p>
+${table(['Factor','Payment','Example'],[['Land (and other natural resources)','Rent','A family leases its field to a car dealership'],['Labor','Wages','A cashier\'s paycheck'],['Capital (tools, machines, buildings)','Interest','A saver lends a bakery money for an oven and is paid interest'],['Entrepreneurship','Profit','A shop owner keeps what is left after paying all costs']])}
+<p>Two ideas make the model click:</p>
+<ul><li><b>Money always moves opposite to the stuff.</b> Every blue arrow (goods or resources) is matched by a gold arrow (money) going the other way.</li><li><b>Everyone plays two roles.</b> Households are buyers in the product market and sellers in the factor market. Firms are the reverse.</li></ul>
+<p><b>Why it matters for this course:</b> Units 2 to 5 study the product market (supply and demand, consumer choice, costs, market structures). Unit 6 studies the factor market (how wages and other factor payments are set). The circular flow is the map for the rest of the course.</p>
+<div data-check="l4c-hhroles,l4c-entre"></div>
+
+<h2>Worked example: one bakery's circle</h2>
+<p>Imagine an economy with one bakery and the households around it. In one week:</p>
+<ul><li>The bakery pays <b>$1,000 in wages</b> to its workers, <b>$200 rent</b> to the family that owns its land, and <b>$100 interest</b> to a neighbor who lent it money for the oven.</li><li>Households buy <b>$1,500</b> of bread. That is the bakery's revenue.</li></ul>
+<div class="math">Profit = revenue − other factor payments<br>= $1,500 − $1,000 − $200 − $100 = <b>$200</b> to the owner<br><br>Household income = $1,000 + $200 + $100 + $200 = <b>$1,500</b></div>
+<p>Income equals spending: the $1,500 households spent came back to households, split among the four factors. In this simple model, households spend it all again next week, and the circle keeps turning. Notice that profit isn't a fixed payment like wages; it is what's left over, so it can shrink or even turn into a loss.</p>
+<div data-widget="bakery"></div>
+<div data-check="l4c-profit"></div>
+
+<h2>Which market is it?</h2>
+<p>Exam questions often describe a transaction and ask where it fits. Use one test: <b>is a household buying a product, or selling a resource?</b> Buying a product puts it in the goods and services market. Selling labor, land, capital or entrepreneurship puts it in the factor market.</p>
+<div data-widget="cfsort"></div>
 
 <h2>Property rights</h2>
-<p><b>Property rights</b> decide who owns a resource and who decides how it is used. Your course lists four parts:</p>
+<p><b>Property rights</b> are the rules that say who owns a resource and who decides how it is used. Your course lists four parts:</p>
 <ol><li>The right to <b>use</b> the good</li><li>The right to <b>earn income</b> from it</li><li>The right to <b>transfer</b> it to someone else</li><li>The right to <b>enforce</b> those rights</li></ol>
+<p><b>Why they matter: incentives.</b> An owner bears the cost of neglecting something and keeps the gain from improving it. That changes behavior.</p>
+<div class="analogy"><div class="eyebrow">Analogy</div><p>You change the oil in a car you own, because you'll still be driving it in five years. A rental car you return on Friday gets no such care. Same car, different owner, different incentive.</p></div>
+<p>Property rights also make markets possible. The circular flow assumes households <i>own</i> their land, labor and savings, because you can only sell what is yours. A store only stocks shelves if it knows it can keep what it earns and that contracts will be enforced.</p>
+<p><b>When anyone can use it: the tragedy of the commons.</b> If a resource is <b>open access</b> (anyone can use it and no one limits use), each user keeps the full gain from using a little more but shares the cost with everyone else. Ecologist Garrett Hardin made this famous in 1968 with a shared pasture: each herder adds animals, and the pasture gets overgrazed.</p>
+<p><b>Example (made-up numbers).</b> Ten people fish a lake anyone can fish, with no limits. Each extra fish is worth $5 to whoever catches it. But catching it shrinks next year's stock, costing the group $8, split ten ways: $0.80 each.</p>
+<div class="math">One fisher's view: gain $5 vs. own share of the cost $0.80 → keep fishing<br>The group's view: gain $5 vs. total cost $8 → lose $3 on every extra fish</div>
+<p>Every fisher acts sensibly for themselves, and the lake is fished out. Giving someone ownership, setting rules like catch limits or quotas, or letting the community manage the lake can put the full cost back on the decision. You'll see this again in Unit 7 (market failure).</p>
+<div data-check="l4c-commons,l4c-rights"></div>
 
 <h2>Your course's grid: ownership vs. allocation</h2>
-<p>Your course sorts systems by two questions: who <b>owns</b> resources, and who <b>allocates</b> them.</p>
+<p>Your course adds a second way to sort systems, using two separate questions: who <b>owns</b> resources, and who <b>allocates</b> them (decides how they are used).</p>
 <div class="tbl-wrap"><table><thead><tr><th></th><th>Planned (government) ownership</th><th>Private ownership</th></tr></thead><tbody>
 <tr><td><b>Planned allocation</b></td><td>Socialism (socially planned)</td><td>Command capitalism</td></tr>
 <tr><td><b>Market allocation</b></td><td>Market socialism</td><td>Capitalism</td></tr></tbody></table></div>
+<p>To read it, answer the two questions separately. A system where the government owns the factories but lets prices decide what they make is <b>market socialism</b>. A system where businesses stay private but the government tells them what to make is <b>command capitalism</b>.</p>
+<p class="small muted">Most textbooks, and most likely the CLEP, use the four names from the top of this lesson: traditional, command, market and mixed. Learn those first; treat this grid as your course's extra lens.</p>
 
-<h2>How a market economy flows</h2>
-<p>The <b>circular flow</b> is a simple model of a market economy with two players, households and firms, meeting in two markets.</p>
-<div data-widget="circular"></div>
-<ul>
-<li><b>Goods and services market</b> (product market): firms sell, households buy.</li>
-<li><b>Factor market</b> (resource market): households sell labor, land and capital; firms buy them.</li>
-</ul>`,
+<h2>Common mistakes</h2>
+<div class="terms">
+${term('"Money and goods go the same way"','They never do. Money always moves opposite to the goods or resources it pays for.')}
+${term('"Households only buy"','Households buy in the product market but <b>sell</b> in the factor market. Firms are the reverse.')}
+${term('"Rent means paying a landlord"','In the circular flow, rent is the payment for <b>land</b>, one of the four factor payments.')}
+${term('"Profit is a fixed payment"','Profit is what is left after the other factor payments. It can be zero or negative.')}
+${term('"Market economies have no government"','Every market runs on rules: protecting property, enforcing contracts, preventing fraud, collecting taxes. And command economies still have some markets.')}
+${term('"Systems differ in the questions they ask"','Every system answers the same three questions. They differ in <b>who</b> answers them.')}
+</div>
+
+<h2>Recap</h2>
+<div class="callout">
+<ol>
+<li>Every economy answers <b>what, how</b> and <b>for whom</b>. Systems differ in who decides: custom, a planner, or buyers and sellers.</li>
+<li>Real economies are <b>mixed</b>. The U.S. leans strongly toward market.</li>
+<li>In a market economy, <b>prices</b> signal, create incentives and ration, with no one in charge.</li>
+<li>The <b>circular flow</b>: firms sell products to households; households sell land, labor, capital and entrepreneurship to firms for rent, wages, interest and profit. Money always moves opposite to the stuff.</li>
+<li><b>Property rights</b> give owners an incentive to care for resources; without them, shared resources get overused.</li>
+</ol>
+<p><b>How the CLEP tests this:</b> the exam outline lists economic systems and "property rights and the role of incentives" as topics. Expect short "Which of the following" questions: identify a system from a description, say which market households sell in, or which way a payment flows.</p>
+</div>`,
   deeper:`
 <h3>Models simplify on purpose</h3>
-<p>The circular flow leaves out government, banks and foreign trade. That's the point of a model: like an architect's tabletop model, it keeps only what you need to see. Economists add pieces back when a question needs them.</p>
+<p>The basic circular flow leaves out government, banks and foreign trade. That's the point of a model: like an architect's tabletop model, it keeps only what you need to see. Economists add pieces back when a question needs them.</p>
+<h3>Adding government to the circle</h3>
+<p>Put government in the middle and three new kinds of flows appear:</p>
+<ul><li><b>Taxes</b> flow from households and firms to the government.</li><li><b>Government purchases</b>: the government buys in both markets, hiring workers (factor market) and buying things like paper and fuel (product market), to provide goods and services such as schools, bridges and defense. (A <b>pure public good</b> is a narrower idea you will meet in Unit 7: nonexcludable and nonrival, like national defense.)</li><li><b>Transfer payments</b> (to households, such as Social Security) and <b>subsidies</b> (to firms) are money with no good or service given back in return.</li></ul>
+<p>Banks and foreign trade can be added the same way. You won't need them for this exam; macroeconomics uses them heavily.</p>
 <h3>The invisible hand</h3>
 <p>Adam Smith argued that people pursuing their own interest in markets often end up serving everyone's, "led by an invisible hand." Nobody plans the whole economy, yet shelves get stocked. The essay "I, Pencil" below shows this with an ordinary pencil that no single person knows how to make.</p>
 <h3>No market is completely free</h3>
 <p>Markets always run on rules: protecting property, enforcing contracts, preventing fraud, collecting taxes. Even command economies have markets. When rules are very heavy, <b>underground economies</b> appear: trades made without the government's approval.</p>`,
   practice:['l4-questions','l4-factor','l4-wages','l4-command','l4-grid','l4-rights','l4-us'],
-  links:[ {k:'Article',t:'I, Pencil',s:'Leonard E. Read, via Econlib',u:'https://www.econlib.org/library/Essays/rdPncl.html',w:'A pencil tells its own story: thousands of strangers cooperate to make it with no one in charge. A classic picture of a market system.'} ] },
+  links:[ {k:'Diagram',t:'The Circular Flow (infographic, PDF)',s:'Federal Reserve Education',u:'https://www.federalreserveeducation.org/resources/infographics/infographic--circular-flow.pdf',w:'A one-page picture of the circular flow with government added, and which factor earns rent, wages, interest and profit.'},
+          {k:'Article',t:'I, Pencil',s:'Leonard E. Read, via Econlib',u:'https://www.econlib.org/library/Essays/rdPncl.html',w:'A pencil tells its own story: thousands of strangers cooperate to make it with no one in charge. A classic picture of a market system.'} ] },
 
 { id:'l5', title:'Marginal Analysis and Incentives', mins:25, src:'Course video 1.4b · Textbook 2.1',
   oneline:'Good decisions compare the extra benefit of one more unit with its extra cost, and ignore what\'s already spent.',
@@ -2268,8 +2466,8 @@ ${table(['Decision','Extra cost per week','Extra revenue per week','Net'],[['Add
 <p>Add the second shift; skip the third. The third shift costs more (night pay, tired machines) and sells less. Marginal thinking catches that; looking at the factory's total profit would hide it.</p>
 
 <h2>Incentives change the math</h2>
-<p>An <b>incentive</b> raises the benefit of a choice. A <b>disincentive</b> raises its cost. Either one can flip an MB vs. MC decision.</p>
-${table(['Incentives (raise the benefit)','Disincentives (raise the cost)'],[['Buy-one-get-one sales','Taxes on cigarettes and alcohol'],['Bonus points for attending class','Calorie counts on fast-food menus'],['Tax credits for new green technology','Pollution taxes']])}
+<p>An <b>incentive</b> raises the benefit of a choice or lowers its cost, so people do more of it. A <b>disincentive</b> raises the cost or lowers the benefit, so people do less of it. Either one can flip an MB vs. MC decision.</p>
+${table(['Incentives (raise benefit or lower cost)','Disincentives (raise cost or lower benefit)'],[['Buy-one-get-one sales','Taxes on cigarettes and alcohol'],['Bonus points for attending class','Fines for returning library books late'],['Tax credits for new green technology','Pollution taxes']])}
 <p><b>Real-world example.</b> In 2018 the UK put a tax on high-sugar soft drinks. Companies cut sugar to avoid it: researchers found the share of drinks that would owe the tax fell from 52% when it was announced to 15% by February 2019.</p>
 
 <h2>Sunk costs: ignore them</h2>
@@ -2359,6 +2557,7 @@ function renderLesson(L){
   mountReport('lesson:'+L.id, $('#lrep'));
   mountReport('lesson:'+L.id, $('#lrep-end'));
   $$('[data-widget]', app).forEach(el => { el.classList.add('widget'); try{ W[el.dataset.widget](el); }catch(e){ el.innerHTML='<p class="muted">This graph failed to load. Reload the page to try again.</p>'; console.error(e); } });
+  $$('[data-check]', app).forEach(el => { el.classList.add('qcheck'); el.innerHTML = '<p class="eyebrow">Quick check · not scheduled for review</p>'; el.dataset.check.split(',').forEach((qid,k,arr) => { if(Q[qid]) el.appendChild(qCard(qid, { ctx:'check', label: arr.length>1 ? `Quick check ${k+1} of ${arr.length}` : 'Quick check' })); }); });
   addSectionExplains($('article', app), L, 'h2');
   addSectionExplains($('.deeper-body', app), L, 'h3');
   $$('.widget', app).forEach(wg => {
