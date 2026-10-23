@@ -19,6 +19,12 @@ Lesson 2
 - [x] Lesson 1 "Resources for firms": list entrepreneurship as the fourth factor of production instead of "many textbooks add" it (the flashcards and questions already treat it as one of four, and so does the CLEP).
 
 ## Run history (newest first)
+### 2026-10-23 · Unit 2 added to the live workbook (on request, not the weekly routine)
+- Snapshots: before 1db7387, after: next commit · Artifact version 1792714612-a048 → 1792778489-548b
+- Added Lessons 6-12 (Supply and Demand) and the Unit 2 quiz (`#quiz2`, stored as `quiz2` in the progress doc). Built in a staging copy and audited by a separate agent first; findings and fixes are in `docs/unit2-build-notes.md`.
+- Progress checked before and after publishing: record version 258 unchanged; all 5 Unit 1 lessons at 12/12, 163 review items (83 due), 4 writing answers, Unit 1 quiz data untouched.
+- Reports: none handled in this run. 3 open in the inbox: l4-mktsoc ("make this a typed answer"), l4-capitalism ("make this typable"), and new l5-g-net ("I do not like this problem. Delete it.").
+
 ### 2026-10-16 (second run) · Focus: Lesson 1
 - Snapshots: before 3ba87c2, after ec4597c · Changes: https://github.com/Eli-lang921/microeconomics-artifact-claude/compare/3ba87c2...ec4597c
 - Reports: 2 fixed, 0 no change, 3 need input
