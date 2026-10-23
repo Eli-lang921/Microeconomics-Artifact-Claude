@@ -20,7 +20,7 @@ Lesson 2
 
 ## Run history (newest first)
 ### 2026-10-23 · Unit 2 added to the live workbook (on request, not the weekly routine)
-- Snapshots: before 1db7387, after: next commit · Artifact version 1792714612-a048 → 1792778489-548b
+- Snapshots: before 1db7387, after be2ce4e · Changes: https://github.com/Eli-lang921/microeconomics-artifact-claude/compare/1db7387...be2ce4e · Artifact version 1792714612-a048 → 1792778489-548b
 - Added Lessons 6-12 (Supply and Demand) and the Unit 2 quiz (`#quiz2`, stored as `quiz2` in the progress doc). Built in a staging copy and audited by a separate agent first; findings and fixes are in `docs/unit2-build-notes.md`.
 - Progress checked before and after publishing: record version 258 unchanged; all 5 Unit 1 lessons at 12/12, 163 review items (83 due), 4 writing answers, Unit 1 quiz data untouched.
 - Reports: none handled in this run. 3 open in the inbox: l4-mktsoc ("make this a typed answer"), l4-capitalism ("make this typable"), and new l5-g-net ("I do not like this problem. Delete it.").
