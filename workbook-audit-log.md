@@ -19,6 +19,14 @@ Lesson 2
 - [x] Lesson 1 "Resources for firms": list entrepreneurship as the fourth factor of production instead of "many textbooks add" it (the flashcards and questions already treat it as one of four, and so does the CLEP).
 
 ## Run history (newest first)
+### 2026-10-23 (evening) · Unit 2 visuals and 4 reports (on request)
+- Snapshots: before d969441, after: this commit · Artifact version 1792778489-548b → 1792786247-bda8
+- Added 30 static figures across Lessons 6-12 (schedules as curves, shifts, surplus/shortage, controls, elasticity range, Table 5.2 chart, revenue chart, income/cross-price sign lines, surplus areas, tax wedge, DWL, incidence). Source: `src/unit2/figs.js`.
+- Fixed: l4-mktsoc and l4-capitalism are now typed answers checked by Claude (self-rating fallback when Claude checking is off).
+- Fixed: l5-g-net deleted (Lesson 5 extra practice now 15).
+- Fixed: l6-tastes now covered: the textbook's chicken and beef example added to the Tastes row of "What shifts demand."
+- Progress record version 300 unchanged by the publish; Unit 1 still 60/60, Lesson 6 12/12, 4 writing answers.
+
 ### 2026-10-23 · Unit 2 added to the live workbook (on request, not the weekly routine)
 - Snapshots: before 1db7387, after be2ce4e · Changes: https://github.com/Eli-lang921/microeconomics-artifact-claude/compare/1db7387...be2ce4e · Artifact version 1792714612-a048 → 1792778489-548b
 - Added Lessons 6-12 (Supply and Demand) and the Unit 2 quiz (`#quiz2`, stored as `quiz2` in the progress doc). Built in a staging copy and audited by a separate agent first; findings and fixes are in `docs/unit2-build-notes.md`.

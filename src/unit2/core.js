@@ -84,16 +84,65 @@ Object.assign(GLOSS, {
 /* ---------- supply-and-demand graph for question prompts (static SVG markup, built on gchart) ----------
    lines: [{a:[q,p], b:[q,p], label, c (color var), dash}]  hl: horizontal lines [{p, label, c}]  dots: [{q,p,label,c}]
    areas: [{pts:[[q,p],...], c, label:[q,p,text]}] */
-function sdg({xmax=10, ymax=10, xlab='Quantity', ylab='Price', xt=[], yt=[], lines=[], hl=[], dots=[], areas=[], labels=[]}){
-  return gchart({ xmax, ymax, xlab, ylab, xt, yt, body:(X,Y)=>{
-    let s='';
-    areas.forEach(a => { s += `<polygon points="${a.pts.map(([q,p])=>X(q).toFixed(1)+','+Y(p).toFixed(1)).join(' ')}" fill="${a.c||'var(--accent-soft)'}" opacity="${a.o||0.8}"/>`; if(a.label) s += gtext(X(a.label[0]), Y(a.label[1]), a.label[2], a.lc||'var(--ink)', 'middle'); });
-    hl.forEach(h => { s += `<line x1="${X(0)}" x2="${X(xmax)}" y1="${Y(h.p).toFixed(1)}" y2="${Y(h.p).toFixed(1)}" stroke="${h.c||'var(--g2)'}" stroke-width="2" stroke-dasharray="6 4"/>`; if(h.label) s += gtext(X(xmax)-2, Y(h.p)-5, h.label, h.c||'var(--g2)', 'end'); });
-    lines.forEach(l => { s += gline([l.a, l.b], X, Y, l.c||'var(--accent)', l.dash||'', l.w||2.6); if(l.label) s += gtext(X(l.b[0])+(l.lx||4), Y(l.b[1])+(l.ly||4), l.label, l.c||'var(--accent)', l.anchor||'start'); });
-    dots.forEach(d => { s += gdot(X, Y, d.q, d.p, d.label||'', d.c||'var(--ink)'); });
-    labels.forEach(([q,p,t,c,anchor]) => { s += gtext(X(q), Y(p), t, c||'var(--ink)', anchor||'middle'); });
-    return s; } });
+/* sdg: supply-and-demand chart (SVG string). Optional extras used by the lesson figures:
+   lines[].pts (a polyline instead of a/b); vls: dashed vertical guides {q, p, c};
+   arrows: {a:[q,p], b:[q,p], c}; spans: two-headed brackets, horizontal {p, q1, q2} or vertical {q, p1, p2}, with label/c/lx/ly/anchor. */
+let SDGN = 0;
+/* gchart2: gchart with an optional non-zero origin (xmin/ymin, shown with a small axis-break mark) and a clip region,
+   so zoomed figures keep their lines inside the plot. Same size and styling as gchart. */
+function gchart2({xmin=0,xmax,ymin=0,ymax,xlab,ylab,xt=[],yt=[],body,aria}){
+  const x0=46,y0=176,pw=236,ph=156; const X=v=>x0+pw*(v-xmin)/(xmax-xmin), Y=v=>y0-ph*(v-ymin)/(ymax-ymin);
+  const cid='sc'+(++SDGN);
+  let s=`<defs><clipPath id="${cid}"><rect x="${x0-1}" y="${y0-ph-1}" width="${pw+2}" height="${ph+2}"/></clipPath></defs>`;
+  yt.forEach(t=>{ const y=Y(t); s+=`<line x1="${x0}" x2="${x0+pw}" y1="${y.toFixed(1)}" y2="${y.toFixed(1)}" class="gl"/><text x="${x0-6}" y="${(y+4).toFixed(1)}" text-anchor="end" class="lbl">${t}</text>`; });
+  xt.forEach(t=>{ const x=X(t); s+=`<line x1="${x.toFixed(1)}" x2="${x.toFixed(1)}" y1="${y0}" y2="${y0-ph}" class="gl"/><text x="${x.toFixed(1)}" y="${y0+15}" text-anchor="middle" class="lbl">${t}</text>`; });
+  s+=`<line x1="${x0}" x2="${x0+pw}" y1="${y0}" y2="${y0}" class="ax"/><line x1="${x0}" x2="${x0}" y1="${y0}" y2="${y0-ph}" class="ax"/>`;
+  if(ymin>0) s+=`<path d="M${x0-5},${y0-8} l10,-4 M${x0-5},${y0-3} l10,-4" stroke="var(--muted)" stroke-width="1.2"/>`;
+  if(xmin>0) s+=`<path d="M${x0+6},${y0+5} l4,-10 M${x0+11},${y0+5} l4,-10" stroke="var(--muted)" stroke-width="1.2"/>`;
+  s+=`<text x="${x0+pw/2}" y="${y0+32}" text-anchor="middle" class="lbl-ink">${xlab}</text><text x="14" y="${y0-ph/2}" text-anchor="middle" class="lbl-ink" transform="rotate(-90 14 ${y0-ph/2})">${ylab}</text>`;
+  const b = body(X,Y);
+  s += `<g clip-path="url(#${cid})">${b.under}</g>${b.over}`;
+  return `<div class="qg"><svg viewBox="0 0 300 215" role="img" aria-label="${esc(aria||`Graph: ${ylab} on the vertical axis, ${xlab} on the horizontal axis`)}">${s}</svg></div>`;
 }
+/* clip segment a-b (data units) to the box; returns null if outside */
+function clipSeg([x1,y1],[x2,y2],xa,xb,ya,yb){
+  let t0=0,t1=1; const dx=x2-x1, dy=y2-y1;
+  for(const [p,q] of [[-dx,x1-xa],[dx,xb-x1],[-dy,y1-ya],[dy,yb-y1]]){
+    if(p===0){ if(q<0) return null; continue; }
+    const r=q/p; if(p<0){ if(r>t1) return null; if(r>t0) t0=r; } else { if(r<t0) return null; if(r<t1) t1=r; }
+  }
+  return [[x1+t0*dx,y1+t0*dy],[x1+t1*dx,y1+t1*dy]];
+}
+/* sdg: supply-and-demand chart (SVG string). Optional extras used by the lesson figures:
+   xmin/ymin (zoomed origin); lines[].pts (a polyline instead of a/b); vls: dashed vertical guides {q, p, c};
+   arrows: {a:[q,p], b:[q,p], c}; spans: two-headed brackets, horizontal {p, q1, q2} or vertical {q, p1, p2}, with label/c/lx/ly/anchor;
+   dots[].lx/ly/anchor move a dot's label. */
+function sdg({xmin=0, xmax=10, ymin=0, ymax=10, xlab='Quantity', ylab='Price', xt=[], yt=[], lines=[], hl=[], dots=[], areas=[], labels=[], vls=[], arrows=[], spans=[], aria}){
+  return gchart2({ xmin, xmax, ymin, ymax, xlab, ylab, xt, yt, aria, body:(X,Y)=>{
+    let u='', o='';
+    const mk = c => { const id='sa'+(++SDGN); o += `<defs><marker id="${id}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="${c}"/></marker></defs>`; return id; };
+    areas.forEach(a => { u += `<polygon points="${a.pts.map(([q,p])=>X(q).toFixed(1)+','+Y(p).toFixed(1)).join(' ')}" fill="${a.c||'var(--accent-soft)'}" opacity="${a.o||0.8}"${a.stroke?` stroke="${a.stroke}" stroke-width="1"`:''}/>`; if(a.label) o += gtext(X(a.label[0]), Y(a.label[1]), a.label[2], a.lc||'var(--ink)', 'middle'); });
+    vls.forEach(v => { u += `<line x1="${X(v.q).toFixed(1)}" x2="${X(v.q).toFixed(1)}" y1="${Y(ymin)}" y2="${Y(v.p===undefined?ymax:v.p).toFixed(1)}" stroke="${v.c||'var(--muted)'}" stroke-width="1.6" stroke-dasharray="4 4"/>`; });
+    hl.forEach(h => { const qe = h.q===undefined?xmax:h.q; u += `<line x1="${X(xmin)}" x2="${X(qe).toFixed(1)}" y1="${Y(h.p).toFixed(1)}" y2="${Y(h.p).toFixed(1)}" stroke="${h.c||'var(--g2)'}" stroke-width="2" stroke-dasharray="6 4"/>`; if(h.label) o += gtext(X(qe)-2, Y(h.p)+(h.ly||-5), h.label, h.c||'var(--g2)', 'end'); });
+    lines.forEach(l => {
+      let pts = l.pts ? l.pts.filter(([q,p])=>q>=xmin&&q<=xmax&&p>=ymin&&p<=ymax) : (clipSeg(l.a,l.b,xmin,xmax,ymin,ymax)||[]);
+      if(pts.length<2) return; const end = pts[pts.length-1];
+      u += gline(pts, X, Y, l.c||'var(--accent)', l.dash||'', l.w||2.6);
+      if(l.label) o += gtext(X(end[0])+(l.lx||4), Y(end[1])+(l.ly||4), l.label, l.c||'var(--accent)', l.anchor||'start'); });
+    arrows.forEach(a => { const c=a.c||'var(--g2)', id=mk(c); o += `<line x1="${X(a.a[0]).toFixed(1)}" y1="${Y(a.a[1]).toFixed(1)}" x2="${X(a.b[0]).toFixed(1)}" y2="${Y(a.b[1]).toFixed(1)}" stroke="${c}" stroke-width="2.2" marker-end="url(#${id})"/>`; });
+    spans.forEach(sp => { const c=sp.c||'var(--g2)', id=mk(c);
+      const [x1,y1,x2,y2] = sp.q===undefined ? [X(sp.q1),Y(sp.p),X(sp.q2),Y(sp.p)] : [X(sp.q),Y(sp.p1),X(sp.q),Y(sp.p2)];
+      o += `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${c}" stroke-width="2" marker-start="url(#${id})" marker-end="url(#${id})"/>`;
+      if(sp.label) o += gtext((x1+x2)/2+(sp.lx||0), (y1+y2)/2+(sp.ly===undefined?-7:sp.ly), sp.label, c, sp.anchor||'middle'); });
+    dots.forEach(d => { if(d.lx===undefined && d.ly===undefined && !d.anchor){ o += gdot(X, Y, d.q, d.p, d.label||'', d.c||'var(--ink)'); return; }
+      o += `<circle cx="${X(d.q).toFixed(1)}" cy="${Y(d.p).toFixed(1)}" r="5" fill="${d.c||'var(--ink)'}"/>` + (d.label ? gtext(X(d.q)+(d.lx||8), Y(d.p)+(d.ly===undefined?-8:d.ly), d.label, 'var(--ink)', d.anchor||'start') : ''); });
+    labels.forEach(([q,p,t,c,anchor]) => { o += gtext(X(q), Y(p), t, c||'var(--ink)', anchor||'middle'); });
+    return { under:u, over:o }; } });
+}
+/* Lesson figures: one chart, or a row of small charts, with a caption. Static pictures (no state), so no TEST NOTE needed;
+   each figure's numbers are listed in the <!-- src: --> comment of its section. */
+const fig = (inner, cap) => `<figure class="u2fig">${inner}<figcaption>${cap}</figcaption></figure>`;
+const figs = (cells, cap) => `<figure class="u2fig"><div class="u2row">${cells.map(([t,svg])=>`<div class="u2cell">${t?`<p class="u2t">${t}</p>`:''}${svg}</div>`).join('')}</div><figcaption>${cap}</figcaption></figure>`;
 /* A demand line from (0, pmax) down to (qmax, 0) clipped to the chart, and a supply line up from (0, pmin). */
 const lin = (p0, slope) => q => p0 + slope*q;   // price as a function of quantity
 

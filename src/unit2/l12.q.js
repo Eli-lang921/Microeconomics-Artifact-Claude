@@ -184,6 +184,7 @@ U2_LESSONS.push({ id:'l12', unit:2, title:'Taxes: Incidence and Deadweight Loss'
 <div class="analogy"><div class="eyebrow">Analogy</div><p>Picture a toll booth on the only bridge between a farm town and a city. Farmers must now get a higher price in the city to make the trip worth it, and city buyers pay more than before. Some trips that used to be worth making no longer are. The toll is the wedge; the trips not taken are the loss.</p></div>
 <p><b>Worked example: your course's sock market.</b> Before the tax: $5 a pair, 300 pairs. The government imposes a $1 tax, collected from sellers, and the quantity sold falls to 200.</p>
 <div class="math">Buyers pay P<sub>B</sub> = <b>$5.50</b> (up $0.50)<br>Sellers keep P<sub>S</sub> = <b>$4.50</b> (down $0.50)<br>Wedge: $5.50 − $4.50 = <b>$1</b>, the tax</div>
+${FIG.l12wedge()}
 <p>Check: buyers' change plus sellers' change, $0.50 + $0.50, equals the $1 tax. (Your course's slide labels the sellers' price "P<sub>b</sub> = $4.50"; it should read P<sub>s</sub>.)</p>
 <p>Your course adds right away: "it doesn't matter who pays the tax, the buyer or the seller." Here the sellers hand the $1 to the government, yet buyers still pay $0.50 of it through the higher price. Who bears how much is the last part of this lesson.</p>
 <p>Why does quantity fall? At $5.50 buyers want fewer than 300 pairs (law of demand) and at $4.50 sellers offer fewer (law of supply). The market settles where they agree: 200.</p>
@@ -193,6 +194,7 @@ U2_LESSONS.push({ id:'l12', unit:2, title:'Taxes: Incidence and Deadweight Loss'
 <!-- src: MS2 (video 2.4: "we take the size of the tax and we multiply this by the quantity ... once we have the tax"; $200; slide 123) -->
 <div class="math">Tax revenue = tax × quantity sold with the tax = $1 × 200 = <b>$200</b></div>
 <p>On a graph, revenue is the rectangle between P<sub>B</sub> and P<sub>S</sub>, out to the taxed quantity. Use the <b>new</b> quantity: the 100 pairs that are no longer sold raise nothing.</p>
+${FIG.l12revenue()}
 <div data-check="l12c-rev"></div>
 
 <h2>Why tax at all?</h2>
@@ -206,6 +208,7 @@ U2_LESSONS.push({ id:'l12', unit:2, title:'Taxes: Incidence and Deadweight Loss'
 <p><b>Worked example: socks with made-up straight-line curves</b> that match your course's numbers (demand Q = 1,300 − 200P, supply Q = 200P − 700; demand reaches zero at $6.50, supply at $3.50).</p>
 ${table(['','Before the tax','After the $1 tax'],[['Consumer surplus','½ × 300 × ($6.50 − $5) = $225','½ × 200 × ($6.50 − $5.50) = $100'],['Producer surplus','½ × 300 × ($5 − $3.50) = $225','½ × 200 × ($4.50 − $3.50) = $100'],['Tax revenue','$0','$1 × 200 = $200'],['Total','<b>$450</b>','<b>$400</b>']])}
 <div class="math">Deadweight loss = $450 − $400 = <b>$50</b><br>Check with the triangle: ½ × (300 − 200) × $1 = $50</div>
+${FIG.l12areas()}
 <p>Where does the $50 come from? Pairs 201 to 300 were worth more to buyers than they cost sellers, but not by more than the $1 tax, so they stop being traded. The revenue isn't lost; it moves to the government. The deadweight loss is surplus nobody gets.</p>
 <div data-check="l12c-surplus,l12c-dwl"></div>
 
@@ -231,12 +234,14 @@ ${table(['','Before the tax','After the $1 tax'],[['Consumer surplus','½ × 300
 <ul><li><b>${dt('price-ceiling','Price ceiling')}.</b> Your course textbook's drug: a $400 ceiling (equilibrium $600) cuts quantity from 20,000 to 15,000. Some producer surplus moves to the buyers who still get the drug, and the 5,000 lost doses are deadweight loss.</li>
 <li><b>${dt('price-floor','Price floor')}.</b> The textbook's movie theaters: a $12 floor (equilibrium $8) cuts tickets from 1,800 to 1,400. Some consumer surplus moves to theaters, and the 400 lost tickets are deadweight loss.</li>
 <li><b>Quota.</b> Lesson 8's orange quota of 20 (equilibrium 30): buyers pay $4 while the 20th unit costs sellers $2. Deadweight loss = ½ × 10 × ($4 − $2) = <b>$10</b>.</li></ul>
+${FIG.l12controls()}
 <p>Your course textbook: price floors and ceilings "block some transactions that buyers and sellers would have been willing to make, and creates deadweight loss." That's why each side favors the control that transfers surplus to it, and why economists count the cost to everyone.</p>
 <div data-check="l12c-controls"></div>
 
 <h2>Read a tax graph</h2>
 <!-- src: MS2; OS53. Exam skill: predict incidence from the slopes (steeper = more inelastic) and the facts of a market. -->
 <p>CLEP questions often show a tax graph or describe a market and ask who bears more. On a graph, compare slopes at the equilibrium: the <b>steeper</b> curve is the more inelastic side and bears more. In words, ask which side has fewer alternatives.</p>
+${FIG.l12incidence()}
 <div data-widget="burden"></div>
 <div data-check="l12c-skill"></div>
 

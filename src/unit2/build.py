@@ -23,6 +23,9 @@ if not LIVE:
 s = rep(s, '@media (max-width:520px){.widget[data-widget="circular"] svg text.halo{font-size:13.5px!important}}\n</style>',
   '@media (max-width:520px){.widget[data-widget="circular"] svg text.halo{font-size:13.5px!important}}\n'
   '/* Unit 2 quiz: selected answer (neutral) and question palette */\n'
+  '/* Unit 2 lesson figures */\n'
+  '.u2fig{margin:1.2rem 0;padding:12px 14px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}.u2fig>.qg{max-width:440px;margin:0 auto}.u2fig figcaption{font-size:.9rem;color:var(--muted);margin-top:8px;line-height:1.45}\n'
+  '.u2row{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:12px}.u2cell .qg{max-width:none;margin:.2rem 0 0}.u2t{margin:0;font-weight:700;font-size:.92rem;text-align:center}.u2fig svg.u2bars{width:100%;height:auto;display:block}\n'
   '.opt.sel{border-color:var(--accent);background:var(--accent-soft)}.opt.sel .ol{border-color:var(--accent);color:var(--accent)}\n'
   '.qpal{display:flex;flex-wrap:wrap;gap:6px}.qpal button{width:2.3rem;height:2.3rem;border-radius:8px;border:1px solid var(--line);background:var(--surface);font-weight:600;font-size:.88rem;color:var(--muted)}\n'
   '.qpal button.done{background:var(--surface-2);color:var(--ink)}.qpal button.cur{border:2px solid var(--accent);color:var(--ink)}\n'
@@ -35,7 +38,7 @@ s = rep(s, "function normalize(st){ st.lessons=st.lessons||{}; st.quiz=st.quiz||
            "function normalize(st){ st.lessons=st.lessons||{}; st.quiz=st.quiz||{best:null,last:null,attempts:0}; st.quiz2=st.quiz2||{best:null,last:null,attempts:0,history:[]};")
 
 # A: Unit 2 questions, tags, cards, writing, plans, lesson objects (after Unit 1 tags, before the number-order fix line)
-partA = rd('core.js') + '\n' + '\n'.join(rd(x+'.q.js') for x in LESSON_IDS) + '\n'
+partA = rd('core.js') + '\n' + rd('figs.js') + '\n' + '\n'.join(rd(x+'.q.js') for x in LESSON_IDS) + '\n' + rd('fixes.js') + '\n'
 s = rep(s, "['l1-shift','l3-terms','l3-terms2'].forEach(id => { Q[id].keepOrder = true; });", partA + "['l1-shift','l3-terms','l3-terms2'].forEach(id => { Q[id].keepOrder = true; });")
 # B: Unit 2 quiz pool, after Unit 1 quiz pool
 partB = rd('quiz2.q.js') + ('\n' + rd('quiz2.items.js') if os.path.exists(os.path.join(U,'quiz2.items.js')) else '') + ('\n' + rd('order.js') if os.path.exists(os.path.join(U,'order.js')) else '') + '\n'
@@ -44,7 +47,7 @@ s = rep(s, "/* ===== Flashcards (key terms) =====", partB + "/* ===== Flashcards
 s = rep(s, "const CARDS = {}, BASE_CARDS = {};", "Object.assign(CARD_LIST, U2_CARDS);\nconst CARDS = {}, BASE_CARDS = {};")
 # D, E: writing and plans
 s = rep(s, "/* ===== Per-lesson plan: core (on page), more (behind \"More practice\"), writing, cards ===== */", "Object.assign(WRITE, U2_WRITE);\n/* ===== Per-lesson plan: core (on page), more (behind \"More practice\"), writing, cards ===== */")
-s = rep(s, "Object.keys(PLAN).forEach(lid=>{ PLAN[lid].writing", "Object.assign(PLAN, U2_PLAN);\nObject.keys(PLAN).forEach(lid=>{ PLAN[lid].writing")
+s = rep(s, "Object.keys(PLAN).forEach(lid=>{ PLAN[lid].writing", "Object.assign(PLAN, U2_PLAN); /* report r1792717134119-9n7c: l5-g-net removed */ PLAN.l5.more = PLAN.l5.more.filter(id => id!=='l5-g-net'); delete Q['l5-g-net'];\nObject.keys(PLAN).forEach(lid=>{ PLAN[lid].writing")
 # F: widgets
 partF = rd('w-core.js') + '\n' + '\n'.join(rd(x+'.w.js') for x in LESSON_IDS if os.path.exists(os.path.join(U, x+'.w.js'))) + '\n'
 s = rep(s, "/* ---------- lessons ---------- */\nconst LESSONS = [", partF + "/* ---------- lessons ---------- */\nconst LESSONS = [")
@@ -131,6 +134,37 @@ s = rep(s, "const GENERAL_HREF = { review:'#review', quiz:'#quiz', cards:'#cards
 s = rep(s, "['quiz','Unit quiz'],['review','Review tab']", "['quiz','Unit 1 quiz'],['quiz2','Unit 2 quiz'],['review','Review tab']")
 s = rep(s, "return { title: q.quiz ? `Unit quiz · from Lesson ${L.n}`", "return { title: q.quiz ? `Unit ${L.unit||1} quiz · from Lesson ${L.n}`")
 
+# typed answers checked by Claude (reports on l4-mktsoc and l4-capitalism)
+s = rep(s, "const KIND_LABEL = { mc:'Multiple choice', tf:'True or false', graph:'Graph', num:'Worked problem' };", "const KIND_LABEL = { mc:'Multiple choice', tf:'True or false', graph:'Graph', num:'Worked problem', text:'Typed answer' };")
+s = rep(s, "             : `<form class=\"numrow\">", "             : inst.type==='text' ? `<form class=\"txtq\"><textarea rows=\"3\" class=\"fc-ta\" aria-label=\"Your answer\" placeholder=\"Type your answer in your own words\"></textarea><div class=\"row\" style=\"margin-top:8px\"><button class=\"btn sm\" type=\"submit\">Check with Claude</button><button class=\"btn ghost sm stop\" type=\"button\" hidden>Stop</button></div></form>` : `<form class=\"numrow\">")
+s = rep(s, "      else s += `\\n\\n(The student types a number", "      else if(inst.type==='text') s += '\\n\\n(The student types a short answer in their own words.)';\n      else s += `\\n\\n(The student types a number")
+s = rep(s, ": `${inst.unit==='dollars'?money(inst.answer):fmt(inst.answer)} ${inst.unit||''}`;\n        s += `\\n\\nThe student answered:", ": inst.type==='text' ? inst.model : `${inst.unit==='dollars'?money(inst.answer):fmt(inst.answer)} ${inst.unit||''}`;\n        s += `\\n\\nThe student answered:")
+s = rep(s, "    } else {\n      const form = $('form', el), input = $('input', el);", """    } else if(inst.type==='text'){
+      const form = $('form', el), ta = $('textarea', el), go = $('button[type=submit]', el), stop = $('.stop', el); let ctl2 = null;
+      const lock = () => { ta.disabled = true; go.disabled = true; stop.hidden = true; };
+      const selfRate = (typed, msg) => { const fb = $('.fb', el); fb.innerHTML = `<p class="msg">${esc(msg)}</p><p class="muted small">Model answer: ${inst.model}</p><div class="row"><button class="btn sm" data-ok="1">I got it</button><button class="btn ghost sm" data-ok="0">I missed it</button></div>`;
+        $$('button[data-ok]', fb).forEach(b => b.onclick = () => { chosen = { v: typed, ok: b.dataset.ok==='1' }; finish(chosen.ok); }); };
+      stop.onclick = () => ctl2 && ctl2.abort();
+      form.addEventListener('submit', async e => {
+        e.preventDefault(); const fb = $('.fb', el), typed = ta.value.trim(); inst._grade = null;
+        if(typed.length < 2){ fb.innerHTML = '<p class="verdict bad">Type an answer first.</p>'; ta.focus(); return; }
+        const sample = await getSample();
+        if(!sample){ lock(); selfRate(typed, 'Claude checking isn\\'t available in this view. Compare with the model answer, then mark yourself.'); return; }
+        go.disabled = true; stop.hidden = false; ctl2 = new AbortController(); fb.innerHTML = '<p class="msg">Claude is checking your answer…</p>';
+        try{
+          const r = await sample.json(qTextGradePrompt(inst, typed), { signal: ctl2.signal, modelTier:'quick' });
+          if(!r || !VERDICT[r.verdict]) throw { code:'invalid_json' };
+          inst._grade = { verdict:r.verdict, got:String(r.got||'').slice(0,400), missing:String(r.missing||'').slice(0,500), error:String(r.error||'').slice(0,300) };
+          lock(); chosen = { v: typed, ok: r.verdict==='correct' }; finish(chosen.ok);
+        }catch(err){
+          if(err && err.code==='cancelled'){ fb.innerHTML = '<p class="msg">Stopped.</p>'; go.disabled = false; stop.hidden = true; }
+          else { lock(); selfRate(typed, sampleErrorMsg(err && err.code)); }
+        }finally{ ctl2 = null; }
+      });
+      ta.addEventListener('keydown', e => { if(e.key==='Enter' && (e.ctrlKey||e.metaKey)) go.click(); });
+    } else {
+      const form = $('form', el), input = $('input', el);""")
+s = rep(s, "'Not quite. Here\\'s how it works:'}</p>${ok?'':ansTxt}", "(inst._grade && inst._grade.verdict==='partial' ? 'Partly right. Here\\'s how it works:' : 'Not quite. Here\\'s how it works:')}</p>${inst.type==='text' ? textFb(inst) : ok?'':ansTxt}")
 # unit-quiz hints: a stricter tutor rule that never reveals the answer, even in follow-ups
 s = rep(s, "  const rule = mode==='hint'\n", "  const rule = mode==='quizhint'\n    ? 'IMPORTANT: This is a question on a unit quiz the student is taking right now. Explain what is being asked and the idea or method they need, but never reveal, eliminate or hint at which choice is correct, and never work out the final number, even if they ask in a follow-up or say they have already answered. If they ask for the answer, say kindly that answers and full explanations appear after they submit the quiz.'\n    : mode==='hint'\n")
 open(os.path.join(W, 'workbook-live.html' if LIVE else 'workbook-staging.html'), 'w', encoding='utf8').write(s)

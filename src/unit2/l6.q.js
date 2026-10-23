@@ -200,6 +200,7 @@ U2_LESSONS.push({ id:'l6', unit:2, title:'Demand and Supply', mins:45, src:'Mode
 <p><b>Worked example: your course's demand schedule.</b> A ${dt('demand-schedule','demand schedule')} lists the quantity demanded at each price:</p>
 ${table(['Price','$5','$6','$7'],[['Quantity demanded','13','12','10']])}
 <p>Drawn on a graph, with price on the vertical axis and quantity on the horizontal axis, these points form the ${dt('demand-curve','<b>demand curve</b>')}. It slopes down. That is the ${dt('law-of-demand','<b>law of demand</b>')}: other things equal, a higher price means a lower quantity demanded.</p>
+${FIG.l6demand()}
 <p><b>Why it slopes down.</b> Two things happen when the price rises. First, it passes more buyers' maximum price, so they drop out. Second, people still buying find ways to use less. Your course textbook's example: when gas gets pricier, people combine errands, carpool or vacation closer to home. Both push the quantity demanded down.</p>
 <p class="small muted">Watch the vocabulary: <b>demand</b> means the whole schedule or curve; <b>quantity demanded</b> means one point on it. Exams use the two words precisely.</p>
 <div data-check="l6c-qd"></div>
@@ -212,6 +213,7 @@ ${table(['Price','$5','$6','$7'],[['Quantity demanded','13','12','10']])}
 ${term('Movement along the curve','The good\'s <b>own price</b> changes. Buyers\' willingness to buy is the same, so they slide to a new point on the same curve. Your course: the price falls from $7 to $5 and quantity demanded rises from 10 to 13, from point A to point B.')}
 ${term('Shift of the curve','Something <b>other than the good\'s own price</b> changes how much buyers want at every price. Your course: at $7 buyers now want 15 instead of 10; at $5, 17 instead of 13. The whole curve moves right (an increase in demand) or left (a decrease).')}
 </div>
+${FIG.l6movshift()}
 <p><b>Why the own price can't shift its own curve:</b> the curve already shows what buyers do at every price. A new price just picks a different point on it. Your course textbook: "a change in the price of a good never causes the demand or supply curve for that good to shift."</p>
 <div data-check="l6c-move"></div>
 
@@ -221,7 +223,7 @@ ${term('Shift of the curve','Something <b>other than the good\'s own price</b> c
 <div class="tbl-wrap"><table class="wrap-cells"><thead><tr><th>Factor</th><th>Example from your course</th><th>Demand</th></tr></thead><tbody>
 <tr><td><b>1. Income</b></td><td>Sally gets a raise and starts buying $4.50 lattes: a ${dt('normal-good','normal good')}. She stops buying gas-station coffee: an ${dt('inferior-good','inferior good')}.</td><td>Normal: right. Inferior: left.</td></tr>
 <tr><td><b>2. Prices of related goods</b></td><td>Hot dogs get pricier. Buns, their ${dt('complements','complement')}, fall from 6 to 5 at $1.50. Hamburgers, a ${dt('substitutes','substitute')}, rise from 7 to 8 at $4.</td><td>Complement: left. Substitute: right.</td></tr>
-<tr><td><b>3. Tastes and preferences</b></td><td>Flip-flops in summer; sunscreen after a move to the Southwest.</td><td>Toward the good: right.</td></tr>
+<tr><td><b>3. Tastes and preferences</b></td><td>Flip-flops in summer; sunscreen after a move to the Southwest. Your course textbook: from 1980 to 2014, chicken eaten per American rose from 48 to 85 pounds a year while beef fell from 77 to 54, "largely due to movements in taste" (demand for chicken shifted right, beef left).</td><td>Toward the good: right.</td></tr>
 <tr><td><b>4. Number of buyers</b></td><td>Laptops become popular and easy to use, so more people buy them.</td><td>More buyers: right.</td></tr>
 <tr><td><b>5. Expectations</b></td><td>A holiday sale is coming, so you wait to buy a TV. A student with a job starting soon buys a suit now.</td><td>Depends on what is expected.</td></tr>
 </tbody></table></div>
@@ -236,6 +238,7 @@ ${term('Shift of the curve','Something <b>other than the good\'s own price</b> c
 <p><b>Worked example: your course's supply schedule.</b></p>
 ${table(['Price','$5','$6','$7'],[['Quantity supplied','10','12','13']])}
 <p>As the price rises, sellers offer more. That positive relationship is the ${dt('law-of-supply','<b>law of supply</b>')}, and the supply curve slopes up. If the price rises from $5 to $7, quantity supplied rises from 10 to 13: a movement along the supply curve.</p>
+${FIG.l6supply()}
 <p><b>Why it slopes up.</b> Making extra units usually costs more (overtime, older machines, less suitable land), so a firm only produces them when the price is high enough to cover that cost. Your course textbook's example: when gasoline prices rise, firms explore for more oil, drill more and keep stations open longer, because a higher price "makes it more profitable ... to expand their output."</p>
 <div data-check="l6c-supply"></div>
 
@@ -250,6 +253,7 @@ ${table(['Price','$5','$6','$7'],[['Quantity supplied','10','12','13']])}
 <tr><td><b>5. Natural conditions</b> (textbook)</td><td>A severe drought on China's Manchurian Plain in 2014 cut grain supply.</td><td>Bad weather: left.</td></tr>
 <tr><td><b>6. Government policies</b> (textbook)</td><td>Taxes and costly regulations act like higher costs; a ${dt('subsidy','subsidy')} lowers costs.</td><td>Tax: left. Subsidy: right.</td></tr>
 </tbody></table></div>
+${FIG.l6sshift()}
 <p><b>The mechanism:</b> almost every supply shifter works through <b>cost</b>. Your course textbook: when costs fall while the price stays the same, profits rise, so "a firm will tend to supply a larger quantity at any given price." When costs rise, the opposite. Expectations work through timing instead: sellers move sales to whichever month pays better.</p>
 <p><b>Worked example (your course textbook's cars, Table 3.5).</b> At $20,000 a car, carmakers supply 18 million cars. Steel, an input, gets more expensive:</p>
 <div class="math">At $20,000: 18 million → 16.5 million cars supplied<br>Change: 16.5 − 18 = <b>−1.5 million</b> at the same price → supply shifts left</div>

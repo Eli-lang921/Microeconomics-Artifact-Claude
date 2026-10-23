@@ -189,9 +189,11 @@ U2_LESSONS.push({ id:'l11', unit:2, title:'Consumer and Producer Surplus', mins:
 <div class="math">Fan willing to pay $5.00: buys; consumer surplus = $5.00 − $2.50 = <b>$2.50</b><br>Fan willing to pay $2.00: $2.00 &lt; $2.50, so doesn't buy; consumer surplus = $0</div>
 <p>Now the price falls to $1.50:</p>
 <div class="math">$5.00 fan: $5.00 − $1.50 = <b>$3.50</b> (up $1.00)<br>$2.00 fan: now buys; $2.00 − $1.50 = <b>$0.50</b></div>
+${FIG.l11water()}
 <p>Check: both changes point the same way. A lower price raises consumer surplus for buyers already in the market and brings in new buyers who now gain something. (Your course's slide shows $1 for the second fan; the video's $0.50 is right.)</p>
 <p><b>Math refresher: triangle areas.</b> With a straight-line demand curve, consumer surplus is a triangle: area = ½ × base × height. <b>Made-up numbers:</b> demand starts at $10, the price is $6 and 40 units are bought. Base 40, height $10 − $6 = $4:</p>
 <div class="math">Consumer surplus = ½ × 40 × $4 = <b>$80</b></div>
+${FIG.l11triangle()}
 <div data-check="l11c-cs,l11c-cs2"></div>
 
 <h2>Producer surplus</h2>
@@ -200,6 +202,7 @@ U2_LESSONS.push({ id:'l11', unit:2, title:'Consumer and Producer Surplus', mins:
 <p><b>Worked example: your course's three water vendors.</b></p>
 ${table(['Vendor','A','B','C'],[['Lowest price accepted','$3.00','$2.75','$2.00'],['Producer surplus at $2.25','does not sell','does not sell','$0.25'],['Producer surplus at $3.50','$0.50','$0.75','$1.50']])}
 <div class="math">At $2.25: only C sells → total producer surplus = <b>$0.25</b><br>At $3.50: $0.50 + $0.75 + $1.50 = <b>$2.75</b></div>
+${FIG.l11vendors()}
 <p>Check: a higher price raises producer surplus two ways, just as a lower price raised consumer surplus: C gains more per bottle, and A and B, who couldn't cover costs at $2.25, now sell.</p>
 <p>Notice what producer surplus is <b>not</b>: it isn't revenue. C's revenue at $2.25 is $2.25, but its surplus is only $0.25, because $2.00 of that was needed to cover costs.</p>
 <div data-check="l11c-ps"></div>
@@ -220,6 +223,7 @@ ${table(['Vendor','A','B','C'],[['Lowest price accepted','$3.00','$2.75','$2.00'
 <p><b>The mechanism, unit by unit.</b></p>
 <ul><li><b>Up to the ${dt('equilibrium','equilibrium')} quantity</b>, the ${dt('demand-curve','demand curve')} is above the supply curve: each unit is worth more to some buyer than it costs some seller. Trading it adds surplus. Your course: goods go to "buyers who value them most highly" and come from "sellers who can produce them at the lowest cost."</li>
 <li><b>Beyond the equilibrium quantity</b>, the supply curve is above the demand curve: each extra unit costs more to make than anyone values it. Producing it would <b>subtract</b> from total surplus.</li></ul>
+${FIG.l11efficient()}
 <p>So the equilibrium quantity is exactly where adding units stops paying. This is Lesson 5's marginal rule, MB ≥ MC, applied to a whole market: the demand curve is the marginal benefit, the supply curve the marginal cost.</p>
 <p class="small muted"><b>A correction to your course.</b> Slide 112 says equilibrium "maximizes both consumer and producer surplus," and the video says "we are maximizing consumer surplus and we are maximizing the area of producer surplus." Only the <b>total</b> is maximized. A ${dt('price-ceiling','price ceiling')} below equilibrium could hand buyers more surplus and a ${dt('price-floor','price floor')} above it could hand sellers more, but both would shrink the total. Your course textbook: "at the efficient level of output, it is impossible to produce greater consumer surplus without reducing producer surplus." The AP framework puts it the same way: equilibrium "maximizes total economic surplus in the absence of market failures." (Your course's own summary slide says "maximized total surplus," which is the accurate version.)</p>
 <p>"In the absence of market failures" matters: Unit 7 covers cases, like pollution, where the market's equilibrium isn't efficient.</p>

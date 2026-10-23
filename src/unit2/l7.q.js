@@ -186,6 +186,7 @@ U2_LESSONS.push({ id:'l7', unit:2, title:'Market Equilibrium', mins:45, src:'Mod
 ${table(['Price','$5','$6','$7'],[['Quantity demanded','13','12','10'],['Quantity supplied','10','12','13']],[[0,2],[1,2]])}
 <div class="math">At $6: quantity demanded 12 = quantity supplied 12<br>Equilibrium: <b>P* = $6, Q* = 12</b></div>
 <p>Check: at every other price the two rows differ, so $6 is the only price where the market clears. Q* is 12, not 24: the same 12 units are bought by buyers and sold by sellers.</p>
+${FIG.l7eq()}
 <p>Your course also calls P* the ${dt('market-clearing-price','<b>market-clearing price</b>')}: at that price, everything sellers bring is bought, with nothing left over and no one turned away who is willing to pay it.</p>
 <div data-check="l7c-eq"></div>
 
@@ -196,6 +197,7 @@ ${table(['Price','$5','$6','$7'],[['Quantity demanded','13','12','10'],['Quantit
 ${term(dt('excess-supply','Surplus'),'Price <b>above</b> equilibrium: quantity supplied is greater than quantity demanded. Goods pile up unsold.')}
 ${term(dt('shortage','Shortage'),'Price <b>below</b> equilibrium: quantity demanded is greater than quantity supplied. Shelves run empty.')}
 </div>
+${FIG.l7gaps()}
 <p><b>The mechanism.</b> In a surplus, sellers would rather sell at a lower price than not sell at all, so they cut prices. Your course: the falling price signals buyers to "buy more" and sellers to "supply less," until the two quantities meet. In a shortage the reverse happens: buyers compete for scarce goods and sellers see they can charge more, so the price rises, buyers want less and sellers offer more.</p>
 <div class="analogy"><div class="eyebrow">Analogy</div><p>Think of a farmers' market near closing time. A stand with crates of unsold peaches marks them down; a stand that sold out by noon will charge more next week. Nobody plans it, but every stand drifts toward the price where its peaches just sell out.</p></div>
 <p><b>Worked example: your course textbook's gasoline market</b> (millions of gallons; equilibrium $1.40 and 600):</p>
@@ -215,6 +217,7 @@ ${term(dt('shortage','Shortage'),'Price <b>below</b> equilibrium: quantity deman
 <p class="small muted">Your course video says quantity falls to 25 in both cases, but that doesn't fit its own schedule (at $4, buyers want only 20). With made-up shifts of 20 oranges at every price, the new quantity is 20 in each case, and the combined case below lands exactly where your course's slide puts it ($3 and 10). The directions, which are what the exam tests, are the same either way.</p>
 <p><b>The pattern to remember.</b> A demand shift moves price and quantity in the <b>same</b> direction. A supply shift moves them in <b>opposite</b> directions. Why: a demand shift slides the market along the upward-sloping supply curve, while a supply shift slides it along the downward-sloping demand curve.</p>
 ${table(['Event','Price','Quantity'],[['Demand increases','Rises','Rises'],['Demand decreases','Falls','Falls'],['Supply increases','Falls','Rises'],['Supply decreases','Rises','Falls']])}
+${FIG.l7four()}
 <p>Real example from your course textbook: excellent weather for California salmon in 2000 shifted supply right; the price fell from $3.25 to $2.50 a pound and the catch rose from 250 to 550 thousand fish, with no change in demand.</p>
 <div data-check="l7c-shift,l7c-four"></div>
 
@@ -222,6 +225,7 @@ ${table(['Event','Price','Quantity'],[['Demand increases','Rises','Rises'],['Dem
 <!-- src: OS33 (Clear It Up: Lee's drought reasoning; "A shift in one curve never causes a shift in the other curve") -->
 <p>Your course textbook tells the story of Lee, a student who reasons: a drought shifts wheat supply left and raises the price; then the higher price makes farmers grow more, so supply shifts back right; then the higher price makes buyers want less, so demand shifts left... At that point Lee suspects something is wrong.</p>
 <p>Lee's first step is right. Everything after it mixes up shifts with movements. The higher price is the <b>result</b> of the shift, and buyers and sellers respond to it by moving <b>along</b> their curves. The textbook: "a shift in one curve never causes a shift in the other curve. Rather, a shift in one curve causes a movement along the second curve."</p>
+${FIG.l7frost()}
 <p>Keep the timeline straight: <b>event → one curve shifts → price changes → movement along the other curve → new equilibrium</b>. Stop there.</p>
 <div data-check="l7c-lee"></div>
 
@@ -237,6 +241,7 @@ ${table(['Event','Price','Quantity'],[['Demand increases','Rises','Rises'],['Dem
 <p><b>The shortcut:</b> curves shift the <b>same way</b> → quantity is certain. Curves shift <b>opposite ways</b> → price is certain. Your course textbook: "we can determine the overall effect on price or on quantity, but not on both."</p>
 <p><b>Worked example: your course's oranges, both events at once</b> (made-up shift sizes of 20 each):</p>
 <div class="math">Frost alone: $3 → $4 (price up) · Cheaper apples alone: $3 → $2 (price down)<br>Both: the price pulls cancel → <b>$3</b>; quantity falls from 30 to <b>10</b></div>
+${FIG.l7both()}
 <p>Check: quantity fell, as the rule promised for two leftward shifts. The price ended where it started only because these two shifts happen to be the same size; with a bigger frost it would have risen. Try "Both" in the orange market above.</p>
 <div data-check="l7c-double"></div>
 

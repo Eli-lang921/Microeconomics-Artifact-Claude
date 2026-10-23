@@ -186,12 +186,14 @@ ${term(dt('cross-price-elasticity','Cross-price elasticity of demand'),'%Δ quan
 <p><b>Worked example: your course's Magic Hat beer.</b> A 23-year-old's income rises from $45,000 to $50,000, and he goes from 5 to 9 Magic Hats a month.</p>
 <div class="math">%Δ quantity = (9 − 5) ÷ [(9 + 5) ÷ 2] = 4 ÷ 7 = 0.571 = 57.1%<br>%Δ income = (50,000 − 45,000) ÷ [(50,000 + 45,000) ÷ 2] = 5,000 ÷ 47,500 = 0.105 = 10.5%<br>Income elasticity = 0.5714 ÷ 0.1053 = <b>5.43</b> (dividing the rounded percents, 57.1 ÷ 10.5, gives 5.44)</div>
 <p>Check: his beer purchases grew more than five times as fast as his income, so a number above 5 fits.</p>
+${FIG.l10incshift()}
 <p><b>Reading the result:</b></p>
 <div class="tbl-wrap"><table class="wrap-cells"><thead><tr><th>Income elasticity</th><th>Meaning</th><th>Example</th></tr></thead><tbody>
 <tr><td><b>Negative</b></td><td>Inferior good: buy less as income rises</td><td>Ramen, gas-station coffee (your course); urban mass transit (Econlib)</td></tr>
 <tr><td><b>Between 0 and 1</b></td><td>Normal good; purchases grow more slowly than income (necessity-like)</td><td>Bread, electricity</td></tr>
 <tr><td><b>Above 1</b></td><td>Normal good; purchases grow faster than income (luxury-like, "income elastic")</td><td>Magic Hat for this buyer (5.43); "luxury cars, vacations in Europe, and fine jewelry" (your course textbook)</td></tr>
 </tbody></table></div>
+${FIG.l10incline()}
 <p><b>Why the sign works:</b> for a normal good, income and quantity move together (both changes positive, or both negative), so the ratio is positive. For an inferior good they move apart, so the ratio is negative. The size tells you how far demand shifts: your course textbook says "A higher income elasticity means a larger shift."</p>
 <p class="small muted">Your course video calls an income elasticity above 1 "an elastic good." On exams, "elastic" alone usually means <b>price</b> elasticity, so think "income elastic" here.</p>
 <div data-check="l10c-ied,l10c-ied2"></div>
@@ -208,6 +210,7 @@ ${term('Positive','<b>'+dt('substitutes','Substitutes')+'</b>: B gets pricier, s
 ${term('Negative','<b>'+dt('complements','Complements')+'</b>: B gets pricier, so people use less of both. Beer and pretzels (−0.64).')}
 ${term('About zero','<b>Unrelated</b>: B\'s price barely affects A. The AP framework uses cross-price elasticity "to determine whether goods are substitutes, complements, or not related."')}
 </div>
+${FIG.l10crossline()}
 <p><b>Why the sign works:</b> for substitutes, B's price and A's quantity move the same way (pricier tea, more coffee), so the ratio is positive. For complements they move in opposite ways (cheaper pretzels, more beer), so it is negative.</p>
 <div data-check="l10c-xed"></div>
 

@@ -1,9 +1,9 @@
 {
   "at": 1792783040000,
   "ctx": "",
-  "fixedAt": 0,
+  "fixedAt": 1792786300000,
   "note": "This was not in the lesson",
-  "reply": "",
-  "status": "open",
+  "reply": "Added the textbook's chicken and beef example to the Tastes row in \"What shifts demand,\" so the question is now covered by the lesson.",
+  "status": "fixed",
   "where": "question:l6-tastes"
 }

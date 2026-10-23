@@ -193,6 +193,7 @@ U2_LESSONS.push({ id:'l9', unit:2, title:'Price Elasticity of Demand and Supply'
 <div class="analogy"><div class="eyebrow">Analogy</div><p>Your course textbook drops a tennis ball and a brick from a balcony. Same push, very different bounce: the tennis ball has greater elasticity. Buyers are the same. Raise the price of Kit Kat bars and buyers bounce away to other candy; raise the price of insulin and they barely move.</p></div>
 <p>Your course shows where each elasticity comes from:</p>
 <ul><li>When <b>supply</b> shifts, the price changes and buyers move <b>along the demand curve</b>. How strongly they respond is the ${dt('ped','<b>price elasticity of demand</b>')}.</li><li>When <b>demand</b> shifts, sellers move <b>along the supply curve</b>. How strongly they respond is the ${dt('pes','<b>price elasticity of supply</b>')}.</li></ul>
+${FIG.l9steepflat()}
 <p><b>Why percentages?</b> A change of 10 units means a lot for a store that sells 20 a week and little for one that sells 10,000. A $1 change matters for a candy bar, not for a car. Percentages put every good on the same scale.</p>
 <div data-check="l9c-what"></div>
 
@@ -216,6 +217,7 @@ ${term(dt('inelastic','Inelastic (less than 1)'),'Quantity responds by a <b>smal
 ${term(dt('unit-elastic','Unit elastic (exactly 1)'),'Quantity responds by the <b>same</b> percentage as price.')}
 </div>
 <p><b>The two extremes</b> (your course textbook, §5.2). A ${dt('perfectly-inelastic','<b>perfectly inelastic</b>')} curve is vertical: quantity doesn't respond at all, like a life-saving drug with no substitute. A ${dt('perfectly-elastic','<b>perfectly elastic</b>')} curve is horizontal: any price rise drops quantity to zero. Real goods sit in between, but the rule of thumb holds: <b>flatter = more elastic, steeper = more inelastic</b> (for curves drawn on the same scale).</p>
+${FIG.l9five()}
 <div data-check="l9c-class"></div>
 
 <h2>What makes demand elastic or inelastic</h2>
@@ -229,6 +231,7 @@ ${term(dt('unit-elastic','Unit elastic (exactly 1)'),'Quantity responds by the <
 </tbody></table></div>
 <p>Substitutes come first: Econlib's David Henderson notes that where there are "few good substitutes," demand is "highly inelastic," and where a close substitute exists, it is elastic. On time, your course textbook: energy demand "is somewhat inelastic in the short run, but much more elastic in the long run," because over years people buy efficient cars and insulate their homes.</p>
 <p><b>Real estimates</b> from your course textbook's Table 5.2: housing 0.12, rush-hour rail transit 0.15, gasoline 0.35, beer 0.80, computers 1.44, restaurant meals 2.27. The textbook: "necessities such as housing and electricity are inelastic, while items that are not necessities such as restaurant meals are more price-sensitive."</p>
+${FIG.l9table52()}
 <div data-check="l9c-det"></div>
 
 <h2>Elasticity and total revenue</h2>
@@ -237,6 +240,7 @@ ${term(dt('unit-elastic','Unit elastic (exactly 1)'),'Quantity responds by the <
 <p><b>Worked example: your course's grocer raises two prices by about 10%.</b></p>
 ${table(['','Price','Quantity','Total revenue','Elasticity'],[['Salmon before','$11.00','40','$440.00',''],['Salmon after','$12.10','25','$302.50','4.85: elastic'],['Bread before','$3.00','100','$300.00',''],['Bread after','$3.30','98','$323.40','0.21: inelastic']])}
 <div class="math">Salmon: $302.50 − $440.00 = <b>−$137.50</b> (price up, revenue down)<br>Bread: $323.40 − $300.00 = <b>+$23.40</b> (price up, revenue up)</div>
+${FIG.l9revenue()}
 <p>Check: salmon buyers cut back by 46% for a 9.5% price rise, so lost sales won. Bread buyers cut back by 2%, so the higher price won. (Your course video reports bread's elasticity as −0.216; the unrounded midpoint value is −0.212. Both say inelastic.)</p>
 <p>That gives the <b>total revenue test</b> (your course textbook, Table 5.3):</p>
 <div class="terms">
@@ -258,6 +262,7 @@ ${term('Unit elastic','A small price change leaves revenue unchanged.')}
 <p><b>What makes supply elastic?</b> How easily producers can change output:</p>
 <ul><li><b>Spare capacity:</b> your course's firm "operating below capacity" can expand quickly, so its supply is elastic.</li><li><b>Time:</b> your course's example of inelastic supply is agriculture in the short run: crops take a season to grow. Your course textbook: producers find it "easier to expand production in the long term of several years rather than in the short run of a few months."</li><li><b>Limited inputs:</b> the textbook's diamond rings and apartments facing Central Park have highly inelastic supply.</li></ul>
 <p class="small muted">Your course also lists nuclear power, saying it has "not a lot of substitutes." Substitutes are a buyer-side idea. The supply-side reason is capacity and time: a new plant takes many years to build, so output can't rise quickly when the price does.</p>
+${FIG.l9pes()}
 <div data-check="l9c-pes"></div>
 
 <h2>Elastic or inelastic?</h2>

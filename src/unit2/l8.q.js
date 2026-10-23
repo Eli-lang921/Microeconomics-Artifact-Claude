@@ -192,6 +192,7 @@ ${term(dt('price-floor','Price floor'),'A legal <b>minimum</b> price. Example: t
 <tr><td>House cleaners</td><td>$8</td><td>above equilibrium: <b>binding</b></td><td>More people want cleaning jobs and households hire fewer cleaners: a surplus of labor (unemployment).</td></tr>
 </tbody></table></div>
 <p>Same law, opposite outcomes, because what matters is where the control sits relative to each market's equilibrium. Your course textbook uses the same word: when the minimum wage is below the market wage, "the price floor minimum wage is said to be nonbinding."</p>
+${FIG.l8binding()}
 <p>Try it with your course's orange market (equilibrium $3 and 30):</p>
 <div data-widget="controls"></div>
 <div data-check="l8c-binding"></div>
@@ -202,6 +203,7 @@ ${term(dt('price-floor','Price floor'),'A legal <b>minimum</b> price. Example: t
 <p class="small muted">Wording note: your course video says the "supply" of house cleaners increases and the "demand" falls. Strictly, the curves don't move; the higher wage changes the <b>quantity</b> supplied and demanded along them. Your course textbook: "Price controls can cause a different choice of quantity supplied along a supply curve, but they do not shift the supply curve."</p>
 <p><b>Worked example: your course textbook's living wage.</b> A city's equilibrium wage is $10 an hour, with 1,200 workers hired. A law sets $12:</p>
 <div class="math">At $12: 1,600 people want city jobs (quantity supplied)<br>At $12: the city hires 700 (quantity demanded)<br>Surplus of labor = 1,600 − 700 = <b>900</b></div>
+${FIG.l8wage()}
 <p>Check: 700 is below the old 1,200, so fewer people work, even though those who do earn more. The textbook keeps the trade-off in view: "For workers who continue to have a job at a higher salary, life has improved. For those who were willing to work at the old wage rate but lost their jobs with the wage increase, life has not improved."</p>
 <p><b>What the evidence says.</b> The textbook reports that "a 10% increase in the minimum wage would decrease the hiring of unskilled workers by 1 to 2%," that "some studies have even found no effect ... although these studies are controversial," and that the U.S. minimum has usually been set close to the equilibrium wage for low-skill workers, which limits its effect. Economists disagree about how big the job effects are; the model tells you their direction when the floor binds.</p>
 <p><b>Farm price supports</b> are floors too. The most common kind works by the government "buy[ing] up the product, adding to demand to keep prices higher than they otherwise would be" (textbook). Farmers gain; "taxpayers and consumers of food will pay the costs."</p>
@@ -213,6 +215,7 @@ ${term(dt('price-floor','Price floor'),'A legal <b>minimum</b> price. Example: t
 <p><b>Worked example: your course textbook's rent control.</b> A town's rental market starts at $500 and 15,000 apartments. Incomes rise and demand increases; the new equilibrium would be $600 and 17,000. But a rent-control law holds rent at $500:</p>
 ${table(['Rent','Supplied','New demand'],[['$500 (capped)','15,000','19,000'],['$600 (market)','17,000','17,000']],[[0,1],[0,2]])}
 <div class="math">Shortage at $500 = 19,000 − 15,000 = <b>4,000 apartments</b><br>Apartments actually rented: 15,000, fewer than the 17,000 at the market rent</div>
+${FIG.l8rent()}
 <p>Check: the law meant to help renters leaves 2,000 fewer apartments rented. The textbook calls this one of "the ironies of price ceilings."</p>
 <p><b>Who decides who gets the good?</b> With price not allowed to do the rationing, something else does. Econlib's Hugh Rockoff lists the usual replacements: waiting lines ("A queue ... is one possibility"), ${dt('black-market','black markets')} where people pay above the legal price, and lower quality ("One of the simplest forms of evasion is quality deterioration"). Your course textbook adds that landlords "spend less on maintenance" and some convert apartments to condos. So the ceiling helps renters who get an apartment and hurts landlords and the renters who can't find one.</p>
 <p><b>Worked example: the true price of capped gasoline</b> (Rockoff's 1979 numbers). Gas is capped at $1.00 a gallon; without the cap it would be about $1.20. A driver waits 30 minutes for 10 gallons and values her time at $8 an hour.</p>
@@ -227,6 +230,7 @@ ${table(['Rent','Supplied','New demand'],[['$500 (capped)','15,000','19,000'],['
 <p><b>The mechanism.</b> A quota binds when it is <b>below</b> the equilibrium quantity. With fewer units for sale than buyers want at the old price, buyers compete for them and the price rises along the demand curve until buyers want exactly the quota amount. Sellers, meanwhile, would have been happy to sell that many for much less.</p>
 <p><b>Worked example: your course's orange market with a made-up quota of 20.</b> Demand: 60 − 10 × price. Supply: 10 × price.</p>
 <div class="math">Buyers want exactly 20 when 60 − 10 × price = 20 → price = <b>$4</b><br>Sellers would supply 20 at 10 × price = 20 → price = $2<br>Gap: $4 − $2 = $2 per orange, kept by whoever holds the right to sell</div>
+${FIG.l8quota()}
 <p>Check: the quota cut the quantity from 30 to 20 and raised the price buyers pay from $3 to $4, the opposite of what a price ceiling does. You'll see in Lesson 12 that quotas, like ceilings and floors, also cost the market some of its gains from trade.</p>
 <div data-check="l8c-quota"></div>
 

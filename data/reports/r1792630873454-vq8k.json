@@ -1,9 +1,9 @@
 {
   "at": 1792630873454,
   "ctx": "",
-  "fixedAt": 0,
+  "fixedAt": 1792786300000,
   "note": "Make this into a typed answer",
-  "reply": "",
-  "status": "open",
+  "reply": "Now a typed answer: write the name and why it fits, and Claude checks it (like typed flashcards).",
+  "status": "fixed",
   "where": "question:l4-mktsoc"
 }
