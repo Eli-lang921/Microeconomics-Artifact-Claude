@@ -215,25 +215,88 @@
     },
     "l4": {
       "practice": {
+        "l4-capitalism": {
+          "ok": false
+        },
         "l4-command": {
           "ok": true
+        },
+        "l4-decentral": {
+          "ok": false
         },
         "l4-factor": {
           "ok": true
         },
-        "l4-gr-cf1": {
+        "l4-firms-buyers": {
           "ok": false
         },
+        "l4-forwhom": {
+          "ok": false
+        },
+        "l4-gr-cf1": {
+          "ok": true
+        },
+        "l4-gr-cf2": {
+          "ok": false
+        },
+        "l4-grid": {
+          "ok": true
+        },
+        "l4-invisible": {
+          "ok": true
+        },
+        "l4-labor": {
+          "ok": true
+        },
+        "l4-mktsoc": {
+          "ok": true
+        },
+        "l4-nk": {
+          "ok": true
+        },
         "l4-questions": {
+          "ok": true
+        },
+        "l4-regs": {
+          "ok": false
+        },
+        "l4-revenue": {
+          "ok": true
+        },
+        "l4-rights": {
+          "ok": true
+        },
+        "l4-tf-cfgov": {
+          "ok": true
+        },
+        "l4-tf-cmdmkts": {
+          "ok": true
+        },
+        "l4-tf-direction": {
           "ok": true
         },
         "l4-tf-market": {
           "ok": true
         },
+        "l4-tf-mixed": {
+          "ok": true
+        },
+        "l4-tf-transfer": {
+          "ok": true
+        },
         "l4-traditional": {
           "ok": true
         },
+        "l4-underground": {
+          "ok": true
+        },
+        "l4-us": {
+          "ok": true
+        },
         "l4-wages": {
+          "ok": true
+        },
+        "l4-who": {
           "ok": true
         }
       }
@@ -249,9 +312,9 @@
   "reports": [],
   "review": {
     "c-l2-0": {
-      "box": 0,
-      "due": 1792382400000,
-      "t": 1792369155514
+      "box": 1,
+      "due": 1792814400000,
+      "t": 1792629814006
     },
     "c-l2-1": {
       "box": 2,
@@ -260,13 +323,13 @@
     },
     "c-l2-10": {
       "box": 0,
-      "due": 1792382400000,
-      "t": 1792369277496
+      "due": 1792641600000,
+      "t": 1792629957800
     },
     "c-l2-11": {
-      "box": 0,
-      "due": 1792382400000,
-      "t": 1792370406530
+      "box": 1,
+      "due": 1792814400000,
+      "t": 1792630137197
     },
     "c-l2-12": {
       "box": 2,
@@ -280,8 +343,8 @@
     },
     "c-l2-2": {
       "box": 0,
-      "due": 1792382400000,
-      "t": 1792371022458
+      "due": 1792641600000,
+      "t": 1792630243360
     },
     "c-l2-3": {
       "box": 1,
@@ -290,13 +353,13 @@
     },
     "c-l2-4": {
       "box": 0,
-      "due": 1792382400000,
-      "t": 1792369798797
+      "due": 1792641600000,
+      "t": 1792630327781
     },
     "c-l2-5": {
       "box": 0,
-      "due": 1792382400000,
-      "t": 1792370653679
+      "due": 1792641600000,
+      "t": 1792630516675
     },
     "c-l2-6": {
       "box": 2,
@@ -318,40 +381,120 @@
       "due": 1792468800000,
       "t": 1791932235093
     },
-    "l1-airport": {
+    "c-l4-0": {
+      "box": 0,
+      "due": 1792641600000,
+      "t": 1792632280785
+    },
+    "c-l4-1": {
       "box": 2,
-      "due": 1792382400000,
-      "t": 1791815007978
+      "due": 1793160000000,
+      "t": 1792632021475
+    },
+    "c-l4-10": {
+      "box": 0,
+      "due": 1792641600000,
+      "t": 1792631523726
+    },
+    "c-l4-11": {
+      "box": 0,
+      "due": 1792641600000,
+      "t": 1792632447669
+    },
+    "c-l4-12": {
+      "box": 0,
+      "due": 1792641600000,
+      "t": 1792632234984
+    },
+    "c-l4-13": {
+      "box": 0,
+      "due": 1792641600000,
+      "t": 1792631857499
+    },
+    "c-l4-14": {
+      "box": 0,
+      "due": 1792641600000,
+      "t": 1792632143905
+    },
+    "c-l4-15": {
+      "box": 2,
+      "due": 1793160000000,
+      "t": 1792631953890
+    },
+    "c-l4-2": {
+      "box": 2,
+      "due": 1793160000000,
+      "t": 1792632342233
+    },
+    "c-l4-3": {
+      "box": 0,
+      "due": 1792641600000,
+      "t": 1792631738064
+    },
+    "c-l4-4": {
+      "box": 0,
+      "due": 1792641600000,
+      "t": 1792631595609
+    },
+    "c-l4-5": {
+      "box": 0,
+      "due": 1792641600000,
+      "t": 1792631479339
+    },
+    "c-l4-6": {
+      "box": 0,
+      "due": 1792641600000,
+      "t": 1792631822154
+    },
+    "c-l4-7": {
+      "box": 0,
+      "due": 1792641600000,
+      "t": 1792631680456
+    },
+    "c-l4-8": {
+      "box": 2,
+      "due": 1793160000000,
+      "t": 1792632001776
+    },
+    "c-l4-9": {
+      "box": 0,
+      "due": 1792641600000,
+      "t": 1792632265810
+    },
+    "l1-airport": {
+      "box": 3,
+      "due": 1794373200000,
+      "t": 1792630522716
     },
     "l1-burger-price": {
-      "box": 2,
-      "due": 1792382400000,
-      "t": 1791815081872
+      "box": 3,
+      "due": 1794373200000,
+      "t": 1792630540199
     },
     "l1-capital": {
-      "box": 2,
-      "due": 1792382400000,
-      "t": 1791805445683
+      "box": 3,
+      "due": 1794373200000,
+      "t": 1792630549177
     },
     "l1-college-mc": {
-      "box": 2,
-      "due": 1792382400000,
-      "t": 1791814898942
+      "box": 3,
+      "due": 1794373200000,
+      "t": 1792630561523
     },
     "l1-def": {
-      "box": 2,
-      "due": 1792382400000,
-      "t": 1791805434977
+      "box": 3,
+      "due": 1794373200000,
+      "t": 1792630567372
     },
     "l1-econdef": {
-      "box": 2,
-      "due": 1792382400000,
-      "t": 1791815050368
+      "box": 3,
+      "due": 1794373200000,
+      "t": 1792630575022
     },
     "l1-g-budget": {
-      "box": 2,
-      "due": 1792382400000,
-      "t": 1791805480153
+      "box": 3,
+      "due": 1794373200000,
+      "t": 1792630595781
     },
     "l1-g-college": {
       "box": 1,
@@ -359,64 +502,64 @@
       "t": 1792291116453
     },
     "l1-g-lunch": {
-      "box": 2,
-      "due": 1792382400000,
-      "t": 1791805537665
+      "box": 3,
+      "due": 1794373200000,
+      "t": 1792630607134
     },
     "l1-g-maxunits": {
-      "box": 2,
-      "due": 1792382400000,
-      "t": 1791814928928
+      "box": 3,
+      "due": 1794373200000,
+      "t": 1792630626251
     },
     "l1-g-time": {
-      "box": 2,
-      "due": 1792382400000,
-      "t": 1791815028679
+      "box": 3,
+      "due": 1794373200000,
+      "t": 1792630635637
     },
     "l1-gr-intercepts": {
-      "box": 2,
-      "due": 1792382400000,
-      "t": 1791814954470
+      "box": 3,
+      "due": 1794373200000,
+      "t": 1792630645370
     },
     "l1-gr-outside": {
-      "box": 2,
-      "due": 1792382400000,
-      "t": 1791805569783
+      "box": 3,
+      "due": 1794373200000,
+      "t": 1792630661464
     },
     "l1-gr-shift": {
-      "box": 2,
-      "due": 1792382400000,
-      "t": 1791815108942
+      "box": 3,
+      "due": 1794373200000,
+      "t": 1792630671458
     },
     "l1-land": {
-      "box": 2,
-      "due": 1792382400000,
-      "t": 1791805516451
+      "box": 3,
+      "due": 1794373200000,
+      "t": 1792630685305
     },
     "l1-macro2": {
-      "box": 2,
-      "due": 1792382400000,
-      "t": 1791814873287
+      "box": 3,
+      "due": 1794373200000,
+      "t": 1792630696581
     },
     "l1-normative2": {
-      "box": 2,
-      "due": 1792382400000,
-      "t": 1791814859251
+      "box": 3,
+      "due": 1794373200000,
+      "t": 1792630715403
     },
     "l1-notfactor": {
-      "box": 2,
-      "due": 1792382400000,
-      "t": 1791814989003
+      "box": 3,
+      "due": 1794373200000,
+      "t": 1792630733160
     },
     "l1-positive": {
-      "box": 2,
-      "due": 1792382400000,
-      "t": 1791805609581
+      "box": 3,
+      "due": 1794373200000,
+      "t": 1792630739821
     },
     "l1-shift": {
-      "box": 2,
-      "due": 1792382400000,
-      "t": 1791805440424
+      "box": 0,
+      "due": 1792641600000,
+      "t": 1792630755116
     },
     "l1-tf-capital-money": {
       "box": 2,
@@ -648,43 +791,148 @@
       "due": 1792728000000,
       "t": 1792188226510
     },
+    "l4-capitalism": {
+      "box": 0,
+      "due": 1792641600000,
+      "t": 1792631017699
+    },
     "l4-command": {
       "box": 2,
       "due": 1792900800000,
       "t": 1792373800796
+    },
+    "l4-decentral": {
+      "box": 0,
+      "due": 1792641600000,
+      "t": 1792631044260
     },
     "l4-factor": {
       "box": 2,
       "due": 1792900800000,
       "t": 1792373730691
     },
+    "l4-firms-buyers": {
+      "box": 0,
+      "due": 1792555200000,
+      "t": 1792547718836
+    },
+    "l4-forwhom": {
+      "box": 0,
+      "due": 1792641600000,
+      "t": 1792631002509
+    },
     "l4-gr-cf1": {
       "box": 0,
       "due": 1792382400000,
       "t": 1792373846114
+    },
+    "l4-gr-cf2": {
+      "box": 0,
+      "due": 1792641600000,
+      "t": 1792630903960
+    },
+    "l4-grid": {
+      "box": 2,
+      "due": 1793073600000,
+      "t": 1792547753028
+    },
+    "l4-invisible": {
+      "box": 2,
+      "due": 1793160000000,
+      "t": 1792630930531
+    },
+    "l4-labor": {
+      "box": 2,
+      "due": 1793160000000,
+      "t": 1792630947060
+    },
+    "l4-mktsoc": {
+      "box": 2,
+      "due": 1793160000000,
+      "t": 1792630861847
+    },
+    "l4-nk": {
+      "box": 2,
+      "due": 1793160000000,
+      "t": 1792630962995
     },
     "l4-questions": {
       "box": 2,
       "due": 1792900800000,
       "t": 1792373710631
     },
+    "l4-regs": {
+      "box": 0,
+      "due": 1792641600000,
+      "t": 1792631032006
+    },
+    "l4-revenue": {
+      "box": 2,
+      "due": 1793160000000,
+      "t": 1792630973297
+    },
+    "l4-rights": {
+      "box": 2,
+      "due": 1793073600000,
+      "t": 1792547785470
+    },
+    "l4-tf-cfgov": {
+      "box": 2,
+      "due": 1793160000000,
+      "t": 1792630936273
+    },
+    "l4-tf-cmdmkts": {
+      "box": 2,
+      "due": 1793160000000,
+      "t": 1792630976926
+    },
+    "l4-tf-direction": {
+      "box": 2,
+      "due": 1793160000000,
+      "t": 1792631038076
+    },
     "l4-tf-market": {
       "box": 2,
       "due": 1792900800000,
       "t": 1792373774414
+    },
+    "l4-tf-mixed": {
+      "box": 2,
+      "due": 1793160000000,
+      "t": 1792630878592
+    },
+    "l4-tf-transfer": {
+      "box": 2,
+      "due": 1793073600000,
+      "t": 1792547797793
     },
     "l4-traditional": {
       "box": 2,
       "due": 1792900800000,
       "t": 1792373863993
     },
+    "l4-underground": {
+      "box": 2,
+      "due": 1793160000000,
+      "t": 1792630921054
+    },
+    "l4-us": {
+      "box": 2,
+      "due": 1793073600000,
+      "t": 1792547805335
+    },
     "l4-wages": {
       "box": 2,
       "due": 1792900800000,
       "t": 1792373762048
+    },
+    "l4-who": {
+      "box": 2,
+      "due": 1793160000000,
+      "t": 1792630891092
     }
   },
-  "updated": 1792373863993,
+  "updated": 1792632447669,
   "v": 1,
   "writing": {
     "w-l2-1": {
@@ -773,6 +1021,35 @@
       },
       "score": 2,
       "text": "Producing more capital goods or goods that produce other goods generally expand the countries PPF curve outward. Consumer goods today tend to decreese or maintain the countries PPF curve in the future."
+    },
+    "w-l4-1": {
+      "at": 1792631414704,
+      "max": 4,
+      "result": {
+        "error": "A command economy does not work by the population telling the government what it needs; the central authority makes production decisions through planning, often without direct consumer input.",
+        "fix": "Clarify that in a command economy a central authority or government plan decides what is produced, not consumer requests, and give a clear strength such as quickly directing resources toward national goals like infrastructure or ensuring everyone gets basic goods.",
+        "points": [
+          {
+            "met": true,
+            "note": "You correctly say individuals and firms figure out what people want and produce it, which captures the demand-driven idea, though mentioning prices as signals would make it stronger."
+          },
+          {
+            "met": false,
+            "note": "You do say the government produces the goods, but describing the population telling the government what it needs misstates the model; in a command economy a central authority decides through a plan."
+          },
+          {
+            "met": true,
+            "note": "Saying a market economy is quicker and needs less oversight is a reasonable strength, since it responds to consumers without central direction."
+          },
+          {
+            "met": false,
+            "note": "'Less risk to the government' is unclear and not a recognized strength; a better answer would be the ability to direct resources quickly toward a chosen goal or guarantee basic necessities."
+          }
+        ],
+        "strength": "Your description of the market economy is on target: you recognize that firms and individuals decide what to produce based on what people want."
+      },
+      "score": 2,
+      "text": "A market economy would decide what is produced by individuals or firms figuring out what people want and producing it. It is quicker, requires less oversight. \nA command economy would have the population tell the government what they need and the government produces it. There is less risk to the government by producing said good."
     }
   }
 }

@@ -216,6 +216,10 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .rep-foot{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:.88rem;margin-top:.4rem}
 .linkbtn{border:0;background:none;padding:0;color:var(--accent);text-decoration:underline;text-underline-offset:2px;font-size:inherit}
 .linkbtn.danger{color:var(--bad)}
+.nr-box{margin-top:1rem;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.nr-box label{display:block;font-weight:600;font-size:.92rem;margin:.6rem 0 4px}
+.nr-box label:first-child{margin-top:0}
+.nr-box select,.nr-box textarea{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;font-size:.98rem;resize:vertical}
 .rep-box textarea{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;font-size:.95rem;resize:vertical}
 .fc-q{color:var(--muted);margin:-.2rem 0 .9rem;font-size:1.02rem}
 .fc-back{margin-top:.4rem}
@@ -273,6 +277,26 @@ table.wrap-cells td:first-child{min-width:5.5rem}
 .qcheck>.eyebrow{margin:0;color:var(--g2)}
 .cf-nav{justify-content:space-between;margin-top:4px}
 .sort-item .why{margin:6px 0 0;color:var(--muted)}
+/* Tap-to-define terms (shared glossary GLOSS) */
+.tdef{text-decoration:underline dotted;text-decoration-thickness:1.5px;text-underline-offset:3px;text-decoration-color:var(--accent);cursor:help;border-radius:3px}
+.tdef:hover,.tdef[aria-expanded="true"]{background:var(--accent-soft)}
+.tdef-pop{position:absolute;z-index:20;max-width:min(20rem,calc(100vw - 32px));background:var(--surface);color:var(--ink);border:1px solid var(--accent);border-radius:var(--r);box-shadow:0 6px 20px rgba(0,0,0,.18);padding:10px 12px;font-size:.95rem;line-height:1.45}
+.tdef-pop .tp-t{font-family:var(--f-display);font-weight:700;margin:0 0 3px}
+.tdef-pop p{margin:.25rem 0}
+.tdef-pop .tp-meta{font-size:.78rem;color:var(--muted);margin-top:6px}
+/* Common mistakes box */
+.mistakes{border:1px solid var(--bad);border-left-width:4px;background:var(--bad-soft);border-radius:var(--r);padding:12px 16px;margin:1rem 0}
+.mistakes .eyebrow{color:var(--bad);margin:0 0 6px}
+.mistakes ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.mistakes li{margin:0}
+.mistakes .wrong{font-weight:700;display:block}
+.mistakes .wrong::before{content:"✗ ";color:var(--bad)}
+/* Source lines */
+.qsrc{font-size:.8rem;color:var(--muted);margin-top:8px}
+.srcs{font-size:.85rem;color:var(--muted);margin:.3rem 0}
+.srcs a{color:var(--muted)}
+/* Circular flow labels: larger on phones so they stay readable once the 500-wide diagram is scaled down */
+@media (max-width:520px){.widget[data-widget="circular"] svg text.halo{font-size:13.5px!important}}
 </style>
 
 <header class="top">
@@ -313,6 +337,48 @@ function fracParse(s){
   return /^-?(\d+\.?\d*|\.\d+)$/.test(s) ? parseFloat(s) : NaN;
 }
 const term = (t,d) => `<div class="term"><b>${t}</b><span>${d}</span></div>`;
+
+/* ---------- sources (golden-standard rubric: every fact and question carries a source tag) ----------
+   Keys are used in question tags (Q[id].src), section comments (<!-- src: ... -->) and glossary entries. */
+const SOURCES = {
+  MS:  { t:'Modern States, Principles of Microeconomics (course videos and slides)', u:'https://modernstates.org/course/principles-of-microeconomics/' },
+  OS13:{ t:'OpenStax, Principles of Microeconomics (your course textbook), §1.3', u:'https://openstax.org/books/principles-microeconomics/pages/1-3-how-economists-use-theories-and-models-to-understand-economic-issues' },
+  OS14:{ t:'OpenStax, Principles of Microeconomics (your course textbook), §1.4', u:'https://openstax.org/books/principles-microeconomics-3e/pages/1-4-how-to-organize-economies-an-overview-of-economic-systems' },
+  CB:  { t:'College Board, CLEP Principles of Microeconomics outline', u:'https://clep.collegeboard.org/exam/microeconomics' },
+  FED: { t:'Federal Reserve Education, The Circular Flow (infographic)', u:'https://www.federalreserveeducation.org/resources/infographics/infographic--circular-flow.pdf' },
+  ELC: { t:'Econlib, "Tragedy of the Commons" (Garrett Hardin)', u:'https://www.econlib.org/library/Enc/TragedyoftheCommons.html' },
+  ELP: { t:'Econlib, Property Rights', u:'https://www.econlib.org/library/Topics/College/propertyrights.html' },
+  ELH: { t:'Econlib, Invisible Hand', u:'https://www.econlib.org/library/Topics/Details/invisiblehand.html' },
+  T2U: { t:'tutor2u, Functions of the price mechanism', u:'https://www.tutor2u.net/economics/reference/functions-of-the-price-mechanism' }
+};
+const srcLabel = keys => keys.map(k => SOURCES[k] ? SOURCES[k].t.replace(/^OpenStax, Principles of Microeconomics \(your course textbook\), /,'Course textbook ').replace(/^Modern States, Principles of Microeconomics \(course videos and slides\)/,'Modern States course') : k).join(' · ');
+
+/* ---------- shared glossary for tap-to-define ----------
+   home = lesson id where the term is taught (or a later unit's name). Add new terms once; later lessons reuse them. */
+const GLOSS = {
+  scarcity:{ t:'Scarcity', d:'Wants are greater than the resources available to satisfy them, so every society has to choose.', home:'l1', src:['MS'] },
+  'econ-system':{ t:'Economic system', d:'A system of production, resource allocation, exchange and distribution of goods and services: how a society decides what to produce, how much, and who receives it.', home:'l4', src:['MS'] },
+  market:{ t:'Market', d:'An institution that brings together buyers and sellers of goods or services, who may be individuals or businesses.', home:'l4', src:['OS14'] },
+  decentralized:{ t:'Decentralized', d:'Decisions are spread across many people instead of made by one central authority. Market economies are decentralized.', home:'l4', src:['OS14'] },
+  incentive:{ t:'Incentive', d:'Something that raises the benefit of a choice or lowers its cost, so people do more of it. A disincentive does the reverse.', home:'l5', src:['T2U'] },
+  'black-market':{ t:'Black market (underground economy)', d:'Buying and selling that happens without the government\'s approval. Heavily regulated economies often have them.', home:'l4', src:['OS14'] },
+  'invisible-hand':{ t:'Invisible hand', d:'Adam Smith\'s idea (1776) that people pursuing their own interest in markets can end up serving society, without anyone planning it.', home:'l4', src:['ELH'] },
+  'supply-demand':{ t:'Supply and demand', d:'The model of how buyers (demand) and sellers (supply) together set a market price. Unit 2 covers it in depth.', home:'Unit 2', src:['CB'] },
+  model:{ t:'Model', d:'A simplified picture of the economy that keeps only the parts needed to answer a question.', home:'l4', src:['OS13'] },
+  household:{ t:'Household', d:'A person or family. In the circular flow, households own the factors of production and buy goods and services.', home:'l4', src:['OS13','FED'] },
+  firm:{ t:'Firm', d:'A business. In the circular flow, firms buy factors of production and sell goods and services.', home:'l4', src:['OS13','FED'] },
+  factors:{ t:'Factors of production', d:'The resources used to make goods and services: land, labor, capital and entrepreneurship.', home:'l1', src:['MS','FED'] },
+  land:{ t:'Land', d:'All natural resources used in production: soil, oil, water, forests. Its payment is rent.', home:'l1', src:['FED'] },
+  labor:{ t:'Labor', d:'The work people put into production, physical or mental. Its payment is wages.', home:'l1', src:['FED'] },
+  capital:{ t:'Capital', d:'Human-made tools, machines and buildings used to produce other goods. Not money. Its payment is interest.', home:'l1', src:['FED'] },
+  entrepreneurship:{ t:'Entrepreneurship', d:'Combining the other factors to run a business and taking the risk that it fails. Its payment is profit.', home:'l1', src:['FED'] },
+  revenue:{ t:'Revenue', d:'The money a firm takes in from selling its goods or services, before paying any costs.', home:'l4', src:['OS13'] },
+  commons:{ t:'Tragedy of the commons', d:'When anyone can use a resource and no one limits use, each user keeps the full gain but shares the cost, so the resource gets overused.', home:'l4', src:['ELC'] },
+  quota:{ t:'Quota', d:'A limit on how much of something each person or firm may take or produce, such as a fishing catch limit.', home:'l4', src:['ELC'] },
+  'market-failure':{ t:'Market failure', d:'A situation where a market on its own produces too much or too little of something compared with what is best for society. Unit 7 covers it.', home:'Unit 7', src:['CB'] }
+};
+/* dt(key, text): a tap-to-define term. A span (not a button) so lesson text still reaches "Explain this". */
+const dt = (k, text) => GLOSS[k] ? `<span class="tdef" role="button" tabindex="0" aria-expanded="false" data-term="${k}">${text || GLOSS[k].t}</span>` : (text || k);
 function table(head, rows, hi=[]){
   return `<div class="tbl-wrap"><table><thead><tr>${head.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${
     rows.map((r,ri)=>`<tr>${r.map((c,ci)=>`<td${hi.some(([a,b])=>a===ri&&b===ci)?' class="hi"':''}>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
@@ -772,114 +838,150 @@ gen('l3-gr-absy','l3',()=>{
 tf('l3-tf-gains-both','l3','When two producers specialize by comparative advantage and trade at a price between their opportunity costs, both can consume more than they could alone.',true,
   '<p>True. That\'s the core result of this lesson: the seamstress and baker both ended up outside their own frontiers.</p>');
 
-/* ===== Lesson 4: Economic systems ===== */
+/* ===== Lesson 4: Economic systems =====
+   Golden-standard rules (see rubric): five choices, distractors drawn from the Common mistakes box (M1-M6),
+   explanations say why the right answer is right AND why the most tempting wrong answer is wrong.
+   Tags are attached below in L4TAGS: src (SOURCES keys), clep (outline topic), skill (CLEP skill), mis (mistakes used). */
 mc('l4-questions','l4','Every economic system must answer three basic questions. Which of the following is that set?',
-  ['What to produce, how much (and how) to produce it, and who gets the output','What to buy, where to sell, and when to save','How to tax, how to spend, and how to borrow','Who owns land, who works, and who votes','How to grow, how to trade, and how to tax'],0,
-  '<p>Every system answers <b>what</b>, <b>how much / how</b>, and <b>for whom</b>. Systems differ in <i>who</i> makes those decisions: tradition, a central planner, or many buyers and sellers.</p>');
+  ['What to produce, how much to produce, and who receives the output','Who sets prices, who sets wages, and who owns the firms','There is no common set; each system asks its own questions','How to tax, how to spend, and how to borrow','What to buy, where to sell, and when to save'],0,
+  '<p>Your course (video 1.4a and slide 27): every system answers <b>what</b> to produce, <b>how much</b> to produce, and <b>who receives</b> the output. Systems differ only in <i>who</i> answers: custom, a central planner, or many buyers and sellers.</p><p>The tempting wrong answer is "who sets prices, who sets wages, and who owns the firms." Those describe <i>who does the deciding</i>, which is how systems differ, not the questions themselves.</p>');
 mc('l4-factor','l4','In the circular flow model, households are <b>sellers</b> in which market?',
-  ['The factor (resource) market','The goods and services market','The stock market','The government bond market','They are never sellers'],0,
-  '<p>Households <b>sell</b> their labor and other resources in the factor market and earn wages, rent, interest and profit. They <b>buy</b> in the goods and services market. Firms do the reverse.</p>');
+  ['The factor (resource) market','The goods and services market','The stock market','The government bond market','Neither market; households only buy'],0,
+  '<p>Households own land, labor, capital and entrepreneurship, so they <b>sell</b> them to firms in the factor market and earn wages, rent, interest and profit.</p><p>The tempting wrong answer is the goods and services market. That is where households <b>buy</b>. Their role flips between the two markets, so "households only buy" is also wrong.</p>');
 mc('l4-wages','l4','In the circular flow model, wages flow in which direction?',
-  ['From firms to households, through the factor market','From households to firms, through the goods and services market','From government to firms','From firms to other firms','From households to government'],0,
-  '<p>Firms pay wages (plus rent, interest and profit) to households for the resources they supply. That income is what households then spend in the goods and services market, closing the loop.</p>');
+  ['From firms to households, through the factor market','From households to firms, through the goods and services market','From households to firms, through the factor market','From firms to other firms','From households to government'],0,
+  '<p>Labor flows from households to firms in the factor market. Money always moves the opposite way to what it pays for, so wages flow from <b>firms to households</b>.</p><p>The tempting wrong answer is "households to firms, through the factor market." That is the direction the <i>labor</i> moves, not the money paying for it.</p>');
 tf('l4-tf-market','l4','In a market economy, the government sets most prices.',false,
-  '<p>False. In a market economy, prices come from buyers and sellers interacting. Government setting prices is a feature of command economies.</p>');
+  '<p>False. In a market economy, prices come from buyers and sellers interacting. A government that sets most prices describes a command economy.</p><p>Watch the opposite trap too: market economies still have some government rules. "Few prices set by government" is not the same as "no government."</p>');
 mc('l4-command','l4','Which of the following describes a <b>command</b> economy?',
   ['The government decides what is produced and what prices are charged','Private buyers and sellers set prices through supply and demand','People produce what their families have always produced','Most businesses are private, with some government rules','Prices are set by custom and tradition'],0,
-  '<p>In a command economy, decisions are centralized: the government sets production goals, prices and often wages. The textbook names Cuba and North Korea as current examples.</p>');
+  '<p>In a command economy, a central authority sets production goals and prices. Your course textbook names Cuba and North Korea as command economies today.</p><p>Each wrong choice names a different decider: buyers and sellers (market), family custom (traditional), private firms plus rules (mixed). The tempting one is "most businesses are private, with some government rules," but that is a mixed economy, because private firms still make most choices.</p>');
 lazy('l4-gr-cf1','l4',()=>({ type:'mc', kind:'graph',
   prompt:`${cfMini(6)}In this circular flow diagram, what flows along the arrow marked "?"`,
-  options:['Wages, rent, interest and profit','Goods and services','Spending on goods and services','Labor, land and capital','Taxes'], answer:0,
-  explain:'<p>The arrow runs from firms into the factor market, on the inner (money) loop. Firms pay for the resources they buy: <b>wages, rent, interest and profit</b>. That\'s households\' income.</p>' }));
+  options:['Wages, rent, interest and profit','Goods and services','Spending on goods and services','Land, labor, capital and entrepreneurship','Taxes'], answer:0,
+  explain:'<p>The arrow runs from firms into the factor market on the inner loop. Firms are paying for the resources they buy: <b>wages, rent, interest and profit</b>, which become households\' income.</p><p>The tempting wrong answer is "land, labor, capital and entrepreneurship." Those are on the outer loop, moving the other way, from households to firms. Money always runs opposite to the stuff.</p>' }));
 mc('l4-traditional','l4','Which of the following best describes a <b>traditional</b> economy?',
   ['People do what earlier generations did, and jobs pass down through families','A central government plans production','Prices coordinate millions of decisions','Private firms compete for customers','The economy changes quickly with new technology'],0,
-  '<p>Tradition answers what, how and for whom. The textbook notes there is little economic progress because things are done the way they always have been.</p>');
+  '<p>In a traditional economy, custom answers what, how much and who receives. Your course textbook: "Because things are driven by tradition, there is little economic progress or development."</p><p>The tempting wrong answer is "a central government plans production." Both systems can look rigid, but the decider differs: custom versus a planner.</p>');
 mc('l4-firms-buyers','l4','In the factor market, firms are which of the following?',
-  ['Buyers of labor, land and capital','Sellers of goods','Sellers of labor','Not involved','Lenders to the government'],0,
-  '<p>Firms need resources to produce, so they buy them from households in the factor market.</p>');
+  ['Buyers of land, labor, capital and entrepreneurship','Sellers of goods and services','Sellers of labor','Not involved, since only households trade there','Lenders to the government'],0,
+  '<p>Firms need resources to produce, so they <b>buy</b> them from households in the factor market.</p><p>The tempting wrong answer is "sellers of goods and services." That is true, but in the <i>other</i> market. Firms sell products and buy factors; households do the reverse.</p>');
 mc('l4-grid','l4','Economic systems can be classified by who owns resources and how resources are allocated. An economy that combines <b>private ownership</b> with <b>planned (government) allocation</b> is called which of the following?',
   ['Command capitalism','Market socialism','Capitalism','Socialism','A traditional economy'],0,
-  '<p>Private ownership + planned allocation = <b>command capitalism</b>. Flip it (government ownership + market allocation) and you get <b>market socialism</b>. Private + private is capitalism; planned + planned is socialism.</p>');
-mc('l4-rights','l4','Which of the following is <b>not</b> one of the four components of property rights from your course?',
-  ['The right to a government payment for owning the good','The right to use the good','The right to transfer the good to others','The right to earn income from the good','The right to enforce those rights'],0,
-  '<p>The four components: <b>use</b> it, <b>earn income</b> from it, <b>transfer</b> it, and <b>enforce</b> those rights. A government payment isn\'t one of them.</p>');
+  '<p>Answer the two questions separately. Owners: private (the capitalism side). Allocation: planned (the command side). Together: <b>command capitalism</b>.</p><p>The tempting wrong answer is "capitalism," which answers only the ownership question. Capitalism needs private ownership <i>and</i> market allocation. Market socialism is the reverse mix: government ownership with market allocation.</p>');
+mc('l4-rights','l4','A city lets a farmer <b>use</b> a field, but she may not sell it, rent it out, or keep the money from crops she sells. Compared with an owner who has full property rights, she is most likely to do which of the following?',
+  ['Invest less in improving the field, because she cannot keep the gains from improving it','Take better care of the field, because people who farm are responsible','Take exactly the same care, because incentives do not depend on ownership','Earn more income from the field than a full owner would','Sell the field to a neighbor who will farm it better'],0,
+  '<p>Of the four parts of property rights (use, earn income, transfer, enforce), she has only <b>use</b>. Without the right to earn income or transfer, improving the field gains her nothing she can keep, so she has little reason to invest in it.</p><p>The tempting wrong answer is "take better care, because farmers are responsible." Character doesn\'t change the math: incentives come from who keeps the gains and bears the costs. She can\'t sell the field either, since transfer is one of the rights she lacks.</p>');
 tf('l4-tf-transfer','l4','One part of property rights is the right to transfer the good to someone else.',true,
-  '<p>True. Selling it, giving it away or leaving it to someone are all transfers. Without that right, markets couldn\'t work.</p>');
+  '<p>True. Selling it, giving it away or leaving it to someone are all transfers. Without that right, nobody could sell anything, and markets couldn\'t work.</p>');
 mc('l4-us','l4','The U.S. economy is best described as which of the following?',
   ['A mixed economy that leans toward the market end','A pure market economy with no government role','A command economy','A traditional economy','A command economy with some markets'],0,
-  '<p>Nearly every real economy is <b>mixed</b>. The U.S. is mostly market-driven, but the government still sets rules, collects taxes, runs public schools and enforces contracts.</p>');
+  '<p>Your course textbook: "The U.S. economy is positioned toward the market-oriented end of the spectrum." Most decisions are made in markets, but government still sets rules, collects taxes, runs public schools and enforces contracts.</p><p>The tempting wrong answer is "a pure market economy with no government role." The textbook: "There is no such thing as an absolutely free market."</p>');
 /* L4 more */
 mc('l4-mktsoc','l4','Economic systems can be classified by who owns resources and how resources are allocated. An economy that combines <b>government ownership</b> of resources with <b>market allocation</b> is called which of the following?',
   ['Market socialism','Command capitalism','Capitalism','Socialism','A traditional economy'],0,
-  '<p>Government owns, markets allocate: market socialism.</p>');
+  '<p>Government owns (the socialism side), markets allocate (the market side): <b>market socialism</b>.</p><p>The tempting wrong answer is "socialism," which answers only the ownership question. In your course\'s grid, socialism means government ownership <i>and</i> planned allocation.</p>');
 tf('l4-tf-mixed','l4','Nearly every real-world economy is mixed.',true,
-  '<p>True. Even very market-oriented economies have rules and public services, and even command economies have some markets.</p>');
+  '<p>True. The textbook: "Most economies in the real world are mixed." Even very market-oriented economies have rules and public services, and "even the most command-oriented economies operate using markets."</p>');
 mc('l4-who','l4','In a market economy, which of the following mainly decides which goods get produced?',
   ['What buyers want and are willing to pay for','A central plan','Tradition','The largest firm in each industry','An annual public vote'],0,
-  '<p>Firms make what people will buy, because that\'s where the revenue is. As the textbook puts it, supply of goods and services depends on what is demanded.</p>');
+  '<p>Firms make what people will buy, because that is where the revenue is. The textbook: "Businesses supply goods and services based on demand."</p><p>The tempting wrong answer is "the largest firm in each industry." Big firms still have to sell what customers will pay for, or they lose money.</p>');
 lazy('l4-gr-cf2','l4',()=>({ type:'mc', kind:'graph',
   prompt:`${cfMini(4)}In this circular flow diagram, what flows along the arrow marked "?"`,
   options:['Spending on goods and services','Wages','Goods and services','Labor','Profits paid to owners'], answer:0,
-  explain:'<p>The arrow runs from households toward the goods and services market. Households pay for what they buy: <b>spending</b>, which becomes firms\' revenue.</p>' }));
+  explain:'<p>The arrow runs from households toward the goods and services market on the inner (money) loop. Households pay for what they buy: <b>spending</b>, which becomes firms\' revenue.</p><p>The tempting wrong answer is "goods and services." They travel the same path between households and that market, but on the outer loop and in the opposite direction, toward households.</p>' }));
 mc('l4-underground','l4','An <b>underground economy</b> is which of the following?',
-  ['Buying and selling that happens without the government\'s approval','Mining and drilling industries','The stock market','Government-owned businesses','Trade between countries'],0,
-  '<p>Heavy regulation pushes some trade out of sight. The textbook notes heavily regulated economies often have underground economies.</p>');
+  ['Buying and selling that happens without the government\'s approval','Mining and drilling industries','Any market that has government rules, since true markets have none','Nothing; it cannot exist, because command economies have no markets at all','Government-owned businesses'],0,
+  '<p>Your course textbook: "Heavily regulated economies often have underground economies, which are markets where the buyers and sellers make transactions without the government\'s approval."</p><p>The tempting wrong answer is "mining and drilling": "underground" here means hidden from the government, not below the ground. The "no rules" and "no markets" choices are both myths: every market has some rules, and even command economies use markets.</p>');
 mc('l4-invisible','l4','Adam Smith\'s "invisible hand" describes which of the following?',
   ['People pursuing their own interest in markets can end up benefiting society','Governments secretly controlling prices','Firms hiding their profits','Tradition guiding production','Charity replacing markets'],0,
-  '<p>No one plans the whole economy, yet self-interested buyers and sellers end up producing what others want. That\'s Smith\'s invisible hand.</p>');
+  '<p>In <i>The Wealth of Nations</i> (1776), Smith wrote that a person seeking his own gain is "led by an invisible hand to promote an end which was no part of his intention." No one plans the whole economy, yet shelves get stocked.</p><p>The tempting wrong answer is "governments secretly controlling prices." The hand is invisible because <i>no one</i> is steering; prices do the coordinating.</p>');
 tf('l4-tf-cfgov','l4','The simplest circular flow model includes government and foreign trade.',false,
-  '<p>False. The basic model has only households and firms in two markets. Government, banks and trade can be added later.</p>');
+  '<p>False. The textbook calls the basic model "stripped down to the essentials": only households and firms in two markets. Government, financial markets and trade can be added later.</p>');
 mc('l4-labor','l4','Which of the following do households most commonly sell in the factor market?',
   ['Labor','Groceries','Cars','Government bonds','Electricity'],0,
-  '<p>Most households earn their income by selling their work. The other choices are goods households buy, or financial assets.</p>');
-mc('l4-nk','l4','Which country does the textbook give as an example of a command economy?',
-  ['North Korea','United States','Denmark','Canada','Germany'],0,
-  '<p>The textbook lists Cuba and North Korea. The others are market-oriented mixed economies.</p>');
+  '<p>Most households earn their income by selling their work.</p><p>Groceries, cars and electricity are tempting because households deal in them every day, but households <b>buy</b> those, in the goods and services market. In the factor market their role flips to seller.</p>');
+mc('l4-nk','l4','Your course textbook names Cuba and North Korea as examples of one type of economy today. Which type?',
+  ['Command economies','Market economies with no government role','Traditional economies, because jobs follow custom','Mixed economies that lean toward the market end','Capitalist economies, because firms are privately owned'],0,
+  '<p>The textbook: "Currently, Cuba and North Korea have command economies." A central authority sets production and prices.</p><p>The tempting wrong answer is "mixed economies." Every real economy has some mix, but these sit at the command end of the spectrum, the opposite of the U.S.</p>');
 mc('l4-revenue','l4','In the circular flow model, firms\' revenue comes from which of the following?',
   ['Household spending in the goods and services market','Wages paid by households','The factor market','Taxes','Other firms only'],0,
-  '<p>When households buy goods and services, their spending becomes firms\' revenue. Firms then use it to pay for resources.</p>');
+  '<p>When households buy goods and services, their spending becomes firms\' revenue. Firms then use it to pay for resources.</p><p>The tempting wrong answer is "the factor market." That is where firms <b>spend</b> money (on wages, rent, interest and profit), not where they earn it. And wages flow from firms to households, not the other way.</p>');
 tf('l4-tf-cmdmkts','l4','A command economy has no markets at all.',false,
-  '<p>False. The textbook: even the most command-oriented economies operate using markets. The difference is that what is produced and what prices are charged are heavily controlled.</p>');
-mc('l4-forwhom','l4','The question "who receives the output?" is about which of the following?',
-  ['How goods are distributed among people','Which technology to use','How much to produce','What goods to make','Where factories are located'],0,
-  '<p>"For whom" is distribution: who gets what. In a market economy it depends mostly on income; in a command economy, on the plan.</p>');
+  '<p>False. The textbook: "even the most command-oriented economies operate using markets. How else would buying and selling occur?" What differs is how heavily the government controls what is produced and what prices are charged.</p>');
+mc('l4-forwhom','l4','In a <b>command</b> economy, the question "who receives the output?" is answered mainly by which of the following?',
+  ['The government\'s plan, which may provide some necessities free','People\'s incomes from selling their resources in markets','Custom and family roles','No one, because command economies ask different questions than market economies','Whatever each firm\'s private owner decides'],0,
+  '<p>In a command economy, the government decides distribution along with everything else. Your course textbook adds that "many necessities like healthcare and education are provided for free."</p><p>The tempting wrong answer is "people\'s incomes from selling their resources." That is how a <b>market</b> economy answers the question. Every system answers the same question; what changes is who decides.</p>');
 mc('l4-capitalism','l4','Private ownership plus market (private) allocation is which of the following?',
   ['Capitalism','Command capitalism','Market socialism','Socialism','A traditional economy'],0,
-  '<p>Private + private = capitalism, the system closest to the U.S.</p>');
+  '<p>Private + market = capitalism, the box closest to the U.S.</p><p>The tempting wrong answer is "command capitalism," which keeps private ownership but swaps in planned allocation. Check both questions: who owns, and who allocates.</p>');
 mc('l4-regs','l4','Even mostly market economies have rules that do which of the following?',
-  ['Protect property, enforce contracts and prevent fraud','Set the price of every good','Assign workers to jobs','Decide what each factory makes','Ban all taxes'],0,
-  '<p>The textbook: there is no absolutely free market. Basic rules like property protection and contract enforcement are what let markets work.</p>');
+  ['Protect property, enforce contracts and prevent fraud','Set the price of every good','Assign workers to jobs','Decide what each factory makes','None; a true market economy has no government rules'],0,
+  '<p>The textbook: "There is no such thing as an absolutely free market." At a minimum, its rules safeguard private property, enforce contracts, prevent fraud and collect taxes. Those rules are what let markets work at all. The last choice is the myth this question tests.</p><p>The other choices (setting every price, assigning workers, deciding output) are tempting because they are real government actions, but they describe a <b>command</b> economy.</p>');
 tf('l4-tf-direction','l4','In the circular flow model, money and goods move in the same direction.',false,
-  '<p>False. Every flow of goods or resources is matched by money going the opposite way.</p>');
+  '<p>False. Every flow of goods or resources is matched by money going the opposite way: goods to households, spending to firms; labor to firms, wages to households.</p>');
 mc('l4-decentral','l4','Which of the following is an example of <b>decentralized</b> decision-making?',
   ['Millions of shoppers and stores deciding what to buy and sell','A planning board setting tractor output','A king assigning land to vassals','A government setting all wages','Families farming as their ancestors did'],0,
-  '<p>Decentralized means spread across many people. That\'s the mark of a market economy.</p>');
+  '<p>Decentralized means spread across many people. The textbook: "In a market economy, decision-making is decentralized."</p><p>The tempting wrong answer is "families farming as their ancestors did," since many families are involved. But custom, not each family\'s own choice, decides there: that is a traditional economy.</p>');
 
-/* ===== Lesson 4 quick checks (inline in the lesson; not scheduled from the lesson page, but available in free practice) ===== */
+/* ===== Lesson 4 quick checks (inline in the lesson; not scheduled from the lesson page, but available in free practice) =====
+   One or two per teaching section, on that section only. */
+mc('l4c-howmuch','l4','A country\'s planning board raises this year\'s car target from 1.5 million to 2 million cars. This decision answers which of your course\'s three basic economic questions?',
+  ['How much to produce','What to produce','Who receives the output','None, because only market economies answer this question','It depends on the system, because planners ask different questions than markets do'],0,
+  '<p>Cars were already on the list (what). Changing the number from 1.5 million to 2 million answers <b>how much</b>.</p><p>The tempting wrong answer is "what to produce," because cars are a thing being made. But the choice here is the amount. And every system, planned or market, answers all three questions; only the decider changes.</p>');
 mc('l4c-forwhom','l4','In a market economy, which of the following mainly decides <b>who receives</b> the goods that are produced?',
   ['People\'s incomes, earned by selling their resources, together with prices','A central planning board','Custom and family roles','A law giving every household an equal share','The firms\' owners, who choose who may buy'],0,
-  '<p>In a market economy, the "for whom" question is answered by who is willing and able to pay. That depends on income, and income comes from selling land, labor, capital or entrepreneurship in the factor market. Planners decide in a command economy; custom decides in a traditional one.</p>');
+  '<p>In a market economy, "who receives the output" is answered by who is willing and able to pay. Your course textbook: "A person\'s income is based on his or her ability to convert resources (especially labor) into something that society values."</p><p>The tempting wrong answer is "the firms\' owners, who choose who may buy." Firms sell to anyone who pays the price; they do not hand out goods. Planners decide in a command economy; custom in a traditional one.</p>');
 mc('l4c-cmdweak','l4','Which of the following is a common criticism of command economies?',
-  ['Planners lack the information prices provide and people have few rewards for new ideas, so waste and shortages are common','Prices change too often for families to plan','Too many competing firms make similar products','The government plays too small a role','Custom prevents any change in what is produced'],0,
-  '<p>Without market prices, planners must guess what people want and what things really cost, and workers and managers gain little from finding better ways. That leads to waste and shortages, and black markets appear. The last choice describes a traditional economy.</p>');
+  ['Planners lack the information prices provide and people have few rewards for new ideas, so waste and shortages are common','Prices change too often for families to plan','Nothing can be bought or sold, because command economies have no markets','The government plays too small a role','Custom prevents any change in what is produced'],0,
+  '<p>Without market prices, planners must guess what people want and what things really cost, and workers and managers gain little from finding better ways. That leads to waste, shortages and black markets.</p><p>The tempting wrong answer is "custom prevents any change." Command economies can change quickly when the plan changes; being stuck in custom is the weakness of a <b>traditional</b> economy. And "no markets at all" is a myth: even command economies use markets.</p>');
 mc('l4c-signal','l4','A frost destroys half of one region\'s orange crop, and the price of oranges rises sharply. For orange growers in other regions, the higher price does which of the following?',
-  ['It signals that oranges are scarcer and gives them an incentive to sell more there','It guarantees that every buyer still gets the same amount of oranges','It lowers their cost of growing oranges','It requires them to stop selling oranges','It has no effect, because prices only matter to buyers'],0,
-  '<p>Prices <b>signal</b> scarcity and create an <b>incentive</b> to respond: other growers can earn more by shipping oranges to the region. Higher prices also <b>ration</b> the smaller supply, so buyers do not all get the same amount.</p>');
+  ['It signals that oranges are scarcer and gives them an incentive to sell more there','It guarantees that every buyer still gets the same amount of oranges','Nothing happens until a government agency orders more oranges shipped there','Nothing changes until the government approves the higher price','It has no effect, because prices only matter to buyers'],0,
+  '<p>Prices <b>signal</b> scarcity and create an <b>incentive</b> to respond: other growers can earn more by shipping oranges to the region. No one has to order it.</p><p>The tempting wrong answer is "every buyer still gets the same amount." The opposite happens: the higher price <b>rations</b> the smaller supply, so buyers who value oranges less buy fewer. The two "wait for the government" choices miss the point of a market: no agency has to order or approve anything.</p>');
 tf('l4c-hhroles','l4','In the circular flow model, households are buyers in both the goods and services market and the factor market.',false,
   '<p>False. Households are <b>buyers</b> in the goods and services market but <b>sellers</b> in the factor market, where they sell land, labor, capital and entrepreneurship. Firms play the opposite roles.</p>');
 mc('l4c-entre','l4','In the circular flow model, profit is the payment for which factor of production?',
   ['Entrepreneurship','Land','Labor','Capital','Government services'],0,
-  '<p>Each factor has its own payment: land earns <b>rent</b>, labor earns <b>wages</b>, capital earns <b>interest</b>, and entrepreneurship earns <b>profit</b>.</p>');
+  '<p>Each factor has its own payment: land earns <b>rent</b>, labor earns <b>wages</b>, capital earns <b>interest</b>, and entrepreneurship earns <b>profit</b> (Federal Reserve Education\'s circular flow lists the same four).</p><p>The tempting wrong answer is "capital," because in everyday talk profit is "the return on money invested." In this model, the payment for capital is interest; profit is what is left for the person who organized the business and took the risk.</p>');
 mc('l4c-profit','l4','A firm collects $2,000 in revenue in a week. It pays $1,200 in wages, $300 in rent and $200 in interest. What is the owner\'s profit?',
-  ['$100','$300','$500','$800','$1,700'],1,
-  '<p>Profit is what is left after the other factor payments: $2,000 − $1,200 − $300 − $200 = <b>$300</b>. $1,700 is the total of the other payments, not the profit.</p>');
+  ['$100','$300','$500','$1,700','$2,000'],1,
+  '<p>Profit is what is left after the other factor payments: $2,000 − $1,200 − $300 − $200 = <b>$300</b>.</p><p>The tempting wrong answers treat profit like a fixed amount instead of a leftover: $2,000 counts all revenue as the owner\'s, and $1,700 is the total of the <i>other</i> payments. $500 forgets the interest.</p>');
 Q['l4c-profit'].keepOrder = true;
+mc('l4c-market','l4','A retired couple leases the empty lot next to their house to a food-truck owner for $150 a month. In the circular flow model, which of the following is true?',
+  ['It happens in the factor market, and the couple\'s household is the seller','It happens in the goods and services market, and the couple\'s household is the buyer','It happens in the factor market, and the food-truck owner is the seller','It happens in the goods and services market, because rent is a payment for a service','The $150 flows from the couple to the food-truck owner'],0,
+  '<p>The couple is selling the use of <b>land</b>, a factor of production, so this is the factor market with the household as seller. The $150 is <b>rent</b> in the economic sense, and it flows from the firm to the household.</p><p>The tempting wrong answer is the goods and services market "because rent is a payment for a service." In the circular flow, rent is the payment for land, one of the four factor payments.</p>');
 mc('l4c-commons','l4','A lake that anyone may fish in, and that no one owns, is quickly overfished. Which of the following best explains why?',
-  ['Each fisher keeps the full gain from an extra fish but shares the cost of a smaller fish stock with everyone','Fish are free goods, so they are not scarce','The government owns the lake and sets the catch','Fishers prefer to catch fewer fish than they could','The price of fish is too low for anyone to want them'],0,
-  '<p>This is the <b>tragedy of the commons</b>. Without property rights, each user compares their own full gain with only their small share of the cost, so everyone uses too much. Fish in an open lake are clearly scarce; that is why overuse hurts.</p>');
+  ['Each fisher keeps the full gain from an extra fish but shares the cost of a smaller fish stock with everyone','Fish are free goods, so they are not scarce','The fishers are selfish; more generous people would fish less','The fishers are careless and do not think about the future','The price of fish is too low for anyone to want them'],0,
+  '<p>This is the <b>tragedy of the commons</b>. Without property rights, each user compares their own full gain with only their small share of the cost, so everyone uses too much.</p><p>The tempting wrong answers blame character ("careless," "selfish"). Each fisher may think about the future carefully, but holding back only leaves more fish for others to catch. The problem is the incentives, not the people. Fish in an open lake are clearly scarce; that is why overuse hurts.</p>');
 mc('l4c-rights','l4','Which of the following best explains why secure property rights encourage people to maintain and improve what they own?',
-  ['Owners keep the gains from improving a resource and bear the cost of neglecting it','Owners are required by law to improve their property','Property rights make all goods free','Property rights let the government decide how resources are used','Owners cannot sell what they own, so they must keep it in good shape'],0,
-  '<p>Property rights tie the costs and benefits of a choice to the person making it. An owner who fixes up a house can sell it for more; one who neglects it loses value. The last choice is backwards: the right to <b>transfer</b> is one of the four parts of property rights.</p>');
+  ['Owners keep the gains from improving a resource and bear the cost of neglecting it','Owners are required by law to improve their property','People who own things are more responsible than people who rent','Renters are careless people, so they neglect what they use','Owners cannot sell what they own, so they must keep it in good shape'],0,
+  '<p>Property rights tie the costs and benefits of a choice to the person making it. An owner who fixes up a house can sell it for more; one who neglects it loses value.</p><p>The tempting wrong answers credit a law or the owner\'s character. Neither is needed: the incentive does the work, and the same person treats an owned car better than a rented one. The last choice is backwards, since the right to <b>transfer</b> is one of the four parts of property rights.</p>');
+mc('l4c-grid','l4','Private companies own every factory, but a government board tells each factory what to make and what to charge. On your course\'s ownership-and-allocation grid, this is which of the following?',
+  ['Command capitalism','Capitalism, because the factories are privately owned','Socialism, because the government makes the decisions','Market socialism','A traditional economy'],0,
+  '<p>Ownership: private. Allocation: planned by the government. Private ownership + planned allocation = <b>command capitalism</b>.</p><p>The two tempting wrong answers each answer only one of the two questions: "capitalism" looks only at who owns, and "socialism" looks only at who decides. The grid needs both.</p>');
+
+/* Course materials checked 2026-10-22: video 1.4a transcript, Module 1 slides 26-33, course textbook (OpenStax Principles of Microeconomics, 2016 revision) §1.3-1.4.
+   Source, CLEP-topic and skill tags for every Lesson 4 question.
+   src: SOURCES keys. clep: outline topic. skill: terms | graphs | data | models (the four CLEP skills). mis: Common mistakes used as distractors. */
+const L4TAGS = {
+  'l4-questions':['MS','sys','terms','M5'], 'l4-factor':['OS13 FED','sys','models','M2'], 'l4-wages':['OS13 FED','sys','models','M1 M2'],
+  'l4-tf-market':['OS14','sys','terms','M4'], 'l4-command':['OS14','sys','terms','M5'], 'l4-gr-cf1':['OS13 FED','sys','graphs','M1'],
+  'l4-traditional':['OS14','sys','terms','M5'], 'l4-firms-buyers':['OS13 FED','sys','models','M2'], 'l4-grid':['MS','sys','terms','M5'],
+  'l4-rights':['MS ELP','pr','models','M6'], 'l4-tf-transfer':['MS ELP','pr','terms',''], 'l4-us':['OS14','sys','terms','M4 M5'],
+  'l4-mktsoc':['MS','sys','terms','M5'], 'l4-tf-mixed':['OS14','sys','terms','M4'], 'l4-who':['OS14','sys','terms','M5'],
+  'l4-gr-cf2':['OS13 FED','sys','graphs','M1'], 'l4-underground':['OS14','sys','terms','M4'], 'l4-invisible':['ELH','sys','terms','M5'],
+  'l4-tf-cfgov':['OS13','sys','models',''], 'l4-labor':['OS13 FED','sys','models','M2'], 'l4-nk':['OS14','sys','terms','M4 M5'],
+  'l4-revenue':['OS13 FED','sys','models','M1 M2'], 'l4-tf-cmdmkts':['OS14','sys','terms','M4'], 'l4-forwhom':['MS OS14','sys','terms','M5'],
+  'l4-capitalism':['MS','sys','terms','M5'], 'l4-regs':['OS14','sys','terms','M4 M5'], 'l4-tf-direction':['OS13 FED','sys','models','M1'],
+  'l4-decentral':['OS14','sys','terms','M5'],
+  'l4c-howmuch':['MS','sys','models','M5'], 'l4c-forwhom':['OS14','sys','models','M5'], 'l4c-cmdweak':['MS OS14','sys','terms','M4 M5'],
+  'l4c-signal':['T2U OS14','pr','models','M4 M5'], 'l4c-hhroles':['OS13 FED','sys','models','M2'], 'l4c-entre':['FED','sys','terms','M3'],
+  'l4c-profit':['FED','sys','data','M3'], 'l4c-market':['FED','sys','models','M1 M2 M3'], 'l4c-commons':['ELC','pr','models','M6'],
+  'l4c-rights':['MS ELP','pr','models','M6'], 'l4c-grid':['MS','sys','models','M5']
+};
+const CLEP_TOPIC = { sys:'Economic systems', pr:'Property rights and the role of incentives' };
+const SKILL_LABEL = { terms:'terms and concepts', graphs:'reading graphs', data:'interpreting data', models:'applying a model' };
+Object.entries(L4TAGS).forEach(([id,[src,clep,skill,mis]]) => { if(Q[id]) Object.assign(Q[id], { src: src.split(' '), clep: CLEP_TOPIC[clep], skill, mis: mis ? mis.split(' ') : [] }); });
 
 /* ===== Lesson 5: Marginal analysis and incentives ===== */
 mc('l5-def','l5','Marginal analysis compares which of the following?',
@@ -1069,8 +1171,8 @@ const CARD_LIST = {
     ['Consuming outside your PPF','Can a country produce outside its PPF? Can it consume outside it?','It can\'t produce outside its PPF, which is set by its own resources and technology. It can consume outside it by specializing and trading.','The baker produces 24 bread (on his PPF) and trades 5 bread for 2 sweaters. He consumes 19 bread and 2 sweaters, more than the 18 bread he could make alongside 2 sweaters on his own.','']
   ],
   l4:[
-    ['Economic system','What is an economic system?','The way a society organizes the production, distribution and exchange of goods and services: who decides what gets made, how it is made, and who gets it.','Tradition, a central plan and markets are three different ways of making those decisions.',''],
-    ['Three basic questions','What three questions must every economic system answer?','What to produce? How (and how much) to produce it? For whom: who receives the output?','In a market economy, "for whom" is answered mostly by income: people who can pay get the goods.',''],
+    ['Economic system','What is an economic system?','Your course\'s definition: a system of production, resource allocation, exchange and distribution of goods and services. It is how a society decides what gets made, how much, and who receives it.','Tradition, a central plan and markets are three different ways of making those decisions.',''],
+    ['Three basic questions','What three questions must every economic system answer?','What to produce? How much to produce? Who receives the output? (Textbooks often call the last one "for whom.")','In a market economy, "who receives the output" is answered mostly by income: people who can pay get the goods.','Systems don\'t ask different questions. They all answer these three; they differ in who answers them.'],
     ['Traditional economy','How does a traditional economy make decisions, and what is its main drawback?','Decisions follow custom and habit. Jobs and methods pass down through families, and people often consume what they produce. Main drawback: little change, innovation or growth.','Families farming the same crops their grandparents grew, the same way.',''],
     ['Command economy','Who decides in a command economy, and what do they control?','A central authority, usually the government, decides what is produced, how and for whom, and sets prices and wages. The textbook\'s examples are Cuba and North Korea.','A planning board orders factories to build 50,000 tractors this year and sets the price of bread.','Even command economies have some markets. What differs is how heavily production and prices are controlled.'],
     ['Market economy','How does a market economy decide what to produce?','Through decentralized decisions by many buyers and sellers. Resources and businesses are privately owned, prices come from supply and demand, and firms make what people are willing to pay for.','A sneaker company launches a new style because customers keep buying similar ones.',''],
@@ -1259,6 +1361,7 @@ async function removeReport(r){
 }
 function describeWhere(where){
   where = String(where);
+  if(where.startsWith('general:')){ const k = where.slice(8); return { title: GENERAL_TOPICS[k] || 'General report', snip:'', href: GENERAL_HREF[k] || null }; }
   if(where.startsWith('explain:')){ const inner = describeWhere(where.slice(8)); return { title: inner.title + ' · Claude\'s explanation', snip: inner.snip, href: inner.href }; }
   const ci = where.indexOf(':'), kind = where.slice(0, ci), id = where.slice(ci+1);
   if(kind==='section' || kind==='widget'){ const [lid, name] = id.split('|'); const L = LBYID[lid];
@@ -1280,6 +1383,8 @@ function describeWhere(where){
   }
   return { title:String(where), snip:'', href:null };
 }
+const GENERAL_TOPICS = { workbook:'General · the workbook overall', idea:'Idea or feature request', review:'Review tab', quiz:'Unit quiz', cards:'Flashcards page', other:'Something else' };
+const GENERAL_HREF = { review:'#review', quiz:'#quiz', cards:'#cards' };
 const shortDay = t => new Date(t).toLocaleDateString(undefined,{month:'short',day:'numeric'});
 const STATUS_LABEL = { open:'Open', unsent:'Not sent yet', fixed:'Fixed', nochange:'No change needed' };
 function fillTag(tag){
@@ -1326,6 +1431,7 @@ function reportLink(where, host, ctxFn){
 
 /* ---------- question card ---------- */
 function instance(qid){ const b = Q[qid]; return b.gen ? b.gen() : b.build ? b.build() : b; }
+const qSrcLine = qid => { const q = Q[qid]; if(!q || !q.src) return ''; return `<p class="qsrc">Source: ${esc(srcLabel(q.src))}${q.clep?` · CLEP topic: ${esc(q.clep)}`:''}${q.skill&&SKILL_LABEL[q.skill]?` · Skill: ${SKILL_LABEL[q.skill]}`:''}</p>`; };
 const KIND_LABEL = { mc:'Multiple choice', tf:'True or false', graph:'Graph', num:'Worked problem' };
 function qCard(qid, { ctx, label, onAnswer, onNext, nextLabel }){
   const el = document.createElement('div'); el.className='q';
@@ -1377,7 +1483,7 @@ function qCard(qid, { ctx, label, onAnswer, onNext, nextLabel }){
   const finish = (ok) => {
     const fb = $('.fb', el);
     const ansTxt = inst.type==='num' ? `<p class="muted small">Answer: ${inst.unit==='dollars'?money(inst.answer):fmt(inst.answer)+' '+(inst.unit||'')}</p>` : '';
-    fb.innerHTML = `<p class="verdict ${ok?'good':'bad'}">${ok?pick(['Correct.','Right.','Yes, that\'s it.']):'Not quite. Here\'s how it works:'}</p>${ok?'':ansTxt}<div class="explain">${inst.explain}</div><div class="q-foot row"></div>`;
+    fb.innerHTML = `<p class="verdict ${ok?'good':'bad'}">${ok?pick(['Correct.','Right.','Yes, that\'s it.']):'Not quite. Here\'s how it works:'}</p>${ok?'':ansTxt}<div class="explain">${inst.explain}</div>${qSrcLine(qid)}<div class="q-foot row"></div>`;
     const foot = $('.q-foot', fb);
     if(Q[qid].gen && ctx==='practice'){ const b=document.createElement('button'); b.className='btn ghost sm'; b.textContent='Try new numbers'; b.onclick=()=>{ inst = instance(qid); draw(); }; foot.appendChild(b); }
     if(onNext){ const b=document.createElement('button'); b.className='btn sm'; b.textContent=nextLabel||'Next'; b.onclick=onNext; foot.appendChild(b); b.focus({preventScroll:true}); }
@@ -1975,8 +2081,12 @@ W.trade = el => {
   [...ids,Qs,Pr].forEach(i=>i.addEventListener('input',draw)); draw();
 };
 
+/* TEST NOTE (2026-10-21, headless Chromium, 375px and 1100px, light and dark): Next/Back through steps 1-6, Back disabled on step 1,
+   Next on step 6 wraps to step 1; stuff/money toggles appear only on step 6. Arrow directions match OpenStax §1.3 and Fed Education:
+   goods firms→households, spending households→firms, factors households→firms, factor payments firms→households.
+   No label overlaps or clipping at 375px (arrow labels enlarged to 13.5px on phones). */
 W.circular = el => {
-  el.innerHTML = `<p class="widget-title">The circular flow, step by step</p><p class="hint">Textbook 1.3 and your course video. Tap Next to build the diagram one piece at a time.</p>
+  el.innerHTML = `<p class="widget-title">The circular flow, step by step</p><p class="hint">Course textbook §1.3, video 1.4a and slide 33. Tap Next to build the diagram one piece at a time.</p>
   <div class="row cf-nav"><button class="btn ghost sm cf-back">← Back</button><span class="small muted num cf-count"></span><button class="btn sm cf-next">Next →</button></div>
   <div class="seg cf-mode" role="group" aria-label="Which flow" hidden><button data-m="real" aria-pressed="false">Follow the stuff</button><button data-m="money" aria-pressed="false">Follow the money</button><button data-m="both" aria-pressed="true">Both</button></div>
   <div class="svgbox" style="margin-top:8px"><svg viewBox="0 0 500 300" width="100%" role="img" aria-label="Circular flow diagram"></svg></div>
@@ -2036,6 +2146,9 @@ W.circular = el => {
   draw();
 };
 
+/* TEST NOTE (2026-10-21): defaults 1500/1000/200/100 → profit $200, income $1,500. All costs max, spend min (1000/1300/400/300) → profit −$1,000,
+   income $1,000, loss message. Spend max, costs min (2000/600/100/0) → profit $1,300, income $2,000. 1500/1000/300/200 → profit $0.
+   Income always equals spending (profit is the residual), matching the lesson's worked example. */
 W.bakery = el => {
   el.innerHTML = `<p class="widget-title">One bakery's circle</p><p class="hint">Move the sliders. Profit is whatever is left after the other factor payments, so total household income always equals total spending.</p>
   <div class="wbox">
@@ -2062,6 +2175,8 @@ W.bakery = el => {
   ins.forEach(x=>x.addEventListener('input',draw)); draw();
 };
 
+/* TEST NOTE (2026-10-21): all 8 items answered; a wrong pick shows the right answer in green plus the reason; score counts correctly (7 of 8 with one miss).
+   Every item checked against OpenStax §1.3 and Fed Education (product vs factor market, rent = land, interest = capital, profit = entrepreneurship). */
 W.cfsort = el => {
   const items = [
     ['You buy a $6 sandwich at a deli.','Product','You (a household) are buying a good. The sandwich goes to you; your $6 goes to the deli as revenue.'],
@@ -2079,7 +2194,7 @@ W.cfsort = el => {
   const box=$('.items',el);
   items.forEach(([txt,ans,why])=>{
     const d=document.createElement('div'); d.className='sort-item';
-    d.innerHTML=`<p>${txt}</p><div class="seg" role="group">${kinds.map(([k,lab])=>`<button data-k="${k}" aria-pressed="false">${lab}</button>`).join('')}</div><p class="small why" hidden></p>`;
+    d.innerHTML=`<p>${txt}</p><div class="seg" role="group" aria-label="Which market">${kinds.map(([k,lab])=>`<button data-k="${k}" aria-pressed="false">${lab}</button>`).join('')}</div><p class="small why" hidden></p>`;
     $$('button',d).forEach(b=>b.onclick=()=>{
       if(d.dataset.done) return; d.dataset.done=1; answered++;
       const ok=b.dataset.k===ans; if(ok) right++;
@@ -2092,30 +2207,33 @@ W.cfsort = el => {
   });
 };
 
+/* TEST NOTE (2026-10-21): all 8 items answered; wrong picks now show the correct system plus a reason (added for the golden-standard rubric).
+   Answers checked against OpenStax §1.4 (U.S. toward the market end; command = central authority; traditional = custom). */
 W.sort = el => {
   const items = [
-    ['Families farm the same crops their grandparents did, the same way, and eat what they grow.','Traditional'],
-    ['A central planning board orders factories to build 50,000 tractors this year.','Command'],
-    ['A sneaker company launches a new style because shoppers keep asking for it.','Market'],
-    ['Most businesses are private, but the government runs public schools and sets a minimum wage.','Mixed'],
-    ['The government sets the price of bread and assigns workers to bakeries.','Command'],
-    ['Concert ticket prices climb because many fans want a limited number of seats, and nobody sets them.','Market'],
-    ['You will do the same work your parents did, because that is how it has always been.','Traditional'],
-    ['The United States today.','Mixed']
+    ['Families farm the same crops their grandparents did, the same way, and eat what they grow.','Traditional','Custom answers all three questions here: what and how much (the same crops, grown the same way) and who receives the output (the family eats what it grows).'],
+    ['A central planning board orders factories to build 50,000 tractors this year.','Command','A central authority sets the production target. No buyer or seller chose the number.'],
+    ['A sneaker company launches a new style because shoppers keep asking for it.','Market','The firm is responding to what buyers want and will pay for. Nobody ordered it.'],
+    ['Most businesses are private, but the government runs public schools and sets a minimum wage.','Mixed','Private firms make most choices, and government adds services and rules. That blend is a mixed economy.'],
+    ['The government sets the price of bread and assigns workers to bakeries.','Command','Setting prices and assigning jobs from the center are command features. In a market, both would come from buyers and sellers.'],
+    ['Concert ticket prices climb because many fans want a limited number of seats, and nobody sets them.','Market','The price rises on its own as buyers compete: a signal of scarcity, and a way of rationing seats.'],
+    ['You will do the same work your parents did, because that is how it has always been.','Traditional','Jobs passed down by custom are the mark of a traditional economy.'],
+    ['The United States today.','Mixed','Your course textbook places the U.S. "toward the market-oriented end of the spectrum," but it still has public schools, taxes and rules, so it is mixed.']
   ];
   const kinds=['Traditional','Command','Market','Mixed'];
   let right=0, answered=0;
-  el.innerHTML = `<p class="widget-title">Which system is it?</p><p class="hint">Textbook 1.4. Pick a system for each example.</p><div class="items"></div><div class="msg score">0 of ${items.length} answered</div>`;
+  el.innerHTML = `<p class="widget-title">Which system is it?</p><p class="hint">Course textbook §1.4. For each example, ask who is deciding: custom, a planner, buyers and sellers, or a blend. Then pick the system.</p><div class="items"></div><div class="msg score">0 of ${items.length} answered</div>`;
   const box=$('.items',el);
-  items.forEach(([txt,ans])=>{
+  items.forEach(([txt,ans,why])=>{
     const d=document.createElement('div'); d.className='sort-item';
-    d.innerHTML=`<p>${txt}</p><div class="seg" role="group">${kinds.map(k=>`<button data-k="${k}" aria-pressed="false">${k}</button>`).join('')}</div>`;
+    d.innerHTML=`<p>${txt}</p><div class="seg" role="group" aria-label="Which system">${kinds.map(k=>`<button data-k="${k}" aria-pressed="false">${k}</button>`).join('')}</div><p class="small why" hidden></p>`;
     $$('button',d).forEach(b=>b.onclick=()=>{
       if(d.dataset.done) return; d.dataset.done=1; answered++;
       const ok=b.dataset.k===ans; if(ok) right++;
       b.classList.add(ok?'right':'wrong'); if(!ok) $(`button[data-k="${ans}"]`,d).classList.add('right');
       $$('button',d).forEach(x=>x.disabled=true);
-      $('.score',el).textContent = answered<items.length ? `${right} right out of ${answered} so far` : `${right} of ${items.length} right. ${right===items.length?'Perfect.':'The green button shows the answer on any you missed.'}`;
+      const w=$('.why',d); w.hidden=false; w.innerHTML=(ok?'<b>Right.</b> ':`<b>Not quite: it's ${ans}.</b> `)+why;
+      $('.score',el).textContent = answered<items.length ? `${right} right out of ${answered} so far` : `${right} of ${items.length} right. ${right===items.length?'Perfect.':'Read the note under any you missed.'}`;
     });
     box.appendChild(d);
   });
@@ -2321,36 +2439,68 @@ ${term('Input problem','"Takes 1 hour per bread, 2 hours per sweater." Opportuni
   links:[ {k:'Video',t:'The Principle of Comparative Advantage (60 Second Adventures in Economics)',s:'OpenLearn, The Open University',u:'https://www.open.edu/openlearn/society/politics-policy-people/economics/60-second-adventures-economics-the-principle-comparative-advantage',w:'A short animated take on Ricardo\'s idea with countries instead of people.'},
           {k:'Article',t:'Ricardo\'s Difficult Idea',s:'Paul Krugman, MIT',u:'https://web.mit.edu/krugman/www/ricardo.htm',w:'Go deeper: why comparative advantage is so often misunderstood. Longer, more advanced read.'} ] },
 
-{ id:'l4', title:'Economic Systems', mins:40, src:'Course video 1.4a · Textbook 1.3, 1.4',
-  oneline:'Every society must decide what to make, how to make it, and who gets it. Systems differ in who decides, and the circular flow shows how a market economy makes those decisions without anyone in charge.',
+{ id:'l4', title:'Economic Systems', mins:45, src:'Modern States video 1.4a and Module 1 slides 26-33 · Course textbook (OpenStax) §1.3, §1.4',
+  sources:['MS','OS13','OS14','CB','FED','ELC','ELP','ELH','T2U'],
+  oneline:'Every society must decide what to make, how much to make, and who gets it. Who owns resources and who allocates them shapes the answer, and the circular flow shows how a market economy decides without anyone in charge.',
   body:`
-<h2>Three questions every economy must answer</h2>
-<p>Lesson 1 showed that resources are scarce. Because a society can't make everything, it has to answer three questions, whether it means to or not:</p>
-<ol><li><b>What</b> to produce, and how much? More phones or more laptops? More housing or more parks?</li><li><b>How</b> to produce it? Many workers with simple tools, or a few workers with robots?</li><li><b>For whom</b>? Once the phones exist, who gets them?</li></ol>
-<p>An <b>economic system</b> is a society's way of answering these questions. The systems below differ mainly in <i>who</i> does the deciding.</p>
-<div class="analogy"><div class="eyebrow">Analogy</div><p>Think of a big family potluck. The menu could be the same dishes as every year (<b>tradition</b>). One organizer could assign every dish (<b>command</b>). Everyone could bring what they think people will eat, and popular dishes get copied next year (<b>market</b>). Or the organizer sets a few rules, like "someone brings plates," and leaves the rest free (<b>mixed</b>).</p></div>
+<h2>What an economic system is</h2>
+<!-- src: MS (video 1.4a definition and three questions; slide 27); OS14 (who coordinates, "produced in the best way possible") -->
+<p>Lesson 1 showed that resources are ${dt('scarcity','scarce')}. Because a society can't make everything, it needs a way to organize production. Your course defines an ${dt('econ-system','<b>economic system</b>')} as a system of <b>production, resource allocation, exchange and distribution</b> of goods and services.</p>
+<p>Every economic system has to answer the same three questions, whether it means to or not:</p>
+<ol><li><b>What</b> to produce? More phones or more laptops? More housing or more parks?</li><li><b>How much</b> to produce? A million phones or ten million?</li><li><b>Who receives the output?</b> Once the phones exist, who gets them? (Textbooks often call this "for whom.")</li></ol>
+<p>Many textbooks add a fourth angle: <b>how</b> to produce, meaning with which methods. Your course textbook asks it this way: who makes sure televisions "are produced in the best way possible?" Treat it as a companion to the three: once a society decides what and how much, it still has to pick a method.</p>
+<div class="analogy"><div class="eyebrow">Analogy</div><p>Think of a big family potluck. Someone has to decide which dishes come (what), how much of each (how much), and who takes the leftovers home (who receives). The menu could be the same as every year (<b>tradition</b>). One organizer could assign every dish (<b>command</b>). Everyone could bring what they think people will eat (<b>market</b>). Or the organizer sets a few rules and leaves the rest free (<b>mixed</b>). Same three questions every time; what changes is <i>who</i> answers them.</p></div>
+<div data-check="l4c-howmuch"></div>
 
-<h2>The main systems</h2>
+<h2>Property rights</h2>
+<!-- src: MS (video 1.4a four components; slides 28-31: owners can be individuals, associations or government); ELP (bundle of rights, incentives); ELC (Hardin 1968, Lloyd 1832, remedies); fishing numbers are made up -->
+<p>Your course puts property rights first for a reason: <b>who owns what shapes which system you get</b>. <b>Property rights</b> are the rules that say who owns a resource and who decides how it is used. The owner can be an individual, an association (like a club or co-op) or the government.</p>
+<p>The course lists four parts (Econlib's readings describe the same bundle):</p>
+<ol><li>The right to <b>use</b> the good</li><li>The right to <b>earn income</b> from it</li><li>The right to <b>transfer</b> it to someone else</li><li>The right to <b>enforce</b> those rights</li></ol>
+<p><b>Why they matter: incentives.</b> An owner bears the cost of neglecting something and keeps the gain from improving it. That changes behavior, whatever the owner's character.</p>
+<div class="analogy"><div class="eyebrow">Analogy</div><p>You change the oil in a car you own, because you'll still be driving it in five years. A rental car you return on Friday gets no such care. Same driver, different ownership, different incentive.</p></div>
+<p>Property rights also make markets possible. A household can only sell its land, labor or savings if they are its own, and a store only stocks shelves if it knows it can keep what it earns and that contracts will be enforced.</p>
+<p><b>When anyone can use it: the ${dt('commons','tragedy of the commons')}.</b> If a resource is <b>open access</b> (anyone can use it and no one limits use), each user keeps the full gain from using a little more but shares the cost with everyone else. Ecologist Garrett Hardin made this famous in 1968, building on an 1832 example of an English village pasture: each herder adds animals, and the pasture gets overgrazed.</p>
+<p><b>Example (made-up numbers).</b> Ten people fish a lake anyone can fish, with no limits. Each extra fish is worth $5 to whoever catches it. But catching it shrinks next year's stock, costing the group $8, split ten ways: $0.80 each.</p>
+<div class="math">One fisher's view: gain $5 vs. own share of the cost $0.80 → keep fishing<br>The group's view: gain $5 vs. total cost $8 → lose $3 on every extra fish</div>
+<p>Every fisher acts sensibly for themselves, and the lake is fished out. The problem is the incentive, not carelessness: a fisher who holds back just leaves more fish for the others. Giving someone ownership, setting rules like catch limits or ${dt('quota','quotas')}, or letting the community manage the lake can put the full cost back on the decision. You'll see this again in Unit 7 (${dt('market-failure','market failure')}).</p>
+<div data-check="l4c-commons,l4c-rights"></div>
+
+<h2>Sorting systems: who owns, who allocates</h2>
+<!-- src: MS (video 1.4a grid; slide 32). The grid is the course's framework; it is not in OpenStax §1.4 or the CLEP outline. -->
+<p>Because property rights matter so much, your course sorts economic systems with two separate questions: who <b>owns</b> resources, and who <b>allocates</b> them (decides how they are used). Each answer is either private or planned (government).</p>
+<div class="tbl-wrap"><table><thead><tr><th></th><th>Planned (government) ownership</th><th>Private ownership</th></tr></thead><tbody>
+<tr><td><b>Planned allocation</b></td><td>Socialism (socially planned economy)</td><td>Command capitalism</td></tr>
+<tr><td><b>Private (market) allocation</b></td><td>Market socialism</td><td>Capitalism</td></tr></tbody></table></div>
+<p>The two corners are the extremes. <b>Capitalism</b> (private owners, private allocation) is the one the U.S. is closest to. <b>Socialism</b> (government owns and plans) is the opposite corner. The middle cells mix them: government-owned factories that let prices decide what they make are <b>market socialism</b>; private businesses that the government tells what to make are <b>command capitalism</b>.</p>
+<p>To read it, answer the two questions separately. The common slip is answering only one: private ownership alone doesn't make it capitalism, and government decisions alone don't make it socialism.</p>
+<div data-check="l4c-grid"></div>
+
+<h2>The textbook's four systems</h2>
+<!-- src: OS14 (all four definitions, healthcare and education free, Cuba and North Korea, U.S. position, China and Russia, "little economic progress or development"); MS (table rows) -->
+<p>Your course textbook sorts systems a second way, by how decisions get made. You'll see these four names on most exams, so learn both lenses:</p>
 <div class="terms">
-${term('Traditional','Decisions follow custom. Jobs pass down through families, most families farm the way their parents did, and people mostly consume what they produce. The textbook notes there is little economic progress.')}
-${term('Command','A central authority, usually the government, decides what is made, how it is made, what prices are charged and what workers are paid. The textbook lists Cuba and North Korea today.')}
-${term('Market','Decisions are spread across millions of buyers and sellers (<b>decentralized</b>). Resources and businesses are privately owned; firms supply what people demand, and prices come from buyers and sellers, not the government.')}
-${term('Mixed','Elements of more than one. Almost every real economy. The U.S. is mixed but leans strongly toward market; many European countries are market-oriented with more government involvement.')}
+${term('Traditional','Decisions follow custom. Jobs stay in the family, most families farm the crops they always have with traditional methods, and what you produce is what you consume. The textbook: "there is little economic progress or development."')}
+${term('Command','A ruler or government decides what is made, how it is made, what prices are charged and what workers are paid. Many necessities, like health care and education, are provided free. The textbook names Cuba and North Korea as command economies today.')}
+${term('Market','Decisions are spread across millions of buyers and sellers: they are '+dt('decentralized','decentralized')+'. Resources and businesses are privately owned, firms supply what people demand, and a '+dt('market','market')+' brings buyers and sellers together.')}
+${term('Mixed','Elements of more than one. The textbook: "Most economies in the real world are mixed." The U.S. sits toward the market end; many European and Latin American countries are market-oriented with more government involvement; China and Russia remain closer to the command end.')}
 </div>
-<p>Here is how each system answers the three questions, and the trade-off each one makes:</p>
+<p>The two lenses line up roughly: a market economy looks like the capitalism corner of the grid, and a command economy like the socialism corner. Here is how each system answers the questions, and the trade-off each one makes:</p>
 <div class="tbl-wrap"><table class="wrap-cells"><thead><tr><th></th><th>Traditional</th><th>Command</th><th>Market</th></tr></thead><tbody>
-<tr><td><b>What?</b></td><td>What was always made</td><td>Whatever planners choose, often with production targets</td><td>Whatever buyers are willing to pay for</td></tr>
-<tr><td><b>How?</b></td><td>Methods passed down</td><td>Methods set by planners</td><td>Each firm picks its own methods; competition pushes it toward cheaper, better ones</td></tr>
-<tr><td><b>For whom?</b></td><td>By custom and family role</td><td>Planners decide; some basics, like health care and education, are provided free</td><td>People who can pay. Your income depends on what you earn selling your resources, such as your labor</td></tr>
-<tr><td><b>Strength</b></td><td>Predictable: everyone knows their role</td><td>Can push resources toward the government's goals, such as more equal outcomes</td><td>Strong incentives to work and innovate; wide variety; prices adjust on their own</td></tr>
-<tr><td><b>Weakness</b></td><td>Little growth or change</td><td>Planners lack good information and few people are rewarded for new ideas, so waste and shortages are common; black markets appear</td><td>Some people can't earn enough to buy what they need; some goods are under-provided (like national defense); costs that fall on others are ignored</td></tr>
+<tr><td><b>What and how much?</b></td><td>What was always made</td><td>Whatever planners choose, often with production targets</td><td>Whatever buyers are willing to pay for</td></tr>
+<tr><td><b>Methods</b></td><td>Passed down</td><td>Set by planners</td><td>Each firm picks its own; competition pushes it toward cheaper, better ones</td></tr>
+<tr><td><b>Who receives?</b></td><td>By custom and family role</td><td>Planners decide; some necessities, like health care and education, are provided free</td><td>People who can pay. Your income depends on what you earn selling your resources, such as your labor</td></tr>
+<tr><td><b>Strength</b></td><td>Predictable: everyone knows their role</td><td>Can push resources toward the government's goals, such as more equal outcomes</td><td>Strong ${dt('incentive','incentives')} to work and innovate; wide variety; prices adjust on their own</td></tr>
+<tr><td><b>Weakness</b></td><td>Little growth or change</td><td>Planners lack good information and few people are rewarded for new ideas, so waste and shortages are common; ${dt('black-market','black markets')} appear</td><td>Some people can't earn enough to buy what they need; some goods are under-provided (like national defense); costs that fall on others are ignored</td></tr>
 </tbody></table></div>
-<p>A mixed economy tries to keep the market's strengths and patch its weaknesses: mostly private businesses and market prices, plus government for things like schools, roads, a safety net and rules against fraud.</p>
+<p>Read the table across a row and you see the mechanism. A command economy's weakness comes straight from its "who decides" answer: one planning office can't know what millions of people want, and workers gain little from finding better ways. A market's weakness also comes from its answer: goods go to people who can pay, so people with little income get little.</p>
+<p>A mixed economy tries to keep the market's strengths and patch its weaknesses: mostly private businesses and market prices, plus government for things like schools, roads, help for people with low incomes, and rules against fraud. The textbook: "There is no such thing as an absolutely free market," and "even the most command-oriented economies operate using markets."</p>
 <div data-widget="sort"></div>
 <div data-check="l4c-forwhom,l4c-cmdweak"></div>
 
 <h2>How prices coordinate a market</h2>
-<p>A market economy has no central planner, so what tells a farmer how much wheat to grow or a store how much to stock? <b>Prices.</b> A price does three jobs at once:</p>
+<!-- src: T2U (signal, incentive, rationing functions); ELH (invisible hand); OS14 ("market forces, not governments"). Beyond video 1.4a: added because the CLEP tests how market systems decide. Orange example is made up. -->
+<p>The textbook says that in a market economy "economic decisions are determined by market forces, not governments." But with no central planner, what tells a farmer how much wheat to grow or a store how much to stock? <b>Prices.</b> A price does three jobs at once:</p>
 <div class="terms">
 ${term('Signal','A price carries information. A rising price says "this is scarcer than before"; a falling price says "there is more than people want."')}
 ${term('Incentive','A higher price rewards sellers who produce more and nudges buyers to use less, or switch to something else.')}
@@ -2358,92 +2508,84 @@ ${term('Rationing','When there isn\'t enough to go around, price decides who get
 </div>
 <p><b>Example (made-up numbers).</b> A frost destroys half of Florida's orange crop, and the price of orange juice jumps from $4 to $6 a carton. Nobody issued an order, yet:</p>
 <ul><li><b>Signal:</b> growers in California and Brazil learn that oranges are scarce.</li><li><b>Incentive:</b> at $6 it pays them to ship more juice to Florida stores, and shoppers who only half-wanted juice buy milk instead.</li><li><b>Rationing:</b> the juice that is left goes to the people who value it most at $6.</li></ul>
-<p>This is what Adam Smith meant by the <b>invisible hand</b> (see Go deeper): self-interested choices, steered by prices, end up coordinating a whole economy. You'll study exactly how prices are set in Unit 2, Supply and Demand.</p>
+<p>Notice the chain: one price change carries the news (signal), changes what people want to do (incentive), and settles who ends up with the juice (rationing). A planner would need all three pieces of information to get the same result. This is what Adam Smith meant by the ${dt('invisible-hand','<b>invisible hand</b>')} (see Go deeper): self-interested choices, steered by prices, end up coordinating a whole economy. You'll study exactly how prices are set in Unit 2, ${dt('supply-demand','Supply and Demand')}.</p>
 <div data-check="l4c-signal"></div>
 
 <h2>How a market economy flows</h2>
-<p>A market economy has millions of buyers and sellers. To see the big picture, economists use a <b>model</b>: a simplified picture that keeps only the parts you need. The <b>circular flow model</b> shrinks the whole economy down to two players and two markets.</p>
-<div class="tbl-wrap"><table class="wrap-cells"><thead><tr><th></th><th>Goods and services market (product market)</th><th>Factor market (resource market)</th></tr></thead><tbody>
-<tr><td><b>What is sold</b></td><td>Products: food, phones, haircuts, streaming</td><td>Factors of production: land, labor, capital, entrepreneurship</td></tr>
+<!-- src: MS (video 1.4a: goods market and "market for inputs" such as land, labor and capital; slide 33 diagram); OS13 (circular flow, households and firms, two markets, "stripped down to the essentials"); FED (four factor payments) -->
+<p>Your course ends video 1.4a with a picture of a market-based capitalist economy. Economists use a ${dt('model','<b>model</b>')} for this: a simplified picture that keeps only the parts you need. The <b>circular flow model</b> shrinks the whole economy down to two players, ${dt('household','households')} and ${dt('firm','firms')}, trading in two markets.</p>
+<div class="tbl-wrap"><table class="wrap-cells"><thead><tr><th></th><th>Goods and services market (product market)</th><th>Factor market ("market for inputs")</th></tr></thead><tbody>
+<tr><td><b>What is sold</b></td><td>Products: food, phones, haircuts, streaming</td><td>${dt('factors','Factors of production')}: ${dt('land','land')}, ${dt('labor','labor')}, ${dt('capital','capital')}, ${dt('entrepreneurship','entrepreneurship')}</td></tr>
 <tr><td><b>Sellers</b></td><td>Firms</td><td>Households</td></tr>
 <tr><td><b>Buyers</b></td><td>Households</td><td>Firms</td></tr>
-<tr><td><b>Money flow</b></td><td>Household spending → firm revenue</td><td>Wages, rent, interest, profit → household income</td></tr>
+<tr><td><b>Money flow</b></td><td>Household spending → firm ${dt('revenue','revenue')}</td><td>Wages, rent, interest, profit → household income</td></tr>
 </tbody></table></div>
 <p>Build the diagram one piece at a time:</p>
 <div data-widget="circular"></div>
 <p>Each factor of production earns its own kind of payment:</p>
 ${table(['Factor','Payment','Example'],[['Land (and other natural resources)','Rent','A family leases its field to a car dealership'],['Labor','Wages','A cashier\'s paycheck'],['Capital (tools, machines, buildings)','Interest','A saver lends a bakery money for an oven and is paid interest'],['Entrepreneurship','Profit','A shop owner keeps what is left after paying all costs']])}
 <p>Two ideas make the model click:</p>
-<ul><li><b>Money always moves opposite to the stuff.</b> Every blue arrow (goods or resources) is matched by a gold arrow (money) going the other way.</li><li><b>Everyone plays two roles.</b> Households are buyers in the product market and sellers in the factor market. Firms are the reverse.</li></ul>
-<p><b>Why it matters for this course:</b> Units 2 to 5 study the product market (supply and demand, consumer choice, costs, market structures). Unit 6 studies the factor market (how wages and other factor payments are set). The circular flow is the map for the rest of the course.</p>
+<ul><li><b>Money always moves opposite to the stuff.</b> Every blue arrow (goods or resources) is matched by a gold arrow (money) going the other way. That's because every arrow is half of a trade: you only hand over money in exchange for something.</li><li><b>Everyone plays two roles.</b> Households are buyers in the product market and sellers in the factor market. Firms are the reverse. A household can only spend what it earned by selling its resources, which is why the loop closes.</li></ul>
+<p class="small muted">Your course textbook draws a simpler version with only labor in the bottom market (a "labor market" paying "wages, salaries and benefits"). The video and slides widen it to all inputs, as above. Same idea, more detail.</p>
+<p><b>Why it matters for this course:</b> Units 2 to 5 study the product market (supply and demand, consumer choice, costs, market structures). Unit 6 studies the factor market (how wages and other factor payments are set). The CLEP outline is built the same way, so the circular flow is the map for the rest of the course.</p>
 <div data-check="l4c-hhroles,l4c-entre"></div>
 
 <h2>Worked example: one bakery's circle</h2>
-<p>Imagine an economy with one bakery and the households around it. In one week:</p>
+<!-- src: FED (factor payments); numbers are made up -->
+<p>Imagine an economy with one bakery and the households around it. In one week (made-up numbers):</p>
 <ul><li>The bakery pays <b>$1,000 in wages</b> to its workers, <b>$200 rent</b> to the family that owns its land, and <b>$100 interest</b> to a neighbor who lent it money for the oven.</li><li>Households buy <b>$1,500</b> of bread. That is the bakery's revenue.</li></ul>
 <div class="math">Profit = revenue − other factor payments<br>= $1,500 − $1,000 − $200 − $100 = <b>$200</b> to the owner<br><br>Household income = $1,000 + $200 + $100 + $200 = <b>$1,500</b></div>
-<p>Income equals spending: the $1,500 households spent came back to households, split among the four factors. In this simple model, households spend it all again next week, and the circle keeps turning. Notice that profit isn't a fixed payment like wages; it is what's left over, so it can shrink or even turn into a loss.</p>
+<p>Check: income equals spending. The $1,500 households spent came back to households, split among the four factors. In this simple model, households spend it all again next week, and the circle keeps turning. Notice that profit isn't a fixed payment like wages; it is what's left over, so it can shrink or even turn into a loss.</p>
 <div data-widget="bakery"></div>
 <div data-check="l4c-profit"></div>
 
 <h2>Which market is it?</h2>
-<p>Exam questions often describe a transaction and ask where it fits. Use one test: <b>is a household buying a product, or selling a resource?</b> Buying a product puts it in the goods and services market. Selling labor, land, capital or entrepreneurship puts it in the factor market.</p>
+<!-- src: OS13; FED -->
+<p>Exam questions often describe a transaction and ask where it fits. Use one test: <b>is a household buying a product, or selling a resource?</b> Buying a product puts it in the goods and services market. Selling labor, land, capital or entrepreneurship puts it in the factor market. Then check the money: it always flows the opposite way to the thing sold.</p>
 <div data-widget="cfsort"></div>
-
-<h2>Property rights</h2>
-<p><b>Property rights</b> are the rules that say who owns a resource and who decides how it is used. Your course lists four parts:</p>
-<ol><li>The right to <b>use</b> the good</li><li>The right to <b>earn income</b> from it</li><li>The right to <b>transfer</b> it to someone else</li><li>The right to <b>enforce</b> those rights</li></ol>
-<p><b>Why they matter: incentives.</b> An owner bears the cost of neglecting something and keeps the gain from improving it. That changes behavior.</p>
-<div class="analogy"><div class="eyebrow">Analogy</div><p>You change the oil in a car you own, because you'll still be driving it in five years. A rental car you return on Friday gets no such care. Same car, different owner, different incentive.</p></div>
-<p>Property rights also make markets possible. The circular flow assumes households <i>own</i> their land, labor and savings, because you can only sell what is yours. A store only stocks shelves if it knows it can keep what it earns and that contracts will be enforced.</p>
-<p><b>When anyone can use it: the tragedy of the commons.</b> If a resource is <b>open access</b> (anyone can use it and no one limits use), each user keeps the full gain from using a little more but shares the cost with everyone else. Ecologist Garrett Hardin made this famous in 1968 with a shared pasture: each herder adds animals, and the pasture gets overgrazed.</p>
-<p><b>Example (made-up numbers).</b> Ten people fish a lake anyone can fish, with no limits. Each extra fish is worth $5 to whoever catches it. But catching it shrinks next year's stock, costing the group $8, split ten ways: $0.80 each.</p>
-<div class="math">One fisher's view: gain $5 vs. own share of the cost $0.80 → keep fishing<br>The group's view: gain $5 vs. total cost $8 → lose $3 on every extra fish</div>
-<p>Every fisher acts sensibly for themselves, and the lake is fished out. Giving someone ownership, setting rules like catch limits or quotas, or letting the community manage the lake can put the full cost back on the decision. You'll see this again in Unit 7 (market failure).</p>
-<div data-check="l4c-commons,l4c-rights"></div>
-
-<h2>Your course's grid: ownership vs. allocation</h2>
-<p>Your course adds a second way to sort systems, using two separate questions: who <b>owns</b> resources, and who <b>allocates</b> them (decides how they are used).</p>
-<div class="tbl-wrap"><table><thead><tr><th></th><th>Planned (government) ownership</th><th>Private ownership</th></tr></thead><tbody>
-<tr><td><b>Planned allocation</b></td><td>Socialism (socially planned)</td><td>Command capitalism</td></tr>
-<tr><td><b>Market allocation</b></td><td>Market socialism</td><td>Capitalism</td></tr></tbody></table></div>
-<p>To read it, answer the two questions separately. A system where the government owns the factories but lets prices decide what they make is <b>market socialism</b>. A system where businesses stay private but the government tells them what to make is <b>command capitalism</b>.</p>
-<p class="small muted">Most textbooks, and most likely the CLEP, use the four names from the top of this lesson: traditional, command, market and mixed. Learn those first; treat this grid as your course's extra lens.</p>
+<div data-check="l4c-market"></div>
 
 <h2>Common mistakes</h2>
-<div class="terms">
-${term('"Money and goods go the same way"','They never do. Money always moves opposite to the goods or resources it pays for.')}
-${term('"Households only buy"','Households buy in the product market but <b>sell</b> in the factor market. Firms are the reverse.')}
-${term('"Rent means paying a landlord"','In the circular flow, rent is the payment for <b>land</b>, one of the four factor payments.')}
-${term('"Profit is a fixed payment"','Profit is what is left after the other factor payments. It can be zero or negative.')}
-${term('"Market economies have no government"','Every market runs on rules: protecting property, enforcing contracts, preventing fraud, collecting taxes. And command economies still have some markets.')}
-${term('"Systems differ in the questions they ask"','Every system answers the same three questions. They differ in <b>who</b> answers them.')}
-</div>
+<!-- Entries in order are M1-M6; each is used as a wrong choice in this lesson's questions (see L4TAGS mis). -->
+<div class="mistakes"><p class="eyebrow">Watch out for these</p><ul>
+<li><span class="wrong">"Money and goods go the same way."</span>They never do. Money always moves opposite to the goods or resources it pays for, because each arrow is one half of a trade.</li>
+<li><span class="wrong">"Households only buy."</span>Households buy in the product market but <b>sell</b> in the factor market. Firms are the reverse.</li>
+<li><span class="wrong">"Rent means paying a landlord, and profit is a fixed payment."</span>In the circular flow, each factor has its own payment: rent for land, wages for labor, interest for capital, profit for entrepreneurship. Profit is what's left over, so it can be zero or negative.</li>
+<li><span class="wrong">"Market economies have no government, and command economies have no markets."</span>The textbook: "There is no such thing as an absolutely free market," and "even the most command-oriented economies operate using markets."</li>
+<li><span class="wrong">"Systems differ in the questions they ask."</span>Every system answers the same three questions (what, how much, who receives). They differ in <b>who</b> answers them: custom, a planner, or buyers and sellers. On your course's grid, answer both questions (who owns, who allocates) before naming the system.</li>
+<li><span class="wrong">"People care for what they own because they're responsible, and overuse shared things because they're careless."</span>It's the incentive, not character. Owners keep the gains and bear the costs; open-access users share the costs, so even careful people overuse. The fix is changing the incentive: ownership, limits or community rules.</li>
+</ul></div>
 
 <h2>Recap</h2>
 <div class="callout">
 <ol>
-<li>Every economy answers <b>what, how</b> and <b>for whom</b>. Systems differ in who decides: custom, a planner, or buyers and sellers.</li>
-<li>Real economies are <b>mixed</b>. The U.S. leans strongly toward market.</li>
+<li>An economic system organizes production, allocation, exchange and distribution. Every one answers <b>what, how much</b> and <b>who receives the output</b>; systems differ in who decides.</li>
+<li><b>Property rights</b> (use, earn income, transfer, enforce) decide who owns and who decides. They give owners an incentive to care for resources; without them, open-access resources get overused (the tragedy of the commons).</li>
+<li>Your course's grid sorts systems by <b>who owns</b> and <b>who allocates</b>: capitalism, socialism, command capitalism, market socialism.</li>
+<li>The textbook's four names: <b>traditional, command, market, mixed</b>. Real economies are mixed; the U.S. sits toward the market end, Cuba and North Korea toward the command end.</li>
 <li>In a market economy, <b>prices</b> signal, create incentives and ration, with no one in charge.</li>
-<li>The <b>circular flow</b>: firms sell products to households; households sell land, labor, capital and entrepreneurship to firms for rent, wages, interest and profit. Money always moves opposite to the stuff.</li>
-<li><b>Property rights</b> give owners an incentive to care for resources; without them, shared resources get overused.</li>
+<li>The <b>circular flow</b>: firms sell products to households; households sell land, labor, capital and entrepreneurship to firms for rent, wages, interest and profit. Money always moves opposite to the stuff, spending equals income, and you place a transaction by asking whether a household is <b>buying a product</b> or <b>selling a resource</b>.</li>
 </ol>
-<p><b>How the CLEP tests this:</b> the exam outline lists economic systems and "property rights and the role of incentives" as topics. Expect short "Which of the following" questions: identify a system from a description, say which market households sell in, or which way a payment flows.</p>
+<p><b>How the CLEP tests this:</b> the exam outline lists "Economic systems" and "Property rights and the role of incentives" under Basic Economic Concepts (10% to 16% of the exam). Expect short "Which of the following" questions that test terms (identify a system from a description), graphs (which flow an arrow shows) and simple models (which market households sell in, which way a payment flows).</p>
 </div>`,
   deeper:`
 <h3>Models simplify on purpose</h3>
-<p>The basic circular flow leaves out government, banks and foreign trade. That's the point of a model: like an architect's tabletop model, it keeps only what you need to see. Economists add pieces back when a question needs them.</p>
+<p>The basic circular flow leaves out government, banks and foreign trade. The textbook calls it "stripped down to the essentials." That's the point of a model: like an architect's tabletop model, it keeps only what you need to see. Economists add pieces back when a question needs them.</p>
 <h3>Adding government to the circle</h3>
-<p>Put government in the middle and three new kinds of flows appear:</p>
+<p>Put government in the middle and three new kinds of flows appear (Federal Reserve Education's infographic, linked below, draws this version):</p>
 <ul><li><b>Taxes</b> flow from households and firms to the government.</li><li><b>Government purchases</b>: the government buys in both markets, hiring workers (factor market) and buying things like paper and fuel (product market), to provide goods and services such as schools, bridges and defense. (A <b>pure public good</b> is a narrower idea you will meet in Unit 7: nonexcludable and nonrival, like national defense.)</li><li><b>Transfer payments</b> (to households, such as Social Security) and <b>subsidies</b> (to firms) are money with no good or service given back in return.</li></ul>
 <p>Banks and foreign trade can be added the same way. You won't need them for this exam; macroeconomics uses them heavily.</p>
 <h3>The invisible hand</h3>
-<p>Adam Smith argued that people pursuing their own interest in markets often end up serving everyone's, "led by an invisible hand." Nobody plans the whole economy, yet shelves get stocked. The essay "I, Pencil" below shows this with an ordinary pencil that no single person knows how to make.</p>
+<p>In <i>The Wealth of Nations</i> (1776), Adam Smith wrote that a person pursuing his own gain is "led by an invisible hand to promote an end which was no part of his intention." Nobody plans the whole economy, yet shelves get stocked. The essay "I, Pencil" below shows this with an ordinary pencil that no single person knows how to make.</p>
 <h3>No market is completely free</h3>
-<p>Markets always run on rules: protecting property, enforcing contracts, preventing fraud, collecting taxes. Even command economies have markets. When rules are very heavy, <b>underground economies</b> appear: trades made without the government's approval.</p>`,
+<p>The textbook calls regulations "the rules of the game." Market-oriented economies keep them to a minimum: protecting private property, protecting people from violence, enforcing contracts, preventing fraud and collecting taxes. When rules are very heavy, <b>underground economies</b> appear: markets where buyers and sellers trade without the government's approval.</p>
+<h3>Measuring economic freedom</h3>
+<p>The textbook shows the Heritage Foundation's 2015 Index of Economic Freedom, which scored 178 countries. Hong Kong ranked 1st and the U.S. 12th; Cuba (177th) and North Korea (178th) were last, matching their place at the command end of the spectrum. Treat the rankings as rough estimates, as the textbook does.</p>
+<h3>Globalization</h3>
+<p>Textbook §1.4 ends with <b>globalization</b>: "the expanding cultural, political, and economic connections between people around the world." Cheaper shipping, better computing and telecommunications, and trade agreements have all pushed it along. One measure is <b>exports ÷ GDP</b>: the share of a country's total production (GDP, gross domestic product) sold abroad. This is a macroeconomics topic and isn't on the CLEP Microeconomics outline, so you won't be tested on it here.</p>`,
   practice:['l4-questions','l4-factor','l4-wages','l4-command','l4-grid','l4-rights','l4-us'],
   links:[ {k:'Diagram',t:'The Circular Flow (infographic, PDF)',s:'Federal Reserve Education',u:'https://www.federalreserveeducation.org/resources/infographics/infographic--circular-flow.pdf',w:'A one-page picture of the circular flow with government added, and which factor earns rent, wages, interest and profit.'},
+          {k:'Textbook',t:'1.4 How to Organize Economies: An Overview of Economic Systems',s:'OpenStax, Principles of Microeconomics (newer 3rd edition, free online)',u:'https://openstax.org/books/principles-microeconomics-3e/pages/1-4-how-to-organize-economies-an-overview-of-economic-systems',w:'The same section as your course textbook\'s §1.4, in the current edition. Handy on a phone; wording differs in a few places.'},
           {k:'Article',t:'I, Pencil',s:'Leonard E. Read, via Econlib',u:'https://www.econlib.org/library/Essays/rdPncl.html',w:'A pencil tells its own story: thousands of strangers cooperate to make it with no one in charge. A classic picture of a market system.'} ] },
 
 { id:'l5', title:'Marginal Analysis and Incentives', mins:25, src:'Course video 1.4b · Textbook 2.1',
@@ -2540,7 +2682,7 @@ function renderLesson(L){
   app.innerHTML = `
   <div class="lesson-head"><div class="eyebrow">Unit 1 · Lesson ${L.n} of ${LESSONS.length} · about ${L.mins} min</div>
   <h1 style="margin-top:.4rem">${L.title}</h1>
-  <p class="oneline">${L.oneline}</p><p class="src">From your course: ${L.src}</p><div id="lrep"></div></div>
+  <p class="oneline">${L.oneline}</p><p class="src">From your course: ${L.src}</p>${L.sources?`<p class="srcs">Sources: ${L.sources.map(k=>`<a href="${SOURCES[k].u}" target="_blank" rel="noopener">${esc(srcLabel([k]))}</a>`).join(' · ')}</p>`:''}<div id="lrep"></div></div>
   <article>${L.body}</article>
   <details class="deeper" id="deeper-${L.id}"><summary>Go deeper (optional)</summary><div class="deeper-body">${L.deeper}</div></details>
   <h2>Practice</h2><p class="muted small">Multiple choice (five options, like the CLEP), true or false, graph questions and worked problems. Everything you answer is scheduled for Review. <span class="num" id="pp">${p.done}/${p.total} answered</span></p>
@@ -2690,9 +2832,9 @@ function repItem(r, { showLink=true, isNew=false }={}){
     <div class="rep-foot"><span class="muted">Reported ${shortDay(r.at)}</span>${showLink&&d.href?`<a href="${d.href}">Open it</a>`:''}<button type="button" class="linkbtn danger rm">Remove</button></div>`;
   const rm = $('.rm', el);
   rm.onclick = () => {
-    if(rm.dataset.armed){ REPV.busy=false; rm.disabled=true; removeReport(r).then(()=>{ if(view==='reports') renderReports(); else el.remove(); }); return; }
+    if(rm.dataset.armed){ REPV.busy=!!REPV.draft; REPV.draft && (REPV.draft.note = ($('#nr-note')||{}).value ?? REPV.draft.note); rm.disabled=true; removeReport(r).then(()=>{ if(view==='reports') renderReports(); else el.remove(); }); return; }
     rm.dataset.armed='1'; rm.textContent='Tap again to remove'; REPV.busy=true;
-    setTimeout(()=>{ if(rm.isConnected && !rm.disabled){ delete rm.dataset.armed; rm.textContent='Remove'; } REPV.busy=false; }, 4000);
+    setTimeout(()=>{ if(rm.isConnected && !rm.disabled){ delete rm.dataset.armed; rm.textContent='Remove'; } REPV.busy=!!REPV.draft; }, 4000);
   };
   return el;
 }
@@ -2708,12 +2850,50 @@ function renderReports(){
     <div class="readout"><div><b class="num">${open.length}</b><span>open</span></div><div><b class="num">${done.filter(r=>r.status==='fixed').length}</b><span>fixed</span></div><div><b class="num">${done.filter(r=>r.status==='nochange').length}</b><span>no change needed</span></div></div>
     <div class="callout"><p><b>How fixes happen.</b> Claude isn't alerted when you report. When you want fixes, ask Claude in a chat in this project: <i>"fix my workbook reports."</i> It works through the open ones, updates the page, and leaves a note on each report here.</p>${signedOut?'<p class="small">You\'re not connected to your Claude account right now, so reports stay on this device until you are.</p>':''}</div>
     ${all.length ? `<div class="chips" role="group" aria-label="Show">${[['all',`All (${all.length})`],['open',`Open (${open.length})`],['done',`Handled (${done.length})`]].map(([k,t])=>`<button class="chipbtn" data-f="${k}" aria-pressed="${f===k}">${t}</button>`).join('')}</div>` : ''}
+    <div class="row" style="margin-top:1rem"><button class="btn sm" id="nr-open" type="button">New report</button><span class="small muted">For anything: a bug, an idea, a lesson, the whole workbook.</span></div>
+    <div id="nr-slot"></div>
     <div class="rep-list" id="replist"></div>`;
+  $('#nr-open').onclick = () => openNewReport();
+  if(REPV.draft) openNewReport();
   const list = $('#replist');
-  if(!all.length) list.innerHTML = `<div class="empty"><b>No reports yet.</b><br>See a wrong answer, a typo or something confusing? Tap <b>Report a problem</b> under any question or at the top of a lesson. It shows up here.</div>`;
+  if(!all.length) list.innerHTML = `<div class="empty"><b>No reports yet.</b><br>See a wrong answer, a typo or something confusing? Tap <b>Report a problem</b> under any question or at the top of a lesson, or use <b>New report</b> above. It shows up here.</div>`;
   else if(!shown.length) list.innerHTML = `<div class="empty">${f==='open'?'Nothing open. Everything you reported has been handled.':'Nothing handled yet.'}</div>`;
   else shown.forEach(r => list.appendChild(repItem(r, { isNew: RESOLVED(r.status) && (r.fixedAt||0) > REPV.prevSeen })));
   $$('[data-f]', app).forEach(b => b.onclick = () => { REPV.filter=b.dataset.f; try{ localStorage.setItem(REP_FILTER_KEY, REPV.filter); }catch(e){} renderReports(); });
+}
+function openNewReport(){
+  const slot = $('#nr-slot'); if(!slot || slot.firstChild) return;
+  const d = REPV.draft || { about:'workbook', note:'' };
+  REPV.draft = d; REPV.busy = true;
+  const opts = [['workbook','The workbook overall'],['idea','An idea or feature request'],
+    ...LESSONS.map(l=>['lesson:'+l.id, `Lesson ${LBYID[l.id].n}: ${l.title}`]),
+    ['quiz','Unit quiz'],['review','Review tab'],['cards','Flashcards page'],['other','Something else']];
+  const box = document.createElement('div'); box.className='nr-box';
+  box.innerHTML = `<label for="nr-about">What's it about?</label>
+    <select id="nr-about">${opts.map(([v,t])=>`<option value="${esc(v)}"${v===d.about?' selected':''}>${esc(t)}</option>`).join('')}</select>
+    <label for="nr-note">What's wrong, or what would you like?</label>
+    <textarea id="nr-note" rows="4" maxlength="1000" placeholder="Describe the problem or idea. Mention where you saw it if it helps."></textarea>
+    <div class="row" style="margin-top:8px"><button class="btn sm" type="button" id="nr-send">Send</button><button class="btn ghost sm" type="button" id="nr-cancel">Cancel</button></div>
+    <p class="small muted" id="nr-msg" aria-live="polite" style="margin:.4rem 0 0"></p>`;
+  slot.appendChild(box);
+  const sel = $('#nr-about', box), ta = $('#nr-note', box), send = $('#nr-send', box), cancel = $('#nr-cancel', box);
+  ta.value = d.note;
+  sel.onchange = () => { d.about = sel.value; };
+  ta.oninput = () => { d.note = ta.value; };
+  const close = () => { REPV.draft = null; REPV.busy = false; slot.innerHTML = ''; };
+  cancel.onclick = close;
+  send.onclick = async () => {
+    const note = ta.value.trim(); if(!note){ ta.focus(); return; }
+    send.disabled = cancel.disabled = sel.disabled = true;
+    const where = d.about.startsWith('lesson:') ? d.about : 'general:' + d.about;
+    const how = await addReport(where, note, 'Filed from the Reports tab (New report).');
+    REPV.draft = null; REPV.busy = false;
+    if(view==='reports') renderReports();
+    const m = document.createElement('div'); m.className='msg good small';
+    m.textContent = how==='sent' ? 'Sent. It\'s listed below; Claude adds a note when it\'s handled.' : 'Saved on this device. It will be sent when you\'re signed in to Claude and online.';
+    const s2 = $('#nr-slot'); if(s2){ s2.appendChild(m); setTimeout(()=>m.remove(), 5000); }
+  };
+  if(!d.note) ta.focus();
 }
 function renderOneQuestion(qid){
   const q = Q[qid], L = LBYID[q.lesson], d = describeWhere('question:'+qid);
@@ -2780,6 +2960,36 @@ function renderOneCard(cid){
   if(mine.length) mine.forEach(r => $('#fclist').appendChild(repItem(r, { showLink:false })));
   else $('#fclist').innerHTML = '<div class="empty">No reports on this card.</div>';
 }
+
+/* ---------- tap-to-define popover (one shared popover, outside #app so "Explain this" never reads it) ---------- */
+const TDEF = { pop:null, cur:null };
+function tdefClose(){ if(!TDEF.pop) return; TDEF.pop.hidden = true; if(TDEF.cur) TDEF.cur.setAttribute('aria-expanded','false'); TDEF.cur = null; }
+function tdefOpen(el){
+  const g = GLOSS[el.dataset.term]; if(!g) return;
+  if(!TDEF.pop){ TDEF.pop = document.createElement('div'); TDEF.pop.className = 'tdef-pop'; TDEF.pop.id = 'tdef-pop'; TDEF.pop.setAttribute('role','dialog'); TDEF.pop.setAttribute('aria-label','Definition'); document.body.appendChild(TDEF.pop); }
+  if(TDEF.cur && TDEF.cur !== el) TDEF.cur.setAttribute('aria-expanded','false');
+  const here = LBYID[view] ? LBYID[view].n : 0, H = LBYID[g.home];
+  const where = H ? (H.n === here ? `Lesson ${H.n}` : H.n < here ? `From Lesson ${H.n}` : `More in Lesson ${H.n}`) : `More in ${g.home}`;
+  TDEF.pop.innerHTML = `<p class="tp-t">${esc(g.t)}</p><p>${esc(g.d)}</p><p class="tp-meta">${where} · Source: ${esc(srcLabel(g.src||[]))}</p>`;
+  TDEF.pop.hidden = false; TDEF.cur = el; el.setAttribute('aria-expanded','true'); el.setAttribute('aria-controls','tdef-pop');
+  const r = el.getBoundingClientRect(), pw = TDEF.pop.offsetWidth, vw = document.documentElement.clientWidth;
+  const left = Math.max(16, Math.min(r.left + window.scrollX, window.scrollX + vw - pw - 16));
+  let top = r.bottom + window.scrollY + 6;
+  if(r.bottom + TDEF.pop.offsetHeight + 12 > window.innerHeight && r.top > TDEF.pop.offsetHeight + 12) top = r.top + window.scrollY - TDEF.pop.offsetHeight - 6;
+  TDEF.pop.style.left = left + 'px'; TDEF.pop.style.top = top + 'px';
+}
+document.addEventListener('click', e => {
+  const t = e.target.closest && e.target.closest('.tdef');
+  if(t){ e.preventDefault(); if(TDEF.cur === t) tdefClose(); else tdefOpen(t); return; }
+  if(TDEF.pop && !TDEF.pop.contains(e.target)) tdefClose();
+});
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape' && TDEF.cur){ const t = TDEF.cur; tdefClose(); t.focus(); return; }
+  const t = e.target.closest && e.target.closest('.tdef');
+  if(t && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); if(TDEF.cur === t) tdefClose(); else tdefOpen(t); }
+});
+window.addEventListener('hashchange', tdefClose);
+window.addEventListener('resize', tdefClose);
 
 /* boot */
 render();
