@@ -273,6 +273,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 
 table.wrap-cells th,table.wrap-cells td{white-space:normal;text-align:left;vertical-align:top;min-width:6.5rem;font-size:.92rem}
 table.wrap-cells td:first-child{min-width:5.5rem}
+table.wrap-cells.compact th,table.wrap-cells.compact td{min-width:0}
 .qcheck{margin:1.2rem 0;padding:12px;border-left:3px solid var(--g2);background:var(--surface-2);border-radius:var(--r);display:grid;gap:10px}
 .qcheck>.eyebrow{margin:0;color:var(--g2)}
 .cf-nav{justify-content:space-between;margin-top:4px}
@@ -349,6 +350,10 @@ const SOURCES = {
   ELC: { t:'Econlib, "Tragedy of the Commons" (Garrett Hardin)', u:'https://www.econlib.org/library/Enc/TragedyoftheCommons.html' },
   ELP: { t:'Econlib, Property Rights', u:'https://www.econlib.org/library/Topics/College/propertyrights.html' },
   ELH: { t:'Econlib, Invisible Hand', u:'https://www.econlib.org/library/Topics/Details/invisiblehand.html' },
+  OS21:{ t:'OpenStax, Principles of Microeconomics (your course textbook), §2.1', u:'https://openstax.org/books/principles-economics-3e/pages/2-1-how-individuals-make-choices-based-on-their-budget-constraint' },
+  OS7: { t:'OpenStax, Principles of Microeconomics (your course textbook), Chapter 7', u:'https://openstax.org/books/principles-microeconomics/pages/preface' },
+  WAR: { t:'University of Warwick, sugar levy study (press release, Feb 2020)', u:'https://warwick.ac.uk/news/pressreleases/sugar_levels_in/' },
+  ELM: { t:'Econlib, Marginalism (Steven E. Rhoads)', u:'https://www.econlib.org/library/Enc/Marginalism.html' },
   T2U: { t:'tutor2u, Functions of the price mechanism', u:'https://www.tutor2u.net/economics/reference/functions-of-the-price-mechanism' }
 };
 const srcLabel = keys => keys.map(k => SOURCES[k] ? SOURCES[k].t.replace(/^OpenStax, Principles of Microeconomics \(your course textbook\), /,'Course textbook ').replace(/^Modern States, Principles of Microeconomics \(course videos and slides\)/,'Modern States course') : k).join(' · ');
@@ -360,7 +365,7 @@ const GLOSS = {
   'econ-system':{ t:'Economic system', d:'A system of production, resource allocation, exchange and distribution of goods and services: how a society decides what to produce, how much, and who receives it.', home:'l4', src:['MS'] },
   market:{ t:'Market', d:'An institution that brings together buyers and sellers of goods or services, who may be individuals or businesses.', home:'l4', src:['OS14'] },
   decentralized:{ t:'Decentralized', d:'Decisions are spread across many people instead of made by one central authority. Market economies are decentralized.', home:'l4', src:['OS14'] },
-  incentive:{ t:'Incentive', d:'Something that raises the benefit of a choice or lowers its cost, so people do more of it. A disincentive does the reverse.', home:'l5', src:['T2U'] },
+  incentive:{ t:'Incentive', d:'Something that raises the benefit of a choice or lowers its cost, so people do more of it. A disincentive does the reverse.', home:'l5', src:['MS'] },
   'black-market':{ t:'Black market (underground economy)', d:'Buying and selling that happens without the government\'s approval. Heavily regulated economies often have them.', home:'l4', src:['OS14'] },
   'invisible-hand':{ t:'Invisible hand', d:'Adam Smith\'s idea (1776) that people pursuing their own interest in markets can end up serving society, without anyone planning it.', home:'l4', src:['ELH'] },
   'supply-demand':{ t:'Supply and demand', d:'The model of how buyers (demand) and sellers (supply) together set a market price. Unit 2 covers it in depth.', home:'Unit 2', src:['CB'] },
@@ -375,6 +380,15 @@ const GLOSS = {
   revenue:{ t:'Revenue', d:'The money a firm takes in from selling its goods or services, before paying any costs.', home:'l4', src:['OS13'] },
   commons:{ t:'Tragedy of the commons', d:'When anyone can use a resource and no one limits use, each user keeps the full gain but shares the cost, so the resource gets overused.', home:'l4', src:['ELC'] },
   quota:{ t:'Quota', d:'A limit on how much of something each person or firm may take or produce, such as a fishing catch limit.', home:'l4', src:['ELC'] },
+  'opp-cost':{ t:'Opportunity cost', d:'The value of the next best alternative you give up when you make a choice. It can be time as well as money.', home:'l1', src:['OS21'] },
+  marginal:{ t:'Marginal', d:'The next unit, or a small change from where you are now: one more slice, hour, worker or machine.', home:'l5', src:['OS21'] },
+  'marginal-analysis':{ t:'Marginal analysis', d:'Examining decisions on the margin: comparing the extra benefit and extra cost of a little more or a little less.', home:'l5', src:['OS21','MS'] },
+  'average-cost':{ t:'Average cost', d:'Total cost divided by the quantity produced. Not the same as marginal cost, the cost of one more unit.', home:'Unit 4', src:['OS7'] },
+  utility:{ t:'Utility', d:'The satisfaction, usefulness or value a person gets from consuming a good or service.', home:'l5', src:['OS21'] },
+  dmu:{ t:'Diminishing marginal utility', d:'As you consume more of a good, each extra unit tends to add less satisfaction than the one before. Total satisfaction usually still rises.', home:'l5', src:['OS21'] },
+  disincentive:{ t:'Disincentive', d:'Something that makes a choice more costly, so people do less of it, like a tax on cigarettes.', home:'l5', src:['MS'] },
+  subsidy:{ t:'Subsidy', d:'A government payment that covers part of the cost of something, which lowers the cost of choosing it.', home:'l5', src:['MS'] },
+  'sunk-cost':{ t:'Sunk cost', d:'A cost made in the past that cannot be recovered. It should not affect your next decision.', home:'l5', src:['OS21'] },
   'market-failure':{ t:'Market failure', d:'A situation where a market on its own produces too much or too little of something compared with what is best for society. Unit 7 covers it.', home:'Unit 7', src:['CB'] }
 };
 /* dt(key, text): a tap-to-define term. A span (not a button) so lesson text still reaches "Explain this". */
@@ -983,10 +997,14 @@ const CLEP_TOPIC = { sys:'Economic systems', pr:'Property rights and the role of
 const SKILL_LABEL = { terms:'terms and concepts', graphs:'reading graphs', data:'interpreting data', models:'applying a model' };
 Object.entries(L4TAGS).forEach(([id,[src,clep,skill,mis]]) => { if(Q[id]) Object.assign(Q[id], { src: src.split(' '), clep: CLEP_TOPIC[clep], skill, mis: mis ? mis.split(' ') : [] }); });
 
-/* ===== Lesson 5: Marginal analysis and incentives ===== */
+/* ===== Lesson 5: Marginal analysis and incentives =====
+   Golden-standard rules (see rubric): five choices, distractors drawn from the Common mistakes box (M1-M6),
+   explanations say why the right answer is right AND why the most tempting wrong answer is wrong.
+   Tags are attached below in L5TAGS. M1 compare totals · M2 marginal = average · M3 DMU means total falls ·
+   M4 sunk costs count · M5 anything that changes behavior is an incentive · M6 if one more is worth it, more always is. */
 mc('l5-def','l5','Marginal analysis compares which of the following?',
-  ['The extra benefit and extra cost of doing a little more (or less) of something','The total benefit and total cost of everything you do','Your income with other people\'s income','Past spending with future spending','Your choices with your friends\' choices'],0,
-  '<p>"Marginal" means the next unit. Good decisions ask: is the <b>next</b> slice, hour or machine worth more than it costs? Totals and past spending don\'t answer that.</p>');
+  ['The extra benefit and extra cost of doing a little more (or less) of something','The total benefit and total cost of everything you do','The average cost per unit of everything produced so far','Money already spent with money still to spend','Your choices with your friends\' choices'],0,
+  '<p>Your course textbook defines marginal analysis as "examination of decisions on the margin, meaning a little more or a little less from the status quo." Good decisions ask: is the <b>next</b> slice, hour or machine worth more than it costs?</p><p>The tempting wrong answer is "total benefit and total cost." Totals can still look good after the last unit stopped being worth it. Average cost and money already spent don\'t answer the question either.</p>');
 gen('l5-g-mb','l5',()=>{
   const start = pick([8,9,10,12]); const mb=[start];
   while(mb.length<6){ const nx = mb[mb.length-1]-pick([1,1.5,2]); if(nx<=0.5) break; mb.push(nx); }
@@ -996,29 +1014,29 @@ gen('l5-g-mb','l5',()=>{
   const tbl = table(['Smoothie',...mb.map((_,i)=>i+1)], [['Extra benefit to you',...mb.map(money)]]);
   return { type:'num', kind:'num', prompt:`Smoothies cost <b>${money(price)}</b> each. Here is how much each extra smoothie this week is worth to you:${tbl}How many smoothies should you buy?`,
     answer:ans, unit:'smoothies',
-    explain:`<p>Buy each smoothie whose extra benefit is at least its extra cost of ${money(price)}. ${ans===1?'Only smoothie 1 is':`Smoothies 1 to ${ans} are`} worth ${money(mb[ans-1])} or more; smoothie ${ans+1} is worth only ${money(mb[ans])}.</p><p>So buy <b>${ans}</b>. Stop where marginal benefit drops below marginal cost.</p>` };
+    explain:`<p>Buy each smoothie whose extra benefit is at least its extra cost of ${money(price)}. ${ans===1?'Only smoothie 1 is':`Smoothies 1 to ${ans} are`} worth ${money(mb[ans-1])} or more; smoothie ${ans+1} is worth only ${money(mb[ans])}.</p><p>So buy <b>${ans}</b>. The common slip is stopping as soon as a smoothie is worth less than the one before. Falling benefit is normal; stop only when the next one is worth less than its price.</p>` };
 });
 tf('l5-tf-total','l5','You should keep buying something as long as its total benefit is bigger than its total cost.',false,
   '<p>False. The total can still look good after the last unit stopped being worth it. Decide unit by unit: buy the next one only if its marginal benefit is at least its marginal cost.</p>');
 mc('l5-sunk','l5','You paid $40 for a non-refundable concert ticket. On the night, a friend offers you a free trip you would enjoy <b>more</b> than the concert. What should you do?',
-  ['Take the trip, since the $40 is gone either way','Go to the concert so the $40 isn\'t wasted','Go to the concert, because you paid more for it','Split the evening to get half the value of each','Go to the concert, then leave early to join the trip'],0,
-  '<p>The $40 is a <b>sunk cost</b>: spent and unrecoverable whichever option you pick. Compare only what\'s still ahead: the trip is worth more to you, so take it.</p>');
+  ['Take the trip, since the $40 is gone either way','Go to the concert so the $40 isn\'t wasted','Go to the concert, because you paid more for it','Split the evening to get half the value of each','Add the $40 to the concert\'s value, so the concert wins'],0,
+  '<p>The $40 is a <b>sunk cost</b>: spent and unrecoverable whichever option you pick. Your course textbook: "forget about the money and time that is irretrievably gone and instead to focus on the marginal costs and benefits of current and future options." The trip is worth more to you, so take it.</p><p>The tempting wrong answer is "go so the $40 isn\'t wasted." The $40 is gone in both cases; going only adds an evening you value less.</p>');
 gen('l5-gr-mb','l5',()=>{
   const mb=[]; let v=pick([7,8,9]); while(mb.length<6 && v>0.5){ mb.push(v); v=round(v-pick([1,1.5,2]),1); }
   const idx=pick([...Array(mb.length-1).keys()].map(i=>i+1)); const price=round((mb[idx-1]+mb[idx])/2,2); const ans=mb.filter(x=>x>=price).length;
   return { type:'num', kind:'graph', prompt:`Bars show the marginal benefit of each unit to you; the dashed line is the price.${mbBars(mb,price)}How many units should you buy?`,
-    answer:ans, unit:'units', explain:`<p>Buy every unit whose bar reaches the price line (${money(price)}). ${ans===1?'Only unit 1 does':`Units 1 to ${ans} do`}; unit ${ans+1} is worth only ${money(mb[ans])}. Buy <b>${ans}</b>.</p>` };
+    answer:ans, unit:'units', explain:`<p>Buy every unit whose bar reaches the price line (${money(price)}). ${ans===1?'Only unit 1 does':`Units 1 to ${ans} do`}; unit ${ans+1} is worth only ${money(mb[ans])}. Buy <b>${ans}</b>.</p><p>Don't count every bar: the bars below the line are units whose extra benefit is less than what they cost.</p>` };
 },'graph');
 mc('l5-incentive','l5','Which of the following is an <b>incentive</b>?',
-  ['A tax credit for companies that hire apprentices','A tax on sugary drinks','A fine for returning library books late','A pollution tax','Higher highway tolls at rush hour'],0,
-  '<p>The tax credit lowers the net <b>cost</b> of hiring apprentices, which makes hiring more attractive: an incentive. The other four raise the <b>cost</b> of a choice, so they are disincentives.</p>');
+  ['A tax subsidy for firms that invest in new green technology','A tax on cigarettes','A fine for returning library books late','A pollution tax','Calorie counts posted on fast-food menus'],0,
+  '<p>Your course: incentives "try to make it more beneficial to make a specific choice." The subsidy lowers the cost of buying green technology, so firms do more of it.</p><p>The tempting wrong answers change behavior too, which is why they look like incentives. But each one makes a choice more <b>costly</b>: taxes, fines and calorie counts are the course\'s examples of <b>disincentives</b>.</p>');
 mc('l5-dis','l5','Which of the following is a <b>disincentive</b>?',
-  ['A tax on cigarettes','A buy-one-get-one-free sale','Bonus points for coming to class','A tax credit for buying solar panels','Free samples at a grocery store'],0,
-  '<p>A disincentive raises the <b>cost</b> of a choice (or lowers its benefit), so people do less of it. The tax makes smoking pricier. The other four make a choice more rewarding or cheaper: incentives.</p>');
+  ['Calorie counts posted at fast-food restaurants','A buy-one-get-one-free sale','Bonus points for coming to class','A tax subsidy for new green technology','Free samples at a grocery store'],0,
+  '<p>Your course lists calorie reports at fast-food restaurants as a disincentive: they make the health cost of a high-calorie choice easier to see, so some people choose it less.</p><p>The tempting wrong answer is the "tax subsidy," because it contains the word tax. A subsidy pays part of the cost, so it lowers the cost of the choice: an incentive. The sale, bonus points and samples are incentives too.</p>');
 gen('l5-g-sunk','l5',()=>{
   const Sx=pick([2,3,5])*1e6, C=pick([400,600,800,1000])*1e3, R=pick([300,500,700,900,1200])*1e3; const ans=R-C;
   return { type:'num', kind:'num', prompt:`A company has already spent ${money(Sx)} developing a product; that money can\'t be recovered. Finishing it would cost ${money(C)} more and bring in ${money(R)} in revenue. Counting only future money, what is the net gain (or loss) from finishing? (Use a minus sign for a loss.)`,
-    answer:ans, unit:'dollars', explain:`<p>Ignore the ${money(Sx)}: it\'s sunk. Looking ahead: ${money(R)} − ${money(C)} = <b>${money(ans)}</b>. ${ans>0?'Finish it.':'Stop, even though so much has been spent.'}</p>` };
+    answer:ans, unit:'dollars', explain:`<p>Ignore the ${money(Sx)}: it\'s sunk. Looking ahead: ${money(R)} − ${money(C)} = <b>${money(ans)}</b>. ${ans>0?'Finish it.':'Stop, even though so much has been spent.'}</p><p>The common slip is subtracting the ${money(Sx)} too. It is the same whether the company finishes or stops, so it can't change which choice is better.</p>` };
 });
 gen('l5-g-firm','l5',()=>{
   const units = pick([500,800,1000,1200]), price = pick([8,10,12,15]);
@@ -1026,74 +1044,117 @@ gen('l5-g-firm','l5',()=>{
   const ans = rev - cost;
   return { type:'num', kind:'num', prompt:`A factory is thinking about adding a weekend shift. It would add <b>${money(cost)}</b> a week in wages, materials and power, and sell <b>${units.toLocaleString()}</b> more units at <b>${money(price)}</b> each. What is the weekly net gain from the extra shift? (Use a minus sign for a loss.)`,
     answer:ans, unit:'dollars',
-    explain:`<p>Marginal benefit: ${units.toLocaleString()} × ${money(price)} = ${money(rev)}. Marginal cost: ${money(cost)}.</p><p>Net: ${money(rev)} − ${money(cost)} = <b>${money(ans)}</b>. ${ans>0?'The extra benefit beats the extra cost, so add the shift.':'The extra cost is bigger than the extra benefit, so skip the shift.'}</p>` };
+    explain:`<p>Marginal benefit: ${units.toLocaleString()} × ${money(price)} = ${money(rev)}. Marginal cost: ${money(cost)}.</p><p>Net: ${money(rev)} − ${money(cost)} = <b>${money(ans)}</b>. ${ans>0?'The extra benefit beats the extra cost, so add the shift.':'The extra cost is bigger than the extra benefit, so skip the shift.'}</p><p>Use only the <b>extra</b> revenue and cost from this shift, not the factory's totals for the week.</p>` };
 });
 mc('l5-water','l5','Water is essential but cheap; diamonds are not essential but expensive. Which of the following best explains this?',
-  ['Price reflects the value of one more unit, and water is plentiful while diamonds are scarce','The total value of water is low','Diamonds cost more to ship','Governments keep water prices low','People don\'t value water'],0,
-  '<p>Marginal thinking: with so much water around, one <b>more</b> gallon is worth little to you. Diamonds are rare, so one more is worth a lot. Price follows the value of the next unit, not total usefulness.</p>');
+  ['Price reflects the value of one more unit, and water is plentiful while diamonds are scarce','The total value of water to society is low','Each extra gallon of water adds as much satisfaction as the first one','Diamonds cost more to ship','Governments keep water prices low'],0,
+  '<p>Econlib\'s entry on marginalism: Adam Smith "had failed to distinguish between \'total\' utility and \'marginal\' utility." Water\'s total value is huge, but with so much around, one <b>more</b> gallon is worth little. Diamonds are rare, so one more is worth a lot.</p><p>The tempting wrong answer is "the total value of water is low." Its total value is enormous; it is the <b>marginal</b> value that is low, because each extra gallon adds less (diminishing marginal utility).</p>');
 tf('l5-tf-sunk','l5','Sunk costs should be included when deciding whether to keep going with a project.',false,
-  '<p>False. Sunk costs are gone whatever you decide, so they can\'t change which option is better. Compare only future costs and benefits.</p>');
+  '<p>False. Your course textbook: "Because sunk costs occurred in the past and cannot be recovered, they should be disregarded in making current decisions." Compare only future costs and benefits.</p>');
 mc('l5-dmu','l5','The law of <b>diminishing marginal utility</b> says which of the following?',
-  ['Each additional unit of a good tends to add less satisfaction than the one before','Total satisfaction falls as you consume more','Prices fall as you buy more','People stop wanting things once they have one','Marginal utility is always zero'],0,
-  '<p>The first slice of pizza is great; the sixth adds much less. Total satisfaction can still rise, just by smaller amounts. This is why people rarely spend everything on one favorite thing.</p>');
+  ['Each additional unit of a good tends to add less satisfaction than the one before','Total satisfaction falls as you consume more','If one unit is worth it, every extra unit is worth just as much','Prices fall as you buy more','Marginal utility is always zero'],0,
+  '<p>Your course textbook: "as a person receives more of a good, the additional (or marginal) utility from each additional unit of the good declines. In other words, the first slice of pizza brings more satisfaction than the sixth."</p><p>The tempting wrong answer is "total satisfaction falls." Total satisfaction usually still rises; it is the <b>extra</b> satisfaction that shrinks.</p>');
 /* L5 more */
-mc('l5-sugar','l5','The UK\'s 2018 tax on high-sugar soft drinks is best described as which of the following?',
-  ['A disincentive that led many companies to cut sugar','An incentive to add sugar','A sunk cost','A subsidy','A price ceiling'],0,
-  '<p>The tax raised the cost of selling high-sugar drinks, so companies reformulated. Researchers found the share of drinks liable for the tax fell from 52% to 15% by February 2019.</p>');
+mc('l5-sugar','l5','The UK\'s tax on high-sugar soft drinks, introduced in April 2018, is best described as which of the following?',
+  ['A disincentive that led many companies to cut sugar','An incentive, because it changed what companies did','An incentive to add sugar','A subsidy for low-sugar drinks','A sunk cost for drink companies'],0,
+  '<p>The tax raised the cost of selling high-sugar drinks, so companies reformulated. University of Warwick researchers found that 52% of eligible drinks were liable for the tax before it was announced, and just 15% by February 2019.</p><p>The tempting wrong answer is "an incentive, because it changed what companies did." Changing behavior isn\'t the test: the tax made a choice more <b>costly</b>, which makes it a disincentive (for high-sugar drinks).</p>');
 gen('l5-g-mc','l5',()=>{
   const P=pick([10,12,15,20]); const mcs=[]; let c=pick([3,4,5]); while(mcs.length<7){ mcs.push(c); c+=pick([2,3,4]); }
   if(!mcs.some(x=>x>P)) mcs[6]=P+5;
   const adj=mcs.map(x=>x===P?x+1:x); const ans=adj.filter(x=>x<P).length;
   return { type:'num', kind:'num', prompt:`A bakery can sell as many cakes as it wants at <b>${money(P)}</b> each. The extra cost of making each additional cake is:${table(['Cake',...adj.map((_,i)=>i+1)],[['Marginal cost',...adj.map(money)]])}How many cakes should it make?`,
-    answer:ans, unit:'cakes', explain:`<p>Each cake brings in ${money(P)} (its marginal benefit). Make every cake that costs less than that to produce. ${ans===1?'Only cake 1 costs':`Cakes 1 to ${ans} cost`} ${money(adj[ans-1])} or less; cake ${ans+1} costs ${money(adj[ans])}. Make <b>${ans}</b>.</p><p>This is the firm\'s version of MB ≥ MC, which comes back in Units 4 and 5.</p>` };
+    answer:ans, unit:'cakes', explain:`<p>Each cake brings in ${money(P)} (its marginal benefit). Make every cake that costs less than that to produce. ${ans===1?'Only cake 1 costs':`Cakes 1 to ${ans} cost`} ${money(adj[ans-1])} or less; cake ${ans+1} costs ${money(adj[ans])}. Make <b>${ans}</b>.</p><p>Don't average the costs: the question is whether the <b>next</b> cake costs less than it sells for. This is the firm's version of MB ≥ MC, which comes back in Units 4 and 5.</p>` };
 });
 tf('l5-tf-dmu','l5','Diminishing marginal utility means your total satisfaction goes down as you consume more.',false,
   '<p>False. Total satisfaction usually still goes up, just by smaller and smaller amounts. It\'s the <b>extra</b> satisfaction that shrinks.</p>');
-mc('l5-selena','l5','Selena paid $8 for a movie and it\'s terrible after 30 minutes. What should her decision to stay or leave be based on?',
-  ['Whether the next 90 minutes of the movie are worth more than her next best use of that time','The $8 she already paid','What the theater charges other people','Whether her friends stay','The total cost of the ticket plus snacks'],0,
-  '<p>The $8 is sunk either way. The only real choice is about the next 90 minutes. It\'s a classic sunk-cost example.</p>');
+mc('l5-selena','l5','Selena paid $8 for a movie, and after 30 minutes she knows it is terrible. What should her decision to stay or leave be based on?',
+  ['Whether the next 90 minutes of the movie are worth more than her next best use of that time','The $8 she already paid','The total she has spent on the ticket and snacks','What the theater charges other people','Whether her friends stay'],0,
+  '<p>This is your course textbook\'s example. The $8 is sunk. But "staying in the movie still means paying an opportunity cost in time." Her real choice is 90 more minutes of the movie versus anything else.</p><p>The tempting wrong answers count money already spent ($8, or ticket plus snacks). Neither changes based on what she does next.</p>');
 mc('l5-mcdef','l5','<b>Marginal cost</b> is which of the following?',
   ['The extra cost of producing or consuming one more unit','Total cost divided by quantity','The cost of all units together','A cost already paid','Price minus profit'],0,
-  '<p>Marginal = the next one. Total cost ÷ quantity is <b>average</b> cost, a different idea you\'ll meet in Unit 4.</p>');
+  '<p>Marginal means the next one: the extra cost of one more unit.</p><p>The tempting wrong answer is "total cost divided by quantity." That is <b>average</b> cost; your course textbook\'s Chapter 7 defines it that way. Watch the course video\'s phrase "cost per unit": it means the cost of each <i>additional</i> unit, not the average.</p>');
 gen('l5-g-net','l5',()=>{
   const mb=[]; let v=pick([8,9,10]); while(mb.length<6){ mb.push(v); v-=pick([1,2]); if(v<=0) break; }
   const P=pick(mb.slice(1,-1).map(x=>x-0.5).filter(x=>x>0)) || 3.5; const bought=mb.filter(x=>x>=P); const ans=bought.reduce((a,x)=>a+(x-P),0);
   return { type:'num', kind:'num', prompt:`Each slice of pizza is worth this much to you: ${table(['Slice',...mb.map((_,i)=>i+1)],[['Marginal benefit',...mb.map(money)]])}Slices cost <b>${money(P)}</b>. If you buy the best number of slices, what is your total net gain (benefit minus cost)?`,
-    answer:ans, unit:'dollars', explain:`<p>Buy slices worth at least ${money(P)}: ${bought.length} slices. Net gain on each: ${bought.map(x=>money(x-P)).join(' + ')} = <b>${money(ans)}</b>.</p><p>Any more slices would subtract from this total.</p>` };
+    answer:ans, unit:'dollars', explain:`<p>Buy slices worth at least ${money(P)}: ${bought.length} slices. Net gain on each: ${bought.map(x=>money(x-P)).join(' + ')} = <b>${money(ans)}</b>.</p><p>Any more slices would subtract from this total, even though total <i>benefit</i> would still rise.</p>` };
 });
 mc('l5-calorie','l5','Posting calorie counts on fast-food menus works mainly as which of the following?',
-  ['Information that makes the health cost of a choice more visible, which can discourage it','An incentive to eat more','A sunk cost','A tax','A subsidy'],0,
-  '<p>Calorie counts don\'t change the price; they are <b>information</b>. By making the health cost easier to see, they can raise the <b>perceived</b> cost of high-calorie choices, so some people choose differently. A tax, by contrast, changes the actual cost.</p>');
+  ['A disincentive: it makes the health cost of high-calorie choices easier to see','An incentive to eat more','An incentive, because it changes what people order','A sunk cost','A tax'],0,
+  '<p>Your course lists calorie reports as a disincentive. They don\'t change the price; they make the health cost of a choice more visible, which raises its perceived cost.</p><p>The tempting wrong answer is "an incentive, because it changes what people order." Both incentives and disincentives change behavior. The test is which way: this one makes a choice look more costly.</p>');
 tf('l5-tf-incent','l5','Incentives and disincentives work by changing the costs or benefits of a choice.',true,
-  '<p>True. Change the MB or MC and you can change where MB ≥ MC stops, which changes the decision.</p>');
+  '<p>True. Your course: they "work to change either the costs or the benefits of a specific decision." Change the MB or MC and you change where MB ≥ MC stops, which changes the decision.</p>');
 mc('l5-study','l5','You\'re deciding whether to study one more hour tonight. Marginal thinking says to compare which of the following?',
-  ['What that extra hour adds to your grade with what else you\'d do with the hour','Total hours studied this semester with your GPA','How much you paid for the course','How long your classmates study','Your grade on the last exam'],0,
-  '<p>Marginal benefit (the extra learning from this hour) against marginal cost (the next best use of the hour).</p>');
+  ['What that extra hour adds to your grade with what else you\'d do with the hour','Total hours studied this semester with your GPA','How much you paid for the course','Your average grade improvement per hour studied so far','How long your classmates study'],0,
+  '<p>Marginal benefit (the extra learning from this hour) against marginal cost (the next best use of the hour).</p><p>The tempting wrong answer is your average gain per hour so far. Averages hide the fact that the tenth hour usually adds less than the first.</p>');
 lazy('l5-gr-line','l5',()=>({ type:'mc', kind:'graph',
   prompt:`${gchart({xmax:10,ymax:10,xlab:'Quantity',ylab:'Dollars',body:(X,Y)=>gline([[0,9],[9,0]],X,Y,'var(--accent)')+gline([[0,4],[10,4]],X,Y,'var(--g2)','6 4',2.4)+gtext(X(0.4),Y(9)-6,'Marginal benefit','var(--accent)')+gtext(X(10),Y(4)-8,'Marginal cost','var(--g2)','end')+`<line x1="${X(5)}" x2="${X(5)}" y1="${Y(0)}" y2="${Y(4)}" stroke="var(--muted)" stroke-dasharray="3 3"/><text x="${X(5)}" y="${Y(0)+15}" text-anchor="middle" class="lbl-ink">Q*</text><line x1="${X(2)}" x2="${X(2)}" y1="${Y(0)}" y2="${Y(7)}" stroke="var(--g1)" stroke-width="2"/><text x="${X(2)}" y="${Y(0)+15}" text-anchor="middle" class="lbl-ink" style="fill:var(--g1)">Q1</text>`})}At quantity Q1, which of the following should you do?`,
-  options:['Do more, because marginal benefit is above marginal cost','Do less, because marginal cost is above marginal benefit','Stop, because Q1 is the best amount','Stop, because total benefit is falling','Do more, because marginal cost is falling'], answer:0,
-  explain:'<p>At Q1 the next unit is worth more than it costs (the MB line is above the MC line). Keep going until Q*, where they meet. Past Q*, MC is above MB, so you\'d stop.</p>' }));
+  options:['Do more, because marginal benefit is above marginal cost','Do less, because marginal cost is above marginal benefit','Stop, because Q1 is the best amount','Stop, because total benefit is falling','Keep going forever, because once one unit is worth it, every unit is'], answer:0,
+  explain:'<p>At Q1 the next unit is worth more than it costs (the MB line is above the MC line). Keep going until Q*, where they meet. Past Q*, MC is above MB, so you\'d stop.</p><p>The tempting wrong answer is "keep going forever." The MB line slopes down: each extra unit is worth less, so past Q* more is no longer worth it. And total benefit isn\'t falling at Q1; only the extra benefit is shrinking.</p>' }));
 mc('l5-third','l5','A factory already runs one shift. Here is what each extra shift would add per week:'+table(['Shift','Added cost','Added revenue'],[['Second','$9,000','$12,000'],['Third','$11,000','$9,000']])+'Which of the following should the factory do?',
   ['Add the second shift but not the third, because the third adds more cost than revenue','Add both shifts, because together they add more revenue ($21,000) than cost ($20,000)','Add neither shift, because the third shift would lose money','Add both shifts, because the second shift\'s cost is sunk once it runs','Add only the third shift, because it costs the most and so must produce the most'],0,
-  '<p>Judge each shift on its own: marginal benefit vs marginal cost. Second shift: $12,000 − $9,000 = <b>+$3,000</b>, so add it. Third shift: $9,000 − $11,000 = <b>−$2,000</b>, so skip it.</p><p>Adding the two together ($21,000 vs $20,000) hides the losing third shift. Stopping after the second gives $3,000 a week instead of $1,000.</p>');
+  '<p>Judge each shift on its own: marginal benefit vs marginal cost. Second shift: $12,000 − $9,000 = <b>+$3,000</b>, so add it. Third shift: $9,000 − $11,000 = <b>−$2,000</b>, so skip it.</p><p>The tempting wrong answer adds the two together ($21,000 vs $20,000), which hides the losing third shift. Stopping after the second gives $3,000 a week instead of $1,000.</p>');
 tf('l5-tf-equal','l5','When marginal benefit exactly equals marginal cost, you are indifferent about that last unit.',true,
   '<p>True. It adds exactly as much as it costs. That\'s why the best quantity is often described as "where MB = MC."</p>');
-mc('l5-concorde','l5','Governments kept funding the Concorde jet partly because so much money had already been spent. This is an example of which of the following?',
-  ['The sunk cost fallacy','Comparative advantage','Diminishing marginal utility','An incentive','Allocative efficiency'],0,
-  '<p>Letting past, unrecoverable spending drive a forward-looking decision is the sunk cost fallacy, sometimes called the Concorde fallacy.</p>');
+mc('l5-concorde','l5','A company spent $5 million launching a new product that is selling badly. Its managers keep funding it "so the $5 million isn\'t wasted." This is an example of which of the following?',
+  ['The sunk cost fallacy','Sound marginal analysis, because the $5 million is a real cost','An incentive','Diminishing marginal utility','Comparing totals correctly, since $5 million is a large total'],0,
+  '<p>Your course textbook: "Many firms, for example, find it hard to give up on a new product that is doing poorly because they spent so much money in creating and launching the product. But the lesson of sunk costs is to ignore them."</p><p>The tempting wrong answer is "sound marginal analysis, because the $5 million is a real cost." It was real, but it is gone under every option, so it can\'t tell the managers what to do next.</p>');
 gen('l5-g-pricedrop','l5',()=>{
   const mb=[]; let v=pick([9,10,12]); while(mb.length<7 && v>0){ mb.push(v); v-=pick([1,1.5,2]); }
   const n=mb.length; const i1=pick([1,2]), i2=Math.min(n-1, i1+pick([1,2]));
   const p1=round((mb[i1-1]+mb[i1])/2,2), p2=round((mb[i2-1]+mb[i2])/2,2); const q1=mb.filter(x=>x>=p1).length, q2=mb.filter(x=>x>=p2).length; const ans=q2-q1;
   return { type:'num', kind:'num', prompt:`Your marginal benefit from each extra movie ticket this month:${table(['Ticket',...mb.map((_,i)=>i+1)],[['Marginal benefit',...mb.map(money)]])}A theater discount cuts the price from <b>${money(p1)}</b> to <b>${money(p2)}</b>. How many <b>more</b> tickets should you buy?`,
-    answer:ans, unit:'more tickets', explain:`<p>At ${money(p1)} you buy ${q1} (every ticket worth at least the price). At ${money(p2)} you buy ${q2}. That\'s <b>${ans} more</b>.</p><p>A lower price is an incentive: it lowers the marginal cost, so more units pass the MB ≥ MC test.</p>` };
+    answer:ans, unit:'more tickets', explain:`<p>At ${money(p1)} you buy ${q1} (every ticket worth at least the price). At ${money(p2)} you buy ${q2}. That\'s <b>${ans} more</b>.</p><p>A lower price is an incentive: it lowers the marginal cost, so more units pass the MB ≥ MC test. The question asks for the <i>extra</i> tickets, not the new total.</p>` };
 });
 mc('l5-spread','l5','Why do people rarely spend all their money on their single favorite good?',
-  ['Each extra unit adds less satisfaction, so other goods become worth more at the margin','Stores limit how much one person can buy','Prices always rise as you buy more','Favorite goods are sunk costs','Opportunity cost is zero for favorite goods'],0,
-  '<p>Diminishing marginal utility: after a few units, the next one of your favorite is worth less than the first unit of something else.</p>');
+  ['Each extra unit adds less satisfaction, so other goods become worth more at the margin','Stores limit how much one person can buy','Prices always rise as you buy more','Total satisfaction from a good falls after the first unit','Money spent on a favorite good is a sunk cost'],0,
+  '<p>Your course textbook: "The law of diminishing marginal utility explains why people and societies rarely make all-or-nothing choices." After a few units, the next one of your favorite is worth less than the first unit of something else.</p><p>The tempting wrong answer is "total satisfaction falls after the first unit." It doesn\'t; each extra unit just adds less than the last.</p>');
 mc('l5-marginaldecision','l5','Which of the following is a <b>marginal</b> decision?',
   ['Whether a café should stay open one more hour','Whether a country should switch to a command economy','How much the café has spent on rent since it opened','What the café earned last year in total','Whether coffee is a good or a service'],0,
-  '<p>"One more hour" is a decision about a little more of something: compare that hour\'s extra revenue to its extra cost.</p>');
+  '<p>"One more hour" is a decision about a little more of something: compare that hour\'s extra revenue to its extra cost.</p><p>The tempting wrong answers look at the past (rent already spent, last year\'s total). Those are history, not a choice about the next unit.</p>');
+
+/* ===== Lesson 5 quick checks (inline; not scheduled from the lesson page, but available in free practice) ===== */
+mc('l5c-margin','l5','A food-truck owner is deciding whether to stay open one extra hour on Friday night. Using marginal analysis, which of the following should she compare?',
+  ['The extra revenue from that hour with the extra cost of that hour','Her total revenue for the day with her total costs for the day','Her average cost per meal so far this week','What she paid for the truck with what it is worth now','Last Friday\'s profit with this Friday\'s'],0,
+  '<p>The choice is about one more hour, so compare that hour\'s <b>extra</b> benefit (sales) with its <b>extra</b> cost (fuel, food, her time).</p><p>The tempting wrong answer is the day\'s totals. A good day can still include a losing last hour, and the truck\'s price is sunk.</p>');
+mc('l5c-expand','l5','A manufacturer is thinking about expanding. Each month the expansion would add $4,000 for new equipment, $6,000 for new workers and $2,000 for materials, and bring in $11,000 in extra sales. Which of the following is true?',
+  ['It should not expand: the extra cost ($12,000) is more than the extra benefit ($11,000)','It should expand, because sales would rise','It should expand if the company is already profitable overall','It should expand, because equipment costs are sunk','It should not expand, because its average cost per unit would rise'],0,
+  '<p>Add the extra costs: $4,000 + $6,000 + $2,000 = $12,000. Extra benefit: $11,000. $11,000 − $12,000 = <b>−$1,000 a month</b>, so the expansion loses money.</p><p>The tempting wrong answer is "expand if the company is already profitable." Overall profit is a total; the expansion still loses $1,000 a month on its own. The equipment isn\'t sunk either: it hasn\'t been bought yet.</p>');
+mc('l5c-dmu','l5','Maya values her 1st, 2nd, 3rd and 4th slice of pizza at $6.00, $4.00, $2.50 and $1.00. Slices cost $2.00. Which of the following is true?',
+  ['She should buy 3 slices, because the 4th is worth less than its $2.00 price','She should buy 4 slices, because her total benefit keeps rising','She should buy 1 slice, because each slice after the first is worth less','She should buy 2 slices, because the 3rd is worth less than the 2nd','She should buy no slices, because her total benefit is below $14'],0,
+  '<p>Buy each slice worth at least its price: $6.00, $4.00 and $2.50 all beat $2.00; the 4th, at $1.00, doesn\'t. Net gain: $4.00 + $2.00 + $0.50 = <b>$6.50</b>.</p><p>The tempting wrong answer is 4 slices "because total benefit keeps rising." It does rise, to $13.50, but the 4th slice adds $1.00 and costs $2.00. Stopping at 1 or 2 mistakes falling benefit for "not worth it."</p>');
+mc('l5c-classify','l5','A city adds a $5 charge to drive downtown during rush hour. For drivers, this is best described as which of the following?',
+  ['A disincentive, because it raises the cost of driving downtown at rush hour','An incentive, because it changes how people drive','An incentive, because the city earns money from it','A sunk cost, because drivers have already bought their cars','Neither, because only firms respond to costs'],0,
+  '<p>The charge makes one choice, driving downtown at rush hour, more <b>costly</b>, so drivers do less of it: a disincentive. It works like the course\'s pollution tax.</p><p>The tempting wrong answer is "an incentive, because it changes how people drive." Every incentive and disincentive changes behavior; the test is whether it adds benefit or adds cost.</p>');
+mc('l5c-subsidy','l5','The government offers a tax subsidy that pays part of the cost when a firm buys new green technology. How does this change the firm\'s marginal analysis?',
+  ['It lowers the cost of buying the technology, so more purchases pass the MB ≥ MC test','It is a disincentive, because it is part of the tax system','It raises the cost of buying the technology','It changes nothing, because past spending on old machines is sunk','It changes nothing, because only the firm\'s total profit matters'],0,
+  '<p>A subsidy cuts the marginal cost of the choice. With a lower MC, purchases that didn\'t pay before now do. That\'s why the course calls it an incentive.</p><p>The tempting wrong answer is "a disincentive, because it is part of the tax system." What matters is its effect on the choice: it lowers cost.</p>');
+mc('l5c-sunk','l5','You paid a $200 non-refundable deposit for a gym\'s summer program. A friend offers you free coaching at the same times, which you would value more. What should decide your choice?',
+  ['Which option you value more from now on','Going to the gym so the $200 isn\'t wasted','Adding the $200 to the gym program\'s value','Splitting your time so you get some value from both','Choosing whichever option has cost you more in total'],0,
+  '<p>The $200 is gone whatever you choose, so it can\'t change which option is better. Compare only what\'s ahead: the coaching is worth more to you, so take it.</p><p>The tempting wrong answer is "go so the $200 isn\'t wasted." It is spent in both cases. Going to the gym just adds a summer you value less.</p>');
+mc('l5c-skill','l5','A bakery already paid $5,000 for its oven. Baking one more batch of bread costs $40 in flour and labor and sells for $55. Which of the following should the bakery do?',
+  ['Bake it: the extra $55 is more than the extra $40, and the oven is sunk','Not bake it: $40 plus the $5,000 oven is more than $55','Not bake it: its average cost per batch is still above $55','Bake it only if its total profit this year is positive','Not bake it, because the second batch is always worth less than the first'],0,
+  '<p>Marginal benefit $55, marginal cost $40: the batch adds <b>$15</b>. The oven was paid for whether or not this batch is baked.</p><p>The tempting wrong answer adds the $5,000 oven to the batch\'s cost. That cost is sunk, and the average cost per batch is a different number from the cost of one more.</p>');
+
+/* Source, CLEP-topic and skill tags for every Lesson 5 question.
+   Course materials checked 2026-10-22: video 1.4b transcript, Module 1 slides 34-44, course textbook §2.1 (and Chapter 7 for average cost). */
+const L5TAGS = {
+  'l5-def':['OS21 MS','ma','terms','M1 M2 M4'], 'l5-g-mb':['OS21','ma','data',''], 'l5-tf-total':['OS21','ma','terms','M1'],
+  'l5-sunk':['OS21','ma','models','M4'], 'l5-gr-mb':['OS21','ma','graphs',''], 'l5-incentive':['MS','inc','terms','M5'],
+  'l5-dis':['MS','inc','terms','M5'], 'l5-g-sunk':['OS21','ma','data','M4'], 'l5-g-firm':['MS','ma','data','M1'],
+  'l5-water':['ELM','ma','models','M1 M6'], 'l5-tf-sunk':['OS21','ma','terms','M4'], 'l5-dmu':['OS21','ma','terms','M3 M6'],
+  'l5-sugar':['WAR MS','inc','models','M5'], 'l5-g-mc':['MS','ma','data','M2'], 'l5-tf-dmu':['OS21','ma','terms','M3'],
+  'l5-selena':['OS21','ma','models','M4 M1'], 'l5-mcdef':['OS21 OS7','ma','terms','M2 M1 M4'], 'l5-g-net':['OS21','ma','data',''],
+  'l5-calorie':['MS','inc','terms','M5'], 'l5-tf-incent':['MS','inc','terms','M5'], 'l5-study':['OS21','ma','models','M1 M2 M4'],
+  'l5-gr-line':['OS21','ma','graphs','M3 M6'], 'l5-third':['MS','ma','data','M1 M4'], 'l5-tf-equal':['OS21','ma','terms',''],
+  'l5-concorde':['OS21','ma','models','M4 M1 M5'], 'l5-g-pricedrop':['MS OS21','inc','data',''], 'l5-spread':['OS21','ma','models','M3 M4'],
+  'l5-marginaldecision':['OS21','ma','terms','M4 M1'],
+  'l5c-margin':['MS OS21','ma','models','M1 M2 M4'], 'l5c-expand':['MS','ma','data','M1 M4 M2'], 'l5c-dmu':['OS21','ma','data','M1 M3'],
+  'l5c-classify':['MS','inc','models','M5 M4'], 'l5c-subsidy':['MS','inc','models','M5 M4 M1'], 'l5c-sunk':['OS21','ma','models','M4 M1'],
+  'l5c-skill':['OS21 OS7','ma','data','M4 M2 M1 M6']
+};
+const L5CLEP = { ma:'Marginal analysis', inc:'Property rights and the role of incentives' };
+Object.entries(L5TAGS).forEach(([id,[src,clep,skill,mis]]) => { if(Q[id]) Object.assign(Q[id], { src: src.split(' '), clep: L5CLEP[clep], skill, mis: mis ? mis.split(' ') : [] }); });
 
 ['l1-shift','l3-terms','l3-terms2'].forEach(id => { Q[id].keepOrder = true; }); /* number choices stay smallest to largest */
 
@@ -1196,10 +1257,10 @@ const CARD_LIST = {
     ['Marginal analysis','What is marginal analysis, and why not just compare totals?','Comparing the extra benefit and extra cost of a small change in an activity. Totals can still look good after the last unit stopped being worth it; marginal analysis shows exactly where to stop.','Second shift: +$12,000 revenue versus +$9,000 cost, so add it. Third shift: +$9,000 versus +$11,000, so skip it.',''],
     ['Utility','What is utility?','The satisfaction or benefit a person gets from consuming a good or service. Economists often measure it in dollars: the most you\'d be willing to pay for it.','If you\'d pay at most $7 for a slice of pizza right now, its utility to you is about $7.',''],
     ['Diminishing marginal utility','What does diminishing marginal utility say? Does total utility fall?','Each additional unit of a good tends to add less satisfaction than the one before. Total satisfaction usually still rises, just by smaller and smaller amounts.','Pizza slices worth $7, $6, $5 and $4: the total keeps rising (7, 13, 18, 22), but each slice adds less.','It\'s the extra satisfaction that shrinks, not the total.'],
-    ['Incentive','What is an incentive? Give an example.','Something that raises the benefit of a choice (or lowers its cost), so people do more of it.','A tax credit for buying solar panels, a buy-one-get-one sale, or bonus points for coming to class.',''],
+    ['Incentive','What is an incentive? Give an example.','Something that raises the benefit of a choice (or lowers its cost), so people do more of it.','Your course\'s examples: a buy-one-get-one sale, bonus points for coming to class, or a tax subsidy for firms that buy new green technology.','Changing behavior doesn\'t make something an incentive; disincentives change behavior too. Ask whether it adds benefit or adds cost.'],
     ['Disincentive','What is a disincentive? Give an example.','Something that raises the cost of a choice (or lowers its benefit), so people do less of it.','The UK\'s 2018 tax on high-sugar soft drinks: companies cut sugar, and the share of drinks liable for the tax fell from 52% to 15%.',''],
     ['Sunk cost','What is a sunk cost, and should it affect your decision?','Money or time already spent that can\'t be recovered. Because it\'s the same whatever you choose next, it should not affect the decision; compare only future costs and benefits.','A $40 non-refundable concert ticket is sunk. If a free trip tonight is worth more to you than the concert, take the trip.',''],
-    ['Sunk cost fallacy','What is the sunk cost fallacy, and what is the classic example?','Continuing something because of what you\'ve already spent instead of what lies ahead. It\'s also called the Concorde fallacy, after governments kept funding the Concorde jet partly because so much had already been spent.','Sitting through a terrible movie "to get your $8 worth."',''],
+    ['Sunk cost fallacy','What is the sunk cost fallacy? Give an example.','Continuing something because of what you\'ve already spent instead of what lies ahead. Your course textbook: many firms "find it hard to give up on a new product that is doing poorly because they spent so much money in creating and launching the product."','Selena sitting through a terrible movie "to get her $8 worth," when the next 90 minutes are what she is really choosing.','The money is gone under every option, so it can\'t make one option better.'],
     ['Water and diamonds','Why is water cheap and diamonds expensive, even though water is essential?','Price reflects marginal value, the value of one more unit, not total usefulness. Water is plentiful, so one more gallon is worth little; diamonds are scarce, so one more is worth a lot.','You\'d pay almost nothing for an extra gallon of tap water today, but a lot for one more diamond.','This is called the diamond-water paradox.']
   ]
 };
@@ -2207,6 +2268,39 @@ W.cfsort = el => {
   });
 };
 
+/* TEST NOTE (2026-10-22, headless Chromium, 375px and 1100px, light and dark): all 8 items answered; a wrong pick shows the right
+   answer plus the reason; score counts correctly (7 of 8 with one miss). Items checked against course textbook §2.1 (sunk costs,
+   Selena's time as an opportunity cost) and video 1.4b (extra costs and benefits of expanding). */
+W.sunksort = el => {
+  const items = [
+    ['The $8 Selena already paid for a terrible movie, when deciding whether to stay.','Ignore','It is gone whether she stays or leaves, so it is sunk.'],
+    ['The 90 minutes Selena would spend watching the rest of the movie.','Counts','Her time is a future cost of staying: an opportunity cost that changes with her choice.'],
+    ['The $9,000 a week a second shift would add in wages and power.','Counts','She only pays it if she adds the shift, so it is a marginal cost of the choice.'],
+    ['The $12,000 a week of extra sales the second shift would bring in.','Counts','It is the marginal benefit of the shift. Benefits that depend on the choice always count.'],
+    ['$2 million a company already spent developing a product it is deciding whether to finish.','Ignore','Spent and unrecoverable whether it finishes or stops: sunk.'],
+    ['The $1 million it would still cost to finish the product.','Counts','It is only spent if the company finishes, so it changes with the choice.'],
+    ['A $200 non-refundable gym deposit, when choosing between the gym and free coaching.','Ignore','You lose the $200 either way, so it can\'t favor the gym.'],
+    ['What you would earn at a shift you skip to go to a free concert.','Counts','The lost wages happen only if you choose the concert: an opportunity cost of that choice.']
+  ];
+  const kinds=[['Counts','Counts: it changes with the choice'],['Ignore','Ignore: it is sunk']];
+  let right=0, answered=0;
+  el.innerHTML = `<p class="widget-title">Count it or ignore it?</p><p class="hint">For each cost or benefit, ask: would this number be different depending on what is chosen next?</p><div class="items"></div><div class="msg score">0 of ${items.length} answered</div>`;
+  const box=$('.items',el);
+  items.forEach(([txt,ans,why])=>{
+    const d=document.createElement('div'); d.className='sort-item';
+    d.innerHTML=`<p>${txt}</p><div class="seg" role="group" aria-label="Count it or ignore it">${kinds.map(([k,lab])=>`<button data-k="${k}" aria-pressed="false">${lab}</button>`).join('')}</div><p class="small why" hidden></p>`;
+    $$('button',d).forEach(b=>b.onclick=()=>{
+      if(d.dataset.done) return; d.dataset.done=1; answered++;
+      const ok=b.dataset.k===ans; if(ok) right++;
+      b.classList.add(ok?'right':'wrong'); if(!ok) $(`button[data-k="${ans}"]`,d).classList.add('right');
+      $$('button',d).forEach(x=>x.disabled=true);
+      const w=$('.why',d); w.hidden=false; w.innerHTML=(ok?'<b>Right.</b> ':`<b>Not quite: ${ans==='Counts'?'it counts':'ignore it'}.</b> `)+why;
+      $('.score',el).textContent = answered<items.length ? `${right} right out of ${answered} so far` : `${right} of ${items.length} right. ${right===items.length?'Perfect.':'Read the note under any you missed.'}`;
+    });
+    box.appendChild(d);
+  });
+};
+
 /* TEST NOTE (2026-10-21): all 8 items answered; wrong picks now show the correct system plus a reason (added for the golden-standard rubric).
    Answers checked against OpenStax §1.4 (U.S. toward the market end; command = central authority; traditional = custom). */
 W.sort = el => {
@@ -2239,10 +2333,13 @@ W.sort = el => {
   });
 };
 
+/* TEST NOTE (2026-10-22): MB = 7,6,5,4,3,2,1,0.50 (made-up). Price $3 → best 5 slices, net $10; price $6 → best 2, net $1;
+   price $0.50 → best 8, net $24.50; price $4 → slice 4 is a tie (worth exactly its price). Eat button disables after slice 8; Start over resets.
+   Totals checked: total benefit of 8 slices = $28.50. Bars shrink (diminishing marginal utility, course textbook §2.1). */
 W.pizza = el => {
   const MB=[7,6,5,4,3,2,1,0.5];
   let eaten=0;
-  el.innerHTML = `<p class="widget-title">One more slice?</p><p class="hint">Each bar is how much that slice is worth to you. The line is the price per slice. Eat slices one at a time.</p>
+  el.innerHTML = `<p class="widget-title">One more slice?</p><p class="hint">Made-up values. Each bar is how much that slice is worth to you; the dashed line is the price per slice. Eat slices one at a time and watch your net gain.</p>
   <div class="slider"><label for="pz-p">Price per slice</label><input id="pz-p" type="range" min="0.5" max="6" step="0.5" value="3"><output></output></div>
   <div class="svgbox"><svg viewBox="0 0 380 230" width="100%" role="img" aria-label="Marginal benefit bars and price line"></svg></div>
   <div class="row"><button class="btn eat">Eat slice 1</button><button class="btn ghost rst">Start over</button></div>
@@ -2588,44 +2685,105 @@ ${table(['Factor','Payment','Example'],[['Land (and other natural resources)','R
           {k:'Textbook',t:'1.4 How to Organize Economies: An Overview of Economic Systems',s:'OpenStax, Principles of Microeconomics (newer 3rd edition, free online)',u:'https://openstax.org/books/principles-microeconomics-3e/pages/1-4-how-to-organize-economies-an-overview-of-economic-systems',w:'The same section as your course textbook\'s §1.4, in the current edition. Handy on a phone; wording differs in a few places.'},
           {k:'Article',t:'I, Pencil',s:'Leonard E. Read, via Econlib',u:'https://www.econlib.org/library/Essays/rdPncl.html',w:'A pencil tells its own story: thousands of strangers cooperate to make it with no one in charge. A classic picture of a market system.'} ] },
 
-{ id:'l5', title:'Marginal Analysis and Incentives', mins:25, src:'Course video 1.4b · Textbook 2.1',
-  oneline:'Good decisions compare the extra benefit of one more unit with its extra cost, and ignore what\'s already spent.',
+{ id:'l5', title:'Marginal Analysis and Incentives', mins:35, src:'Modern States video 1.4b and Module 1 slides 34-44 · Course textbook (OpenStax) §2.1',
+  sources:['MS','OS21','OS7','CB','WAR','ELM'],
+  oneline:'Good decisions compare the extra benefit of one more unit with its extra cost. Incentives change that comparison, and money already spent shouldn\'t.',
   body:`
-<h2>Thinking at the margin</h2>
-<p>Most choices aren't all-or-nothing. You don't decide "pizza or no pizza for the rest of my life." You decide "one more slice?" In economics, <b>marginal</b> means <b>the next one</b>: the next slice, hour, worker or machine.</p>
+<h2>What marginal analysis is</h2>
+<!-- src: MS (video 1.4b definition, slides 36-38); OS21 (definition "on the margin", glossary) -->
+<p>Lesson 4 showed markets coordinating millions of choices with no one in charge. This lesson zooms in on one choice and asks how a person or firm should make it.</p>
+<p>Your course textbook defines ${dt('marginal-analysis','<b>marginal analysis</b>')} as the "examination of decisions on the margin, meaning a little more or a little less from the status quo." In economics, ${dt('marginal','<b>marginal</b>')} means <b>the next one</b>: the next slice, hour, worker or machine. Your course video applies it to business: firms look at how costs and benefits change when they change what they do.</p>
 <div class="terms">
 ${term('Marginal benefit (MB)','The extra benefit from one more unit.')}
 ${term('Marginal cost (MC)','The extra cost of one more unit.')}
 ${term('The rule','Keep going while <b>MB ≥ MC</b>. Stop when the next unit\'s MB falls below its MC.')}
 </div>
+<p><b>Why look at the next unit instead of the whole?</b> Because the next unit is the only thing you are actually choosing. Everything you already have or already did stays the same either way, so it can't change the answer. Comparing totals can also hide a bad last step: a factory can be profitable overall while its newest shift loses money.</p>
+<p class="small muted">Watch one phrase in video 1.4b: "cost per unit." The course means the cost of each <i>additional</i> unit. Total cost divided by the number of units is a different idea, ${dt('average-cost','average cost')}, which you'll meet in Unit 4.</p>
 <div class="analogy"><div class="eyebrow">Analogy</div><p>The snooze button from Lesson 1 was marginal analysis. You never decided "how much sleep in total." You decided, press by press: are 10 more minutes worth what I'll give up this time?</p></div>
+<div data-check="l5c-margin"></div>
+
+<h2>Worked example: should the manufacturer expand?</h2>
+<!-- src: MS (video 1.4b and slides 39-40: manufacturer's costs and benefits, "if the benefit outweighs the cost"); shift numbers are made up -->
+<p>Your course's example is a manufacturer deciding whether to increase production. It lists what the expansion adds on each side:</p>
+<ul><li><b>Extra costs:</b> new manufacturing equipment, more employees, larger or new facilities, and more materials for production.</li><li><b>Extra benefit:</b> more sales (${dt('revenue','revenue')}) from the added output.</li></ul>
+<p>The course's rule: "If the benefit outweighs the cost for the firm, then it is a wise choice." Here it is with made-up numbers, one shift at a time:</p>
+<div class="tbl-wrap"><table class="wrap-cells compact"><thead><tr><th>Per week</th><th>Extra cost</th><th>Extra revenue</th><th>Net</th></tr></thead><tbody>
+<tr><td>Add a second shift</td><td>$9,000</td><td>$12,000 (1,200 units × $10)</td><td><b>+$3,000</b></td></tr>
+<tr><td>Add a third shift</td><td>$11,000</td><td>$9,000 (900 units × $10)</td><td><b>−$2,000</b></td></tr></tbody></table></div>
+<div class="math">Second shift: $12,000 − $9,000 = <b>+$3,000</b> → add it<br>Third shift: $9,000 − $11,000 = <b>−$2,000</b> → skip it<br>Both together: $21,000 − $20,000 = +$1,000, which looks fine but hides the losing third shift</div>
+<p>In this made-up example, the third shift costs more (night pay, more wear on the machines) and sells less, because the easiest sales were already made by the first two. Marginal thinking judges each step on its own, so it catches that. Check: stopping after the second shift earns $3,000 a week, more than the $1,000 from running both.</p>
+<div data-check="l5c-expand"></div>
+
+<h2>People weigh costs and benefits too</h2>
+<!-- src: MS (video 1.4b "not only firms but also consumers"; slide 41); OS21 (utility, diminishing marginal utility, Alphonso, ice cream) -->
+<p>Your course: "All individuals weigh the costs and benefits of a choice and then make a decision." For people, the benefit is ${dt('utility','<b>utility</b>')}: the satisfaction or usefulness you get from a good.</p>
+<p>Utility usually follows a pattern. Your course textbook's example: Alphonso's first few bus rides might get him to a job interview or a doctor's appointment, but later rides "may only serve to kill time on a rainy day." That is the ${dt('dmu','<b>law of diminishing marginal utility</b>')}: each extra unit tends to add less satisfaction than the one before. "The first slice of pizza brings more satisfaction than the sixth."</p>
+<p>Try it with pizza (made-up values):</p>
 <div data-widget="pizza"></div>
-<p>Notice the bars shrink. That's the <b>law of diminishing marginal utility</b>: each extra unit of something tends to add less satisfaction than the one before. The first slice is great; the eighth, not so much. It's why people spread their money across many things.</p>
+<p>Notice two things. The bars shrink, so the best stopping point is where the next bar drops below the price line. And total benefit keeps rising the whole time; only the <b>extra</b> benefit falls. This is also why people rarely make all-or-nothing choices: the textbook notes you wouldn't eat nothing but ice cream, because the last few servings would add very little.</p>
+<div data-check="l5c-dmu"></div>
 
-<h2>Worked example: should the factory add a shift?</h2>
-<p>Your course's example is a manufacturer deciding whether to expand. It lists the extra costs (new equipment, more workers, more materials) and the extra benefit (more sales). With numbers:</p>
-${table(['Decision','Extra cost per week','Extra revenue per week','Net'],[['Add a second shift','$9,000','1,200 units × $10 = $12,000','<b>+$3,000</b>'],['Add a third shift','$11,000','900 units × $10 = $9,000','<b>−$2,000</b>']])}
-<p>Add the second shift; skip the third. The third shift costs more (night pay, tired machines) and sells less. Marginal thinking catches that; looking at the factory's total profit would hide it.</p>
-
-<h2>Incentives change the math</h2>
-<p>An <b>incentive</b> raises the benefit of a choice or lowers its cost, so people do more of it. A <b>disincentive</b> raises the cost or lowers the benefit, so people do less of it. Either one can flip an MB vs. MC decision.</p>
-${table(['Incentives (raise benefit or lower cost)','Disincentives (raise cost or lower benefit)'],[['Buy-one-get-one sales','Taxes on cigarettes and alcohol'],['Bonus points for attending class','Fines for returning library books late'],['Tax credits for new green technology','Pollution taxes']])}
-<p><b>Real-world example.</b> In 2018 the UK put a tax on high-sugar soft drinks. Companies cut sugar to avoid it: researchers found the share of drinks that would owe the tax fell from 52% when it was announced to 15% by February 2019.</p>
+<h2>Incentives and disincentives</h2>
+<!-- src: MS (video 1.4b definitions and examples; slides 41-43); WAR (UK sugar levy numbers) -->
+<p>Your course: incentives and disincentives "work to change either the costs or the benefits of a specific decision." An ${dt('incentive','<b>incentive</b>')} makes a choice more beneficial (or cheaper), so people do more of it. A ${dt('disincentive','<b>disincentive</b>')} makes a choice more costly, so people do less of it.</p>
+<p>Here are your course's examples:</p>
+<div class="tbl-wrap"><table class="wrap-cells"><thead><tr><th>Incentives (raise benefit or lower cost)</th><th>Disincentives (raise cost)</th></tr></thead><tbody>
+<tr><td>Buy-one-get-one sales</td><td>Taxes on cigarettes and alcohol</td></tr>
+<tr><td>Bonus points for coming to class</td><td>Calorie counts at fast-food restaurants</td></tr>
+<tr><td>A tax ${dt('subsidy','subsidy')} for new green technology</td><td>Pollution taxes</td></tr></tbody></table></div>
+<p><b>The mechanism:</b> because people and firms stop where MB stops being at least MC, anything that moves MB or MC moves the stopping point. Lower the cost of a choice and more units pass the test; raise it and fewer do.</p>
+<p><b>Real-world example.</b> The UK put a tax on high-sugar soft drinks in April 2018. It raised the cost of selling sugary drinks, so companies cut sugar to avoid it. University of Warwick researchers found that 52% of eligible drinks were liable for the tax before it was announced, and just 15% by February 2019.</p>
+<p>Watch the trap: changing behavior doesn't make something an incentive. Both kinds change behavior; the test is whether the policy adds benefit or adds cost.</p>
+<div data-check="l5c-classify,l5c-subsidy"></div>
 
 <h2>Sunk costs: ignore them</h2>
-<p>A <b>sunk cost</b> is money or time already spent that you can't get back. Because it's gone whatever you choose next, it shouldn't affect the choice.</p>
-<p>The textbook's example: Selena pays $8 for a movie and it's terrible after 30 minutes. The $8 is gone either way. Her real choice is 90 more minutes of a bad movie vs. anything else. Staying "to get my money's worth" is the <b>sunk cost fallacy</b>.</p>`,
+<!-- src: OS21 (sunk costs, Selena, firms' new products, summary sentence) -->
+<p>A ${dt('sunk-cost','<b>sunk cost</b>')} is a cost made in the past that can't be recovered. Your course textbook: "Because sunk costs occurred in the past and cannot be recovered, they should be disregarded in making current decisions."</p>
+<p><b>Why ignore them?</b> A sunk cost is the same under every option you are choosing between. Something that doesn't change with the choice can't make one option better than another, so it drops out of the comparison.</p>
+<p><b>The textbook's example.</b> Selena pays $8 for a movie, and after 30 minutes she knows it is terrible. The $8 is gone whether she stays or leaves. But "staying in the movie still means paying an ${dt('opp-cost','opportunity cost')} in time." Her real choice is 90 more minutes of a bad movie versus anything else. Staying "to get my money's worth" is the <b>sunk cost fallacy</b>.</p>
+<p>Firms face the same pull. The textbook notes that many firms "find it hard to give up on a new product that is doing poorly because they spent so much money in creating and launching the product." The lesson is the same: decide on what happens next.</p>
+<div data-check="l5c-sunk"></div>
+
+<h2>Count it or ignore it?</h2>
+<!-- src: OS21; MS. Exam skill: sorting future (marginal) costs and benefits from sunk ones. -->
+<p>Exam questions often list several costs and ask what should affect a decision. Use one test: <b>would this number be different depending on what I choose next?</b> If yes, it counts. If it is the same either way, it is sunk: ignore it.</p>
+<div data-widget="sunksort"></div>
+<p>Notice the pattern: anything already paid is sunk, while anything that happens only if you pick an option (time, wages, extra revenue, costs still to come) counts. Time is the cost students forget most often.</p>
+<div data-check="l5c-skill"></div>
+
+<h2>Common mistakes</h2>
+<!-- Entries in order are M1-M6; each is used as a wrong choice in this lesson's questions (see L5TAGS mis). -->
+<div class="mistakes"><p class="eyebrow">Watch out for these</p><ul>
+<li><span class="wrong">"Compare the totals to decide."</span>Compare the next unit's marginal benefit with its marginal cost. Totals can look fine while the last unit loses money, like the third shift.</li>
+<li><span class="wrong">"Marginal cost is the cost per unit."</span>Total cost divided by quantity is <b>average</b> cost. Marginal cost is the extra cost of one more unit.</li>
+<li><span class="wrong">"Diminishing marginal utility means total satisfaction falls."</span>Total satisfaction usually still rises. It is the extra satisfaction from each new unit that shrinks.</li>
+<li><span class="wrong">"Money already spent has to count, or it's wasted."</span>A sunk cost is the same whatever you choose next, so it can't change which option is better.</li>
+<li><span class="wrong">"Anything that changes behavior is an incentive."</span>Incentives make a choice more beneficial; disincentives make it more costly. Taxes, fines and calorie counts are disincentives; sales, bonuses and subsidies are incentives.</li>
+<li><span class="wrong">"If one more is worth it, more is always worth it."</span>Marginal benefit usually falls and marginal cost can rise, so check each unit. Stop at the last one where MB ≥ MC.</li>
+</ul></div>
+
+<h2>Recap</h2>
+<div class="callout">
+<ol>
+<li><b>Marginal analysis</b> compares the extra benefit and extra cost of a little more or a little less. Keep going while <b>MB ≥ MC</b>.</li>
+<li>Firms use it to decide whether to expand: add a step only if its extra revenue beats its extra cost. Judge each step on its own, not the totals.</li>
+<li>People do it too. Because of <b>diminishing marginal utility</b>, each extra unit adds less satisfaction, so people stop before "all of it."</li>
+<li><b>Incentives</b> make a choice more beneficial; <b>disincentives</b> make it more costly. Either can move where MB ≥ MC stops.</li>
+<li><b>Sunk costs</b> are already spent and can't be recovered, so they should not affect the next decision.</li>
+<li>To sort a list of costs, ask whether each one <b>changes with the choice</b>. If it doesn't, it is sunk.</li>
+</ol>
+<p><b>How the CLEP tests this:</b> the exam outline lists "Marginal analysis" and "Property rights and the role of incentives" under Basic Economic Concepts (10% to 16% of the exam). Expect questions that give a table of marginal benefits or costs and ask for the best quantity, ask whether a cost should affect a decision, or ask you to classify a policy as an incentive or a disincentive.</p>
+</div>`,
   deeper:`
 <h3>Why water is cheap and diamonds are expensive</h3>
-<p>Water keeps you alive, yet it's cheap. Diamonds are mostly decoration, yet they're expensive. Marginal thinking solves it: water is so plentiful that one <b>more</b> gallon is worth very little to you; diamonds are rare, so one more is worth a lot. Price follows the value of the next unit, not total usefulness.</p>
-<h3>Sunk costs at national scale</h3>
-<p>The Concorde supersonic jet is the classic case: governments kept funding it partly because so much had already been spent, even as the outlook worsened. Psychologists call it the "Concorde fallacy." Businesses face the same pull with failing products.</p>
+<p>Water keeps you alive, yet it's cheap. Diamonds are mostly decoration, yet they're expensive. Adam Smith puzzled over this. Econlib's entry on marginalism explains that Smith "had failed to distinguish between 'total' utility and 'marginal' utility." Water is so plentiful that one <b>more</b> gallon is worth very little to you; diamonds are rare, so one more is worth a lot. Price follows the value of the next unit, not total usefulness.</p>
 <h3>Where this goes next</h3>
 <p>MB vs. MC is the engine of the whole course. In Unit 3 it explains how consumers choose; in Units 4 and 5 it decides how much a firm produces (where marginal revenue = marginal cost).</p>`,
   practice:['l5-def','l5-g-mb','l5-sunk','l5-dis','l5-g-firm','l5-dmu'],
-  links:[ {k:'Real world',t:'Sugar levels in UK soft drinks lowered, research finds',s:'University of Warwick, Feb 2020',u:'https://warwick.ac.uk/news/pressreleases/sugar_levels_in/',w:'The study behind the sugar-tax numbers in this lesson: a disincentive changing what firms make.'},
-          {k:'Article',t:'Marginalism',s:'Econlib',u:'https://www.econlib.org/library/Enc/Marginalism.html',w:'Short encyclopedia entry on thinking at the margin, including the water and diamonds puzzle.'},
-          {k:'Article',t:'The Sunk Cost Fallacy',s:'The Decision Lab',u:'https://thedecisionlab.com/biases/the-sunk-cost-fallacy',w:'Why people stick with bad investments, with the Concorde example.'} ] }
+  links:[ {k:'Textbook',t:'2.1 How Individuals Make Choices Based on Their Budget Constraint',s:'OpenStax, Principles of Economics 3e (free online)',u:'https://openstax.org/books/principles-economics-3e/pages/2-1-how-individuals-make-choices-based-on-their-budget-constraint',w:'The newer edition of your course textbook\'s §2.1: marginal analysis, diminishing marginal utility and sunk costs. Wording differs in a few places.'},
+          {k:'Real world',t:'Sugar levels in UK soft drinks lowered, research finds',s:'University of Warwick, Feb 2020',u:'https://warwick.ac.uk/news/pressreleases/sugar_levels_in/',w:'The study behind the sugar-tax numbers in this lesson: a disincentive changing what firms make.'},
+          {k:'Article',t:'Marginalism',s:'Econlib',u:'https://www.econlib.org/library/Enc/Marginalism.html',w:'Short encyclopedia entry on thinking at the margin, including the water and diamonds puzzle.'} ] }
 ];
 LESSONS.forEach(l=>{ Object.assign(l, PLAN[l.id]); l.practice = l.core; [...l.core,...l.more].forEach(q=>{ if(!Q[q]) console.warn('missing q',q); }); });
 const LBYID = Object.fromEntries(LESSONS.map((l,i)=>[l.id,{...l,n:i+1}]));
