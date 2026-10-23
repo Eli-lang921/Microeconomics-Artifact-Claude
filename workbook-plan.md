@@ -67,6 +67,7 @@ Course: Modern States, Principles of Microeconomics (CLEP). Source files: unit t
 - From Oct 16 2026: weekly routine runs are logged in the GitHub audit log, not here.
 - Oct 22 2026: Unit 2 audited by a separate agent against the rubric (rev 16). One answer-key problem (l7-equal) and several should-fix items (a course misquote, L12 topic order, a missing quick check, quiz items too close to practice, quiz-hint follow-ups), all fixed before the staging republish. Details in docs/unit2-build-notes.md.
 - Oct 23 2026: GitHub snapshot before (1db7387), Unit 2 added to the live workbook, snapshot after.
+- Oct 23 2026 (evening): 30 figures added across Unit 2 (src/unit2/figs.js, `FIG` and `fig`/`figs` helpers; `sdg` now supports zoomed axes, arrows, brackets). Reports fixed: l4-mktsoc and l4-capitalism are typed answers checked by Claude (question type 'text'); l5-g-net deleted; l6-tastes example added to the lesson.
 
 ## Useful official resources
 - Free official sample questions: https://clep.collegeboard.org/clep/pdf/principles-of-microeconomics-fact-sheet.pdf
