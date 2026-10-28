@@ -74,5 +74,12 @@ Course: Modern States, Principles of Microeconomics (CLEP). Source files: unit t
 - CLEP Principles of Microeconomics Examination Guide (PDF, $10, College Board) as a later calibration check.
 - Exam weighting: Basic Economic Concepts is about 10-16% of the exam; product markets (supply/demand, consumer choice, costs, market structure) are 55-70%.
 
+## Unit 3: Theory of Consumer Choice (built Oct 27 2026; in staging, not yet in the live workbook)
+- Staging: https://claude.ai/artifact/JmD52HyAjdCYJfgXoCdD6G (new "Unit 3 Staging" copy with its own empty progress; the Oct 22 Unit 2 staging copy is unchanged).
+- Lessons: 13 Total Utility and Marginal Utility (utility explorer, table sorter) · 14 Utility Maximization: Marginal Utility per Dollar (bundle explorer, one-purchase-at-a-time shopper, which-way sorter) · 15 From Utility to Demand: Income and Substitution Effects (demand builder, effects predictor, which-effect sorter). 12 core + 16 more questions each, 7/8/9 instructional visuals, 12 flashcards and 2 writing prompts each.
+- Unit 3 quiz (`#quiz3`): 20 five-choice items (TU/MU 5, MU per dollar 6, demand 4, income/substitution 5), submit-then-reveal, stored as `quiz3` in the progress doc.
+- Source: `src/unit3/` (build.py patches the live index.html). Details, source problems, coverage map, visual inventory, quiz blueprint and test record: docs/unit3-build-notes.md.
+- Audited by a separate agent against the rubric; fixes applied (see notes).
+
 ## Next
-- Build Unit 3 (Theory of Consumer Choice) the same way: staging copy, separate audit, then promote on Eli's OK.
+- Promote Unit 3 to the live workbook on Eli's OK: run `python3 src/unit3/build.py <out> --live`, snapshot to GitHub before and after, republish the live artifact.
