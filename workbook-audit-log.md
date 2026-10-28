@@ -20,7 +20,7 @@ Lesson 2
 
 ## Run history (newest first)
 ### 2026-10-28 · Review upgrades: skip, delete, 1-3 rating, practice counts as review (on request)
-- Snapshots: before de29882, after: this commit · Changes: https://github.com/Eli-lang921/microeconomics-artifact-claude/compare/de29882...main
+- Snapshots: before de29882, after 31b53f9 · Changes: https://github.com/Eli-lang921/microeconomics-artifact-claude/compare/de29882...31b53f9
 - Live artifact version 1792786247-bda8 → 1793186535-a9d1 · Unit 3 staging (JmD52HyAjdCYJfgXoCdD6G) 1793153400-7d15 → 1793186559-74be (rebuilt from the patched live page with `src/unit3/build.py`).
 - **Skip** button in review and practice sessions (questions and flashcards): not scored, left out of the session score, schedule unchanged, so a due item stays due. Disappears once you answer.
 - **Delete** button in the same sessions: pick optional reasons (Too easy, Confusing, Not useful for the exam, Repetitive, Wrong or broken, Just don't like it) and add a note. The item leaves daily review, review ahead and the practice pools; it stays on its lesson page and still counts for lesson completion. New "Deleted (n)" list at the bottom of the Review tab with Restore. Saved in the progress record as `deleted`, so Claude can read what you dislike.
