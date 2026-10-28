@@ -16,7 +16,7 @@ Course: Modern States, Principles of Microeconomics (CLEP). Source files: unit t
 - Difficulty: match the exam, plus a slightly harder tier.
 - Writing: 2-3 optional prompts per lesson, graded by Claude in the page (sample capability) against a 4-point checklist, with a model answer.
 - Flashcards: 11-16 per lesson (see Flashcards below).
-- Review tab: everything is spaced. Miss → back tomorrow; right first time → back in 7 days; each correct due review moves it up 1 → 3 → 7 → 21 → 60 days, then mastered. Practice anytime by lesson, mixed 10/20/all sets, flashcards, and review ahead; free practice never pushes items out, but misses always count. Unit-quiz questions are kept out of free practice so the quiz stays unseen.
+- Review tab: everything is spaced. Miss → back tomorrow; right first time → back in 7 days; each correct due review moves it up 1 → 3 → 7 → 21 → 60 days, then mastered. Practice anytime by lesson, mixed 10/20/all sets, flashcards, and review ahead. Since Oct 28 2026, a right answer in practice (pick-a-unit/lesson sets or the lesson page) on an item that is due today counts as its due review and moves it up the ladder; items not yet due keep their dates; misses always count. Unit-quiz questions are kept out of free practice so the quiz stays unseen.
 - Unit quiz: 20 exam-style questions (5 choices), target 80%+ (Modern States voucher needs 75% on their final).
 - "Explain this" under every lesson section, graph, question, flashcard and writing prompt (see below).
 - "Report a problem" on every question, lesson, flashcard, Claude's writing grade, Claude's flashcard check and Claude's explanations (see Report inbox below).
@@ -44,6 +44,14 @@ Course: Modern States, Principles of Microeconomics (CLEP). Source files: unit t
 - Fix pass (when Eli asks "fix my workbook reports"): ArtifactData list `data/users/me/micro-workbook/reports` → fix the page (questions, cards, or the prompts `gradePrompt` / `cardGradePrompt` / `xpPrompt`) and republish → for each handled report, `update` status, reply and fixedAt (pin if_version).
 - The weekly Claude Code routine that ran the fix pass was removed by Eli (Oct 22 2026); run the fix pass on request.
 
+## Review upgrades (built Oct 28 2026; live and in Unit 3 staging)
+- **Skip** (review and practice sessions, questions and flashcards): not scored, not in the session score, schedule untouched, so a due item stays due. Hidden once you answer.
+- **Delete** (same places): optional reasons (Too easy, Confusing, Not useful for the exam, Repetitive, Wrong or broken, Just don't like it) plus an optional note. The item leaves daily review, review ahead and practice pools; it stays on its lesson page and still counts for lesson completion; its schedule entry is kept so Restore puts it back exactly. "Deleted (n)" list at the bottom of the Review tab with Restore.
+- **Rating 1-3** (1 worst, 3 best): optional, shown after answering every question (review, practice, lesson pages, Unit 1 quiz, quick checks) and on the back of every flashcard; tap the same number again to clear. Stored only; no algorithm uses it yet.
+- Storage (progress doc, synced): `deleted` {id: {at, kind:"question"|"card", lesson, reasons[], note, txt (prompt or card text, 300 chars)}}; `ratings` {id: {r:1-3, at}}. Ids are question ids or card ids.
+- To learn what Eli dislikes: ArtifactData get `data/users/me` doc `micro-workbook`, read `deleted` (reasons, notes, text) and low `ratings`. A "Wrong or broken" deletion is not a report; the delete box tells Eli to also use Report a problem.
+- Code: `src/review/patch.py` (applied once to `index.html`; every patch must match exactly once). `isDeleted`, `reviewable`, `DEL_REASONS`, `rateBox`, `deletedSection`, and the Skip/Delete handlers in `runSession`. Unit 3 staging is rebuilt from the patched page with `src/unit3/build.py`, so promoting Unit 3 keeps these features.
+
 ## Unit 1 (built)
 1. Scarcity and opportunity cost (snooze widget, budget-line widget)
 2. Production possibilities frontier (PPF explorer: test points, steps, shifts)
@@ -68,6 +76,7 @@ Course: Modern States, Principles of Microeconomics (CLEP). Source files: unit t
 - Oct 22 2026: Unit 2 audited by a separate agent against the rubric (rev 16). One answer-key problem (l7-equal) and several should-fix items (a course misquote, L12 topic order, a missing quick check, quiz items too close to practice, quiz-hint follow-ups), all fixed before the staging republish. Details in docs/unit2-build-notes.md.
 - Oct 23 2026: GitHub snapshot before (1db7387), Unit 2 added to the live workbook, snapshot after.
 - Oct 23 2026 (evening): 30 figures added across Unit 2 (src/unit2/figs.js, `FIG` and `fig`/`figs` helpers; `sdg` now supports zoomed axes, arrows, brackets). Reports fixed: l4-mktsoc and l4-capitalism are typed answers checked by Claude (question type 'text'); l5-g-net deleted; l6-tastes example added to the lesson.
+- Oct 28 2026: Review upgrades (skip, delete with reasons and restore, 1-3 rating, practice counts as review) added to the live workbook and the Unit 3 staging copy. Snapshots and details in the GitHub audit log.
 
 ## Useful official resources
 - Free official sample questions: https://clep.collegeboard.org/clep/pdf/principles-of-microeconomics-fact-sheet.pdf
@@ -82,4 +91,5 @@ Course: Modern States, Principles of Microeconomics (CLEP). Source files: unit t
 - Audited by a separate agent against the rubric; fixes applied (see notes).
 
 ## Next
-- Promote Unit 3 to the live workbook on Eli's OK: run `python3 src/unit3/build.py <out> --live`, snapshot to GitHub before and after, republish the live artifact.
+- Promote Unit 3 to the live workbook on Eli's OK: run `python3 src/unit3/build.py <out> --live` (the patched `index.html` already has the Oct 28 review upgrades, so they carry over), snapshot to GitHub before and after, republish the live artifact.
+- Later: use the 1-3 ratings and the Deleted list to weight which questions Review shows (Eli wants an algorithm eventually; not designed yet).

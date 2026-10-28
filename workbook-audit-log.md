@@ -19,6 +19,18 @@ Lesson 2
 - [x] Lesson 1 "Resources for firms": list entrepreneurship as the fourth factor of production instead of "many textbooks add" it (the flashcards and questions already treat it as one of four, and so does the CLEP).
 
 ## Run history (newest first)
+### 2026-10-28 · Review upgrades: skip, delete, 1-3 rating, practice counts as review (on request)
+- Snapshots: before de29882, after: this commit · Changes: https://github.com/Eli-lang921/microeconomics-artifact-claude/compare/de29882...main
+- Live artifact version 1792786247-bda8 → 1793186535-a9d1 · Unit 3 staging (JmD52HyAjdCYJfgXoCdD6G) 1793153400-7d15 → 1793186559-74be (rebuilt from the patched live page with `src/unit3/build.py`).
+- **Skip** button in review and practice sessions (questions and flashcards): not scored, left out of the session score, schedule unchanged, so a due item stays due. Disappears once you answer.
+- **Delete** button in the same sessions: pick optional reasons (Too easy, Confusing, Not useful for the exam, Repetitive, Wrong or broken, Just don't like it) and add a note. The item leaves daily review, review ahead and the practice pools; it stays on its lesson page and still counts for lesson completion. New "Deleted (n)" list at the bottom of the Review tab with Restore. Saved in the progress record as `deleted`, so Claude can read what you dislike.
+- **Rating 1-3** (1 worst, 3 best), optional, after answering any question and on the back of any flashcard; tap the same number to clear. Saved as `ratings`. Nothing uses it yet (future algorithm).
+- **Practice counts as review:** a right answer in pick-a-unit/lesson practice, or on a lesson page, on an item due today now moves it up the ladder (1 → 3 → 7 → 21 → 60) and takes it off today's list, same as Due review. Before this, it stayed due. Items not yet due keep their dates; misses still come back tomorrow. "How the schedule works" text and the session-end message updated to match.
+- Code: `src/review/patch.py` (12 exact-match patches, syntax-checked).
+- Tested (Playwright, Chromium, page opened as a file with a copy of your progress): 80/80 checks on live and staging. Your record loads unchanged (132 due, 289 scheduled, same on old and new pages); skip leaves the schedule alone and keeps the item due; delete saves reasons, note and text, removes the item from due and practice, keeps it on its lesson, survives reload, and Restore brings it back; ratings save, clear and survive reload; practice moves due items up, leaves not-due items alone, and misses still reset; flashcards rate and delete; no horizontal scroll at 375 px with the delete box or rating open; light and dark checked. Not tested: the real claude.ai sync and touch devices.
+- Progress record version 470 unchanged by both publishes. Reports: none handled.
+- Known limit (unchanged): two devices editing within the same minute still means the newest copy wins.
+
 ### 2026-10-23 (evening) · Unit 2 visuals and 4 reports (on request)
 - Snapshots: before d969441, after: this commit · Artifact version 1792778489-548b → 1792786247-bda8
 - Added 30 static figures across Lessons 6-12 (schedules as curves, shifts, surplus/shortage, controls, elasticity range, Table 5.2 chart, revenue chart, income/cross-price sign lines, surplus areas, tax wedge, DWL, incidence). Source: `src/unit2/figs.js`.

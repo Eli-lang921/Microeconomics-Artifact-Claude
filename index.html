@@ -216,6 +216,14 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .rep-foot{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:.88rem;margin-top:.4rem}
 .linkbtn{border:0;background:none;padding:0;color:var(--accent);text-decoration:underline;text-underline-offset:2px;font-size:inherit}
 .linkbtn.danger{color:var(--bad)}
+/* Review upgrades: skip, delete, rating */
+.rv-tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.rate-row{margin-top:10px}
+.rate{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:.85rem;color:var(--muted)}
+.rate .seg button{padding:3px 12px}
+.del-box{margin-top:10px;padding:12px 14px;border:1px dashed var(--line);border-radius:8px;background:var(--surface-2)}
+.del-box textarea{width:100%;margin-top:4px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;resize:vertical}
+.del-list{display:grid;gap:10px;margin-top:.6rem}
 .nr-box{margin-top:1rem;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
 .nr-box label{display:block;font-weight:600;font-size:.92rem;margin:.6rem 0 4px}
 .nr-box label:first-child{margin-top:0}
@@ -408,7 +416,7 @@ function table(head, rows, hi=[]){
 
 /* ---------- progress state + storage ---------- */
 const LS_KEY = 'micro-workbook-v1';
-function blankState(){ return { v:1, updated:0, lessons:{}, quiz:{best:null,last:null,attempts:0}, quiz2:{best:null,last:null,attempts:0,history:[]}, review:{}, mastered:{}, writing:{}, reports:[] }; }
+function blankState(){ return { v:1, updated:0, lessons:{}, quiz:{best:null,last:null,attempts:0}, quiz2:{best:null,last:null,attempts:0,history:[]}, review:{}, mastered:{}, writing:{}, reports:[], deleted:{}, ratings:{} }; }
 let S = blankState();
 const Store = { mode:'local', ref:null, writing:false, again:false, timer:null };
 function setSync(mode, text){ const el=$('#sync'); el.dataset.s=mode; $('#sync-text').textContent=text; }
@@ -464,9 +472,10 @@ async function initStore(){
 /* spaced review for everything: misses come back after 1 day; right answers after 7.
    Each correct "due" review moves an item up the ladder: 1 → 3 → 7 → 21 → 60 days, then it's mastered. */
 const LADDER = [1,3,7,21,60];
-function normalize(st){ st.lessons=st.lessons||{}; st.quiz=st.quiz||{best:null,last:null,attempts:0}; st.quiz2=st.quiz2||{best:null,last:null,attempts:0,history:[]}; st.review=st.review||{}; st.mastered=st.mastered||{}; st.writing=st.writing||{}; st.reports=st.reports||[]; return st; }
+function normalize(st){ st.lessons=st.lessons||{}; st.quiz=st.quiz||{best:null,last:null,attempts:0}; st.quiz2=st.quiz2||{best:null,last:null,attempts:0,history:[]}; st.review=st.review||{}; st.mastered=st.mastered||{}; st.writing=st.writing||{}; st.reports=st.reports||[]; st.deleted=st.deleted||{}; st.ratings=st.ratings||{}; return st; }
 function schedule(id, ok, mode){
   const today = startOfDay(Date.now()), r = S.review[id];
+  if(ok && r && (mode==='free' || mode==='practice') && r.due <= Date.now()) mode = 'due';
   if(!ok){ S.review[id] = { box:0, due: daysFromToday(1), t: Date.now() }; delete S.mastered[id]; return 'missed'; }
   if(mode==='due'){
     if(!r) return 'none';
@@ -476,7 +485,19 @@ function schedule(id, ok, mode){
   if(!r && !S.mastered[id]){ S.review[id] = { box:2, due: daysFromToday(LADDER[2]), t: Date.now() }; return 'added'; }
   return 'kept';
 }
-const reviewable = id => !!(Q[id] || CARDS[id]);
+const isDeleted = id => !!(S.deleted && S.deleted[id]);
+const reviewable = id => !!(Q[id] || CARDS[id]) && !isDeleted(id);
+const DEL_REASONS = { easy:'Too easy', confusing:'Confusing', offtopic:'Not useful for the exam', repetitive:'Repetitive', wrong:'Wrong or broken', dislike:'Just don\'t like it' };
+/* 1-3 rating (1 = worst, 3 = best). Stored only, for a future algorithm. */
+function rateBox(id){
+  const w = document.createElement('span'); w.className = 'rate';
+  const draw = () => {
+    const cur = ((S.ratings||{})[id]||{}).r || 0;
+    w.innerHTML = `<span>Rate it (1 worst, 3 best)</span><span class="seg" role="group" aria-label="Rate this from 1, worst, to 3, best">${[1,2,3].map(n=>`<button type="button" data-v="${n}" aria-pressed="${cur===n}">${n}</button>`).join('')}</span>${cur?`<span>${['','Worst','Okay','Best'][cur]} · tap again to clear</span>`:''}`;
+    w.querySelectorAll('button').forEach(b => b.onclick = () => { const v = +b.dataset.v; S.ratings = S.ratings || {}; if(cur===v) delete S.ratings[id]; else S.ratings[id] = { r:v, at:Date.now() }; save(); draw(); });
+  };
+  draw(); return w;
+}
 function dueList(){ const now = Date.now(); return Object.keys(S.review).filter(k => reviewable(k) && S.review[k].due <= now).sort((a,b)=>S.review[a].due-S.review[b].due); }
 function lessonProgress(L){
   const rec = (S.lessons[L.id]||{}).practice || {};
@@ -4040,6 +4061,7 @@ function qCard(qid, { ctx, label, onAnswer, onNext, nextLabel }){
     const foot = $('.q-foot', fb);
     if(Q[qid].gen && ctx==='practice'){ const b=document.createElement('button'); b.className='btn ghost sm'; b.textContent='Try new numbers'; b.onclick=()=>{ inst = instance(qid); draw(); }; foot.appendChild(b); }
     if(onNext){ const b=document.createElement('button'); b.className='btn sm'; b.textContent=nextLabel||'Next'; b.onclick=onNext; foot.appendChild(b); b.focus({preventScroll:true}); }
+    const rr = document.createElement('div'); rr.className = 'rate-row'; rr.appendChild(rateBox(qid)); fb.appendChild(rr);
     onAnswer && onAnswer(ok);
   };
   draw();
@@ -4113,12 +4135,13 @@ function flashCard(cid, { label, onAnswer, onNext, standalone }){
       <div class="fc-out" aria-live="polite"></div>`;
     else {
       const rec = graded && !graded.err ? (graded.verdict==='correct') : null;
-      body = gradeHTML() + backHTML(c) +
+      body = gradeHTML() + backHTML(c) + '<div class="rate-row"></div>' +
         (onAnswer && !standalone ? `<div class="row fc-actions"><span class="small muted">${rec===null?'Did you know it?':'Count this one as:'}</span>
           <button class="btn ${rec===false?'':'ghost'} sm no" type="button">Didn't know</button><button class="btn ${rec===false?'ghost':''} sm yes" type="button">Knew it</button></div>` : '');
     }
     el.innerHTML = head(c) + body + `<div class="fc-foot"><span class="xp-slot"></span>${state==='back'?'<button class="linkbtn edit" type="button">Edit this card</button>':''}<span class="rep-slot cslot"></span></div>`;
     const back = state==='back';
+    if(back){ const rr = $('.rate-row', el); if(rr) rr.appendChild(rateBox(cid)); }
     $('.xp-slot', el).appendChild(explainBox('card:'+cid, () => {
       const x = CARDS[cid]; let s = `Flashcard\nFront: ${x.t}\nQuestion: ${x.q||'Define or explain this term.'}`;
       if(back) s += `\nAnswer on the card: ${x.d}${x.ex?'\nExample: '+x.ex:''}${x.tip?'\nWatch out: '+x.tip:''}`;
@@ -6093,8 +6116,8 @@ function renderReview(){
   const later = sched.filter(k=>!due.includes(k)).sort((a,b)=>S.review[a].due-S.review[b].due);
   const mastered = Object.keys(S.mastered||{}).length;
   const sel = getSel();
-  const qPool = ALLQ().filter(k=>sel.includes(Q[k].lesson));
-  const cPool = Object.keys(CARDS).filter(k=>sel.includes(CARDS[k].lesson));
+  const qPool = ALLQ().filter(k=>sel.includes(Q[k].lesson) && !isDeleted(k));
+  const cPool = Object.keys(CARDS).filter(k=>sel.includes(CARDS[k].lesson) && !isDeleted(k));
   const lessonOf = k => (Q[k]||CARDS[k]).lesson;
   app.innerHTML = `<div class="lesson-head"><div class="eyebrow">Units 1 to ${UNITS.length}</div><h1 style="margin-top:.4rem">Review</h1>
     <p class="oneline">Two ways in: what's due today on your spaced schedule, or anything you want, any time.</p></div>
@@ -6105,7 +6128,7 @@ function renderReview(){
     <details class="deeper" style="margin-top:1rem"><summary>How the schedule works</summary><div class="deeper-body small">
       <p>Every question and flashcard you answer is scheduled. <b>Miss it</b> and it comes back tomorrow. <b>Get it right</b> the first time and it comes back in a week.</p>
       <p>Each time you get a due item right, the gap grows: 1 → 3 → 7 → 21 → 60 days. Get it right at 60 days and it's mastered. Miss it at any step and it starts over at 1 day.</p>
-      <p>Practicing ahead or by lesson never pushes items further out, but misses always count, so anything you miss comes back tomorrow.</p></div></details>
+      <p>Practice by lesson or unit counts too: get a question right that is <b>due today</b> and it moves up the ladder, just as in Due review. Items that aren't due yet keep their dates (Review ahead works the same way). Misses always count, so anything you miss comes back tomorrow.</p><p><b>Skip</b> moves on without scoring; the item stays due. <b>Delete</b> takes an item out of Review and practice (it stays on its lesson page); restore it any time under Deleted at the bottom of this page.</p></div></details>
 
     <h2>Practice any time</h2>
     <p class="muted small">Pick lessons (or a whole unit), then choose questions or flashcards.</p>
@@ -6119,21 +6142,55 @@ function renderReview(){
   $$('#sel .chipbtn').forEach(b=>b.onclick=()=>{ let s=getSel(); if(b.dataset.l==='all') s=LESSONS.map(l=>l.id); else if(/^u\d+$/.test(b.dataset.l)) s=LESSONS.filter(l=>'u'+l.unit===b.dataset.l).map(l=>l.id); else { s = s.includes(b.dataset.l) ? s.filter(x=>x!==b.dataset.l) : [...s, b.dataset.l]; if(!s.length) s=[b.dataset.l]; } setSel(s); renderReview(); });
   $$('[data-n]').forEach(b=>b.onclick=()=>{ const n=b.dataset.n==='all'?qPool.length:+b.dataset.n; startSession({ title: sel.length===LESSONS.length?'Mixed practice':'Practice: '+sel.map(x=>'Lesson '+LBYID[x].n).join(', '), items: shuffle(qPool).slice(0,n), mode:'free' }); });
   $('#rv-cards').onclick=()=>startSession({ title:'Flashcards', items: shuffle(cPool), mode:'free' });
+  app.appendChild(deletedSection());
+}
+function deletedSection(){
+  const wrap = document.createElement('div'), D = S.deleted || {};
+  const ids = Object.keys(D).sort((a,b) => (D[b].at||0) - (D[a].at||0));
+  if(!ids.length) return wrap;
+  wrap.innerHTML = `<details class="deeper" id="rv-deleted" style="margin-top:1.4rem"><summary>Deleted (${ids.length})</summary><div class="deeper-body"><p class="small muted" style="margin-top:0">Questions and flashcards you took out of Review and practice. They still appear on their lesson pages. Claude can read this list and your reasons to learn what you don't like.</p><div class="del-list"></div></div></details>`;
+  const list = $('.del-list', wrap);
+  ids.forEach(id => {
+    const d = D[id], L = LBYID[d.lesson], it = document.createElement('div'); it.className = 'rep-item';
+    it.innerHTML = `<div class="rep-top"><span class="rep-where">${d.kind==='card'?'Flashcard':'Question'}${L?' · Lesson '+L.n:''}</span><span class="small muted">Deleted ${shortDay(d.at)}</span></div><p class="rep-snip">${esc(d.txt||id)}</p>${(d.reasons||[]).length?`<div class="chips">${d.reasons.map(r=>`<span class="chip">${esc(DEL_REASONS[r]||r)}</span>`).join('')}</div>`:''}${d.note?`<p class="rep-note">${esc(d.note)}</p>`:''}<div class="rep-foot"><button type="button" class="linkbtn restore">Restore</button></div>`;
+    $('.restore', it).onclick = () => { delete S.deleted[id]; save(); refreshChrome(); renderReview(); const det = $('#rv-deleted'); if(det) det.open = true; };
+    list.appendChild(it);
+  });
+  return wrap;
 }
 function runSession(){
   if(RV.i >= RV.items.length){
-    const msg = RV.mode==='due' ? 'Right answers moved to a longer gap; misses come back tomorrow.' : 'Done. Anything you missed comes back in Review tomorrow; your other schedule dates didn\'t change.';
-    app.innerHTML = `<div class="lesson-head"><div class="eyebrow">${RV.title} · finished</div><p class="score-big num">${RV.right}/${RV.items.length}</p><p>${msg}</p></div><div class="row"><button class="btn" id="rv-back">Back to Review</button><a class="btn ghost" href="#home">Course</a></div>`;
+    const msg = RV.mode==='due' ? 'Right answers moved to a longer gap; misses come back tomorrow.' : 'Done. Due items you got right moved to a longer gap; misses come back tomorrow. Other dates didn\'t change.';
+    const sk = RV.skipped||0, dl = RV.deleted||0;
+    const extra = [sk ? `Skipped ${sk} (not scored${RV.mode==='due'?', still due':''})` : '', dl ? `Deleted ${dl}` : ''].filter(Boolean).join(' · ');
+    app.innerHTML = `<div class="lesson-head"><div class="eyebrow">${RV.title} · finished</div><p class="score-big num">${RV.right}/${RV.items.length-sk}</p><p>${msg}</p>${extra?`<p class="muted">${extra}.</p>`:''}</div><div class="row"><button class="btn" id="rv-back">Back to Review</button><a class="btn ghost" href="#home">Course</a></div>`;
     $('#rv-back').onclick=()=>{ RV=null; renderReview(); window.scrollTo(0,0); };
     RV=null; refreshChrome(); return;
   }
   const id = RV.items[RV.i];
   if(!Q[id] && !CARDS[id]){ RV.items.splice(RV.i,1); return runSession(); }
-  app.innerHTML = `<div class="quiz-top"><div class="eyebrow">${RV.title} · ${RV.i+1} of ${RV.items.length}</div><button class="btn ghost sm" id="rv-quit">End session</button></div><div class="bar"><span style="width:${RV.i/RV.items.length*100}%"></span></div><div class="qset" id="rbox"></div>`;
+  app.innerHTML = `<div class="quiz-top"><div class="eyebrow">${RV.title} · ${RV.i+1} of ${RV.items.length}</div><button class="btn ghost sm" id="rv-quit">End session</button></div><div class="bar"><span style="width:${RV.i/RV.items.length*100}%"></span></div><div class="qset" id="rbox"></div><div class="rv-tools"><button class="btn ghost sm" id="rv-skip" type="button">Skip</button><button class="btn ghost sm" id="rv-del" type="button">Delete</button><span class="small muted" id="rv-skipnote">Skip: not scored${RV.mode==='due'?', stays due':''}</span></div><div id="rv-delbox"></div>`;
   $('#rv-quit').onclick=()=>{ RV.items = RV.items.slice(0, RV.i); runSession(); };
+  RV.answered = false;
   const label = `From Lesson ${LBYID[(Q[id]||CARDS[id]).lesson].n}${S.review[id]?` · step ${S.review[id].box+1} of 5`:''}`;
   const advance = () => { runSession(); window.scrollTo(0,0); };
-  const onAnswer = ok => { if(ok) RV.right++; RV.i++; schedule(id, ok, RV.mode); save(); refreshChrome(); };
+  const onAnswer = ok => { if(ok) RV.right++; RV.i++; RV.answered = true; const sb=$('#rv-skip'), sn=$('#rv-skipnote'); if(sb) sb.hidden = true; if(sn) sn.hidden = true; schedule(id, ok, RV.mode); save(); refreshChrome(); };
+  $('#rv-skip').onclick = () => { if(RV.answered) return; RV.skipped = (RV.skipped||0) + 1; RV.i++; advance(); };
+  $('#rv-del').onclick = () => {
+    const box = $('#rv-delbox'); if(box.firstChild){ box.innerHTML = ''; return; }
+    box.innerHTML = `<div class="del-box"><p style="margin:0 0 6px"><b>Delete from Review and practice?</b> It stays on its lesson page. You can restore it under Deleted on the Review tab.</p><p class="small muted" style="margin:0 0 4px">Why? Tap any that fit (optional):</p><div class="chips">${Object.entries(DEL_REASONS).map(([k,v])=>`<button type="button" class="chipbtn" data-r="${k}" aria-pressed="false">${v}</button>`).join('')}</div><label class="small muted" for="del-note" style="display:block;margin-top:8px">Anything else? (optional)</label><textarea id="del-note" rows="2" maxlength="500"></textarea><p class="small muted" id="del-wrong" hidden>To get a wrong item fixed rather than hidden, use Report a problem on it too.</p><div class="row" style="margin-top:8px"><button class="btn sm" id="del-go" type="button">Delete it</button><button class="btn ghost sm" id="del-cancel" type="button">Cancel</button></div></div>`;
+    $$('.chipbtn', box).forEach(b => b.onclick = () => { b.setAttribute('aria-pressed', b.getAttribute('aria-pressed')==='true' ? 'false' : 'true'); $('#del-wrong').hidden = !$('.chipbtn[data-r="wrong"][aria-pressed="true"]', box); });
+    $('#del-cancel').onclick = () => { box.innerHTML = ''; };
+    $('#del-go').onclick = () => {
+      const isCard = !!CARDS[id] && !Q[id], c = CARDS[id];
+      let txt = ''; try{ txt = isCard ? `${c.t}${c.q?': '+c.q:''}` : textOf($('.q-prompt', $('#rbox'))); }catch(e){}
+      S.deleted = S.deleted || {};
+      S.deleted[id] = { at:Date.now(), kind: isCard?'card':'question', lesson:(Q[id]||CARDS[id]).lesson, reasons: $$('.chipbtn[aria-pressed="true"]', box).map(b=>b.dataset.r), note: $('#del-note').value.trim().slice(0,500), txt: String(txt).replace(/\s+/g,' ').trim().slice(0,300) };
+      save(); refreshChrome(); RV.deleted = (RV.deleted||0) + 1;
+      if(RV.answered) advance(); else { RV.items.splice(RV.i, 1); advance(); }
+    };
+    $('#del-note').focus();
+  };
   if(CARDS[id]) $('#rbox').appendChild(flashCard(id, { label, onAnswer, onNext: advance }));
   else $('#rbox').appendChild(qCard(id, { ctx:'review', label, nextLabel: RV.i===RV.items.length-1?'Finish':'Next', onAnswer, onNext: advance }));
 }

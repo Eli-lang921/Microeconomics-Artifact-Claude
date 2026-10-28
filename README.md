@@ -7,6 +7,7 @@ Master copy of Eli's CLEP Microeconomics study artifact.
 - `data/progress.json`: Eli's saved progress (lessons, quiz, review schedule, writing). Snapshot only; the live copy is in the artifact's database.
 - `data/reports/`: one file per problem report from the Reports tab.
 - `src/unit2/`: the Unit 2 source pieces (lessons, widgets, quiz) and the build script that merges them into `index.html`.
+- `src/review/patch.py`: the Oct 28 2026 Review upgrades (skip, delete with restore, 1-3 rating, practice counts as review), applied once to `index.html`.
 - `docs/unit2-build-notes.md`: Unit 2 decisions, sources, course errors found, quiz blueprint and audit results.
 
 ## How versions work
