@@ -6,7 +6,7 @@
 const QZ3T = {
   'q3-tu-1':['MS3 OS61','tu','data','M1 M5'], 'q3-tu-2':['MS3','tu','graphs','M2 M3'], 'q3-tu-3':['MS3 OS61','tu','terms','M2 M4'],
   'q3-tu-4':['MS3','tu','models','M6 M3'], 'q3-tu-5':['OS61','tu','data','M1 M5'],
-  'q3-max-1':['OS61','max','data','M5 M6'], 'q3-max-2':['OS61 MS3','max','data','M2 M3'], 'q3-max-3':['OS61','max','data','M2'],
+  'q3-max-1':['OS61','max','data','M5 M6'], 'q3-max-2':['OS61 MS3','max','data','M2 M3 M4'], 'q3-max-3':['OS61','max','data','M2'],
   'q3-max-4':['OS61 OS21','max','graphs','M6'], 'q3-max-5':['OS61','max','data','M1'], 'q3-max-6':['OS61 MS3','max','models','M3 M2'],
   'q3-dem-1':['MS3 CED16','dem','data','M4'], 'q3-dem-2':['MS3 OS62','dem','models','M1 M6'], 'q3-dem-3':['MS3 CED16','dem','graphs','M4'], 'q3-dem-4':['MS3 CED16','dem','models','M1'],
   'q3-eff-1':['OS62 MS3','eff','models','M2 M3'], 'q3-eff-2':['MS3 OS62','eff','models','M2 M3'], 'q3-eff-3':['MS3 OS62','eff','models','M5 M2'],
@@ -35,8 +35,8 @@ qz3('q3-max-1','l14',`Made-up numbers. Leo has <b>$10</b> for streaming hours ($
   [`3 hours and 4 snacks`,`3 hours and 5 snacks`,`5 hours and no snacks`,`No hours and 10 snacks`,`4 hours and 2 snacks`],0,
   `<p>Among the choices he can afford ($10 or less), 3 hours and 4 snacks gives the most total utility, <b>64 utils</b>. Total utility rises toward it (40, 52, 61, 64) and falls after it (60, 50), the step-by-step pattern from your course textbook's José.</p><p>3 hours and 5 snacks gives more (67) but costs $11, beyond his budget (M6). Putting everything into one good gives only 50 or 40 utils (M5).</p>`);
 qz3('q3-max-2','l14','Made-up numbers. Five shoppers have each spent their whole budget on tea ($2 a cup) and bagels ($3 each). Which shopper is already at her utility-maximizing bundle?',
-  [`Ana: last tea 8 utils, last bagel 12 utils`,`Ben: last tea 8 utils, last bagel 8 utils`,`Cal: last tea 0 utils, last bagel 0 utils`,`Dee: last tea 10 utils, last bagel 12 utils`,`Eve: last tea 6 utils, last bagel 12 utils`],0,
-  `<p>Divide by price. Ana: 8 ÷ $2 = 4 and 12 ÷ $3 = 4 utils per dollar: equal, with the budget spent, so no shift can help.</p><p>Ben has equal marginal utilities (M2), but per dollar tea gives 4 and bagels 2.67, so he should buy more tea. Cal's zero marginal utilities aren't the test (M3). Dee: 5 versus 4 (more tea); Eve: 3 versus 4 (more bagels).</p>`);
+  [`Ana: last tea 8 utils, last bagel 12 utils`,`Ben: last tea 8 utils, last bagel 8 utils`,`Cal: last tea 0 utils, last bagel 6 utils`,`Dee: last tea 10 utils, last bagel 12 utils`,`Eve: last tea 6 utils, last bagel 12 utils`],0,
+  `<p>Divide by price. Ana: 8 ÷ $2 = 4 and 12 ÷ $3 = 4 utils per dollar: equal, with the budget spent, so no shift can help.</p><p>Ben has equal marginal utilities (M2), but per dollar tea gives 4 and bagels 2.67, so he should buy more tea. Cal's last tea added nothing (0 per dollar versus 2 for bagels), so he should have bought more bagels instead (M3). Dee: 5 versus 4 (more tea); Eve: 3 versus 4 (more bagels).</p>`);
 qz3('q3-max-3','l14','Made-up numbers. Ben is at his utility-maximizing bundle of books and magazines. His last book gives 30 utils and his last magazine 6 utils. A magazine costs $3. What must a book cost?',
   [`$15`,`$3`,`$90`,`$5`,`$10`],0,
   `<p>At the best bundle, utility per dollar is equal: magazine 6 ÷ $3 = 2 utils per dollar, so the book must also give 2: $30 ÷ 2 = <b>$15</b>. Check with the ratio form (consumer equilibrium): $15 ÷ $3 = 5 = 30 ÷ 6.</p><p>$3 assumes the two goods give equal utility at equal prices (M2). $90 multiplies 30 × 3. $5 is the ratio of the marginal utilities, not a price.</p>`);

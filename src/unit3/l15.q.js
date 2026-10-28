@@ -140,7 +140,7 @@ const L15TAGS = {
   'l15-tf-subboth':['MS3 OS62','eff','terms','M3'], 'l15-sergei':['OS62','eff','models','M5'], 'l15-income-shift':['OS62','eff','graphs','M2'],
   'l15-ms-income':['MS3','eff','models','M5 M3'], 'l15-ceteris':['OS62','dem','terms','M1'], 'l15-heating':['OS62','eff','models','M5'],
   'l15-optimal-point':['MS3','dem','data','M4'],
-  'l15c-mup':['MS3','dem','models','M1'], 'l15c-new':['MS3','dem','data',''], 'l15c-demand':['MS3 OS62','dem','graphs','M1'], 'l15c-market':['MS3 CED16','dem','data','M4'],
+  'l15c-mup':['MS3','dem','models','M1'], 'l15c-new':['MS3','dem','data','M1'], 'l15c-demand':['MS3 OS62','dem','graphs','M1'], 'l15c-market':['MS3 CED16','dem','data','M4'],
   'l15c-sub':['MS3 OS62','eff','models','M3'], 'l15c-inc':['MS3 OS62','eff','data','M2'], 'l15c-income':['OS62','eff','models','M6'], 'l15c-skill':['OS62 CBS','eff','terms','M2']
 };
 u3tag(L15TAGS);
@@ -228,7 +228,7 @@ ${FIG3.l15relp()}
 <p>Put together:</p>
 ${FIG3.l15flow()}
 <p>For the good whose price fell (if it's a ${dt('normal-good','normal good')}), both effects say buy more: pizza goes from 2 to 4 slices. For the other good, they disagree. Your course: what happens to soda "is going to depend on the income, and the substitution effects." In its example soda stays at 1 can, so the two effects offset. A price <b>rise</b> runs everything in reverse.</p>
-<p>Because everything comes out of one budget, a price change can reach goods you'd never connect to it. Your course textbook's Sergei pays more for baseball bats and keeps buying the same number, so he buys fewer cameras: "a change in the price of one good can also have a range of effects, either positive or negative, on the quantity consumed of other goods." When home heating prices soared in 2005, households paid the bills and "cut back on what it valued least on the margin," such as dinners out.</p>
+<p>Because everything comes out of one budget, a price change can reach goods you'd never connect to it. Your course textbook's Sergei pays more for baseball bats and keeps buying the same number, so he buys fewer cameras: "a change in the price of one good can also have a range of effects, either positive or negative, on the quantity consumed of other goods." When home heating prices soared in 2005, each household paid the bills and "cut back on what it valued least on the margin," such as dinners out.</p>
 <p>Try the combinations, including ${dt('inferior-good','inferior goods')} (Lesson 6), where the income effect flips:</p>
 <div data-widget="effects"></div>
 <p>What to notice: the substitution effect always favors the good that got relatively cheaper. The income effect follows normal or inferior. Wherever they disagree, the total is uncertain without knowing which is stronger.</p>
