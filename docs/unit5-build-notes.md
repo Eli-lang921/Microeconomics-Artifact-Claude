@@ -138,3 +138,16 @@ Verifier result before the last round: L20 97, L21 97, L22 96, L23 94 (one gate 
 Tests after the last round: no page errors; 725 old questions and Units 1-4 unchanged; quiz withholding, scoring, S.quiz5 storage, old-state, blocked storage and cloud-failure tests pass; every Unit 5 lesson has no horizontal overflow at 375 px; all 40 quiz items fit at 375 px; generators clean.
 Left open (minor, recorded): misconception tags on every distractor (A-D12, B-#17); l27-mx-br wording (B-#22); some long sentences (B-#24); "Hide explanation" label in quiz hint mode is shared base code (B-#25); 2015 wheat $6.00 kept as the textbook's figure (A-D13); barsort widget has no lead-in sentence. "Perfectly elastic" (L22), "oligopoly"/"deadweight loss" (L28) and "total revenue" (L25) appear only in quotes, captions or comments, not in lesson body text, so they have no tap.
 Published to staging only: Version 6 (1793292587-5d98). Live artifact untouched.
+
+## Final review rounds and live publish (2026-11-01)
+Round 4 (fresh independent agent, whole unit) flagged quiz items that still overlapped lesson practice or had keys that could be argued. Fixed:
+- q5-mclr-1: new juice-bar numbers; the key is the short-run outcome (5 smoothies at $8.25 with ATC $8.25, MC $4.50); explanation names options by content because numeric choices are re-sorted.
+- q5-mmax-2: rent rises $10 a day; key "keep selling 6 units at $14; profit falls to $20 a day" (fixed cost doesn't move MR = MC).
+- q5-mineff-1: P = 28 - 2Q, MC $8; monopoly 5 at $18, efficient 10 at $8; consumer surplus falls $75, of which $50 becomes profit and $25 is deadweight loss. Tags M1 M3.
+- q5-mcmax-1: added why $12 is the right size but the wrong sign (price below ATC is a loss).
+- L25: added "Fixed costs don't move the choice" paragraph (De Beers still 300 at $1,400; only profit falls).
+Round 5 (separate agent) passed everything except one contradictory sentence in q5-mcmax-2's explanation, now: "$11 makes one candle too many: the 5th adds $7 to revenue but $8 to cost. $13 and $15 stop too early."
+Final tests on the live build: no page errors; regress vs the live base, 0 of 725 old questions changed and no Units 1-4 lessons changed; unit5.js all clean; 40 quiz items, 2 per subtopic; no horizontal overflow at 375 px.
+Published to live: Version 21 (1793576775-2229), built from live Version 1793210645-1479 plus Unit 5 only. Capabilities (db, sample, user) carried forward. Staging not republished; workbook_units3-5_staging.html has the same fixes.
+GitHub: snapshot before (commit 04fedea) and after this publish.
+
