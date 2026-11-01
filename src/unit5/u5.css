@@ -1,0 +1,24 @@
+/* Unit 5 figures */
+.u5mx{border-collapse:collapse;min-width:0;font-size:.9rem}
+.u5mx th,.u5mx td{border:1px solid var(--line);padding:6px 8px;text-align:center;white-space:normal;vertical-align:middle}
+.u5mx thead th{font-size:.82rem;text-transform:none;letter-spacing:0;color:var(--ink);background:var(--surface-2)}
+.u5mx tbody th{background:var(--surface-2);font-size:.82rem;text-align:left}
+.u5mx-corner{font-weight:600;color:var(--muted)!important}.u5mx-corner span{display:block;font-size:.75rem}
+.u5mx-c span{display:block;line-height:1.35}.u5mx-a{color:var(--g1);font-weight:700}.u5mx-b{color:var(--g2);font-weight:700}
+.u5mx-c.u5mx-hl{outline:3px solid var(--accent);outline-offset:-3px;background:var(--accent-soft)}
+.u5mx u{text-decoration-thickness:2px;text-underline-offset:3px}
+.u5mx-c button{all:unset}
+.u5spec{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;position:relative}
+@media (max-width:560px){.u5spec{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.u5spec .u3card{font-size:.88rem}.u5spec .u3card p{margin:.15rem 0}
+.u5bar{height:8px;border-radius:99px;background:linear-gradient(90deg,var(--g1),var(--g2));margin:.4rem 0 .2rem}
+.u5ends{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted)}
+.u5wf{display:grid;gap:6px}.u5wf-row{display:grid;grid-template-columns:minmax(7.5rem,11rem) 1fr;gap:8px;align-items:center;font-size:.9rem}
+.u5wf-bar{height:22px;border-radius:4px;display:flex;align-items:center;padding:0 6px;font-weight:700;font-size:.82rem;color:var(--ink);white-space:nowrap}
+@media (max-width:520px){.u5wf-row{grid-template-columns:1fr}}
+.u5cmp th{white-space:normal}.u5cmp td{white-space:normal;text-align:left;vertical-align:top;font-size:.88rem}
+.u5mxw td.u5mx-c{cursor:pointer}.u5mxw td.u5mx-c:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
+.u5mxw td.u5mx-c.sel{background:var(--accent-soft)}
+.u5io .u3arrow{transform:none!important;font-weight:700}
+@media (max-width:520px){.u5io .u3arrow{line-height:1;padding:2px 0}}
+.u3tbl.u5tight th,.u3tbl.u5tight td{padding:4px 4px;font-size:.86rem}

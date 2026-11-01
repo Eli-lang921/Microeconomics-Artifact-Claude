@@ -1,0 +1,7 @@
+  { n:5, title:'Firm Behavior and Market Structure', quiz:'#quiz5', qkey:'quiz5', blurb:'How firms choose output and price to maximize profit, and how that changes from perfect competition to monopoly, oligopoly and monopolistic competition.',
+    weight:'Firm behavior and market structure is about 23% to 33% of the exam, the largest section (College Board outline).',
+    cover:[['Profit: accounting versus economic profits; normal profit','Lesson 20'],['Profit: profit maximization, MR = MC rule','Lesson 21'],['Characteristics of different market structures','Lessons 22 and 28'],
+      ['Perfect competition: profit maximization','Lesson 22'],['Perfect competition: short-run supply and shut-down decision','Lesson 23'],['Perfect competition: firm and market behaviors in short-run and long-run equilibria','Lessons 23 and 24'],['Perfect competition: efficiency','Lesson 24'],
+      ['Monopoly: sources of market power; profit maximization','Lesson 25'],['Monopoly: inefficiency; price discrimination; natural monopoly','Lesson 26 (natural monopoly also in Lesson 25)'],
+      ['Oligopoly: interdependence, collusion, and cartels; game theory and payoff matrices; dominant strategies and Nash equilibrium','Lesson 27'],
+      ['Monopolistic competition: product differentiation and advertising; profit maximization; short-run and long-run equilibrium; excess capacity and inefficiency','Lesson 28']] }
