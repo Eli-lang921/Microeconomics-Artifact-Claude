@@ -16,7 +16,7 @@ Course: Modern States, Principles of Microeconomics (CLEP). Source files: unit t
 - Difficulty: match the exam, plus a slightly harder tier.
 - Writing: 2-3 optional prompts per lesson, graded by Claude in the page (sample capability) against a 4-point checklist, with a model answer.
 - Flashcards: 11-16 per lesson (see Flashcards below).
-- Review tab: everything is spaced. Miss → back tomorrow; right first time → back in 7 days; each correct due review moves it up 1 → 3 → 7 → 21 → 60 days, then mastered. Practice anytime by lesson, mixed 10/20/all sets, flashcards, and review ahead. Since Oct 28 2026, a right answer in practice (pick-a-unit/lesson sets or the lesson page) on an item that is due today counts as its due review and moves it up the ladder; items not yet due keep their dates; misses always count. Unit-quiz questions are kept out of free practice so the quiz stays unseen.
+- Review tab: everything is spaced. Miss → back tomorrow; right first time → back in 7 days; each correct due review moves it up 1 → 3 → 7 → 21 → 60 days, then mastered. Practice anytime by lesson, mixed 10/20/all sets, flashcards, and review ahead. Since Oct 28 2026, a right answer in practice (pick-a-unit/lesson sets or the lesson page) on an item that is due today counts as its due review and moves it up the ladder; items not yet due keep their dates; misses always count. Unit-quiz questions are kept out of free practice so the quiz stays unseen. Since Nov 2 2026, after a miss in Review, practice sets or flashcards Eli picks how it comes back (see Review upgrades 2), and practice by lesson can be limited to due or overdue items.
 - Unit quiz: 20 exam-style questions (5 choices), target 80%+ (Modern States voucher needs 75% on their final).
 - "Explain this" under every lesson section, graph, question, flashcard and writing prompt (see below).
 - "Report a problem" on every question, lesson, flashcard, Claude's writing grade, Claude's flashcard check and Claude's explanations (see Report inbox below).
@@ -52,6 +52,13 @@ Course: Modern States, Principles of Microeconomics (CLEP). Source files: unit t
 - To learn what Eli dislikes: ArtifactData get `data/users/me` doc `micro-workbook`, read `deleted` (reasons, notes, text) and low `ratings`. A "Wrong or broken" deletion is not a report; the delete box tells Eli to also use Report a problem.
 - Code: `src/review/patch.py` (applied once to `index.html`; every patch must match exactly once). `isDeleted`, `reviewable`, `DEL_REASONS`, `rateBox`, `deletedSection`, and the Skip/Delete handlers in `runSession`. Unit 3 staging is rebuilt from the patched page with `src/unit3/build.py`, so promoting Unit 3 keeps these features.
 
+## Review upgrades 2 (built Nov 2 2026; live)
+Eli's request (Nov 2 2026), with his answers to 4 questions: all three alternatives to "back to day one" available; applies to daily review, practice sets and flashcards (not lesson pages or unit quizzes); "needs review" means due today or overdue, as an optional toggle; build straight to live with a GitHub backup and notes.
+- **Miss choice**: after a wrong answer, a box under the explanation (flashcards: under the card, with its own Next button) asks "How should it come back?": Back to day one (default, the old rule, applied at once), Drop one step, Keep the same step (both shown with their gap in days, only when the item was already on a step above day one or mastered), Count it as right (exactly what a right answer would do in that session: a due item moves up the ladder, a not-yet-due item keeps its date, a new item starts at 7 days, a mastered item stays mastered). Changeable until Next. The session score stays honest (a miss is still a miss); the summary lists how many misses were counted as right, kept or dropped.
+- **Practice scope**: under "Practice any time", an Include toggle: "Everything in these lessons" or "Only due or overdue" (due date today or earlier). Applies to the 10/20/All question buttons and to Flashcards; counts show "x of y ... are due or overdue"; buttons disable when nothing matches. Remembered per device (localStorage `micro-rv-scope`).
+- Storage: nothing new in the progress doc; choices write the normal `review`/`mastered` entries.
+- Code: `src/review2/patch.py` (applied once to `index.html`). `snapReview`, `missStep`, `applyMiss`, `missBox`, `cardNext` in `runSession`, `getScope`/`setScope`/`isDueNow`.
+
 ## Unit 1 (built)
 1. Scarcity and opportunity cost (snooze widget, budget-line widget)
 2. Production possibilities frontier (PPF explorer: test points, steps, shifts)
@@ -77,19 +84,30 @@ Course: Modern States, Principles of Microeconomics (CLEP). Source files: unit t
 - Oct 23 2026: GitHub snapshot before (1db7387), Unit 2 added to the live workbook, snapshot after.
 - Oct 23 2026 (evening): 30 figures added across Unit 2 (src/unit2/figs.js, `FIG` and `fig`/`figs` helpers; `sdg` now supports zoomed axes, arrows, brackets). Reports fixed: l4-mktsoc and l4-capitalism are typed answers checked by Claude (question type 'text'); l5-g-net deleted; l6-tastes example added to the lesson.
 - Oct 28 2026: Review upgrades (skip, delete with reasons and restore, 1-3 rating, practice counts as review) added to the live workbook and the Unit 3 staging copy. Snapshots and details in the GitHub audit log.
+- Oct 28 2026: Unit 4 built into the Units 3-4 staging copy and audited by a separate agent (first-pass L16 92.5, L17 85, L18 92.5, L19 77.5; two one-answer problems, a missing mechanism, a widget edge case and five quiz near-duplicates, all fixed before publishing). Details in docs/unit4-build-notes.md.
+- Nov 2 2026: Review upgrades 2 (miss choice, due-only practice toggle) added to the live workbook (artifact version 1793576775-2229 → 1793621123-a957). GitHub snapshot before = bb7ceeb (identical to the live page); details in the GitHub audit log.
+- Oct 28 2026: Units 3 and 4 added to the live workbook on Eli's "Move to live" (artifact version 1793210645-1479), built with `--live` from the live page (version 1793186535-a9d1, identical to repo index.html). Progress carries over: `normalize()` adds `quiz3` and `quiz4`. Tests on the live build: 156 Unit 4 items, 0 bad; old progress kept; every route at 390px with no errors. No GitHub snapshot: this session had read-only repo access.
 
 ## Useful official resources
 - Free official sample questions: https://clep.collegeboard.org/clep/pdf/principles-of-microeconomics-fact-sheet.pdf
 - CLEP Principles of Microeconomics Examination Guide (PDF, $10, College Board) as a later calibration check.
 - Exam weighting: Basic Economic Concepts is about 10-16% of the exam; product markets (supply/demand, consumer choice, costs, market structure) are 55-70%.
 
-## Unit 3: Theory of Consumer Choice (built Oct 27 2026; in staging, not yet in the live workbook)
+## Unit 3: Theory of Consumer Choice (built Oct 27 2026; live since Oct 28 2026)
 - Staging: https://claude.ai/artifact/JmD52HyAjdCYJfgXoCdD6G (new "Unit 3 Staging" copy with its own empty progress; the Oct 22 Unit 2 staging copy is unchanged).
 - Lessons: 13 Total Utility and Marginal Utility (utility explorer, table sorter) · 14 Utility Maximization: Marginal Utility per Dollar (bundle explorer, one-purchase-at-a-time shopper, which-way sorter) · 15 From Utility to Demand: Income and Substitution Effects (demand builder, effects predictor, which-effect sorter). 12 core + 16 more questions each, 7/8/9 instructional visuals, 12 flashcards and 2 writing prompts each.
 - Unit 3 quiz (`#quiz3`): 20 five-choice items (TU/MU 5, MU per dollar 6, demand 4, income/substitution 5), submit-then-reveal, stored as `quiz3` in the progress doc.
 - Source: `src/unit3/` (build.py patches the live index.html). Details, source problems, coverage map, visual inventory, quiz blueprint and test record: docs/unit3-build-notes.md.
 - Audited by a separate agent against the rubric; fixes applied (see notes).
 
+## Unit 4: Production and Costs (built Oct 28 2026; live since Oct 28 2026)
+- Built into the same staging copy as Unit 3 (https://claude.ai/artifact/JmD52HyAjdCYJfgXoCdD6G, now titled "Units 3-4 Staging"; its separate test progress is kept). Eli's choices: update the Unit 3 staging copy, 4 lessons, leave explicit/implicit costs and accounting vs economic profit for Unit 5, and show the course's broken per-unit table corrected while teaching the U-curves with the textbook's longer Clip Joint table.
+- Lessons: 16 Production: Short Run, Long Run and Diminishing Returns (production explorer, returns sorter) · 17 Short-Run Costs: Fixed, Variable, Total and Average Cost (spread-the-fixed-cost explorer, cost-table fill-in) · 18 Marginal Cost and the Short-Run Cost Curves (what-moves-MC builder, MC-pulls-the-average explorer, MC vs ATC sorter) · 19 Long-Run Costs: Economies of Scale and the Least-Cost Input Mix (plant-size chooser, scale sorter, least-cost park cleaning, which-input sorter). 12 core + 16 more questions, 12 flashcards and 2 writing prompts each.
+- Unit 4 quiz (`#quiz4`): 20 five-choice items (short/long run 3, marginal product 4, short-run costs 5, productivity and MC 2, long-run costs 4, least-cost inputs 2), submit-then-reveal, stored as `quiz4` in the progress doc.
+- Course slips flagged in the lessons: per-unit table AVC/ATC values, the video's marginal costs (1.25/2.5 should be 0.25/0.50), a slide's worker label, and the "LRATC meets the lowest points" wording.
+- Source: `src/unit4/` (build.py patches the Unit 3 staging build; `--live` for promotion). Audited by a separate agent; all must-fix and should-fix items applied. Details and test record: docs/unit4-build-notes.md.
+
 ## Next
-- Promote Unit 3 to the live workbook on Eli's OK: run `python3 src/unit3/build.py <out> --live` (the patched `index.html` already has the Oct 28 review upgrades, so they carry over), snapshot to GitHub before and after, republish the live artifact.
+- Commit `src/unit4/` to GitHub (its source files are not in the repo or the Project; `docs/unit4-build-notes.md`, this plan and the live page were committed Nov 2 2026).
+- Unit 5: Firm Behavior and Market Structure. Starts with explicit vs implicit costs and accounting vs economic profit (held back from Unit 4 by Eli's choice).
 - Later: use the 1-3 ratings and the Deleted list to weight which questions Review shows (Eli wants an algorithm eventually; not designed yet).

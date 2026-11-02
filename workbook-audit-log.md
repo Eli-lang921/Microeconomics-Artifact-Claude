@@ -19,6 +19,16 @@ Lesson 2
 - [x] Lesson 1 "Resources for firms": list entrepreneurship as the fourth factor of production instead of "many textbooks add" it (the flashcards and questions already treat it as one of four, and so does the CLEP).
 
 ## Run history (newest first)
+### 2026-11-02 · Review upgrades 2: miss choice and due-only practice (on request)
+- Snapshots: before bb7ceeb (repo index.html was byte-identical to the live page, md5 685d9c36…), after = this commit · Artifact version 1793576775-2229 → 1793621123-a957
+- Eli's request: after a wrong answer, choose whether it goes back to day one or counts as right; when reviewing specific lessons, choose everything or only what needs review. His answers to 4 questions: offer all three alternatives (drop one step, same step, count as right); apply to daily review, practice sets and flashcards (not lesson pages or quizzes); "needs review" = due today or overdue, as an optional toggle; go straight to live with this backup and notes.
+- Added: a "How should it come back?" box after every miss in Review sessions and flashcards. Default Back to day one (the old rule); Drop one step / Keep the same step (only when the item was above day one or mastered, labelled with the gap in days); Count it as right (does what a right answer would in that session). Changeable until Next; flashcards wait on a Next button after a miss. Session score unchanged; the summary says how many misses were counted another way.
+- Added: Include toggle under Practice any time: "Everything in these lessons" or "Only due or overdue", for questions and flashcards, remembered per device. Counts show "x of y due"; buttons disable when nothing is due.
+- "How the schedule works" explains both. No change to stored data shape, lessons, questions, cards or quizzes.
+- Code: `src/review2/patch.py` (every patch matches exactly once).
+- Tests (Playwright, file build): due item missed → reset 1 day, drop 3 days, same 7 days, right 21 days, switching back and forth restores correctly; due flashcard missed → same step 21 days, Next/Finish works; mastered item missed → count as right stays mastered; new item missed → only reset/right offered, right = 7 days; due-only toggle on Eli's saved progress record (data/progress.json): 154 of 953 questions and 53 of 345 flashcards due; no page errors; no horizontal scroll at 375/390/1100 px, light and dark. Not tested: the real claude.ai sync after publish.
+- Also committed: `docs/unit4-build-notes.md` (from the Project) and the Project's newer plan as `workbook-plan.md`. `src/unit4/` is still not in the repo.
+
 ### 2026-10-28 · Review upgrades: skip, delete, 1-3 rating, practice counts as review (on request)
 - Snapshots: before de29882, after 31b53f9 · Changes: https://github.com/Eli-lang921/microeconomics-artifact-claude/compare/de29882...31b53f9
 - Live artifact version 1792786247-bda8 → 1793186535-a9d1 · Unit 3 staging (JmD52HyAjdCYJfgXoCdD6G) 1793153400-7d15 → 1793186559-74be (rebuilt from the patched live page with `src/unit3/build.py`).

@@ -224,6 +224,11 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .del-box{margin-top:10px;padding:12px 14px;border:1px dashed var(--line);border-radius:8px;background:var(--surface-2)}
 .del-box textarea{width:100%;margin-top:4px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;resize:vertical}
 .del-list{display:grid;gap:10px;margin-top:.6rem}
+/* Review upgrades 2: miss choice, practice scope */
+.miss-box{margin-top:12px;padding:12px 14px;border:1px solid var(--line);border-left:4px solid var(--g2);border-radius:8px;background:var(--surface)}
+.miss-box .seg button{font-size:.88rem}
+.miss-out{margin:8px 0 0}
+.scope-row{margin-top:12px;gap:8px}
 .nr-box{margin-top:1rem;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
 .nr-box label{display:block;font-weight:600;font-size:.92rem;margin:.6rem 0 4px}
 .nr-box label:first-child{margin-top:0}
@@ -540,6 +545,38 @@ function rateBox(id){
     const cur = ((S.ratings||{})[id]||{}).r || 0;
     w.innerHTML = `<span>Rate it (1 worst, 3 best)</span><span class="seg" role="group" aria-label="Rate this from 1, worst, to 3, best">${[1,2,3].map(n=>`<button type="button" data-v="${n}" aria-pressed="${cur===n}">${n}</button>`).join('')}</span>${cur?`<span>${['','Worst','Okay','Best'][cur]} · tap again to clear</span>`:''}`;
     w.querySelectorAll('button').forEach(b => b.onclick = () => { const v = +b.dataset.v; S.ratings = S.ratings || {}; if(cur===v) delete S.ratings[id]; else S.ratings[id] = { r:v, at:Date.now() }; save(); draw(); });
+  };
+  draw(); return w;
+}
+/* Miss choice: how a missed item comes back. Default is the normal rule (back to day one). */
+function snapReview(id){ return { r: S.review[id] ? { ...S.review[id] } : null, m: (S.mastered||{})[id] || null }; }
+function missStep(snap){ return snap.r ? snap.r.box : snap.m ? LADDER.length-1 : null; }
+function applyMiss(id, snap, how, mode){
+  if(snap.r) S.review[id] = { ...snap.r }; else delete S.review[id];
+  if(snap.m) S.mastered[id] = snap.m; else delete S.mastered[id];
+  if(how==='right') return schedule(id, true, mode);
+  const cur = missStep(snap);
+  if(how==='reset' || cur===null) return schedule(id, false, mode);
+  const box = how==='drop' ? Math.max(0, cur-1) : cur;
+  delete S.mastered[id];
+  S.review[id] = { box, due: daysFromToday(LADDER[box]), t: Date.now() };
+  return how;
+}
+function missBox(id, snap, mode, onPick){
+  const cur = missStep(snap), w = document.createElement('div'); w.className = 'miss-box';
+  const gap = n => n===1 ? '1 day' : n + ' days';
+  const opts = [['reset', 'Back to day one'],
+    ...(cur ? [['drop', `Drop one step (${gap(LADDER[cur-1])})`], ['same', `Keep the same step (${gap(LADDER[cur])})`]] : []),
+    ['right', 'Count it as right']];
+  let chosen = 'reset';
+  const result = () => {
+    if((S.mastered||{})[id]) return 'Stays mastered.';
+    const r = S.review[id]; if(!r) return 'Not scheduled.';
+    return `Comes back ${fmtDay(r.due)} · step ${r.box+1} of ${LADDER.length}${chosen==='right' && snap.r && r.due===snap.r.due ? ' (it wasn\'t due yet, so it keeps its date)' : ''}.`;
+  };
+  const draw = () => {
+    w.innerHTML = `<p style="margin:0 0 8px"><b>You missed this. How should it come back?</b></p><div class="seg" role="group" aria-label="How should this item be scheduled">${opts.map(([k,t])=>`<button type="button" data-k="${k}" aria-pressed="${k===chosen}">${t}</button>`).join('')}</div><p class="small muted miss-out" aria-live="polite">${esc(result())} You can change this until you move on.</p><div class="miss-next"></div>`;
+    $$('button[data-k]', w).forEach(b => b.onclick = () => { if(b.dataset.k===chosen) return; chosen = b.dataset.k; applyMiss(id, snap, chosen, mode); save(); refreshChrome(); onPick && onPick(chosen); const nx = $('.miss-next', w).innerHTML; draw(); $('.miss-next', w).innerHTML = nx; w.bindNext && w.bindNext(); });
   };
   draw(); return w;
 }
@@ -13402,6 +13439,10 @@ const ALLQ = () => Object.keys(Q).filter(k => LBYID[Q[k].lesson] && !Q[k].quiz);
 const RVSEL_KEY = 'micro-rv-sel';
 function getSel(){ try{ const v=JSON.parse(localStorage.getItem(RVSEL_KEY)); if(Array.isArray(v) && v.length) return v.filter(x=>LBYID[x]); }catch(e){} return LESSONS.map(l=>l.id); }
 function setSel(v){ try{ localStorage.setItem(RVSEL_KEY, JSON.stringify(v)); }catch(e){} }
+const RVSCOPE_KEY = 'micro-rv-scope';
+function getScope(){ try{ return localStorage.getItem(RVSCOPE_KEY)==='due' ? 'due' : 'all'; }catch(e){ return 'all'; } }
+function setScope(v){ try{ localStorage.setItem(RVSCOPE_KEY, v); }catch(e){} }
+const isDueNow = id => !!(S.review[id] && S.review[id].due <= Date.now());
 const fmtDay = t => new Date(t).toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'});
 function startSession(s, go){ RV = { ...s, i:0, right:0 }; if(go && location.hash!=='#review'){ location.hash='#review'; return; } renderReview(); window.scrollTo(0,0); }
 function renderReview(){
@@ -13412,8 +13453,11 @@ function renderReview(){
   const later = sched.filter(k=>!due.includes(k)).sort((a,b)=>S.review[a].due-S.review[b].due);
   const mastered = Object.keys(S.mastered||{}).length;
   const sel = getSel();
-  const qPool = ALLQ().filter(k=>sel.includes(Q[k].lesson) && !isDeleted(k));
-  const cPool = Object.keys(CARDS).filter(k=>sel.includes(CARDS[k].lesson) && !isDeleted(k));
+  const scope = getScope();
+  const qAll = ALLQ().filter(k=>sel.includes(Q[k].lesson) && !isDeleted(k));
+  const cAll = Object.keys(CARDS).filter(k=>sel.includes(CARDS[k].lesson) && !isDeleted(k));
+  const qPool = scope==='due' ? qAll.filter(isDueNow) : qAll;
+  const cPool = scope==='due' ? cAll.filter(isDueNow) : cAll;
   const lessonOf = k => (Q[k]||CARDS[k]).lesson;
   app.innerHTML = `<div class="lesson-head"><div class="eyebrow">Units 1 to ${UNITS.length}</div><h1 style="margin-top:.4rem">Review</h1>
     <p class="oneline">Two ways in: what's due today on your spaced schedule, or anything you want, any time.</p></div>
@@ -13424,20 +13468,24 @@ function renderReview(){
     <details class="deeper" style="margin-top:1rem"><summary>How the schedule works</summary><div class="deeper-body small">
       <p>Every question and flashcard you answer is scheduled. <b>Miss it</b> and it comes back tomorrow. <b>Get it right</b> the first time and it comes back in a week.</p>
       <p>Each time you get a due item right, the gap grows: 1 → 3 → 7 → 21 → 60 days. Get it right at 60 days and it's mastered. Miss it at any step and it starts over at 1 day.</p>
-      <p>Practice by lesson or unit counts too: get a question right that is <b>due today</b> and it moves up the ladder, just as in Due review. Items that aren't due yet keep their dates (Review ahead works the same way). Misses always count, so anything you miss comes back tomorrow.</p><p><b>Skip</b> moves on without scoring; the item stays due. <b>Delete</b> takes an item out of Review and practice (it stays on its lesson page); restore it any time under Deleted at the bottom of this page.</p></div></details>
+      <p>Practice by lesson or unit counts too: get a question right that is <b>due today</b> and it moves up the ladder, just as in Due review. Items that aren't due yet keep their dates (Review ahead works the same way). Misses always count, so anything you miss comes back tomorrow.</p><p><b>After a miss</b> (Review, practice sets and flashcards), you choose how it comes back: <b>Back to day one</b> (the normal rule), <b>Drop one step</b>, <b>Keep the same step</b>, or <b>Count it as right</b>. Lesson pages and unit quizzes always use the normal rule.</p><p><b>Include</b> under Practice any time: <b>Everything in these lessons</b> to refresh on all of it, or <b>Only due or overdue</b> for just what your schedule says needs review.</p><p><b>Skip</b> moves on without scoring; the item stays due. <b>Delete</b> takes an item out of Review and practice (it stays on its lesson page); restore it any time under Deleted at the bottom of this page.</p></div></details>
 
     <h2>Practice any time</h2>
-    <p class="muted small">Pick lessons (or a whole unit), then choose questions or flashcards.</p>
+    <p class="muted small">Pick lessons (or a whole unit), choose everything in them or only what's due, then choose questions or flashcards.</p>
     <div class="chips" id="sel" role="group" aria-label="Lessons to include">${LESSONS.map(l=>`<button class="chipbtn" data-l="${l.id}" aria-pressed="${sel.includes(l.id)}">Lesson ${LBYID[l.id].n}</button>`).join('')}${UNITS.map(U=>`<button class="chipbtn all" data-l="u${U.n}">Unit ${U.n}</button>`).join('')}<button class="chipbtn all" data-l="all">All</button></div>
-    <p class="small muted" style="margin:8px 0 4px">${qPool.length} questions and ${cPool.length} flashcards in your selection</p>
-    <div class="row"><button class="btn sm" data-n="10">10 questions</button><button class="btn sm" data-n="20">20 questions</button><button class="btn ghost sm" data-n="all">All ${qPool.length}</button><button class="btn ghost sm" id="rv-cards">Flashcards (${cPool.length})</button></div>
+    <div class="row scope-row"><span class="small muted">Include:</span><span class="seg" role="group" aria-label="Which items to include">${[['all','Everything in these lessons'],['due','Only due or overdue']].map(([k,t])=>`<button type="button" data-scope="${k}" aria-pressed="${scope===k}">${t}</button>`).join('')}</span></div>
+    <p class="small muted" style="margin:8px 0 4px">${scope==='due' ? `${qPool.length} of ${qAll.length} questions and ${cPool.length} of ${cAll.length} flashcards in your selection are due or overdue` : `${qPool.length} questions and ${cPool.length} flashcards in your selection`}</p>
+    <div class="row"><button class="btn sm" data-n="10"${qPool.length?'':' disabled'}>10 questions</button><button class="btn sm" data-n="20"${qPool.length?'':' disabled'}>20 questions</button><button class="btn ghost sm" data-n="all"${qPool.length?'':' disabled'}>All ${qPool.length}</button><button class="btn ghost sm" id="rv-cards"${cPool.length?'':' disabled'}>Flashcards (${cPool.length})</button></div>
+    ${scope==='due' && !qPool.length && !cPool.length ? `<div class="empty" style="margin-top:10px">Nothing in these lessons is due or overdue. Switch to <b>Everything in these lessons</b> to refresh on all of it.</div>` : ''}
     <p class="small" style="margin-top:8px"><a href="#cards">Browse, edit and add flashcards</a> · On each card, choose <b>Show answer</b> to flip it or <b>Type my answer</b> and Claude checks it.</p>
     ${sched.length?`<details class="deeper" style="margin-top:1.4rem"><summary>What's scheduled</summary><div class="deeper-body"><div class="tbl-wrap"><table><thead><tr><th>Lesson</th><th>Due now</th><th>Later</th></tr></thead><tbody>${LESSONS.map(l=>`<tr><td>${LBYID[l.id].n}. ${l.title}</td><td>${due.filter(k=>lessonOf(k)===l.id).length}</td><td>${later.filter(k=>lessonOf(k)===l.id).length}</td></tr>`).join('')}</tbody></table></div></div></details>`:''}`;
   const d=$('#rv-due'); if(d) d.onclick=()=>startSession({ title:'Due review', items: due.slice(0,25), mode:'due' });
   const a=$('#rv-ahead'); if(a) a.onclick=()=>startSession({ title:'Review ahead', items: later.slice(0,20), mode:'free' });
   $$('#sel .chipbtn').forEach(b=>b.onclick=()=>{ let s=getSel(); if(b.dataset.l==='all') s=LESSONS.map(l=>l.id); else if(/^u\d+$/.test(b.dataset.l)) s=LESSONS.filter(l=>'u'+l.unit===b.dataset.l).map(l=>l.id); else { s = s.includes(b.dataset.l) ? s.filter(x=>x!==b.dataset.l) : [...s, b.dataset.l]; if(!s.length) s=[b.dataset.l]; } setSel(s); renderReview(); });
-  $$('[data-n]').forEach(b=>b.onclick=()=>{ const n=b.dataset.n==='all'?qPool.length:+b.dataset.n; startSession({ title: sel.length===LESSONS.length?'Mixed practice':'Practice: '+sel.map(x=>'Lesson '+LBYID[x].n).join(', '), items: shuffle(qPool).slice(0,n), mode:'free' }); });
-  $('#rv-cards').onclick=()=>startSession({ title:'Flashcards', items: shuffle(cPool), mode:'free' });
+  const dueTag = scope==='due' ? ' (due only)' : '';
+  $$('[data-scope]').forEach(b=>b.onclick=()=>{ setScope(b.dataset.scope); renderReview(); });
+  $$('[data-n]').forEach(b=>b.onclick=()=>{ const n=b.dataset.n==='all'?qPool.length:+b.dataset.n; startSession({ title: (sel.length===LESSONS.length?'Mixed practice':'Practice: '+sel.map(x=>'Lesson '+LBYID[x].n).join(', '))+dueTag, items: shuffle(qPool).slice(0,n), mode:'free' }); });
+  $('#rv-cards').onclick=()=>startSession({ title:'Flashcards'+dueTag, items: shuffle(cPool), mode:'free' });
   app.appendChild(deletedSection());
 }
 function deletedSection(){
@@ -13456,21 +13504,32 @@ function deletedSection(){
 }
 function runSession(){
   if(RV.i >= RV.items.length){
-    const msg = RV.mode==='due' ? 'Right answers moved to a longer gap; misses come back tomorrow.' : 'Done. Due items you got right moved to a longer gap; misses come back tomorrow. Other dates didn\'t change.';
+    const msg = RV.mode==='due' ? 'Right answers moved to a longer gap; misses come back tomorrow unless you chose otherwise.' : 'Done. Due items you got right moved to a longer gap; misses come back tomorrow unless you chose otherwise. Other dates didn\'t change.';
     const sk = RV.skipped||0, dl = RV.deleted||0;
-    const extra = [sk ? `Skipped ${sk} (not scored${RV.mode==='due'?', still due':''})` : '', dl ? `Deleted ${dl}` : ''].filter(Boolean).join(' · ');
+    const ov = Object.values(RV.over||{}), ovn = k => ov.filter(x=>x===k).length;
+    const extra = [sk ? `Skipped ${sk} (not scored${RV.mode==='due'?', still due':''})` : '', dl ? `Deleted ${dl}` : '',
+      ovn('right') ? `${ovn('right')} miss${ovn('right')>1?'es':''} counted as right` : '', ovn('same') ? `${ovn('same')} kept on the same step` : '', ovn('drop') ? `${ovn('drop')} dropped one step` : ''].filter(Boolean).join(' · ');
     app.innerHTML = `<div class="lesson-head"><div class="eyebrow">${RV.title} · finished</div><p class="score-big num">${RV.right}/${RV.items.length-sk}</p><p>${msg}</p>${extra?`<p class="muted">${extra}.</p>`:''}</div><div class="row"><button class="btn" id="rv-back">Back to Review</button><a class="btn ghost" href="#home">Course</a></div>`;
     $('#rv-back').onclick=()=>{ RV=null; renderReview(); window.scrollTo(0,0); };
     RV=null; refreshChrome(); return;
   }
   const id = RV.items[RV.i];
   if(!Q[id] && !CARDS[id]){ RV.items.splice(RV.i,1); return runSession(); }
-  app.innerHTML = `<div class="quiz-top"><div class="eyebrow">${RV.title} · ${RV.i+1} of ${RV.items.length}</div><button class="btn ghost sm" id="rv-quit">End session</button></div><div class="bar"><span style="width:${RV.i/RV.items.length*100}%"></span></div><div class="qset" id="rbox"></div><div class="rv-tools"><button class="btn ghost sm" id="rv-skip" type="button">Skip</button><button class="btn ghost sm" id="rv-del" type="button">Delete</button><span class="small muted" id="rv-skipnote">Skip: not scored${RV.mode==='due'?', stays due':''}</span></div><div id="rv-delbox"></div>`;
+  app.innerHTML = `<div class="quiz-top"><div class="eyebrow">${RV.title} · ${RV.i+1} of ${RV.items.length}</div><button class="btn ghost sm" id="rv-quit">End session</button></div><div class="bar"><span style="width:${RV.i/RV.items.length*100}%"></span></div><div class="qset" id="rbox"></div><div id="rv-miss"></div><div class="rv-tools"><button class="btn ghost sm" id="rv-skip" type="button">Skip</button><button class="btn ghost sm" id="rv-del" type="button">Delete</button><span class="small muted" id="rv-skipnote">Skip: not scored${RV.mode==='due'?', stays due':''}</span></div><div id="rv-delbox"></div>`;
   $('#rv-quit').onclick=()=>{ RV.items = RV.items.slice(0, RV.i); runSession(); };
   RV.answered = false;
   const label = `From Lesson ${LBYID[(Q[id]||CARDS[id]).lesson].n}${S.review[id]?` · step ${S.review[id].box+1} of 5`:''}`;
   const advance = () => { runSession(); window.scrollTo(0,0); };
-  const onAnswer = ok => { if(ok) RV.right++; RV.i++; RV.answered = true; const sb=$('#rv-skip'), sn=$('#rv-skipnote'); if(sb) sb.hidden = true; if(sn) sn.hidden = true; schedule(id, ok, RV.mode); save(); refreshChrome(); };
+  const onAnswer = ok => { const snap = snapReview(id); if(ok) RV.right++; RV.i++; RV.answered = true; const sb=$('#rv-skip'), sn=$('#rv-skipnote'); if(sb) sb.hidden = true; if(sn) sn.hidden = true; schedule(id, ok, RV.mode); save(); refreshChrome();
+    if(!ok){ const mb = $('#rv-miss'), foot = $('#rbox .fb .q-foot'), box = missBox(id, snap, RV.mode, how => { RV.over = RV.over || {}; if(how==='reset') delete RV.over[id]; else RV.over[id] = how; });
+      if(foot) foot.before(box); else if(mb){ mb.innerHTML = ''; mb.appendChild(box); } } };
+  const cardNext = () => {
+    const mb = $('#rv-miss'), box = mb && mb.firstChild;
+    if(!box) return advance();
+    const put = () => { const slot = $('.miss-next', box); slot.innerHTML = `<div class="row" style="margin-top:10px"><button class="btn sm" type="button">${RV.i>=RV.items.length?'Finish':'Next'}</button></div>`; const b = $('button', slot); b.onclick = advance; return b; };
+    box.bindNext = () => { $('button', $('.miss-next', box)).onclick = advance; };
+    put().focus({preventScroll:true}); box.scrollIntoView({block:'nearest'});
+  };
   $('#rv-skip').onclick = () => { if(RV.answered) return; RV.skipped = (RV.skipped||0) + 1; RV.i++; advance(); };
   $('#rv-del').onclick = () => {
     const box = $('#rv-delbox'); if(box.firstChild){ box.innerHTML = ''; return; }
@@ -13487,7 +13546,7 @@ function runSession(){
     };
     $('#del-note').focus();
   };
-  if(CARDS[id]) $('#rbox').appendChild(flashCard(id, { label, onAnswer, onNext: advance }));
+  if(CARDS[id]) $('#rbox').appendChild(flashCard(id, { label, onAnswer, onNext: cardNext }));
   else $('#rbox').appendChild(qCard(id, { ctx:'review', label, nextLabel: RV.i===RV.items.length-1?'Finish':'Next', onAnswer, onNext: advance }));
 }
 
