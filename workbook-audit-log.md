@@ -19,6 +19,13 @@ Lesson 2
 - [x] Lesson 1 "Resources for firms": list entrepreneurship as the fourth factor of production instead of "many textbooks add" it (the flashcards and questions already treat it as one of four, and so does the CLEP).
 
 ## Run history (newest first)
+### 2026-11-02 · Review upgrades 3: written response and new-version requests (on request)
+- Snapshots: before b01cd80 (identical to live 1793621123-a957), after: this commit · Artifact version 1793621123-a957 → 1793668520-6f88
+- Added next to the 1-3 rating on every question: **Change to written response** (Claude rewrites it in the page as a short typed answer, previewed before saving, undo with "Switch back to the original"; unit quizzes keep the original) and **Ask for a new version** (files a "variant:<qid>" request in the Reports tab; built in fix passes into `VARIANTS`, versions share one schedule). Rating plus both buttons now also on Unit 2-5 quiz results.
+- Tests (Chrome, Claude mocked): old progress loads unchanged (638 review items, 12 ratings, 13 deletions); convert, save, render as written with the table kept, grade, switch back; generator conversion stores its exhibit; typed-answer items get no written button; request saved and listed in Reports; random version pick and quiz uses version 1; Unit 1 quiz shows no extra buttons; Unit 2-5 results show 20/20/20/40; no overflow at 375-390 px; no page errors.
+- Not tested: real Claude rewrites and grading in the claude.ai app (mocked here).
+- Duplicates: skipped at Eli's request.
+
 ### 2026-11-02 · Review upgrades 2: miss choice and due-only practice (on request)
 - Snapshots: before bb7ceeb (repo index.html was byte-identical to the live page, md5 685d9c36…), after = this commit · Artifact version 1793576775-2229 → 1793621123-a957
 - Eli's request: after a wrong answer, choose whether it goes back to day one or counts as right; when reviewing specific lessons, choose everything or only what needs review. His answers to 4 questions: offer all three alternatives (drop one step, same step, count as right); apply to daily review, practice sets and flashcards (not lesson pages or quizzes); "needs review" = due today or overdue, as an optional toggle; go straight to live with this backup and notes.

@@ -220,6 +220,14 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .rv-tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}
 .rate-row{margin-top:10px}
 .rate{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:.85rem;color:var(--muted)}
+/* Review upgrades 3: written response, new-version requests */
+.qx{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin-top:8px}
+.qx-box{flex-basis:100%;margin-top:4px;padding:10px 12px;border:1px dashed var(--line);border-radius:8px;background:var(--surface-2);min-width:0}
+.qx-box p{margin:.3rem 0}
+.qx-box textarea{width:100%;margin-top:4px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;line-height:1.5;resize:vertical}
+.wr-prev{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:10px 12px;margin:8px 0;overflow-wrap:anywhere}
+.wr-prev details{margin-top:6px;font-size:.92rem}
+.wr-note{font-size:.82rem;color:var(--muted);margin:0 0 6px}
 .rate .seg button{padding:3px 12px}
 .del-box{margin-top:10px;padding:12px 14px;border:1px dashed var(--line);border-radius:8px;background:var(--surface-2)}
 .del-box textarea{width:100%;margin-top:4px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;resize:vertical}
@@ -522,7 +530,7 @@ async function initStore(){
 /* spaced review for everything: misses come back after 1 day; right answers after 7.
    Each correct "due" review moves an item up the ladder: 1 → 3 → 7 → 21 → 60 days, then it's mastered. */
 const LADDER = [1,3,7,21,60];
-function normalize(st){ st.lessons=st.lessons||{}; st.quiz=st.quiz||{best:null,last:null,attempts:0}; st.quiz2=st.quiz2||{best:null,last:null,attempts:0,history:[]}; st.quiz3=st.quiz3||{best:null,last:null,attempts:0,history:[]}; st.quiz4=st.quiz4||{best:null,last:null,attempts:0,history:[]}; st.quiz5=st.quiz5||{best:null,last:null,attempts:0,history:[]}; st.review=st.review||{}; st.mastered=st.mastered||{}; st.writing=st.writing||{}; st.reports=st.reports||[]; st.deleted=st.deleted||{}; st.ratings=st.ratings||{}; return st; }
+function normalize(st){ st.lessons=st.lessons||{}; st.quiz=st.quiz||{best:null,last:null,attempts:0}; st.quiz2=st.quiz2||{best:null,last:null,attempts:0,history:[]}; st.quiz3=st.quiz3||{best:null,last:null,attempts:0,history:[]}; st.quiz4=st.quiz4||{best:null,last:null,attempts:0,history:[]}; st.quiz5=st.quiz5||{best:null,last:null,attempts:0,history:[]}; st.review=st.review||{}; st.mastered=st.mastered||{}; st.writing=st.writing||{}; st.reports=st.reports||[]; st.deleted=st.deleted||{}; st.ratings=st.ratings||{}; st.written=st.written||{}; return st; }
 function schedule(id, ok, mode){
   const today = startOfDay(Date.now()), r = S.review[id];
   if(ok && r && (mode==='free' || mode==='practice') && r.due <= Date.now()) mode = 'due';
@@ -547,6 +555,131 @@ function rateBox(id){
     w.querySelectorAll('button').forEach(b => b.onclick = () => { const v = +b.dataset.v; S.ratings = S.ratings || {}; if(cur===v) delete S.ratings[id]; else S.ratings[id] = { r:v, at:Date.now() }; save(); draw(); });
   };
   draw(); return w;
+}
+/* ---------- Review upgrades 3: written-response versions and new-version requests ---------- */
+/* Extra versions of a question, written in fix passes for "variant:<qid>" requests. Q[qid] is version 1.
+   Each entry is a question object like Q's (type, kind, prompt, options, answer, explain, keepOrder; or gen()).
+   Versions share the question id, so they share one review schedule, rating and report history. */
+const VARIANTS = {};
+function versionsOf(qid){ return [Q[qid], ...(VARIANTS[qid] || [])]; }
+function pickVersion(qid){
+  const vs = versionsOf(qid); if(vs.length < 2) return instance(qid);
+  const k = Math.floor(Math.random() * vs.length), b = vs[k];
+  const inst = b.gen ? b.gen() : b.build ? b.build() : { ...b };
+  inst._ver = k + 1; inst._vers = vs.length; return inst;
+}
+const plainOf = html => textOf(Object.assign(document.createElement('div'), { innerHTML: html || '' }));
+function exhibitsOf(html){
+  const d = document.createElement('div'); d.innerHTML = html || ''; const picked = [];
+  d.querySelectorAll('.tbl-wrap,.qg,figure,table,svg,img,pre').forEach(n => { if(!picked.some(p => p.contains(n))) picked.push(n); });
+  return picked.map(n => n.outerHTML).join('');
+}
+function correctText(inst){
+  if(!inst) return '';
+  if(inst.type==='mc') return plainOf(inst.options[inst.answer]);
+  if(inst.type==='num') return `${inst.unit==='dollars'?money(inst.answer):fmt(inst.answer)} ${inst.unit||''}`.trim();
+  return plainOf(inst.model || '');
+}
+/* The written version of a question, or null. Unit quizzes never use it (qInst checks ctx). */
+function writtenInst(qid){
+  const w = (S.written || {})[qid]; if(!w || !Q[qid]) return null;
+  let ex = w.ex || '', explain = w.explain || '';
+  if(!Q[qid].gen){ try{ const b = instance(qid); ex = exhibitsOf(b.prompt); explain = b.explain || ''; }catch(e){} }
+  return { type:'text', kind:'written', _written:true,
+    prompt: `<p>${esc(w.prompt)}</p>${ex}`,
+    model: esc(w.model),
+    points: [...(w.points || []), `The correct answer in the original version of this question: ${w.key}`],
+    explain };
+}
+function qInst(qid, ctx){
+  if(ctx === 'quiz') return instance(qid);
+  return writtenInst(qid) || pickVersion(qid);
+}
+function writtenRewritePrompt(qid, inst){
+  const L = LBYID[Q[qid].lesson];
+  const kind = inst.type==='mc' ? (Q[qid].kind==='tf' ? 'true-or-false' : 'multiple-choice') : inst.type==='num' ? 'numeric worked problem' : 'practice';
+  const letters = 'ABCDE';
+  const choices = inst.type==='mc' ? '\nChoices:\n' + inst.options.map((o,i)=>`${letters[i]}. ${plainOf(o)}${i===inst.answer?'  (correct)':''}`).join('\n') : '';
+  const hasEx = !!exhibitsOf(inst.prompt);
+  return `You are rewriting one practice question from a beginner's microeconomics workbook (CLEP Principles of Microeconomics${L?`, Lesson ${L.n}: ${L.title}`:''}) as a short written-response question. The student will type 1-3 sentences in their own words, and Claude will later check that answer against your model answer.
+
+Original ${kind} question:
+${plainOf(inst.prompt)}${choices}
+Correct answer: ${correctText(inst)}
+Explanation from the workbook: ${plainOf(inst.explain).slice(0,1500)}
+
+Rules:
+- Test the same idea with the same correct answer. Keep every number, name and setting from the original.
+- ${hasEx ? 'The original table or graph stays on screen right below your question, so refer to it ("the table below", "the graph below") instead of repeating its numbers.' : 'The question must make sense on its own.'}
+- Ask for the answer and a short reason (why, or how you know), so a lucky guess cannot pass.
+- Do not reveal or hint at the answer. Do not list choices. Do not write "Which of the following".
+- Plain text only: no markdown, no bullet points, no em dashes. Keep the question under 60 words.
+- Model answer: 1-3 plain sentences a strong beginner could write. Key points: 2 or 3 short phrases a correct answer must contain.
+
+Reply with only JSON in this shape:
+{"prompt":"the written question","model":"the model answer","points":["key point","key point"]}`;
+}
+function qExtras(qid, inst, host, ctx, onSwitch){
+  if(!Q[qid]) return;
+  const row = document.createElement('div'); row.className = 'qx'; host.appendChild(row);
+  const isWritten = () => !!(S.written || {})[qid];
+  const canWrite = inst && Q[qid].type !== 'text' && (inst._written || inst.type==='mc' || inst.type==='num');
+  const wb = document.createElement('button'); wb.type = 'button'; wb.className = 'btn ghost sm';
+  const vb = document.createElement('button'); vb.type = 'button'; vb.className = 'btn ghost sm'; vb.textContent = 'Ask for a new version';
+  const tag = document.createElement('span'); tag.dataset.rep = 'variant:' + qid;
+  const label = () => { wb.textContent = isWritten() ? 'Switch back to the original' : 'Change to written response'; };
+  const closeBox = () => { const b = row.querySelector('.qx-box'); if(b) b.remove(); };
+  const openBox = html => { closeBox(); const b = document.createElement('div'); b.className = 'qx-box'; b.innerHTML = html; row.appendChild(b); return b; };
+  if(canWrite){ label(); row.appendChild(wb); }
+  row.appendChild(vb); row.appendChild(tag); fillTag(tag);
+  wb.onclick = async () => {
+    if(isWritten()){
+      delete S.written[qid]; save(); label(); onSwitch && onSwitch();
+      openBox('<p class="small">Switched back. Next time you\'ll see the original question.</p>'); return;
+    }
+    if(!inst || inst._written){ openBox('<p class="small">Already switched back. Open the question again to make a new written version.</p>'); return; }
+    const box = openBox('<p class="small">Claude is rewriting this as a written question…</p><div class="row"><button class="btn ghost sm stop" type="button">Stop</button></div>');
+    const sample = await getSample();
+    if(!sample){ box.innerHTML = '<p class="small">Rewriting needs Claude, which isn\'t available in this view. Open the workbook in the Claude app while signed in.</p>'; return; }
+    const ctl = new AbortController(); $('.stop', box).onclick = () => ctl.abort();
+    wb.disabled = true;
+    try{
+      const r = await sample.json(writtenRewritePrompt(qid, inst), { ...OPUS_LOW, signal: ctl.signal });
+      const p = String((r && r.prompt) || '').trim(), m = String((r && r.model) || '').trim();
+      if(p.length < 10 || p.length > 700 || m.length < 3) throw { code:'invalid_json' };
+      const pts = Array.isArray(r.points) ? r.points.map(x => String(x).slice(0,200)).filter(Boolean).slice(0,4) : [];
+      const rec = { prompt:p, model:m.slice(0,800), points:pts, key:correctText(inst).slice(0,400), from:inst.type, at:Date.now() };
+      if(Q[qid].gen){
+        rec.ex = exhibitsOf(inst.prompt); rec.explain = String(inst.explain || '');
+        if(rec.ex.length + rec.explain.length > 40000){ box.innerHTML = '<p class="small">This question\'s graph is too large to save as a written version. Try a different one, or ask for a new version instead.</p>'; return; }
+      }
+      box.innerHTML = `<p class="small"><b>Here's the written version.</b> Keep it, or have Claude try again.</p><div class="wr-prev"><p style="margin:0">${esc(p)}</p>${exhibitsOf(inst.prompt)?'<p class="wr-note" style="margin-top:6px">The same table or graph will show under it.</p>':''}<details><summary>Model answer</summary><p>${esc(m)}</p>${pts.length?`<p class="small muted">Key points: ${esc(pts.join('; '))}</p>`:''}</details></div><p class="wr-note">It replaces this question in lessons and Review (unit quizzes keep the original). Your schedule, rating and reports stay with it. You can switch back any time.</p><div class="row"><button class="btn sm keep" type="button">Use this version</button><button class="btn ghost sm again" type="button">Try again</button><button class="btn ghost sm no" type="button">Cancel</button></div>`;
+      $('.keep', box).onclick = () => { S.written = S.written || {}; S.written[qid] = rec; save(); label(); box.innerHTML = '<p class="small">Saved. From now on this question comes up as a written response. You can switch back any time.</p>'; };
+      $('.again', box).onclick = () => { closeBox(); wb.click(); };
+      $('.no', box).onclick = closeBox;
+    }catch(err){
+      box.innerHTML = `<p class="small">${esc(err && err.code==='invalid_json' ? 'Claude\'s rewrite didn\'t come back in a usable form. Try again.' : sampleErrorMsg(err && err.code))}</p>`;
+    }finally{ wb.disabled = false; }
+  };
+  vb.onclick = () => {
+    if(row.querySelector('.qx-box textarea')) return;
+    const box = openBox(`<label class="small muted" for="vr-${esc(qid)}">What should change? (optional: numbers, graph, story, choices)</label><textarea id="vr-${esc(qid)}" rows="2" maxlength="1000" placeholder="Leave blank for all of them"></textarea><p class="wr-note">Claude writes it the next time you ask it to fix your workbook reports. Both versions stay and share one review schedule.</p><div class="row"><button class="btn sm" type="button">Send request</button><button class="btn ghost sm" type="button">Cancel</button></div>`);
+    const [send, cancel] = box.querySelectorAll('button'), ta = $('textarea', box);
+    cancel.onclick = closeBox;
+    send.onclick = async () => {
+      send.disabled = true; cancel.disabled = true;
+      const note = ta.value.trim() || 'New version: new numbers, graph look, story and choices; same concept.';
+      let ctxText = '';
+      try{ const b = (inst && !inst._written) ? inst : instance(qid);
+        ctxText = `Question as shown:\n${plainOf(b.prompt)}${b.type==='mc'?'\nChoices:\n'+b.options.map((o,i)=>`${'ABCDE'[i]}. ${plainOf(o)}`).join('\n'):''}\nCorrect answer: ${correctText(b)}${inst && inst._ver ? `\n(Shown as version ${inst._ver} of ${inst._vers}.)` : ''}`; }catch(e){}
+      const how = await addReport('variant:' + qid, note, ctxText);
+      box.innerHTML = how==='sent'
+        ? '<p class="small" style="margin:0">Requested. Track it under <a href="#reports">Reports</a>. Ask Claude to "fix my workbook reports" when you want it built.</p>'
+        : '<p class="small" style="margin:0">Saved on this device. It will be sent when you\'re signed in to Claude and online.</p>';
+      fillTag(tag); setTimeout(() => { if(box.isConnected) box.remove(); }, 5000);
+    };
+    ta.focus();
+  };
 }
 /* Miss choice: how a missed item comes back. Default is the normal rule (back to day one). */
 function snapReview(id){ return { r: S.review[id] ? { ...S.review[id] } : null, m: (S.mastered||{})[id] || null }; }
@@ -10026,6 +10159,7 @@ async function removeReport(r){
 function describeWhere(where){
   where = String(where);
   if(where.startsWith('general:')){ const k = where.slice(8); return { title: GENERAL_TOPICS[k] || 'General report', snip:'', href: GENERAL_HREF[k] || null }; }
+  if(where.startsWith('variant:')){ const inner = describeWhere('question:'+where.slice(8)); return { title: inner.title + ' · New version request', snip: inner.snip, href: inner.href }; }
   if(where.startsWith('explain:')){ const inner = describeWhere(where.slice(8)); return { title: inner.title + ' · Claude\'s explanation', snip: inner.snip, href: inner.href }; }
   const ci = where.indexOf(':'), kind = where.slice(0, ci), id = where.slice(ci+1);
   if(kind==='section' || kind==='widget'){ const [lid, name] = id.split('|'); const L = LBYID[lid];
@@ -10058,8 +10192,9 @@ function fillTag(tag){
   tag.classList.add('st-'+r.status);
   if(RESOLVED(r.status)){
     const note = r.reply ? (r.reply.length>140 ? r.reply.slice(0,137)+'…' : r.reply) : '';
-    tag.innerHTML = `${r.status==='fixed'?'Fixed':'Checked'} ${shortDay(r.fixedAt||r.at)}${note?` <span class="rt-note">· ${esc(note)}</span>`:''}`;
-  } else tag.textContent = r.status==='unsent' ? 'Reported (not sent yet)' : `Reported ${shortDay(r.at)} · open`;
+    tag.innerHTML = `${String(r.where).startsWith('variant:') ? (r.status==='fixed'?'New version added':'Version request checked') : r.status==='fixed'?'Fixed':'Checked'} ${shortDay(r.fixedAt||r.at)}${note?` <span class="rt-note">· ${esc(note)}</span>`:''}`;
+  } else if(String(r.where).startsWith('variant:')) tag.textContent = r.status==='unsent' ? 'New version requested (not sent yet)' : `New version requested ${shortDay(r.at)} · open`;
+  else tag.textContent = r.status==='unsent' ? 'Reported (not sent yet)' : `Reported ${shortDay(r.at)} · open`;
 }
 function updateRepUI(){
   $$('.rep-tag[data-rep]').forEach(fillTag);
@@ -10096,15 +10231,15 @@ function reportLink(where, host, ctxFn){
 /* ---------- question card ---------- */
 function instance(qid){ const b = Q[qid]; return b.gen ? b.gen() : b.build ? b.build() : b; }
 const qSrcLine = qid => { const q = Q[qid]; if(!q || !q.src) return ''; return `<p class="qsrc">Source: ${esc(srcLabel(q.src))}${q.clep?` · CLEP topic: ${esc(q.clep)}`:''}${q.skill&&SKILL_LABEL[q.skill]?` · Skill: ${SKILL_LABEL[q.skill]}`:''}</p>`; };
-const KIND_LABEL = { mc:'Multiple choice', tf:'True or false', graph:'Graph', num:'Worked problem', text:'Typed answer' };
+const KIND_LABEL = { mc:'Multiple choice', tf:'True or false', graph:'Graph', num:'Worked problem', text:'Typed answer', written:'Written response' };
 function qCard(qid, { ctx, label, onAnswer, onNext, nextLabel }){
   const el = document.createElement('div'); el.className='q';
-  let inst = instance(qid), chosen = null, shown = null;
+  let inst = qInst(qid, ctx), chosen = null, shown = null;
   const draw = () => {
     const kind = inst.kind || Q[qid].kind || (inst.type==='num'?'num':'mc');
     const opts = inst.type==='mc' ? (inst.keepOrder ? inst.options.map((t,i)=>({t,i})) : shuffle(inst.options.map((t,i)=>({t,i})))) : null;
     const letters = 'ABCDE';
-    el.innerHTML = `<div class="q-meta"><span>${label||''}</span><span>${KIND_LABEL[kind]||'Question'}${Q[qid].gen?' · new numbers each time':''}</span></div>
+    el.innerHTML = `<div class="q-meta"><span>${label||''}</span><span>${KIND_LABEL[kind]||'Question'}${Q[qid].gen&&!inst._written?' · new numbers each time':''}${inst._written?' · your version':''}${inst._vers?` · version ${inst._ver} of ${inst._vers}`:''}</span></div>
       <div class="q-prompt">${inst.prompt}</div>
       ${opts ? `<div class="opts${kind==='tf'?' tf':''}">${opts.map((o,k)=>`<button class="opt" data-i="${o.i}">${kind==='tf'?'':`<span class="ol">${letters[k]}</span>`}<span>${o.t}</span></button>`).join('')}</div>`
              : inst.type==='text' ? `<form class="txtq"><textarea rows="3" class="fc-ta" aria-label="Your answer" placeholder="Type your answer in your own words"></textarea><div class="row" style="margin-top:8px"><button class="btn sm" type="submit">Check with Claude</button><button class="btn ghost sm stop" type="button" hidden>Stop</button></div></form>` : `<form class="numrow"><input id="in-${qid}-${ctx}" aria-label="Your answer" inputmode="decimal" autocomplete="off" placeholder="Your answer"><span class="muted small">${inst.unit||''}</span><button class="btn sm" type="submit">Check</button></form>`}
@@ -10123,6 +10258,9 @@ function qCard(qid, { ctx, label, onAnswer, onNext, nextLabel }){
       return s;
     }, () => chosen ? 'full' : 'hint', 'Explain this'));
     mountReport('question:'+qid, $('.q-tools > .rep-slot', el));
+    if(inst._written){ const sb = document.createElement('button'); sb.type='button'; sb.className='rep-link'; sb.textContent='Switch back to the original';
+      sb.onclick = () => { delete S.written[qid]; save(); if(!chosen){ inst = qInst(qid, ctx); draw(); } else { sb.replaceWith(Object.assign(document.createElement('span'),{className:'small muted',textContent:'Switched back. Next time you\'ll see the original.'})); } };
+      $('.q-tools > .rep-slot', el).appendChild(sb); }
     if(opts){
       $$('.opt', el).forEach(b => b.addEventListener('click', () => {
         const i = +b.dataset.i, ok = i === inst.answer;
@@ -10173,9 +10311,9 @@ function qCard(qid, { ctx, label, onAnswer, onNext, nextLabel }){
     const ansTxt = inst.type==='num' ? `<p class="muted small">Answer: ${inst.unit==='dollars'?money(inst.answer):fmt(inst.answer)+' '+(inst.unit||'')}</p>` : '';
     fb.innerHTML = `<p class="verdict ${ok?'good':'bad'}">${ok?pick(['Correct.','Right.','Yes, that\'s it.']):(inst._grade && inst._grade.verdict==='partial' ? 'Partly right. Here\'s how it works:' : 'Not quite. Here\'s how it works:')}</p>${inst.type==='text' ? textFb(inst) : ok?'':ansTxt}<div class="explain">${inst.explain}</div>${qSrcLine(qid)}<div class="q-foot row"></div>`;
     const foot = $('.q-foot', fb);
-    if(Q[qid].gen && ctx==='practice'){ const b=document.createElement('button'); b.className='btn ghost sm'; b.textContent='Try new numbers'; b.onclick=()=>{ inst = instance(qid); draw(); }; foot.appendChild(b); }
+    if(Q[qid].gen && ctx==='practice' && !inst._written){ const b=document.createElement('button'); b.className='btn ghost sm'; b.textContent='Try new numbers'; b.onclick=()=>{ inst = qInst(qid, ctx); draw(); }; foot.appendChild(b); }
     if(onNext){ const b=document.createElement('button'); b.className='btn sm'; b.textContent=nextLabel||'Next'; b.onclick=onNext; foot.appendChild(b); b.focus({preventScroll:true}); }
-    const rr = document.createElement('div'); rr.className = 'rate-row'; rr.appendChild(rateBox(qid)); fb.appendChild(rr);
+    const rr = document.createElement('div'); rr.className = 'rate-row'; rr.appendChild(rateBox(qid)); if(ctx!=='quiz') qExtras(qid, inst, rr, ctx); fb.appendChild(rr);
     onAnswer && onAnswer(ok);
   };
   draw();
@@ -13111,6 +13249,7 @@ function renderQuiz2Results(){
       s += `\n\nThe student answered: ${pj<0?'nothing':letters[pj]+'. '+t(pj)} (${ok?'correct':'incorrect'}).\nCorrect answer: ${letters[cj]}. ${t(cj)}\nExplanation shown in the workbook: ${textOf($('.explain', el))}`;
       return s; }, () => 'full', 'Explain this'));
     mountReport('question:'+id, $('.rep-slot', el));
+    { const rr = document.createElement('div'); rr.className = 'rate-row'; rr.appendChild(rateBox(id)); qExtras(id, Q[id].gen ? null : Q[id], rr, 'results'); el.appendChild(rr); }
     box.appendChild(el);
   });
   $('#q2again').onclick = () => { QZ2R = null; QZ2 = qz2New(); qz2Save(); renderQuiz2(); window.scrollTo(0,0); };
@@ -13215,6 +13354,7 @@ function renderQuiz3Results(){
       s += `\n\nThe student answered: ${pj<0?'nothing':letters[pj]+'. '+t(pj)} (${ok?'correct':'incorrect'}).\nCorrect answer: ${letters[cj]}. ${t(cj)}\nExplanation shown in the workbook: ${textOf($('.explain', el))}`;
       return s; }, () => 'full', 'Explain this'));
     mountReport('question:'+id, $('.rep-slot', el));
+    { const rr = document.createElement('div'); rr.className = 'rate-row'; rr.appendChild(rateBox(id)); qExtras(id, Q[id].gen ? null : Q[id], rr, 'results'); el.appendChild(rr); }
     box.appendChild(el);
   });
   $('#q3again').onclick = () => { QZ3R = null; QZ3 = qz3New(); qz3Save(); renderQuiz3(); window.scrollTo(0,0); };
@@ -13319,6 +13459,7 @@ function renderQuiz4Results(){
       s += `\n\nThe student answered: ${pj<0?'nothing':letters[pj]+'. '+t(pj)} (${ok?'correct':'incorrect'}).\nCorrect answer: ${letters[cj]}. ${t(cj)}\nExplanation shown in the workbook: ${textOf($('.explain', el))}`;
       return s; }, () => 'full', 'Explain this'));
     mountReport('question:'+id, $('.rep-slot', el));
+    { const rr = document.createElement('div'); rr.className = 'rate-row'; rr.appendChild(rateBox(id)); qExtras(id, Q[id].gen ? null : Q[id], rr, 'results'); el.appendChild(rr); }
     box.appendChild(el);
   });
   $('#q4again').onclick = () => { QZ4R = null; QZ4 = qz4New(); qz4Save(); renderQuiz4(); window.scrollTo(0,0); };
@@ -13424,6 +13565,7 @@ function renderQuiz5Results(){
       s += `\n\nThe student answered: ${pj<0?'nothing':letters[pj]+'. '+t(pj)} (${ok?'correct':'incorrect'}).\nCorrect answer: ${letters[cj]}. ${t(cj)}\nExplanation shown in the workbook: ${textOf($('.explain', el))}`;
       return s; }, () => 'full', 'Explain this'));
     mountReport('question:'+id, $('.rep-slot', el));
+    { const rr = document.createElement('div'); rr.className = 'rate-row'; rr.appendChild(rateBox(id)); qExtras(id, Q[id].gen ? null : Q[id], rr, 'results'); el.appendChild(rr); }
     box.appendChild(el);
   });
   $('#q5again').onclick = () => { QZ5R = null; QZ5 = qz5New(); qz5Save(); renderQuiz5(); window.scrollTo(0,0); };
@@ -13579,7 +13721,7 @@ function renderReports(){
   app.innerHTML = `<div class="lesson-head"><div class="eyebrow">Your feedback</div><h1 style="margin-top:.4rem">My reports</h1>
     <p class="oneline">Every problem you've reported in this workbook, and what Claude did about it.</p></div>
     <div class="readout"><div><b class="num">${open.length}</b><span>open</span></div><div><b class="num">${done.filter(r=>r.status==='fixed').length}</b><span>fixed</span></div><div><b class="num">${done.filter(r=>r.status==='nochange').length}</b><span>no change needed</span></div></div>
-    <div class="callout"><p><b>How fixes happen.</b> Claude isn't alerted when you report. When you want fixes, ask Claude in a chat in this project: <i>"fix my workbook reports."</i> It works through the open ones, updates the page, and leaves a note on each report here.</p>${signedOut?'<p class="small">You\'re not connected to your Claude account right now, so reports stay on this device until you are.</p>':''}</div>
+    <div class="callout"><p><b>How fixes happen.</b> Claude isn't alerted when you report. When you want fixes, ask Claude in a chat in this project: <i>"fix my workbook reports."</i> It works through the open ones, updates the page, and leaves a note on each report here.</p><p class="small">Requests from <b>Ask for a new version</b> under a question show here too; Claude writes the new version in the same pass.</p>${signedOut?'<p class="small">You\'re not connected to your Claude account right now, so reports stay on this device until you are.</p>':''}</div>
     ${all.length ? `<div class="chips" role="group" aria-label="Show">${[['all',`All (${all.length})`],['open',`Open (${open.length})`],['done',`Handled (${done.length})`]].map(([k,t])=>`<button class="chipbtn" data-f="${k}" aria-pressed="${f===k}">${t}</button>`).join('')}</div>` : ''}
     <div class="row" style="margin-top:1rem"><button class="btn sm" id="nr-open" type="button">New report</button><span class="small muted">For anything: a bug, an idea, a lesson, the whole workbook.</span></div>
     <div id="nr-slot"></div>
