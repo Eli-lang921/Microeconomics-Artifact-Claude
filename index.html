@@ -503,17 +503,18 @@ async function flush(){
 async function initStore(){
   const local = loadLocal(); if(local) S = normalize(local);
   setSync('local', 'Progress is saved on this device only');
-  if(!(window.claude && typeof window.claude.use==='function')){ refreshChrome(); return; }
+  if(!(window.claude && typeof window.claude.use==='function')){ syncAutoCards(); refreshChrome(); return; }
   try{
     const [db, user] = await Promise.all([window.claude.use('db'), window.claude.use('user')]);
     const uid = user ? await user.id() : null;
-    if(!db || !uid){ setSync(uid===null && user ? 'none':'local', uid===null && user ? 'Sign in to claude.ai to keep progress across devices. For now it stays on this device.' : 'Progress is saved on this device only'); return; }
+    if(!db || !uid){ syncAutoCards(); setSync(uid===null && user ? 'none':'local', uid===null && user ? 'Sign in to claude.ai to keep progress across devices. For now it stays on this device.' : 'Progress is saved on this device only'); return; }
     Store.ref = db.collection('data/users/' + uid).doc('micro-workbook');
     const snap = await Store.ref.get();
     const remote = snap.exists ? snap.data() : null;
     Store.mode = 'cloud';
     if(remote && remote.v===1 && (remote.updated||0) >= (S.updated||0)){ S = normalize(JSON.parse(JSON.stringify(remote))); saveLocal(); render(); }
     else if(S.updated){ await flush(); }
+    if(syncAutoCards() && view==='home') render();
     setSync('cloud','Progress syncs to your Claude account (phone and computer)');
     startReports(); startCards();
     Store.ref.onSnapshot(s => {
@@ -523,6 +524,7 @@ async function initStore(){
     }, () => { setSync('local','Live sync paused. Progress is still saved on this device.'); });
   }catch(e){
     setSync('local','Could not reach your account. Progress is saved on this device for now.');
+    syncAutoCards();
   }
   refreshChrome();
 }
@@ -544,6 +546,12 @@ function schedule(id, ok, mode){
   return 'kept';
 }
 const isDeleted = id => !!(S.deleted && S.deleted[id]);
+/* Flashcards join Review automatically once any core question of their lesson is answered (Lesson 14 always counts).
+   A card already in Review, mastered or deleted is never added again. New cards are due today at step 1. */
+const CARD_AUTO_ALWAYS = ['l14'];
+function lessonStarted(lid){ const L = LBYID[lid], rec = (S.lessons[lid]||{}).practice || {}; return CARD_AUTO_ALWAYS.includes(lid) || !!(L && L.core.some(q => rec[q])); }
+function enqueueCards(lid){ let n = 0; cardsFor(lid).forEach(id => { if(S.review[id] || (S.mastered||{})[id] || isDeleted(id)) return; S.review[id] = { box:0, due: startOfDay(Date.now()), t: Date.now() }; n++; }); return n; }
+function syncAutoCards(){ let n = 0; LESSONS.forEach(L => { if(lessonStarted(L.id)) n += enqueueCards(L.id); }); if(n){ save(); refreshChrome(); } return n; }
 const reviewable = id => !!(Q[id] || CARDS[id]) && !isDeleted(id);
 const DEL_REASONS = { easy:'Too easy', confusing:'Confusing', offtopic:'Not useful for the exam', repetitive:'Repetitive', wrong:'Wrong or broken', dislike:'Just don\'t like it' };
 /* 1-3 rating (1 = worst, 3 = best). Stored only, for a future algorithm. */
@@ -726,6 +734,7 @@ function recordPractice(qid, ok){
   const prev = L.practice[qid];
   L.practice[qid] = { ok: ok || !!(prev && prev.ok) };
   schedule(qid, ok, 'practice');
+  if(LBYID[lid] && LBYID[lid].core.includes(qid)) enqueueCards(lid);
   save(); refreshChrome();
 }
 
@@ -10485,6 +10494,7 @@ function cardEditor({ cid=null, lesson=null, onDone }){
   return el;
 }
 function onCardsChanged(){
+  if(Store.mode==='cloud') syncAutoCards();
   $$('.rep-tag[data-rep]').forEach(fillTag);
   refreshChrome();
   if(view==='cards' && !CARDV.editing) renderCards();
