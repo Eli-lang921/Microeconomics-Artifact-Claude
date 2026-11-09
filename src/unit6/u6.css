@@ -1,0 +1,8 @@
+/* Unit 6: graphs as answer choices (two per row on a phone, three on wider screens), flashcard visuals */
+.opts.vis{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:640px){.opts.vis{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.opts.vis .opt{flex-direction:column;align-items:stretch;gap:4px;padding:6px 8px}
+.opts.vis .opt>span:last-child{display:block;min-width:0}
+.u6vis{display:block}.u6vis svg,svg.u6m{width:100%;height:auto;display:block}
+.wr-vis{margin:.6rem 0}
+.fc-vis{margin:.7rem 0 .2rem;max-width:380px}.fc-vis svg,.fc-vis .qg svg{width:100%;height:auto;display:block}.fc-vis .qg{max-width:none;margin:0}.fc-vis figure{margin:0}
