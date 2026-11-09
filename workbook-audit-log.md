@@ -80,3 +80,9 @@ Lesson 2
 - Fixed: nothing. Rule "no backup, no changes" applied: artifact, database and reports were not modified.
 - Proposed: 0
 - Notes: Push to GitHub was refused because Cowork scheduled tasks can't attach a GitHub repo, so the job moved to a Claude Code routine with this repo attached.
+
+## 2026-11-09: Review upgrades 4 (optional extras, Lucky guess)
+- Why: Review had 781 active items, 460 due on Nov 8 (535 by Nov 9). Eli asked to trim it and to be able to mark a right answer as a lucky guess.
+- Change (src/review4/patch.py): "More practice" questions and quick checks no longer join Review automatically; "Add to Review" / "Remove from Review" on each after answering. One-time move on first load: optional items in Review go to `S.parked` (schedule kept), flag `S.trim1`. "Lucky guess? Count it as a miss" (with Undo) after every right answer except unit quizzes.
+- Tests (Playwright, Eli's progress record v1464): 336 optional items parked, 463 left in Review, 343 due now (was 535); lesson core lucky guess resets to day one and Undo restores step 4 exactly; extra missed stays out of Review, Add puts it at day one, Remove parks it; Review session lucky guess drops the score by one and shows the miss choices; no page errors; no horizontal scroll at 390 px.
+- Published: live Version 25 (1794267266-8554), force-overwrite approved by Eli because the live version was byte-identical (sha256 5cd5aac4…) to the base edited here. Capabilities carried forward.

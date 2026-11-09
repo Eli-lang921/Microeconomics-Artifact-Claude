@@ -235,6 +235,9 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 /* Review upgrades 2: miss choice, practice scope */
 .miss-box{margin-top:12px;padding:12px 14px;border:1px solid var(--line);border-left:4px solid var(--g2);border-radius:8px;background:var(--surface)}
 .miss-box .seg button{font-size:.88rem}
+/* Review upgrades 4: optional extras, lucky guess */
+.verdict .lucky{margin-left:10px;font-size:.85rem;font-weight:400}
+.opt-rv{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;margin-left:auto}
 .miss-out{margin:8px 0 0}
 .scope-row{margin-top:12px;gap:8px}
 .nr-box{margin-top:1rem;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
@@ -532,8 +535,9 @@ async function initStore(){
 /* spaced review for everything: misses come back after 1 day; right answers after 7.
    Each correct "due" review moves an item up the ladder: 1 → 3 → 7 → 21 → 60 days, then it's mastered. */
 const LADDER = [1,3,7,21,60];
-function normalize(st){ st.lessons=st.lessons||{}; st.quiz=st.quiz||{best:null,last:null,attempts:0}; st.quiz2=st.quiz2||{best:null,last:null,attempts:0,history:[]}; st.quiz3=st.quiz3||{best:null,last:null,attempts:0,history:[]}; st.quiz4=st.quiz4||{best:null,last:null,attempts:0,history:[]}; st.quiz5=st.quiz5||{best:null,last:null,attempts:0,history:[]}; st.review=st.review||{}; st.mastered=st.mastered||{}; st.writing=st.writing||{}; st.reports=st.reports||[]; st.deleted=st.deleted||{}; st.ratings=st.ratings||{}; st.written=st.written||{}; return st; }
+function normalize(st){ st.lessons=st.lessons||{}; st.quiz=st.quiz||{best:null,last:null,attempts:0}; st.quiz2=st.quiz2||{best:null,last:null,attempts:0,history:[]}; st.quiz3=st.quiz3||{best:null,last:null,attempts:0,history:[]}; st.quiz4=st.quiz4||{best:null,last:null,attempts:0,history:[]}; st.quiz5=st.quiz5||{best:null,last:null,attempts:0,history:[]}; st.review=st.review||{}; st.mastered=st.mastered||{}; st.writing=st.writing||{}; st.reports=st.reports||[]; st.deleted=st.deleted||{}; st.ratings=st.ratings||{}; st.written=st.written||{}; st.parked=st.parked||{}; return st; }
 function schedule(id, ok, mode){
+  if(!S.review[id] && !(S.mastered||{})[id] && (mode==='practice' || mode==='free') && isOptional(id)) return 'optional';
   const today = startOfDay(Date.now()), r = S.review[id];
   if(ok && r && (mode==='free' || mode==='practice') && r.due <= Date.now()) mode = 'due';
   if(!ok){ S.review[id] = { box:0, due: daysFromToday(1), t: Date.now() }; delete S.mastered[id]; return 'missed'; }
@@ -545,13 +549,56 @@ function schedule(id, ok, mode){
   if(!r && !S.mastered[id]){ S.review[id] = { box:2, due: daysFromToday(LADDER[2]), t: Date.now() }; return 'added'; }
   return 'kept';
 }
+/* ---------- Review upgrades 4 (2026-11-09): optional extras and Lucky guess ---------- */
+/* "More practice" questions and quick checks are optional: they join Review only when Eli taps Add to Review.
+   Core lesson questions, unit quiz questions and flashcards still join automatically.
+   S.parked keeps the schedule of optional items taken out of Review, so adding one back restores its step. */
+function isOptional(id){ const q = Q[id]; if(!q || q.quiz) return false; const L = LBYID[q.lesson]; return !!L && !L.core.includes(id); }
+function parkOptional(){
+  if(S.trim1) return 0; let n = 0; S.parked = S.parked || {};
+  Object.keys(S.review).forEach(id => { if(isOptional(id)){ S.parked[id] = { ...S.review[id], at: Date.now() }; delete S.review[id]; n++; } });
+  S.trim1 = Date.now(); return n || 1;
+}
+function restoreSnap(id, snap){ if(snap.r) S.review[id] = { ...snap.r }; else delete S.review[id]; if(snap.m) S.mastered[id] = snap.m; else delete S.mastered[id]; }
+function addOptional(id, ok){
+  S.parked = S.parked || {}; const p = S.parked[id], now = Date.now();
+  if(!ok) S.review[id] = { box:0, due: daysFromToday(1), t: now };
+  else if(p) S.review[id] = { box: p.box, due: p.due > now ? p.due : daysFromToday(LADDER[p.box]), t: now };
+  else S.review[id] = { box:2, due: daysFromToday(LADDER[2]), t: now };
+  delete S.parked[id]; delete S.mastered[id];
+}
+function removeOptional(id){ S.parked = S.parked || {}; if(S.review[id]) S.parked[id] = { ...S.review[id], at: Date.now() }; delete S.review[id]; }
+function optBox(qid, getOk){
+  const w = document.createElement('span'); w.className = 'opt-rv';
+  const draw = () => {
+    const r = S.review[qid];
+    w.innerHTML = r ? `<span class="small muted">In Review · back ${fmtDay(r.due)}</span><button type="button" class="btn ghost sm">Remove from Review</button>`
+                    : `<button type="button" class="btn ghost sm">Add to Review</button><span class="small muted">Optional · not in Review</span>`;
+    $('button', w).onclick = () => { if(S.review[qid]) removeOptional(qid); else addOptional(qid, getOk()); save(); refreshChrome(); draw(); };
+  };
+  w.redraw = draw; draw(); return w;
+}
+/* onAnswer + onLucky for questions that count as lesson practice (lesson pages, single-question view). */
+function practiceHandlers(qid, after){
+  let pre = null;
+  return {
+    onAnswer: ok => { const lid = Q[qid].lesson; pre = { snap: snapReview(qid), prac: (((S.lessons[lid]||{}).practice)||{})[qid] }; recordPractice(qid, ok); after && after(); },
+    onLucky: lucky => {
+      if(!pre) return; const lid = Q[qid].lesson, wasIn = !!S.review[qid];
+      restoreSnap(qid, pre.snap); const P = S.lessons[lid].practice; if(pre.prac) P[qid] = { ...pre.prac }; else delete P[qid];
+      recordPractice(qid, !lucky);
+      if(wasIn && !S.review[qid]){ addOptional(qid, !lucky); save(); refreshChrome(); }
+      after && after();
+    }
+  };
+}
 const isDeleted = id => !!(S.deleted && S.deleted[id]);
 /* Flashcards join Review automatically once any core question of their lesson is answered (Lesson 14 always counts).
    A card already in Review, mastered or deleted is never added again. New cards are due today at step 1. */
 const CARD_AUTO_ALWAYS = ['l14'];
 function lessonStarted(lid){ const L = LBYID[lid], rec = (S.lessons[lid]||{}).practice || {}; return CARD_AUTO_ALWAYS.includes(lid) || !!(L && L.core.some(q => rec[q])); }
 function enqueueCards(lid){ let n = 0; cardsFor(lid).forEach(id => { if(S.review[id] || (S.mastered||{})[id] || isDeleted(id)) return; S.review[id] = { box:0, due: startOfDay(Date.now()), t: Date.now() }; n++; }); return n; }
-function syncAutoCards(){ let n = 0; LESSONS.forEach(L => { if(lessonStarted(L.id)) n += enqueueCards(L.id); }); if(n){ save(); refreshChrome(); } return n; }
+function syncAutoCards(){ let n = parkOptional(); LESSONS.forEach(L => { if(lessonStarted(L.id)) n += enqueueCards(L.id); }); if(n){ save(); refreshChrome(); } return n; }
 const reviewable = id => !!(Q[id] || CARDS[id]) && !isDeleted(id);
 const DEL_REASONS = { easy:'Too easy', confusing:'Confusing', offtopic:'Not useful for the exam', repetitive:'Repetitive', wrong:'Wrong or broken', dislike:'Just don\'t like it' };
 /* 1-3 rating (1 = worst, 3 = best). Stored only, for a future algorithm. */
@@ -10241,7 +10288,7 @@ function reportLink(where, host, ctxFn){
 function instance(qid){ const b = Q[qid]; return b.gen ? b.gen() : b.build ? b.build() : b; }
 const qSrcLine = qid => { const q = Q[qid]; if(!q || !q.src) return ''; return `<p class="qsrc">Source: ${esc(srcLabel(q.src))}${q.clep?` · CLEP topic: ${esc(q.clep)}`:''}${q.skill&&SKILL_LABEL[q.skill]?` · Skill: ${SKILL_LABEL[q.skill]}`:''}</p>`; };
 const KIND_LABEL = { mc:'Multiple choice', tf:'True or false', graph:'Graph', num:'Worked problem', text:'Typed answer', written:'Written response' };
-function qCard(qid, { ctx, label, onAnswer, onNext, nextLabel }){
+function qCard(qid, { ctx, label, onAnswer, onNext, nextLabel, onLucky }){
   const el = document.createElement('div'); el.className='q';
   let inst = qInst(qid, ctx), chosen = null, shown = null;
   const draw = () => {
@@ -10318,11 +10365,19 @@ function qCard(qid, { ctx, label, onAnswer, onNext, nextLabel }){
   const finish = (ok) => {
     const fb = $('.fb', el);
     const ansTxt = inst.type==='num' ? `<p class="muted small">Answer: ${inst.unit==='dollars'?money(inst.answer):fmt(inst.answer)+' '+(inst.unit||'')}</p>` : '';
-    fb.innerHTML = `<p class="verdict ${ok?'good':'bad'}">${ok?pick(['Correct.','Right.','Yes, that\'s it.']):(inst._grade && inst._grade.verdict==='partial' ? 'Partly right. Here\'s how it works:' : 'Not quite. Here\'s how it works:')}</p>${inst.type==='text' ? textFb(inst) : ok?'':ansTxt}<div class="explain">${inst.explain}</div>${qSrcLine(qid)}<div class="q-foot row"></div>`;
+    el._ok = ok; const okTxt = pick(['Correct.','Right.','Yes, that\'s it.']);
+    fb.innerHTML = `<p class="verdict ${ok?'good':'bad'}"><span class="vt">${ok?okTxt:(inst._grade && inst._grade.verdict==='partial' ? 'Partly right. Here\'s how it works:' : 'Not quite. Here\'s how it works:')}</span></p>${inst.type==='text' ? textFb(inst) : ok?'':ansTxt}<div class="explain">${inst.explain}</div>${qSrcLine(qid)}<div class="q-foot row"></div>`;
     const foot = $('.q-foot', fb);
     if(Q[qid].gen && ctx==='practice' && !inst._written){ const b=document.createElement('button'); b.className='btn ghost sm'; b.textContent='Try new numbers'; b.onclick=()=>{ inst = qInst(qid, ctx); draw(); }; foot.appendChild(b); }
     if(onNext){ const b=document.createElement('button'); b.className='btn sm'; b.textContent=nextLabel||'Next'; b.onclick=onNext; foot.appendChild(b); b.focus({preventScroll:true}); }
     const rr = document.createElement('div'); rr.className = 'rate-row'; rr.appendChild(rateBox(qid)); if(ctx!=='quiz') qExtras(qid, inst, rr, ctx); fb.appendChild(rr);
+    const ob = ctx!=='quiz' && isOptional(qid) ? optBox(qid, () => el._ok) : null; if(ob) rr.prepend(ob);
+    if(ok && ctx!=='quiz'){
+      const v = $('.verdict', fb), lk = document.createElement('button'); lk.type = 'button'; lk.className = 'linkbtn lucky'; let lucky = false;
+      const drawLk = () => { v.className = 'verdict ' + (lucky ? 'bad' : 'good'); $('.vt', v).textContent = lucky ? 'Counted as a miss (lucky guess).' : okTxt; lk.textContent = lucky ? 'Undo' : 'Lucky guess? Count it as a miss'; };
+      lk.onclick = () => { lucky = !lucky; el._ok = !lucky; drawLk(); onLucky && onLucky(lucky); if(ob) ob.redraw(); };
+      v.appendChild(lk); drawLk();
+    }
     onAnswer && onAnswer(ok);
   };
   draw();
@@ -13099,7 +13154,7 @@ function renderLesson(L){
   mountReport('lesson:'+L.id, $('#lrep'));
   mountReport('lesson:'+L.id, $('#lrep-end'));
   $$('[data-widget]', app).forEach(el => { el.classList.add('widget'); try{ W[el.dataset.widget](el); }catch(e){ el.innerHTML='<p class="muted">This graph failed to load. Reload the page to try again.</p>'; console.error(e); } });
-  $$('[data-check]', app).forEach(el => { el.classList.add('qcheck'); el.innerHTML = '<p class="eyebrow">Quick check · not scheduled for review</p>'; el.dataset.check.split(',').forEach((qid,k,arr) => { if(Q[qid]) el.appendChild(qCard(qid, { ctx:'check', label: arr.length>1 ? `Quick check ${k+1} of ${arr.length}` : 'Quick check' })); }); });
+  $$('[data-check]', app).forEach(el => { el.classList.add('qcheck'); el.innerHTML = '<p class="eyebrow">Quick check · optional, not in Review unless you add it</p>'; el.dataset.check.split(',').forEach((qid,k,arr) => { if(Q[qid]) el.appendChild(qCard(qid, { ctx:'check', label: arr.length>1 ? `Quick check ${k+1} of ${arr.length}` : 'Quick check' })); }); });
   addSectionExplains($('article', app), L, 'h2');
   addSectionExplains($('.deeper-body', app), L, 'h3');
   $$('.widget', app).forEach(wg => {
@@ -13111,14 +13166,14 @@ function renderLesson(L){
     mountReport(`widget:${L.id}|${name}`, rs, () => wCtx().slice(0,4000));
     wg.after(holder);
   });
-  const status = q => rec[q] ? (rec[q].ok?' · answered ✓':' · answered, review pending') : '';
-  const onAns = qid => ok => { recordPractice(qid, ok); const pp=lessonProgress(L); $('#pp').textContent=`${pp.done}/${pp.total} answered`; };
-  L.core.forEach((qid,k) => $('#qset').appendChild(qCard(qid, { ctx:'practice', label:`Question ${k+1}${status(qid)}`, onAnswer: onAns(qid) })));
+  const status = q => rec[q] ? (rec[q].ok?' · answered ✓': S.review[q] ? ' · answered, review pending' : ' · answered, missed') : '';
+  const onAns = qid => practiceHandlers(qid, () => { const pp=lessonProgress(L); $('#pp').textContent=`${pp.done}/${pp.total} answered`; });
+  L.core.forEach((qid,k) => $('#qset').appendChild(qCard(qid, { ctx:'practice', label:`Question ${k+1}${status(qid)}`, ...onAns(qid) })));
   let shown = 0; const bar = $('#more-bar');
   const drawBar = () => {
     const left = L.more.length - shown;
-    bar.innerHTML = left>0 ? `<button class="btn ghost" id="more-go">More practice · ${Math.min(4,left)} more (${left} left)</button>` : `<p class="small muted">That's all ${L.more.length} extra questions for this lesson. For more, use Review: pick this lesson and practice any time.</p>`;
-    const b=$('#more-go'); if(b) b.onclick = () => { L.more.slice(shown, shown+4).forEach((qid,k)=>$('#moreset').appendChild(qCard(qid, { ctx:'practice', label:`Extra ${shown+k+1}${status(qid)}`, onAnswer: onAns(qid) }))); shown = Math.min(L.more.length, shown+4); drawBar(); };
+    bar.innerHTML = left>0 ? `<button class="btn ghost" id="more-go">More practice · ${Math.min(4,left)} more (${left} left)</button><p class="small muted" style="margin:6px 0 0">Extra questions are optional: they go into Review only if you tap <b>Add to Review</b> on one.</p>` : `<p class="small muted">That's all ${L.more.length} extra questions for this lesson. For more, use Review: pick this lesson and practice any time.</p>`;
+    const b=$('#more-go'); if(b) b.onclick = () => { L.more.slice(shown, shown+4).forEach((qid,k)=>$('#moreset').appendChild(qCard(qid, { ctx:'practice', label:`Extra ${shown+k+1}${status(qid)}`, ...onAns(qid) }))); shown = Math.min(L.more.length, shown+4); drawBar(); };
   };
   drawBar();
   L.writing.forEach(w => $('#wset').appendChild(writeCard(w)));
@@ -13618,7 +13673,7 @@ function renderReview(){
     <div class="row" style="margin-top:12px">${due.length?`<button class="btn" id="rv-due">Start review (${Math.min(25,due.length)}${due.length>25?` of ${due.length}`:''})</button>`:`<div class="empty" style="flex:1 1 100%">${later.length?`Nothing due today. Next item comes back <b>${fmtDay(S.review[later[0]].due)}</b>.`:'Nothing scheduled yet. Answer practice questions, quiz questions or flashcards and they\'ll be scheduled here.'}</div>`}
       ${later.length?`<button class="btn ghost" id="rv-ahead">Review ahead (${Math.min(20,later.length)})</button>`:''}</div>
     <details class="deeper" style="margin-top:1rem"><summary>How the schedule works</summary><div class="deeper-body small">
-      <p>Every question and flashcard you answer is scheduled. <b>Miss it</b> and it comes back tomorrow. <b>Get it right</b> the first time and it comes back in a week.</p>
+      <p>Every core lesson question, unit quiz question and flashcard you answer is scheduled. <b>Miss it</b> and it comes back tomorrow. <b>Get it right</b> the first time and it comes back in a week.</p><p><b>Extra ("More practice") questions and quick checks are optional.</b> They go into Review only when you tap <b>Add to Review</b> on one, and <b>Remove from Review</b> takes one back out (its step is remembered).</p><p><b>Lucky guess:</b> after a right answer, tap <b>Lucky guess? Count it as a miss</b> if you didn't really know it. It's scheduled as a miss (and in Review and practice sets you choose how it comes back). <b>Undo</b> puts it back as right.</p>
       <p>Each time you get a due item right, the gap grows: 1 → 3 → 7 → 21 → 60 days. Get it right at 60 days and it's mastered. Miss it at any step and it starts over at 1 day.</p>
       <p>Practice by lesson or unit counts too: get a question right that is <b>due today</b> and it moves up the ladder, just as in Due review. Items that aren't due yet keep their dates (Review ahead works the same way). Misses always count, so anything you miss comes back tomorrow.</p><p><b>After a miss</b> (Review, practice sets and flashcards), you choose how it comes back: <b>Back to day one</b> (the normal rule), <b>Drop one step</b>, <b>Keep the same step</b>, or <b>Count it as right</b>. Lesson pages and unit quizzes always use the normal rule.</p><p><b>Include</b> under Practice any time: <b>Everything in these lessons</b> to refresh on all of it, or <b>Only due or overdue</b> for just what your schedule says needs review.</p><p><b>Skip</b> moves on without scoring; the item stays due. <b>Delete</b> takes an item out of Review and practice (it stays on its lesson page); restore it any time under Deleted at the bottom of this page.</p></div></details>
 
@@ -13660,7 +13715,7 @@ function runSession(){
     const sk = RV.skipped||0, dl = RV.deleted||0;
     const ov = Object.values(RV.over||{}), ovn = k => ov.filter(x=>x===k).length;
     const extra = [sk ? `Skipped ${sk} (not scored${RV.mode==='due'?', still due':''})` : '', dl ? `Deleted ${dl}` : '',
-      ovn('right') ? `${ovn('right')} miss${ovn('right')>1?'es':''} counted as right` : '', ovn('same') ? `${ovn('same')} kept on the same step` : '', ovn('drop') ? `${ovn('drop')} dropped one step` : ''].filter(Boolean).join(' · ');
+      ovn('right') ? `${ovn('right')} miss${ovn('right')>1?'es':''} counted as right` : '', ovn('same') ? `${ovn('same')} kept on the same step` : '', ovn('drop') ? `${ovn('drop')} dropped one step` : '', RV.lucky ? `${RV.lucky} lucky guess${RV.lucky>1?'es':''} counted as miss${RV.lucky>1?'es':''}` : ''].filter(Boolean).join(' · ');
     app.innerHTML = `<div class="lesson-head"><div class="eyebrow">${RV.title} · finished</div><p class="score-big num">${RV.right}/${RV.items.length-sk}</p><p>${msg}</p>${extra?`<p class="muted">${extra}.</p>`:''}</div><div class="row"><button class="btn" id="rv-back">Back to Review</button><a class="btn ghost" href="#home">Course</a></div>`;
     $('#rv-back').onclick=()=>{ RV=null; renderReview(); window.scrollTo(0,0); };
     RV=null; refreshChrome(); return;
@@ -13672,9 +13727,17 @@ function runSession(){
   RV.answered = false;
   const label = `From Lesson ${LBYID[(Q[id]||CARDS[id]).lesson].n}${S.review[id]?` · step ${S.review[id].box+1} of 5`:''}`;
   const advance = () => { runSession(); window.scrollTo(0,0); };
-  const onAnswer = ok => { const snap = snapReview(id); if(ok) RV.right++; RV.i++; RV.answered = true; const sb=$('#rv-skip'), sn=$('#rv-skipnote'); if(sb) sb.hidden = true; if(sn) sn.hidden = true; schedule(id, ok, RV.mode); save(); refreshChrome();
-    if(!ok){ const mb = $('#rv-miss'), foot = $('#rbox .fb .q-foot'), box = missBox(id, snap, RV.mode, how => { RV.over = RV.over || {}; if(how==='reset') delete RV.over[id]; else RV.over[id] = how; });
-      if(foot) foot.before(box); else if(mb){ mb.innerHTML = ''; mb.appendChild(box); } } };
+  let snap0 = null;
+  const showMiss = () => { const mb = $('#rv-miss'), foot = $('#rbox .fb .q-foot'), box = missBox(id, snap0, RV.mode, how => { RV.over = RV.over || {}; if(how==='reset') delete RV.over[id]; else RV.over[id] = how; });
+      if(foot) foot.before(box); else if(mb){ mb.innerHTML = ''; mb.appendChild(box); } };
+  const onAnswer = ok => { snap0 = snapReview(id); if(ok) RV.right++; RV.i++; RV.answered = true; const sb=$('#rv-skip'), sn=$('#rv-skipnote'); if(sb) sb.hidden = true; if(sn) sn.hidden = true; const res = schedule(id, ok, RV.mode); save(); refreshChrome();
+    if(!ok && res!=='optional') showMiss(); };
+  const onLucky = lucky => {
+    RV.lucky = (RV.lucky||0) + (lucky ? 1 : -1); RV.right += lucky ? -1 : 1;
+    $$('.miss-box', app).forEach(b => b.remove()); if(RV.over) delete RV.over[id];
+    const wasIn = !!S.review[id]; restoreSnap(id, snap0); const res = schedule(id, !lucky, RV.mode);
+    if(wasIn && !S.review[id] && isOptional(id)) addOptional(id, !lucky);
+    save(); refreshChrome(); if(lucky && res!=='optional') showMiss(); };
   const cardNext = () => {
     const mb = $('#rv-miss'), box = mb && mb.firstChild;
     if(!box) return advance();
@@ -13699,7 +13762,7 @@ function runSession(){
     $('#del-note').focus();
   };
   if(CARDS[id]) $('#rbox').appendChild(flashCard(id, { label, onAnswer, onNext: cardNext }));
-  else $('#rbox').appendChild(qCard(id, { ctx:'review', label, nextLabel: RV.i===RV.items.length-1?'Finish':'Next', onAnswer, onNext: advance }));
+  else $('#rbox').appendChild(qCard(id, { ctx:'review', label, nextLabel: RV.i===RV.items.length-1?'Finish':'Next', onAnswer, onLucky, onNext: advance }));
 }
 
 /* reports */
@@ -13784,7 +13847,7 @@ function renderOneQuestion(qid){
     <p class="small"><a href="#reports">← Back to Reports</a> · <a href="#${L.id}">Lesson ${L.n}: ${L.title}</a></p></div>
     <div class="qset" id="onebox"></div><h2>Your reports on this question</h2><div class="rep-list" id="onelist"></div>`;
   $('#onebox').appendChild(qCard(qid, { ctx:'single', label: q.quiz ? 'Unit quiz question · not scored here' : 'Counts as practice for this lesson',
-    onAnswer: ok => { if(!q.quiz) recordPractice(qid, ok); } }));
+    ...(q.quiz ? {} : practiceHandlers(qid)) }));
   const mine = allReports().filter(r=>r.where==='question:'+qid);
   if(mine.length) mine.forEach(r => $('#onelist').appendChild(repItem(r, { showLink:false })));
   else $('#onelist').innerHTML = '<div class="empty">No reports on this question.</div>';
