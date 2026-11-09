@@ -63,14 +63,14 @@ FIG6.l29bars = () => figs([
    Common mistakes: M1 households demand labor and firms supply it · M2 labor demand doesn't depend on the product
    M3 marginal product = output ÷ workers · M4 falling marginal product means falling output · M5 derived demand applies only to labor
    M6 a change in product demand shifts labor supply */
-const dTbl = (rows) => atable(['Workers','Output (units a day)'], rows.map((q,L)=>[L,q]), { cls:'compact' });
+const dTbl = (rows, unit='units') => atable(['Workers',`Output (${unit} a day)`], rows.map((q,L)=>[L,q]), { cls:'compact' });
 const SHIFT_CH = (ok) => ['Dr','Dl','Sr','Sl','mv'].map(k => shiftChoice(k, k===ok));
 
 mc('l29-derived-def','l29','Which of the following best describes the demand for labor as a "derived demand"?',
   [`A firm\'s demand for workers comes from consumers\' demand for the product the workers make`,`Workers decide how many hours to work based on the wage`,`The wage is set by the government and firms must accept it`,`Households demand jobs, and firms supply them`,`Firms hire workers mainly because labor is cheaper than capital`],0,
   `<p>Your course: firms\' demand for inputs "is derived from consumers\' demand for their product." The textbook: "the demand for labor is based on the demand for the good or service that is being produced."</p><p>"Workers decide how many hours to work" describes labor <b>supply</b>, and "households demand jobs" reverses the roles (M1). Derived demand is about where firms\' demand comes from, not about cost comparisons.</p>`);
 mc('l29-roles','l29','In the labor market, who are the demanders and who are the suppliers?',
-  [`Firms demand labor; households supply it`,`Households demand labor; firms supply it`,`Firms both demand and supply labor`,`The government demands labor; firms supply it`,`Consumers demand labor; the products supply it`],0,
+  [`Firms demand labor; households supply it`,`Households demand labor; firms supply it`,`Firms both demand and supply labor`,`The government demands labor; firms supply it`,`Firms demand labor, but its supply shifts whenever product demand changes`],0,
   `<p>Your textbook: "job seekers (individuals) are the suppliers of labor, while firms and other employers who hire labor are the demanders for labor." Your course says the same: demand for factors "comes from the firm" and supply "comes from the household."</p><p>The reversed pairing is the classic slip (M1): in the <b>product</b> market households buy, but in the factor market they sell.</p>`);
 gen('l29-g-prodfn','l29',()=>{
   const a = pick([50,80,100,120]), b = pick([10,20,25,40]); let K, L; do { K = pick([1,2,3,4,5]); L = pick([2,3,4,6,8,10]); } while(K === L); const ans = a*K + b*L;
@@ -85,7 +85,7 @@ lazy('l29-gr-derived','l29',()=>visMC({
   choices: SHIFT_CH('Dr'),
   explain: L => `<p><b>Graph ${L}</b>: the demand for assembly workers shifts right. Bikes are the product; assemblers are the input. More bike sales mean bike makers want more workers at every wage, so the wage and the number hired both rise.</p>${u6shiftBig('Dr','The question\'s answer graph, marked up: demand moves from D1 to D2, so the equilibrium moves from E1 to E2, a higher wage (W2) and more workers.')}<p>The most tempting wrong graph is a supply shift: nothing here changes how many people want assembly jobs. A movement along the curve would need a change in the wage alone.</p>` }));
 tf('l29-tf-forself','l29','Firms hire workers because they want labor for its own sake, so the demand for labor does not depend on sales of the firm\'s product.',false,
-  `<p>False. Firms hire workers to make things they can sell. Your course: the demand for inputs "is linked directly to the demand by consumers for the good or service that that firm is producing." When product sales rise, firms want more workers; when sales fall, they want fewer (M2).</p>`);
+  `<p>False. Firms hire workers to make things they can sell. Your course: the demand for inputs is "linked directly to the demand by consumers for the good or service that that firm is producing." When product sales rise, firms want more workers; when sales fall, they want fewer (M2).</p>`);
 mc('l29-toaster-mpl','l29',`${toIntro()}${toTbl(['q'])}What is the marginal product of the <b>3rd</b> worker?`,
   [`30 toasters`,`40 toasters`,`120 toasters`,`90 toasters`,`40 toasters per worker on average`],0,
   `<p>Marginal product = change in output ÷ change in workers = (120 − 90) ÷ (3 − 2) = <b>30 toasters</b>.</p>${toTbl(['q','mp'],{hl:3})}<p>120 is total output with 3 workers, not what the 3rd added. "40 on average" is 120 ÷ 3, output per worker (M3). 40 is the 2nd worker\'s marginal product.</p>`);
@@ -93,7 +93,7 @@ gen('l29-g-mpl','l29',()=>{
   let mps; do { const m1 = pick([30,40,50,60]); mps=[m1]; while(mps.length<5) mps.push(mps[mps.length-1] - pick([4,6,8,10])); } while(mps[4] < 2);
   const Q=[0]; mps.forEach(m=>Q.push(Q[Q.length-1]+m)); const k = pick([2,3,4,5]), ans = mps[k-1];
   const hl = {}; hl[k-1]={row:'u3z1'}; hl[k]={row:'u3z2'};
-  return { type:'num', kind:'num', unit:'units', prompt:`Made-up numbers. A bakery\'s output (loaves a day) with different numbers of workers:${dTbl(Q)}What is the marginal product of the <b>${ordinal(k)}</b> worker?`, answer:ans,
+  return { type:'num', kind:'num', unit:'units', prompt:`Made-up numbers. A bakery\'s output (loaves a day) with different numbers of workers:${dTbl(Q,'loaves')}What is the marginal product of the <b>${ordinal(k)}</b> worker?`, answer:ans,
     explain:`<p>Marginal product = (${Q[k]} − ${Q[k-1]}) ÷ (${k} − ${k-1}) = <b>${ans} loaves</b>.</p>${atable(['Workers','Output','Marginal product'], Q.map((q,L)=>[L,q,L?mps[L-1]:'–']), { cls:'compact', hl })}<p>The common slip is answering total output (${Q[k]}) or output per worker (${Q[k]} ÷ ${k} = ${fmt(Q[k]/k)}), M3. Marginal product is only what the ${ordinal(k)} worker added.</p>` };
 });
 tf('l29-tf-falling','l29','When each new worker adds less output than the one before, the firm\'s total output must be falling.',false,
@@ -169,7 +169,7 @@ lazy('l29-gr-tp','l29',()=>visMC({
     { svg:L=>u6minibars([10,25,45,75,110,150],{ymax:160,line:true,aria:'Graph '+L,ylab:'Output',xlab:'Workers'}), desc:'a line rising faster and faster' },
     { svg:L=>u6minibars([50,40,30,20,10,0],{ymax:160,line:true,aria:'Graph '+L,ylab:'Output',xlab:'Workers'}), desc:'a line falling from 50 to 0' },
     { svg:L=>u6minibars([150,140,120,90,50,0],{ymax:160,line:true,aria:'Graph '+L,ylab:'Output',xlab:'Workers'}), desc:'a line falling faster and faster' } ],
-  explain: L => `<p><b>Graph ${L}</b>: output rises 50, 90, 120, 140, 150 and then stays at 150. Each step is smaller than the one before because each worker adds less (diminishing marginal returns, Lesson 30).</p>${fig(sdg({ xmax:6.3, ymax:160, xt:[0,1,2,3,4,5,6], yt:[0,50,100,150], xlab:'Workers', ylab:'Toasters a day', aria:'Marked-up total output',
+  explain: L => `<p><b>Graph ${L}</b>: output rises 50, 90, 120, 140, 150 and then stays at 150. Each step is smaller than the one before because each worker adds less (diminishing marginal returns, Lesson 16).</p>${fig(sdg({ xmax:6.3, ymax:160, xt:[0,1,2,3,4,5,6], yt:[0,50,100,150], xlab:'Workers', ylab:'Toasters a day', aria:'Marked-up total output',
       lines:[ {pts:TO.map(r=>[r.L,r.q]), c:'var(--g1)'} ], spans:[{q:1,p1:0,p2:50,label:'+50',lx:12},{q:3,p1:90,p2:120,label:'+30',lx:12},{q:5,p1:140,p2:150,label:'+10',lx:12,ly:-12}] }), 'The answer graph, marked up: the climb per worker shrinks (+50, +30, +10) while the total keeps rising.')}<p>The line falling from 50 to 0 is marginal product, not total output (M4).</p>` }));
 
 /* ===== Lesson 29 quick checks ===== */
@@ -177,14 +177,14 @@ mc('l29c-pf','l29','Your course\'s production function is Q = 100K + 25L. Made-u
   [`350`,`125`,`300`,`275`,`500`],0,
   `<p>Q = 100 × 3 + 25 × 2 = 300 + 50 = <b>350</b>. 300 counts only the machines; 125 adds 100 + 25 without the input amounts; 275 swaps the inputs (100 × 2 + 25 × 3); 500 treats each worker like a machine, 100 × (3 + 2).</p>`);
 mc('l29c-roles','l29','When a college student takes a part-time job at a bookstore, which role does the student play in the labor market?',
-  [`Supplier of labor`,`Demander of labor`,`Seller of a product`,`Buyer of a factor of production`,`Neither; students are outside the labor market`],0,
+  [`Supplier of labor`,`Demander of labor`,`Seller of a product`,`Buyer of a factor of production`,`Supplier of labor, but only when bookstore sales rise`],0,
   `<p>The student sells hours of work to the bookstore, so she is a supplier of labor; the bookstore is the demander. Your textbook notes that in 2011, 52% of undergraduates worked part time.</p>`);
 lazy('l29c-derived','l29',()=>visMC({
   prompt:`Made-up scenario. Many homeowners decide to put solar panels on their roofs. Which graph shows what happens in the market for solar-panel installers?`,
   choices: ['Dr','Dl','Sr','Sl','mv'].map(k => shiftChoice(k, k==='Dr')),
   explain: L => `<p><b>Graph ${L}</b>: the demand for installers shifts right. Installing panels is the service homeowners want; installers are the input. More demand for the service means installation companies want more workers at every wage. Homeowners don\'t hire directly, but their demand is passed back through the firms (derived demand).</p>${u6shiftBig('Dr','The answer graph, marked up: demand for installers moves from D1 to D2, so their wage and employment rise.')}<p>A supply shift would mean the installers themselves changed their plans (M6). Treating it as no change forgets that labor demand comes from the product (M2).</p>` }));
 mc('l29c-earn','l29','Made-up scenario. A hospital pays nurse A more than nurse B for the same shift. Using this lesson\'s marginal-product explanation, which is the most likely reason?',
-  [`Nurse A has more experience or training, so she adds more to the hospital\'s output`,`Nurse A works fewer hours`,`Nurse B\'s marginal product is higher`,`The hospital has fewer patients`,`Nurse A is a supplier and nurse B is a demander`],0,
+  [`Nurse A has more experience or training, so she adds more to the hospital\'s output`,`Nurse A works fewer hours`,`Nurse B\'s marginal product is higher`,`The hospital has fewer patients`,`Nurse A\'s pay is higher, so she must produce less than nurse B`],0,
   `<p>Your course ties pay differences to the marginal product of labor, which experience, education and training, and technology raise. A higher marginal product means a worker is worth more to the employer.</p><p>"Nurse B\'s marginal product is higher" would point the other way. Calling one nurse a demander mixes up the roles: both nurses supply labor (M1).</p>`);
 mc('l29c-mpl','l29','Your course\'s toaster company makes 140 toasters with 4 workers and 150 with 5 workers. What is the 5th worker\'s marginal product?',
   [`10 toasters`,`30 toasters`,`35 toasters`,`150 toasters`,`140 toasters`],0,
@@ -198,7 +198,7 @@ mc('l29c-skill','l29','Made-up scenario. A new study convinces people to drink m
    baby boomers, BLS 19%, 526,000 nurses), §4.1 (derived demand; chefs, pharmacists, attorneys; compensation and benefits up to 30%; Table 4.2 education and training); Econlib, Gorman ("not willing to pay a worker more than the value of the additional product");
    Federal Reserve Education ("derived from ... the demand for goods and services produced"); CLEP outline (Derived factor demand). */
 const L29TAGS = {
-  'l29-derived-def':['MS6 OS41','der','terms','M1 M2 M6'], 'l29-roles':['OS40 MS6','der','terms','M1'], 'l29-g-prodfn':['MS6','der','data',''],
+  'l29-derived-def':['MS6 OS41','der','terms','M1 M2 M6'], 'l29-roles':['OS40 MS6','der','terms','M1 M6'], 'l29-g-prodfn':['MS6','der','data',''],
   'l29-chef':['OS41','der','models','M2 M6'], 'l29-gr-derived':['OS41 MS6','der','graphs','M2 M6'], 'l29-tf-forself':['MS6 FEDL','der','terms','M2'],
   'l29-toaster-mpl':['MS6','der','data','M3'], 'l29-g-mpl':['MS6','der','data','M3'], 'l29-tf-falling':['MS6','der','terms','M4'],
   'l29-gr-mplbars':['MS6','der','graphs','M3 M4'], 'l29-why-earn':['MS6 ELMW','der','terms','M2'], 'l29-nurses':['OS40 OS41','der','models','M2 M6'],
@@ -207,7 +207,7 @@ const L29TAGS = {
   'l29-tf-zero':['MS6','der','terms','M4'], 'l29-compensation':['OS41','der','terms',''], 'l29-tech-access':['MS6','der','models','M6 M2'],
   'l29-decline':['OS41','der','models','M2 M6'], 'l29-tf-onlylabor':['MS6','der','terms','M5'], 'l29-flow':['OS41 FEDL','der','models','M2 M6'],
   'l29-q100k':['MS6','der','terms','M3'], 'l29-firm-buyer':['OS40 MS6','der','terms','M1'], 'l29-education':['OS41','der','terms','M6'], 'l29-gr-tp':['MS6','der','graphs','M4'],
-  'l29c-pf':['MS6','der','data',''], 'l29c-roles':['OS40','der','terms','M1'], 'l29c-derived':['OS41','der','models','M2 M6'],
+  'l29c-pf':['MS6','der','data',''], 'l29c-roles':['OS40','der','terms','M1 M6'], 'l29c-derived':['OS41','der','models','M2 M6'],
   'l29c-earn':['MS6','der','models','M1'], 'l29c-mpl':['MS6','der','data','M3'], 'l29c-skill':['OS41','der','models','M2 M6']
 };
 u6tag(L29TAGS);
@@ -223,7 +223,7 @@ U6_CARDS.l29 = [
   ['Supply of labor','What does the market supply of labor show, and which way does it slope?','How many people want to work at each wage. It slopes up: a higher wage draws more people away from leisure.','Higher nursing pay draws more people to train and work as nurses (textbook).','Households are the suppliers (Lesson 32 covers this in depth).', u6mini({ lines:[{a:[1,1],b:[9,9],c:SC,label:'S',lx:-2,ly:-3,anchor:'end'}], aria:'A labor supply curve sloping up' })],
   ['Labor compensation','What is the full "price" of labor?','Wage or salary plus benefits. Benefits can be up to 30 percent of compensation (textbook).','A $50,000 salary plus $15,000 of benefits is $65,000 of compensation.','The wage alone understates what labor costs the employer.'],
   ['Marginal product of labor (MPL)','What is the marginal product of labor, and how do you calculate it?','The extra output from one more worker: (Q2 − Q1) ÷ (L2 − L1).','Toaster company: the 3rd worker raises output from 90 to 120, an MPL of 30.','Not output per worker: 120 ÷ 3 = 40 is a different number.', u6minibars([50,40,30,20,10,0],{ymax:50,aria:'Marginal product of workers 1 to 6: 50, 40, 30, 20, 10, 0'})],
-  ['Why some workers earn more','According to your course, why do some workers earn more than others?','They are more productive (higher marginal product) because of experience, education and training, or access to the latest technology.','A carpenter with a power saw adds more output per hour than one with hand tools.','Pay follows what a worker adds to output, not effort alone.'],
+  ['Why some workers earn more','Using marginal product, why do some workers earn more than others?','They are more productive (higher marginal product) because of experience, education and training, or access to the latest technology.','A carpenter with a power saw adds more output per hour than one with hand tools.','Pay follows what a worker adds to output, not effort alone.'],
   ['Falling marginal product','When each new worker adds less output, what happens to total output?','It keeps rising, just more slowly. It falls only if a worker\'s marginal product is negative.','Toaster company: MPL 50, 40, 30, 20, 10, 0; output 50, 90, 120, 140, 150, 150.','A shrinking bar is not a shrinking total.', FIG6.l29bars()]
 ];
 
@@ -265,7 +265,7 @@ ${FIG6.l29two()}
 
 <h2>Derived demand</h2>
 <!-- src: MS6 (video 6.1: "when we think about firms demand for inputs of production, it's going to be based on what we call derived demand"; "if ... a firms good is in very high demand by consumers ... it's going to want to hire more workers and more inputs of production"; "it's linked directly to the demand by consumers for the good or service that that firm is producing"; slide 250: "Firm's demand for inputs is derived from consumers' demand for their product"); OS41 ("the demand for labor is based on the demand for the good or service that is being produced ... Therefore the demand for labor is called a 'derived demand'"; chefs, pharmacists, attorneys; automobiles); FEDL ("The demand for labor is derived from ... the demand for goods and services produced"); OS40 (baby boomers; "Aging baby boomers and advances in life-saving and life-extending technologies will increase the demand for healthcare and nursing"; BLS: registered nursing jobs +19% 2012-2022) -->
-<p>Your course: the firm\'s demand for inputs "is based on what we call ${dt('derived-demand','<b>derived demand</b>')}," because "it\'s linked directly to the demand by consumers for the good or service that that firm is producing." Federal Reserve Education says the same: the demand for labor "is derived from ... the demand for goods and services produced."</p>
+<p>Your course: the firm\'s demand for inputs is "based on what we call ${dt('derived-demand','<b>derived demand</b>')}," because "it\'s linked directly to the demand by consumers for the good or service that that firm is producing." Federal Reserve Education says the same: the demand for labor "is derived from ... the demand for goods and services produced."</p>
 ${FIG6.l29chain()}
 <p><b>Why it happens:</b> a firm hires a worker only to sell what the worker makes. If buyers want more of the product, the firm wants to make more, and it needs more hands to do it. The textbook\'s examples: the demand for chefs depends on restaurant meals, pharmacists on prescription drugs, attorneys on legal services.</p>
 <div class="analogy"><div class="eyebrow">Analogy</div><p>Think of labor demand as the shadow of product demand. You can\'t move a shadow by pushing on it; you move the object that casts it. To predict what happens to a job market, look first at what is happening to the product those workers make.</p></div>
@@ -281,7 +281,7 @@ ${FIG6.l29pair()}
 <!-- src: MS6 (video 6.1: "The first is what we call the Marginal Physical Product of Labor ... it's going to show us the changes in quantity produced based on additional workers. The differences in the Marginal Physical Product of Labor are going to help reflect and show us why some people may earn more than others. So what we see is that some workers tend to be more productive because of experience, education and training, or access to the latest technology"; slide 251); OS41 (Table 4.2: "A well-trained and educated workforce causes an increase in the demand for that labor by employers"); ELMW (Gorman: "Employers typically are not willing to pay a worker more than the value of the additional product that he produces") -->
 <p>Your course measures each worker by the marginal physical product of labor (MPL): "the changes in quantity produced based on additional workers." Differences in it "help reflect and show us why some people may earn more than others."</p>
 ${FIG6.l29why()}
-<p><b>Why productivity sets pay:</b> an employer gains from a worker only what that worker adds. A worker who adds more output per hour brings in more for the firm, so firms will compete to pay more for him. Econlib\'s Gorman puts the limit: employers "are not willing to pay a worker more than the value of the additional product that he produces."</p>
+<p><b>Why productivity sets pay:</b> an employer gains from a worker only what that worker adds. A worker who adds more output per hour brings in more for the firm, so firms will compete to pay more for him. Econlib\'s Gorman puts the limit: employers "typically are not willing to pay a worker more than the value of the additional product that he produces."</p>
 <p><b>So what:</b> anything that raises workers\' productivity, such as training or better tools, tends to raise the demand for them. The textbook: "A well-trained and educated workforce causes an increase in the demand for that labor."</p>
 <div data-check="l29c-earn"></div>
 
@@ -355,4 +355,4 @@ u6xv({
   'l29-capital-derived':[u6shiftBig('Dr','Marked up: the demand for delivery vans moves from D1 to D2 as deliveries grow.','P1','P2','Delivery vans','Price of vans'), ''],
   'l29-roles':[FIG6.l29two(), 'Every wrong pairing either reverses the roles (M1) or names something that isn\'t a buyer or seller of labor.']
 });
-u6cv('l29', { 'Production function': FIG6.l29pf(), 'Derived demand chain': FIG6.l29chain(), 'Why some workers earn more': FIG6.l29why(), 'Who demands and supplies labor': FIG6.l29two() });
+u6cv('l29', { 'Factor market': FIG6.l29two(), 'Production function': FIG6.l29pf(), 'Derived demand chain': FIG6.l29chain(), 'Why some workers earn more': FIG6.l29why(), 'Who demands and supplies labor': FIG6.l29two() });

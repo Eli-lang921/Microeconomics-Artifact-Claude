@@ -1,7 +1,7 @@
 /* ===================== Unit 6 widgets ===================== */
 /* L29 widget: add workers one at a time (your course's toaster company, video 6.1, slides 253-254).
    TEST NOTE (2026-11-04), expected (checked by script): 0 workers → output 0, no MP; 1 → 50, MP 50, avg 50; 3 → 120, MP 30, avg 40; 5 → 150, MP 10, avg 30; 6 → 150, MP 0, avg 25.
-   UI checked 2026-11-04 by Playwright: no overflow at 375 px light and 1100 px dark; arrow keys and the sorter Enter key tested by script; 375 and 1100 px, light and dark; slider moves with arrow keys. */
+   UI checked by Playwright (2026-11-08): no overflow at 375 px light and 1100 px dark; the slider moves with arrow keys; at 6 workers it reads "leaves output at 150". */
 W.toaster = el => {
   el.innerHTML = `<p class="widget-title">Add a worker</p><p class="hint">Your course\'s toaster company. Move the slider to hire workers one at a time and see what the newest one adds. Grey bars show what each worker not yet hired would add.</p>
   <div class="slider"><label for="tw-n">Workers hired</label><input id="tw-n" type="range" min="0" max="6" step="1" value="3"><output></output></div>
@@ -37,7 +37,7 @@ W.dersort = el => sorterWidget(el, { title:'Trace it back from the product', hin
 /* L30 widget: set the wage and the toaster price (your course's toaster company: MP 50, 40, 30, 20, 10, 0).
    Hire while the value of MP ≥ the wage (a tie goes to hiring, as your course names the 5th worker at $100).
    TEST NOTE (2026-11-04), expected (checked by script): P $10, W $100 → 5 workers, gain from labor $1,000; P $10, W $250 → 3, $450; P $15, W $250 → 4, $1,100;
-   P $20, W $550 → 3, $750; P $5, W $50 → 5 (5th worker ties), $500; P $5, W $550 → 0, $0. UI checked 2026-11-04 by Playwright: no overflow at 375 px light and 1100 px dark; arrow keys and the sorter Enter key tested by script; 375 and 1100 px, light and dark; both sliders move with arrow keys. */
+   P $20, W $550 → 3, $750; P $5, W $50 → 5 (5th worker ties), $500; P $5, W $550 → 0, $0. UI checked by Playwright (2026-11-08): no overflow at 375 px light and 1100 px dark; both sliders move with arrow keys; y ticks stay within the chart at $12-14. */
 W.hire = el => {
   el.innerHTML = `<p class="widget-title">How many workers?</p><p class="hint">Your course\'s toaster company. Set the daily wage and the price of a toaster; the firm hires every worker whose output is worth at least the wage.</p>
   <div class="slider"><label for="hw-w">Daily wage</label><input id="hw-w" type="range" min="50" max="550" step="25" value="100"><output></output></div>
@@ -66,7 +66,7 @@ W.hire = el => {
 
 /* L30 exam skill: fill in marginal product and value of MP, then decide (made-up café: output 0, 12, 22, 30, 36, 40; $5 a drink; wage $35).
    TEST NOTE (2026-11-04), expected: MP 12, 10, 8, 6, 4; value $60, $50, $40, $30, $20; hire 3. Wrong entries are marked and the right value is shown after "Check";
-   fractions and "$" accepted; empty boxes count as wrong. UI checked 2026-11-04 by Playwright: no overflow at 375 px light and 1100 px dark; arrow keys and the sorter Enter key tested by script; 375 px (table fits without horizontal scroll), keyboard tab order. */
+   fractions and "$" accepted; empty boxes count as wrong. UI checked by Playwright (2026-11-08): no overflow at 375 px light and 1100 px dark; Tab moves from a marginal-product cell to its value cell; inputs -1 and 2.5 ask for a whole number from 0 to 5; wrong cells keep what was typed and the message lists the answers. */
 W.vmpfill = el => {
   const Qx = [0,12,22,30,36,40], P = 5, Wg = 35, mp = Qx.slice(1).map((q,i)=>q-Qx[i]), vm = mp.map(m=>m*P), hire = hireAt(vm, Wg);
   el.innerHTML = `<p class="widget-title">Fill in the table, then decide</p><p class="hint">Made-up café: each drink sells for $${P}, and baristas cost $${Wg} a shift. Fill in each barista\'s marginal product and its value, then say how many to hire.</p>
@@ -77,11 +77,11 @@ W.vmpfill = el => {
   <div class="msg">Fill in what you can, then press Check.</div>`;
   const check = () => {
     let right = 0, total = 0;
-    $$('.vf-mp', el).forEach(inp => { total++; const ok = Math.abs(fracParse(inp.value) - mp[+inp.dataset.i]) < 0.01; inp.classList.toggle('ok', ok); inp.classList.toggle('no', !ok); if(ok) right++; else inp.value = mp[+inp.dataset.i]; });
-    $$('.vf-v', el).forEach(inp => { total++; const ok = Math.abs(fracParse(inp.value) - vm[+inp.dataset.i]) < 0.01; inp.classList.toggle('ok', ok); inp.classList.toggle('no', !ok); if(ok) right++; else inp.value = vm[+inp.dataset.i]; });
+    $$('.vf-mp', el).forEach(inp => { total++; const ok = Math.abs(fracParse(inp.value) - mp[+inp.dataset.i]) < 0.01; inp.classList.toggle('ok', ok); inp.classList.toggle('no', !ok); if(ok) right++; });
+    $$('.vf-v', el).forEach(inp => { total++; const ok = Math.abs(fracParse(inp.value) - vm[+inp.dataset.i]) < 0.01; inp.classList.toggle('ok', ok); inp.classList.toggle('no', !ok); if(ok) right++; });
     const hin = $('#vf-h', el), h = fracParse(hin.value), hvalid = Number.isInteger(h) && h >= 0 && h <= 5, hok = h === hire; hin.classList.toggle('ok', hok); hin.classList.toggle('no', !hok);
     const m = $('.msg', el); m.className = 'msg' + (hok && right===total ? ' good' : ' bad');
-    m.innerHTML = `${right} of ${total} cells right (wrong ones now show the answer). ${hok ? `<b>Hire ${hire}: right.</b>` : `<b>Hire ${hire}</b>${!hvalid ? ' (enter a whole number of baristas from 0 to 5)' : hok ? '' : `, not ${h}: ${h>hire ? `the ${ordinal(hire+1)} barista adds only $${vm[hire]}, less than the $${Wg} wage` : `the ${ordinal(h+1)} barista still adds $${vm[h]}, more than the $${Wg} wage`}`}.`} The 3rd barista\'s drinks are worth $${vm[2]}, more than $${Wg}; the 4th\'s are worth only $${vm[3]}. Value of MP = marginal product × $${P}.`;
+    m.innerHTML = `${right} of ${total} cells right${right<total ? ` (red cells are off; the answers are MP ${mp.join(', ')} and values ${vm.map(v=>'$'+v).join(', ')})` : ''}. ${hok ? `<b>Hire ${hire}: right.</b>` : `<b>Hire ${hire}</b>${!hvalid ? ' (enter a whole number of baristas from 0 to 5)' : hok ? '' : `, not ${h}: ${h>hire ? `the ${ordinal(hire+1)} barista adds only $${vm[hire]}, less than the $${Wg} wage` : `the ${ordinal(h+1)} barista still adds $${vm[h]}, more than the $${Wg} wage`}`}.`} The 3rd barista\'s drinks are worth $${vm[2]}, more than $${Wg}; the 4th\'s are worth only $${vm[3]}. Value of MP = marginal product × $${P}.`;
   };
   $('.vf-go', el).onclick = check;
   $('.vf-reset', el).onclick = () => { $$('input', el).forEach(i => { i.value=''; i.classList.remove('ok','no'); }); const m=$('.msg', el); m.className='msg'; m.textContent='Fill in what you can, then press Check.'; };
@@ -90,7 +90,7 @@ W.vmpfill = el => {
 /* L31 widget: what shifts the demand for labor? Base = your course's toaster company at $10 with normal productivity (MP 50 ... 0).
    Price: $10 / $15 / $20 (made-up). Tools: normal, or better tools that raise every marginal product by 20% (made-up: 60, 48, 36, 24, 12, 0).
    TEST NOTE (2026-11-04), expected (checked by script): $15, normal, wage $250 → before 3, now 4 (shift right); $10, better tools, wage $250 → 3 → 3 (values 600, 480, 360, 240: still 3);
-   $20, normal, wage $350 → 2 → 4; $10, normal, any wage → no shift; wage $300 at $10 normal → 3 (tie at the 3rd). UI checked 2026-11-04 by Playwright: no overflow at 375 px light and 1100 px dark; arrow keys and the sorter Enter key tested by script; 375 and 1100 px, light and dark; buttons and slider by keyboard. */
+   $20, normal, wage $350 → 2 → 4; $10, normal, any wage → no shift; wage $300 at $10 normal → 3 (tie at the 3rd). UI checked by Playwright (2026-11-08): no overflow at 375 px light and 1100 px dark; the wage slider moves with arrow keys; price and tools buttons respond to Enter and Space; legend replaces on-graph D1/D2 labels. */
 W.ldshift = el => {
   el.innerHTML = `<p class="widget-title">What moves the demand for labor?</p><p class="hint">Your course\'s toaster company with made-up changes. The dashed curve is the original ($10 toasters, normal tools). Change the price or the tools, then move the wage.</p>
   <div class="row" style="gap:8px 14px"><span class="small">Toaster price</span><span class="seg ls-p" role="group" aria-label="Toaster price"><button data-v="10" aria-pressed="true">$10</button><button data-v="15" aria-pressed="false">$15</button><button data-v="20" aria-pressed="false">$20</button></span>
@@ -137,7 +137,7 @@ W.ldsort = el => sorterWidget(el, { title:'Shift or move, and which way?', hint:
 /* L32 widget: a labor market with shiftable curves (made-up numbers). Demand Qd = 600 − 20W + d; supply Qs = −100 + 30W + s; d and s from −150 to +150.
    Equilibrium W = (700 + d − s) ÷ 50, L = 600 − 20W + d.
    TEST NOTE (2026-11-04), expected (checked by script): d 0, s 0 → W $14.00, L 320; d +150 → W $17.00, L 410; s +150 → W $11.00, L 380; d +150, s +150 → W $14.00, L 470;
-   d −150, s +150 → W $8.00, L 290; d +150, s −150 → W $20.00, L 350. UI checked 2026-11-04 by Playwright: no overflow at 375 px light and 1100 px dark; screenshots at d +150/s −150 and d −150/s +150 show every label inside the chart. Arrow keys move the first slider (script). */
+   d −150, s +150 → W $8.00, L 290; d +150, s −150 → W $20.00, L 350. UI checked by Playwright (2026-11-08): no overflow at 375 px light and 1100 px dark; both sliders move with arrow keys; the D label is clamped inside the chart for positive demand shifts; when employment falls below 320 the two point labels sit on opposite sides so they don\'t touch. */
 W.labormkt = el => {
   el.innerHTML = `<p class="widget-title">Shift the labor market</p><p class="hint">Made-up market for warehouse workers. Shift employers\' demand or households\' supply and watch the wage and employment. Dashed lines are the starting curves.</p>
   <div class="slider"><label for="lm-d">Demand shift (workers at every wage)</label><input id="lm-d" type="range" min="-150" max="150" step="50" value="0"><output></output></div>
@@ -155,7 +155,7 @@ W.labormkt = el => {
     $('.lm-g', el).innerHTML = sdg({ xmax:700, ymax:32, xt:[0,200,400,600], yt:[0,10,20,30], xlab:'Workers employed', ylab:'Hourly wage ($)', aria:`Labor market with equilibrium wage ${W} dollars and ${L} workers`,
       lines:[ ...(d? [dLine(0,'',true)] : []), ...(s? [sLine(0,'',true)] : []), dLine(d,'D'), sLine(s,'S') ],
       labels:[ (570+d)/20 + 1.2 <= 30.5 ? [30, (570+d)/20 + 1.2, 'D', DC, 'start'] : [d + 40, 30.5, 'D', DC, 'start'], [640, (640+100-s)/30 + 1.6, 'S', SC, 'end'] ],
-      dots:[ ...((d||s) ? [{q:320,p:14,c:'var(--muted)',label:'start',lx:-8,ly:14,anchor:'end'}] : []), {q:L,p:W,label:`$${W.toFixed(2)}, ${L}`,c:'var(--ink)',lx:8,ly:-8}], vls:[{q:L,p:W}], hl:[{p:W,q:L,c:'var(--g2)'}] });
+      dots:[ ...((d||s) ? [{q:320,p:14,c:'var(--muted)',label:'start',lx: L<320 ? 8 : -8,ly:14,anchor: L<320 ? 'start' : 'end'}] : []), {q:L,p:W,label:`$${W.toFixed(2)}, ${L}`,c:'var(--ink)',lx: L<320 ? -8 : 8,ly: L<320 ? 18 : -8, anchor: L<320 ? 'end' : 'start'}], vls:[{q:L,p:W}], hl:[{p:W,q:L,c:'var(--g2)'}] });
     $('.lm-w', el).textContent = '$'+W.toFixed(2); $('.lm-l', el).textContent = L; $('.lm-c', el).textContent = `${W>14?'+':W<14?'−':''}$${Math.abs(W-14).toFixed(2)}, ${L>320?'+':L<320?'−':''}${Math.abs(L-320)}`;
     const m = $('.msg', el);
     m.innerHTML = !d && !s ? 'Starting point: $14.00 an hour and 320 workers. Shift a curve.' :

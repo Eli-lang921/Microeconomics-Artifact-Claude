@@ -118,7 +118,7 @@ function u6shiftBig(kind, note, w1='W1', w2='W2', xlab='Quantity of labor', ylab
   const [e1,e2] = E;
   return fig(sdg({ xmax:10, ymax:10, xt:[], yt:[], xlab, ylab, aria:'Marked-up answer graph',
     lines, vls:[{q:e1[0],p:e1[1]},{q:e2[0],p:e2[1]}], hl:[{p:e1[1],q:e1[0],c:'var(--muted)'},{p:e2[1],q:e2[0],c:'var(--g2)'}],
-    dots:[{q:e1[0],p:e1[1],label:'E1',c:'var(--muted)',lx:0,ly:-10,anchor:'middle'},{q:e2[0],p:e2[1],label:'E2',c:'var(--ink)',lx:0,ly:-10,anchor:'middle'}],
+    dots:[{q:e1[0],p:e1[1],label:'E1',c:'var(--muted)',lx:e1[0]<e2[0]?-9:9,ly:e1[1]<e2[1]?14:-6,anchor:e1[0]<e2[0]?'end':'start'},{q:e2[0],p:e2[1],label:'E2',c:'var(--ink)',lx:e2[0]<e1[0]?-9:9,ly:e2[1]<e1[1]?14:-6,anchor:e2[0]<e1[0]?'end':'start'}],
     labels:[[0.9,e1[1]+(e1[1]>e2[1]?0.55:-0.95),w1,'var(--muted)','start'],[0.9,e2[1]+(e2[1]>e1[1]?0.55:-0.95),w2,'var(--g2)','start']] }), note);
 }
 
@@ -182,3 +182,19 @@ function u6xv(map){ Object.entries(map).forEach(([id,[vis,why]]) => { const q = 
 /* Give built-in flashcards a picture (6th card field) by card title. */
 function u6cv(lesson, map){ (U6_CARDS[lesson]||[]).forEach(c => { if(map[c[0]] !== undefined) c[5] = map[c[0]]; });
   Object.keys(map).forEach(t => { if(!(U6_CARDS[lesson]||[]).some(c => c[0]===t)) console.warn('u6cv: no card', lesson, t); }); }
+
+/* One firm's labor demand pictures with no supply curve (a firm that takes the market wage).
+   kinds: mv (down along), mvUp (up along), Dr, Dl, vert (a vertical line, a distractor). */
+const FIRM_DESC = { mv:'movement down along one demand curve', mvUp:'movement up along one demand curve', Dr:'demand curve shifts right (D1 to D2)', Dl:'demand curve shifts left (D1 to D2)', vert:'a vertical demand line' };
+function u6firm(kind, aria){
+  const D1 = (lab) => ({a:LD1[0],b:LD1[1],c:OLD,dash:'5 4',w:2,label:lab,at:'start',lx:4,ly:2});
+  const D2 = (lab) => ({a:LD2[0],b:LD2[1],c:DC,label:lab,at:'start',lx:4,ly:2});
+  const spec = {
+    mv:{ lines:[D2('D')], arrows:[{a:[4.5,7.5],b:[6.5,5.5]}], hls:[{y:7.5,x:4.5},{y:5.5,x:6.5}] },
+    mvUp:{ lines:[D2('D')], arrows:[{a:[6.5,5.5],b:[4.5,7.5]}], hls:[{y:7.5,x:4.5},{y:5.5,x:6.5}] },
+    Dr:{ lines:[D1('D1'), D2('D2')], arrows:[{a:[5.1,5],b:[6.9,5]}] },
+    Dl:{ lines:[D2('D1'), D1('D2')], arrows:[{a:[6.9,5],b:[5.1,5]}] },
+    vert:{ lines:[{a:[5,0.6],b:[5,9.4],c:DC,label:'D',lx:6,ly:10}] } }[kind];
+  return u6mini({ ...spec, aria: aria || 'Graph' });
+}
+const firmChoice = (k, ok) => ({ svg: L => u6firm(k, 'Graph ' + L), desc: FIRM_DESC[k], ok: !!ok });

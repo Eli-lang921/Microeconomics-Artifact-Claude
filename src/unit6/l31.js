@@ -5,7 +5,7 @@ function u6moveBig(note, hiW='W1', loW='W2', up=false){
   return fig(sdg({ xmax:10, ymax:10, xt:[], yt:[], xlab:'Quantity of labor', ylab:'Wage', aria:'Marked-up answer graph: a movement along one demand curve',
     lines:[ {a:LD2[0],b:LD2[1],c:DC,label:'D',lx:-4,ly:-8,anchor:'end'} ], hl:[{p:7.3,q:4.7,c:'var(--muted)'},{p:4.7,q:7.3,c:'var(--g2)'}], vls:[{q:4.7,p:7.3},{q:7.3,p:4.7}],
     dots:[{q:4.7,p:7.3,label:'A',c:'var(--muted)',lx:8,ly:-6},{q:7.3,p:4.7,label:'B',c:'var(--ink)',lx:8,ly:-6}], arrows:[up ? {a:[6.9,5.1],b:[5.1,6.9],c:'var(--g2)'} : {a:[5.1,6.9],b:[6.9,5.1],c:'var(--g2)'}],
-    labels:[[0.9,7.75,hiW,'var(--muted)','start'],[0.9,5.15,loW,'var(--g2)','start']] }), note);
+    labels:[[0.9,7.75,hiW,up?'var(--g2)':'var(--muted)','start'],[0.9,5.15,loW,up?'var(--muted)':'var(--g2)','start']] }), note);
 }
 
 /* L31 V1: movement along versus shift (textbook §4.1) */
@@ -24,7 +24,7 @@ FIG6.l31pricetbl = () => fig(atable(['Worker (MP)','Value at $10','Value at $15'
 /* L31 V3: the same change on the graph: D1 → D2 (slide 261) */
 FIG6.l31pricegraph = (cap) => fig(sdg({ xmax:6.5, ymax:800, xt:[0,1,2,3,4,5,6], yt:[0,250,500,750], xlab:'Workers', ylab:'Dollars per day', aria:'Value of marginal product at 10 dollars and at 15 dollars, with a 250 dollar wage line',
   lines:[ {pts:vmpPts(10), c:OLD, dash:'5 4', w:2}, {pts:vmpPts(15), c:DC}, {pts:[[0,250],[6.5,250]], c:'var(--g2)'} ],
-  labels:[ [5.05,140,'D1 ($10)',OLD,'start'], [2.75,640,'D2 ($15)',DC,'start'], wLab(250,800) ],
+  labels:[ [5.25,95,'D1 ($10)',OLD,'start'], [2.75,640,'D2 ($15)',DC,'start'], wLab(250,800) ],
   dots:[{q:3,p:300,c:'var(--muted)',label:'3',lx:-12,ly:-8},{q:4,p:300,c:'var(--ink)',label:'4',lx:6,ly:-8}], arrows:[{a:[2.05,410],b:[2.05,560],c:'var(--ok)'}] }),
   cap || 'The table above as a graph, like your course\'s slide 261 (D.1 to D.2). Each worker\'s value rises, so the whole curve moves up and to the right. At the same $250 wage the firm now hires 4 workers instead of 3.');
 
@@ -71,7 +71,7 @@ mc('l31-move-shift','l31','Which of the following would <b>shift</b> a firm\'s d
   [`A rise in the price of the product the workers make`,`A rise in the wage the firm must pay`,`A fall in the wage the firm must pay`,`A change in the number of workers the firm hires because of a wage change`,`None; labor demand curves never shift`],0,
   `<p>The product price changes what each worker is worth (value of MP), so it shifts the curve. Your course textbook: "A change in salary will lead to a movement along labor demand ... but it will not shift those curves" (M1).</p>${FIG6.l31two()}`);
 mc('l31-price','l31','Your course\'s slide 261 says that when the price of the good rises, the "Value of MPL goes up!" What happens to the firm\'s demand for labor, and why?',
-  [`It shifts right: each worker\'s extra output is worth more, so more workers are worth hiring at each wage`,`It shifts left: the firm sells fewer goods at a higher price`,`It doesn\'t change: only the wage affects labor demand`,`The supply of labor shifts right instead`,`It shifts right because workers\' marginal product rises`],0,
+  [`It shifts right: each worker\'s output is worth more at each wage`,`It shifts left: the firm sells fewer goods at the higher price`,`It doesn\'t change: only the wage can affect labor demand`,`The supply of labor shifts right instead, as jobs pay more`,`It shifts right because each worker\'s marginal product rises`],0,
   `<p>Value of MP = MP × price. A higher price raises it for every worker, so at any wage the firm wants more workers: "Price of good increases → Firm will produce more → Demand more labor." The marginal products themselves don\'t change, only their dollar value. A price change moves labor <b>demand</b>, not supply (M3).</p>${FIG6.l31pricegraph('Your course\'s toaster company with a made-up price rise from $10 to $15, like slide 261 (D.1 to D.2). Every worker\'s value rises, so the whole curve moves up and to the right. At a $250 wage the firm now hires 4 workers instead of 3.')}`);
 lazy('l31-gr-price','l31',()=>visMC({
   prompt:`Made-up scenario. The market price of strawberries rises sharply. Which graph shows what happens in the labor market for strawberry pickers?`,
@@ -93,7 +93,7 @@ mc('l31-typists','l31','Your course textbook: "word processing decreased the num
 mc('l31-it','l31','Your course textbook says the spread of word processing and other software "increased the demand for information technology professionals." For IT professionals, the software was',
   [`a complement, shifting their demand curve right`,`a substitute, shifting their demand curve left`,`a substitute, shifting their supply curve right`,`a complement, shifting their supply curve left`,`irrelevant, because their wage did not change`],0,
   `<p>"Technology that acts as a complement to labor will increase the demand for certain types of labor, resulting in a rightward shift of the demand curve." Software needs people to keep it running. This is why technology doesn\'t always lower labor demand (M2).</p>`);
-tf('l31-tf-tech','l31','According to your course textbook, new technology always lowers the demand for labor.',false,
+tf('l31-tf-tech','l31','New technology always lowers the demand for labor.',false,
   `<p>False. Your course\'s slide 262 gives one direction ("firm needs less labor"), but the textbook says technology "can act as either substitutes for or complements to labor." Word processing lowered the demand for typists and raised it for IT professionals (M2).</p>`);
 lazy('l31-gr-tech','l31',()=>visMC({
   prompt:`Made-up scenario. Supermarkets install self-checkout machines that do the work cashiers used to do. Which graph shows the effect on the labor market for supermarket cashiers?`,
@@ -127,14 +127,14 @@ gen('l31-g-vmpshift','l31',()=>{
 });
 lazy('l31-gr-read','l31',()=>({ type:'mc', kind:'graph',
   prompt:`Your course\'s toaster company with a made-up price rise from $10 to $15 and a made-up wage of $250 a day:${sdg({ xmax:6.5, ymax:800, xt:[0,1,2,3,4,5,6], yt:[0,150,250,450,600,750], xlab:'Workers', ylab:'Dollars per day', aria:'Two value of marginal product curves, D1 and D2, and a wage line',
-    lines:[ {pts:vmpPts(10), c:OLD, dash:'5 4', w:2}, {pts:vmpPts(15), c:DC}, {pts:[[0,250],[6.5,250]], c:'var(--g2)'} ], labels:[ [5.05,140,'D1 ($10)',OLD,'start'], [2.75,640,'D2 ($15)',DC,'start'], wLab(250,800) ],
+    lines:[ {pts:vmpPts(10), c:OLD, dash:'5 4', w:2}, {pts:vmpPts(15), c:DC}, {pts:[[0,250],[6.5,250]], c:'var(--g2)'} ], labels:[ [5.25,95,'D1 ($10)',OLD,'start'], [2.75,640,'D2 ($15)',DC,'start'], wLab(250,800) ],
     dots: vmpPts(10).concat(vmpPts(15)).map(([q,p])=>({q,p,c:'var(--muted)'})) })}How many workers does the firm hire before and after the price rise?`,
   options:[`3 before, 4 after`,`3 before, 3 after`,`4 before, 5 after`,`5 before, 6 after`,`3 before, 6 after`], answer:0,
   explain:`<p>Before (D1): values $500, $400, $300, $200: three are above $250, so 3. After (D2): $750, $600, $450, $300, $150: four are above $250, so 4. The curve shifted right, so at the same wage the firm hires one more.</p>${FIG6.l31pricegraph('Your course\'s toaster company with a made-up price rise from $10 to $15, like slide 261 (D.1 to D.2). Every worker\'s value rises, so the whole curve moves up and to the right. At a $250 wage the firm now hires 4 workers instead of 3.')}<p>"6 after" counts every worker with positive output, which ignores the wage. "3 and 3" treats a price change as having no effect on hiring.</p>` }));
 tf('l31-tf-pricesupply','l31','A rise in the price of the good workers produce shifts the supply of labor to the right.',false,
   `<p>False. The product price changes what workers are worth to <b>employers</b>, so it shifts labor demand. Labor supply depends on workers\' own situation, such as population, income and the cost of child care (Lesson 32) (M3).</p>`);
 mc('l31-ms-scarce','l31','Your course\'s slide 262: "If other factors become scarce → firm can produce less overall → less demand for labor." Which example fits?',
-  [`A shortage of steel forces a car plant to cut production, so it needs fewer assembly workers`,`A rise in assembly workers\' wages makes the plant hire fewer`,`More people move to town looking for factory jobs`,`The price of cars rises`,`Workers decide to retire earlier`],0,
+  [`A steel shortage cuts a car plant\'s output, so it needs fewer workers`,`A rise in assembly workers\' wages makes the car plant hire fewer`,`More people move to town looking for jobs at the factory`,`The price of cars rises, so the plant wants to sell more`,`Assembly workers decide to retire earlier than planned`],0,
   `<p>Steel is an input used together with labor. If it can\'t be had, the plant can\'t make as many cars and doesn\'t need as many workers: labor demand shifts left (M4). A wage rise is a movement along; more people looking for jobs is supply.</p>`);
 lazy('l31-direction','l31',()=>visMC({
   prompt:`"The demand for nurses increased." Each graph puts the wage up the side and the number of nurses along the bottom. Which graph shows that statement?`,
@@ -144,7 +144,7 @@ mc('l31-boomers','l31','Your course textbook expects aging baby boomers and the 
   [`Demand shifts right, which tends to raise the equilibrium salary`,`Demand shifts left, which tends to lower the salary`,`Supply shifts right, which tends to lower the salary`,`Hospitals move along the demand curve, so the salary stays the same`,`Demand shifts right, which lowers the salary`],0,
   `<p>Nurses are an input into health care, so their demand is derived from it and shifts right. With supply unchanged, a rightward demand shift raises the equilibrium salary and the number of nurses employed (Lesson 32 puts supply and demand together). The textbook adds that the median nurse salary was expected to rise.</p>${u6shiftBig('Dr','Marked up: demand for nurses shifts from D1 to D2, so the salary rises (W1 to W2) and more nurses are employed (E1 to E2).')}`);
 mc('l31-productivity','l31','Made-up scenario. A bakery buys a faster mixer, so each baker can make more bread per hour, and it can sell all the extra bread at the market price. What happens to its demand for bakers?',
-  [`It increases: each baker\'s marginal product, and so its value, is higher`,`It decreases: the mixer replaces bakers`,`It doesn\'t change: the wage didn\'t change`,`The supply of bakers increases`,`It decreases: bread prices rise`],0,
+  [`It increases: each baker\'s output, and its value, is higher`,`It decreases: the faster mixer replaces some bakers`,`It doesn\'t change, because the wage didn\'t change`,`The supply of bakers increases instead of demand`,`It decreases, because bread prices will fall`],0,
   `<p>The mixer makes bakers more productive, a complement. Value of MP = MP × price rises, so at each wage more bakers are worth hiring. The newer edition of your textbook: "marginal product depends on the capital and technology with which workers have to work." This is the case your course\'s slide 262 leaves out (M2).</p>`);
 mc('l31-notshifter','l31','Which of the following does <b>not</b> shift the demand curve for factory workers?',
   [`More people in the area want factory jobs`,`The price of the factory\'s product rises`,`The factory installs robots that do the workers\' tasks`,`A new rule requires a second machine operator on every machine`,`Two more factories open nearby making the same product`],0,
@@ -163,7 +163,7 @@ gen('l31-g-shiftpick','l31',()=>{
     { t:`people buy far fewer ${SET[0]} than before`, k:'Dl', why:`demand for ${SET[1]} is derived from the demand for ${SET[0]}, so employers want fewer of them` },
     { t:`new machines are installed that do most of the work of ${SET[1]}`, k:'Dl', why:`the machines are a substitute for ${SET[1]}, so employers need fewer` },
     { t:`several new companies start producing ${SET[0]} in the area`, k:'Dr', why:`more companies means more employers wanting ${SET[1]}` },
-    { t:`the wage employers pay ${SET[1]} rises to $${w0+3}, and nothing else changes`, k:'mvUp', why:`only the wage changed, so employers move up along their demand curve to fewer workers` },
+    { t:`a new law requires employers to pay ${SET[1]} at least $${w0+3}, above the old wage of $${w0}, and nothing else changes`, k:'mvUp', why:`only the wage changed, so employers move up along their demand curve to fewer workers` },
     { t:`a key material used to make ${SET[0]} becomes scarce and expensive`, k:'Dl', why:`dearer inputs used alongside labor make production less profitable` }
   ]);
   return visMC({ prompt:`Made-up scenario. ${SET[1][0].toUpperCase()+SET[1].slice(1)} currently earn about <b>$${w0}</b> an hour. Then ${ev.t}. Which graph shows the effect on the labor market for ${SET[1]}?`,
@@ -191,7 +191,7 @@ mc('l31c-tech','l31','Made-up scenario. A new X-ray machine needs a trained radi
 mc('l31c-inputs','l31','Your course textbook: "if prices of other inputs fall, production will become more profitable." Made-up case: the price of the fabric a clothing factory uses falls. What happens to its demand for sewing workers?',
   [`It increases`,`It decreases`,`It doesn\'t change`,`The supply of sewing workers increases`,`It decreases because fabric replaces workers`],0,
   `<p>Cheaper fabric makes producing clothes more profitable, so the factory wants to produce more and "suppliers will demand more labor to increase production."</p>`);
-mc('l31c-other','l31','Which of these is one of your course textbook\'s shifters of labor demand?',
+mc('l31c-other','l31','Which of these shifts the demand for labor?',
   [`Government regulations`,`The wage rate`,`The number of people looking for work`,`Workers\' preferences for leisure`,`The cost of child care`],0,
   `<p>Government regulations appear in the textbook\'s Table 4.2. The wage causes a movement along the curve; the others are labor <b>supply</b> shifters (Lesson 32).</p>`);
 mc('l31c-skill','l31','Made-up scenario. A popular diet makes people eat much more fish. What happens in the market for workers on fishing boats?',
@@ -282,7 +282,7 @@ ${FIG6.l31claim()}
 
 <h2>Other inputs used with labor</h2>
 <!-- src: MS6 (video 6.1: "Third, the supply or cost of other factors will cause a shift in the demand ... if other factors become scarce, the firm can produce less overall, so there's gonna be less demand for labor. If one of the key factors of production, not related to labor, becomes unavailable, then the firm cannot produce that good any longer"; slide 262); OS41 (Table 4.2, Price and Availability of Other Inputs: call center; "As the amount of inputs increases, the demand for labor will increase ... if prices of other inputs fall, production will become more profitable and suppliers will demand more labor to increase production. The opposite is also true. Higher input prices lower demand for labor") -->
-<p>Your course\'s third shifter: "the supply or cost of other factors." Workers rarely produce alone. The textbook\'s call-center salesperson "needs a telephone and a computer terminal."</p>
+<p>Your course\'s third shifter: "the supply or cost of other ${dt('factors','factors')}." Workers rarely produce alone; they work with other ${dt('inputs','inputs')}. The textbook\'s call-center salesperson "needs a telephone and a computer terminal."</p>
 ${FIG6.l31inputs()}
 <p><b>Worked example (made-up numbers):</b> each call-center salesperson makes sales worth $20. With too few terminals, the last salesperson hired shares a desk and makes 8 sales a day: 8 × $20 = $160, less than a $200 daily wage, so the center won\'t hire him. It buys more terminals, and that salesperson now makes 12 sales: 12 × $20 = $240, more than $200. At the same wage, he is now worth hiring: demand shifted right.</p>
 <p><b>Why:</b> when an input used alongside labor is plentiful and cheap, each worker produces more and production is more profitable, so the firm wants more workers. When it is scarce or expensive, the firm makes less and needs fewer. The textbook: "Higher input prices lower demand for labor." Lesson 32 returns to this as "linkages among the factors."</p>
@@ -357,8 +357,9 @@ u6xv({
   'l31c-tech':[u6shiftBig('Dr','Marked up: the X-ray machine shifts the demand for radiology technicians from D1 to D2.'), '"A substitute" would fit a machine that does the technician\'s job; this one needs him.'],
   'l31c-inputs':[u6shiftBig('Dr','Marked up: cheaper fabric shifts the demand for sewing workers from D1 to D2.'), '"Fabric replaces workers" mistakes a complement for a substitute: the factory needs both to make clothes.'],
   'l31c-skill':[u6shiftBig('Dr','Marked up: more fish demanded shifts the demand for fishing-boat crews from D1 to D2.'), '"Supply shifts right" puts the change on the workers\' side; the diet changed what customers buy, which reaches workers through employers.'],
-  'l31c-other':['', 'Leisure preferences, child-care costs and the number of job seekers are all on the workers\' side, so they shift supply, not demand.']
+  'l31c-other':[figs([['Demand shifters: employers', u6shift('Dr','Labor demand shifts')],['Supply shifters: workers', u6shift('Sr','Labor supply shifts')]], 'Regulations change how many workers employers want, so they shift demand; leisure, child care and the number of job seekers shift supply. The wage moves along both curves.'), 'Leisure preferences, child-care costs and the number of job seekers are all on the workers\' side, so they shift supply, not demand.'],
+  'l31-notshifter':[figs([['Shifts demand (employers)', u6shift('Dr','Labor demand shifts')],['Shifts supply (workers)', u6shift('Sr','Labor supply shifts right')]], 'More people wanting factory jobs moves the supply curve, not employers\' demand.'), '']
 });
 u6cv('l31', { 'Other inputs': FIG6.l31inputs(), 'Education and training': u6shift('Dr','Labor demand shifts right'), 'Number of companies': u6shift('Dr','Labor demand shifts right'),
   'Government regulations': figs([['Nurses', u6shift('Dr','Demand for nurses shifts right')],['Less-trained workers', u6shift('Dl','Demand for less-trained workers shifts left')]], 'A rule can shift demand right for one group and left for another.'),
-  'Course vs textbook on technology': FIG6.l31tech() });
+  'Course vs textbook on technology': FIG6.l31tech(), 'Value of MP after a price change': atable(['Price','Units he adds','Value of MP'],[['$10',8,'$80'],['$12',8,'$96']],{cls:'compact',hl:{1:{row:'u3z2'}}}) });
