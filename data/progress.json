@@ -1,2235 +1,6636 @@
 {
-  "lessons": {
-    "l1": {
-      "practice": {
-        "l1-airport": {
-          "ok": true
-        },
-        "l1-burger-price": {
-          "ok": true
-        },
-        "l1-capital": {
-          "ok": true
-        },
-        "l1-college-mc": {
-          "ok": true
-        },
-        "l1-def": {
-          "ok": true
-        },
-        "l1-econdef": {
-          "ok": true
-        },
-        "l1-g-budget": {
-          "ok": true
-        },
-        "l1-g-college": {
-          "ok": true
-        },
-        "l1-g-lunch": {
-          "ok": true
-        },
-        "l1-g-maxunits": {
-          "ok": true
-        },
-        "l1-g-time": {
-          "ok": true
-        },
-        "l1-gr-intercepts": {
-          "ok": true
-        },
-        "l1-gr-outside": {
-          "ok": true
-        },
-        "l1-gr-shift": {
-          "ok": true
-        },
-        "l1-land": {
-          "ok": true
-        },
-        "l1-macro2": {
-          "ok": true
-        },
-        "l1-micro": {
-          "ok": true
-        },
-        "l1-normative2": {
-          "ok": true
-        },
-        "l1-notfactor": {
-          "ok": true
-        },
-        "l1-positive": {
-          "ok": true
-        },
-        "l1-shift": {
-          "ok": true
-        },
-        "l1-tf-capital-money": {
-          "ok": true
-        },
-        "l1-tf-diff": {
-          "ok": true
-        },
-        "l1-tf-free": {
-          "ok": true
-        },
-        "l1-tf-positive-true": {
-          "ok": true
-        },
-        "l1-tf-rich": {
-          "ok": true
-        },
-        "l1-tf-sum": {
-          "ok": true
-        },
-        "l1-tradeoff": {
-          "ok": true
-        }
-      }
-    },
-    "l2": {
-      "practice": {
-        "l2-boots": {
-          "ok": true
-        },
-        "l2-bowed": {
-          "ok": true
-        },
-        "l2-g-ppf": {
-          "ok": true
-        },
-        "l2-gr-biased": {
-          "ok": true
-        },
-        "l2-gr-points": {
-          "ok": true
-        },
-        "l2-inside": {
-          "ok": true
-        },
-        "l2-prodeff": {
-          "ok": true
-        },
-        "l2-reverse": {
-          "ok": false
-        },
-        "l2-rubber": {
-          "ok": true
-        },
-        "l2-shift": {
-          "ok": true
-        },
-        "l2-straight": {
-          "ok": true
-        },
-        "l2-tf-unemp": {
-          "ok": true
-        }
-      }
-    },
-    "l3": {
-      "practice": {
-        "l3-absex": {
-          "ok": true
-        },
-        "l3-alone": {
-          "ok": true
-        },
-        "l3-both": {
-          "ok": true
-        },
-        "l3-brazil": {
-          "ok": true
-        },
-        "l3-defs": {
-          "ok": true
-        },
-        "l3-g-ca": {
-          "ok": true
-        },
-        "l3-g-export": {
-          "ok": true
-        },
-        "l3-g-input": {
-          "ok": true
-        },
-        "l3-g-max": {
-          "ok": false
-        },
-        "l3-g-oc": {
-          "ok": true
-        },
-        "l3-g-oc2": {
-          "ok": true
-        },
-        "l3-gains": {
-          "ok": true
-        },
-        "l3-gr-absy": {
-          "ok": true
-        },
-        "l3-gr-trade": {
-          "ok": true
-        },
-        "l3-gr-two": {
-          "ok": true
-        },
-        "l3-input": {
-          "ok": false
-        },
-        "l3-lawyer": {
-          "ok": true
-        },
-        "l3-meaning": {
-          "ok": true
-        },
-        "l3-smith": {
-          "ok": false
-        },
-        "l3-specialize": {
-          "ok": true
-        },
-        "l3-terms": {
-          "ok": true
-        },
-        "l3-terms2": {
-          "ok": false
-        },
-        "l3-tf-abs": {
-          "ok": true
-        },
-        "l3-tf-gains-both": {
-          "ok": true
-        },
-        "l3-tf-identical": {
-          "ok": false
-        },
-        "l3-tf-oc": {
-          "ok": true
-        },
-        "l3-tf-workers": {
-          "ok": true
-        }
-      }
-    },
-    "l4": {
-      "practice": {
-        "l4-capitalism": {
-          "ok": false
-        },
-        "l4-command": {
-          "ok": true
-        },
-        "l4-decentral": {
-          "ok": false
-        },
-        "l4-factor": {
-          "ok": true
-        },
-        "l4-firms-buyers": {
-          "ok": false
-        },
-        "l4-forwhom": {
-          "ok": false
-        },
-        "l4-gr-cf1": {
-          "ok": true
-        },
-        "l4-gr-cf2": {
-          "ok": false
-        },
-        "l4-grid": {
-          "ok": true
-        },
-        "l4-invisible": {
-          "ok": true
-        },
-        "l4-labor": {
-          "ok": true
-        },
-        "l4-mktsoc": {
-          "ok": true
-        },
-        "l4-nk": {
-          "ok": true
-        },
-        "l4-questions": {
-          "ok": true
-        },
-        "l4-regs": {
-          "ok": false
-        },
-        "l4-revenue": {
-          "ok": true
-        },
-        "l4-rights": {
-          "ok": true
-        },
-        "l4-tf-cfgov": {
-          "ok": true
-        },
-        "l4-tf-cmdmkts": {
-          "ok": true
-        },
-        "l4-tf-direction": {
-          "ok": true
-        },
-        "l4-tf-market": {
-          "ok": true
-        },
-        "l4-tf-mixed": {
-          "ok": true
-        },
-        "l4-tf-transfer": {
-          "ok": true
-        },
-        "l4-traditional": {
-          "ok": true
-        },
-        "l4-underground": {
-          "ok": true
-        },
-        "l4-us": {
-          "ok": true
-        },
-        "l4-wages": {
-          "ok": true
-        },
-        "l4-who": {
-          "ok": true
-        }
-      }
-    },
-    "l5": {
-      "practice": {
-        "l5-calorie": {
-          "ok": true
-        },
-        "l5-concorde": {
-          "ok": true
-        },
-        "l5-def": {
-          "ok": true
-        },
-        "l5-dis": {
-          "ok": true
-        },
-        "l5-dmu": {
-          "ok": false
-        },
-        "l5-g-firm": {
-          "ok": false
-        },
-        "l5-g-mb": {
-          "ok": true
-        },
-        "l5-g-mc": {
-          "ok": true
-        },
-        "l5-g-pricedrop": {
-          "ok": true
-        },
-        "l5-g-sunk": {
-          "ok": false
-        },
-        "l5-gr-line": {
-          "ok": true
-        },
-        "l5-gr-mb": {
-          "ok": true
-        },
-        "l5-incentive": {
-          "ok": true
-        },
-        "l5-marginaldecision": {
-          "ok": true
-        },
-        "l5-mcdef": {
-          "ok": true
-        },
-        "l5-selena": {
-          "ok": true
-        },
-        "l5-spread": {
-          "ok": true
-        },
-        "l5-study": {
-          "ok": true
-        },
-        "l5-sugar": {
-          "ok": true
-        },
-        "l5-sunk": {
-          "ok": true
-        },
-        "l5-tf-dmu": {
-          "ok": true
-        },
-        "l5-tf-equal": {
-          "ok": true
-        },
-        "l5-tf-incent": {
-          "ok": true
-        },
-        "l5-tf-sunk": {
-          "ok": true
-        },
-        "l5-tf-total": {
-          "ok": false
-        },
-        "l5-third": {
-          "ok": true
-        },
-        "l5-water": {
-          "ok": true
-        }
-      }
-    },
-    "l6": {
-      "practice": {
-        "l6-assume": {
-          "ok": true
-        },
-        "l6-buyers-expect": {
-          "ok": true
-        },
-        "l6-complement": {
-          "ok": true
-        },
-        "l6-dvsqd": {
-          "ok": true
-        },
-        "l6-expect": {
-          "ok": false
-        },
-        "l6-g-income": {
-          "ok": true
-        },
-        "l6-g-schedule": {
-          "ok": true
-        },
-        "l6-g-shift": {
-          "ok": true
-        },
-        "l6-gr-demand-right": {
-          "ok": true
-        },
-        "l6-gr-move": {
-          "ok": true
-        },
-        "l6-gr-shiftvsmove": {
-          "ok": true
-        },
-        "l6-gr-supply": {
-          "ok": true
-        },
-        "l6-inferior": {
-          "ok": true
-        },
-        "l6-law": {
-          "ok": true
-        },
-        "l6-notshift": {
-          "ok": true
-        },
-        "l6-population": {
-          "ok": true
-        },
-        "l6-qsdef": {
-          "ok": false
-        },
-        "l6-sellers": {
-          "ok": false
-        },
-        "l6-subsidy": {
-          "ok": true
-        },
-        "l6-substitute": {
-          "ok": false
-        },
-        "l6-supply-shifter": {
-          "ok": false
-        },
-        "l6-tastes": {
-          "ok": true
-        },
-        "l6-tech": {
-          "ok": true
-        },
-        "l6-tf-inferior": {
-          "ok": true
-        },
-        "l6-tf-ownprice": {
-          "ok": true
-        },
-        "l6-tf-related": {
-          "ok": false
-        },
-        "l6-tf-supply-up": {
-          "ok": false
-        },
-        "l6-tf-willing": {
-          "ok": true
-        }
-      }
-    },
-    "l7": {
-      "practice": {
-        "l7-adjust": {
-          "ok": true
-        },
-        "l7-clearing": {
-          "ok": true
-        },
-        "l7-coffee": {
-          "ok": true
-        },
-        "l7-def": {
-          "ok": true
-        },
-        "l7-double": {
-          "ok": false
-        },
-        "l7-ecar": {
-          "ok": true
-        },
-        "l7-equal": {
-          "ok": true
-        },
-        "l7-frost": {
-          "ok": true
-        },
-        "l7-g-both": {
-          "ok": true
-        },
-        "l7-g-gap": {
-          "ok": false
-        },
-        "l7-g-neweq": {
-          "ok": true
-        },
-        "l7-g-schedule": {
-          "ok": true
-        },
-        "l7-gas": {
-          "ok": true
-        },
-        "l7-gr-double": {
-          "ok": true
-        },
-        "l7-gr-shift": {
-          "ok": true
-        },
-        "l7-gr-supply": {
-          "ok": true
-        },
-        "l7-gr-surplus": {
-          "ok": true
-        },
-        "l7-income": {
-          "ok": true
-        },
-        "l7-salmon": {
-          "ok": true
-        },
-        "l7-shortage-def": {
-          "ok": true
-        },
-        "l7-snowboard": {
-          "ok": false
-        },
-        "l7-substitute": {
-          "ok": false
-        },
-        "l7-surplus": {
-          "ok": true
-        },
-        "l7-tech": {
-          "ok": true
-        },
-        "l7-tf-above": {
-          "ok": true
-        },
-        "l7-tf-both": {
-          "ok": true
-        },
-        "l7-tf-lee": {
-          "ok": true
-        },
-        "l7-tf-scarcity": {
-          "ok": true
-        }
-      }
-    },
-    "l8": {
-      "practice": {
-        "l8-binding": {
-          "ok": true
-        },
-        "l8-black": {
-          "ok": true
-        },
-        "l8-ceiling-def": {
-          "ok": true
-        },
-        "l8-ceiling-why": {
-          "ok": true
-        },
-        "l8-cleaners": {
-          "ok": true
-        },
-        "l8-farm": {
-          "ok": true
-        },
-        "l8-fewer": {
-          "ok": true
-        },
-        "l8-floor-def": {
-          "ok": true
-        },
-        "l8-floor-low": {
-          "ok": true
-        },
-        "l8-g-gas": {
-          "ok": false
-        },
-        "l8-g-quota": {
-          "ok": true
-        },
-        "l8-g-rent": {
-          "ok": false
-        },
-        "l8-gaslines": {
-          "ok": true
-        },
-        "l8-gr-ceiling": {
-          "ok": true
-        },
-        "l8-gr-floor": {
-          "ok": false
-        },
-        "l8-gr-quota": {
-          "ok": true
-        },
-        "l8-import": {
-          "ok": true
-        },
-        "l8-lawyers": {
-          "ok": true
-        },
-        "l8-living": {
-          "ok": true
-        },
-        "l8-minwage-evidence": {
-          "ok": true
-        },
-        "l8-quality": {
-          "ok": true
-        },
-        "l8-quota": {
-          "ok": false
-        },
-        "l8-tf-floor-short": {
-          "ok": true
-        },
-        "l8-tf-helpall": {
-          "ok": true
-        },
-        "l8-tf-nonbinding": {
-          "ok": true
-        },
-        "l8-tf-quota": {
-          "ok": true
-        },
-        "l8-tf-shift": {
-          "ok": true
-        },
-        "l8-who": {
-          "ok": true
-        }
-      }
-    }
+ "deleted": {
+  "c-l14-2": {
+   "at": 1793534334046,
+   "kind": "card",
+   "lesson": "l14",
+   "note": "Had simular qeuestions before.",
+   "reasons": [
+    "repetitive"
+   ],
+   "txt": "Utility-maximizing rule: What is the rule for getting the most total utility from a budget?"
   },
-  "mastered": {},
-  "quiz": {
-    "attempts": 0,
-    "best": null,
-    "last": null
+  "c-l14-8": {
+   "at": 1794157163361,
+   "kind": "card",
+   "lesson": "l14",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "Higher MU isn't a better buy: Does the good with the higher marginal utility always deserve the next dollar?"
   },
-  "quiz2": {
-    "attempts": 0,
-    "best": null,
-    "history": [],
-    "last": null
+  "c-l5-7": {
+   "at": 1793983489240,
+   "kind": "card",
+   "lesson": "l5",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "Incentive: What is an incentive? Give an example."
   },
-  "repSeen": 1792786300000,
-  "reports": [],
-  "review": {
-    "c-l2-0": {
-      "box": 1,
-      "due": 1792814400000,
-      "t": 1792629814006
-    },
-    "c-l2-1": {
-      "box": 3,
-      "due": 1794891600000,
-      "t": 1793142427655
-    },
-    "c-l2-10": {
-      "box": 0,
-      "due": 1792641600000,
-      "t": 1792629957800
-    },
-    "c-l2-11": {
-      "box": 1,
-      "due": 1792814400000,
-      "t": 1792630137197
-    },
-    "c-l2-12": {
-      "box": 2,
-      "due": 1792900800000,
-      "t": 1792369479696
-    },
-    "c-l2-13": {
-      "box": 2,
-      "due": 1792900800000,
-      "t": 1792369577979
-    },
-    "c-l2-2": {
-      "box": 0,
-      "due": 1792641600000,
-      "t": 1792630243360
-    },
-    "c-l2-3": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793142550402
-    },
-    "c-l2-4": {
-      "box": 0,
-      "due": 1792641600000,
-      "t": 1792630327781
-    },
-    "c-l2-5": {
-      "box": 0,
-      "due": 1792641600000,
-      "t": 1792630516675
-    },
-    "c-l2-6": {
-      "box": 3,
-      "due": 1794891600000,
-      "t": 1793142571135
-    },
-    "c-l2-7": {
-      "box": 2,
-      "due": 1792814400000,
-      "t": 1792291793560
-    },
-    "c-l2-8": {
-      "box": 3,
-      "due": 1794891600000,
-      "t": 1793142633916
-    },
-    "c-l2-9": {
-      "box": 3,
-      "due": 1794891600000,
-      "t": 1793142725001
-    },
-    "c-l4-0": {
-      "box": 0,
-      "due": 1792641600000,
-      "t": 1792632280785
-    },
-    "c-l4-1": {
-      "box": 2,
-      "due": 1793160000000,
-      "t": 1792632021475
-    },
-    "c-l4-10": {
-      "box": 0,
-      "due": 1792641600000,
-      "t": 1792631523726
-    },
-    "c-l4-11": {
-      "box": 0,
-      "due": 1792641600000,
-      "t": 1792632447669
-    },
-    "c-l4-12": {
-      "box": 0,
-      "due": 1792641600000,
-      "t": 1792632234984
-    },
-    "c-l4-13": {
-      "box": 0,
-      "due": 1792641600000,
-      "t": 1792631857499
-    },
-    "c-l4-14": {
-      "box": 0,
-      "due": 1792641600000,
-      "t": 1792632143905
-    },
-    "c-l4-15": {
-      "box": 2,
-      "due": 1793160000000,
-      "t": 1792631953890
-    },
-    "c-l4-2": {
-      "box": 2,
-      "due": 1793160000000,
-      "t": 1792632342233
-    },
-    "c-l4-3": {
-      "box": 0,
-      "due": 1792641600000,
-      "t": 1792631738064
-    },
-    "c-l4-4": {
-      "box": 0,
-      "due": 1792641600000,
-      "t": 1792631595609
-    },
-    "c-l4-5": {
-      "box": 0,
-      "due": 1792641600000,
-      "t": 1792631479339
-    },
-    "c-l4-6": {
-      "box": 0,
-      "due": 1792641600000,
-      "t": 1792631822154
-    },
-    "c-l4-7": {
-      "box": 0,
-      "due": 1792641600000,
-      "t": 1792631680456
-    },
-    "c-l4-8": {
-      "box": 2,
-      "due": 1793160000000,
-      "t": 1792632001776
-    },
-    "c-l4-9": {
-      "box": 0,
-      "due": 1792641600000,
-      "t": 1792632265810
-    },
-    "c-l5-0": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792725511122
-    },
-    "c-l5-1": {
-      "box": 0,
-      "due": 1792728000000,
-      "t": 1792724969228
-    },
-    "c-l5-10": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792725051090
-    },
-    "c-l5-11": {
-      "box": 0,
-      "due": 1792728000000,
-      "t": 1792724870061
-    },
-    "c-l5-2": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792725643629
-    },
-    "c-l5-3": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792725477093
-    },
-    "c-l5-4": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792725755782
-    },
-    "c-l5-5": {
-      "box": 0,
-      "due": 1792728000000,
-      "t": 1792724755323
-    },
-    "c-l5-6": {
-      "box": 0,
-      "due": 1792728000000,
-      "t": 1792724891609
-    },
-    "c-l5-7": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792725552369
-    },
-    "c-l5-8": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792725177002
-    },
-    "c-l5-9": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792725235363
-    },
-    "c-l6-0": {
-      "box": 0,
-      "due": 1792814400000,
-      "t": 1792784108195
-    },
-    "c-l6-1": {
-      "box": 0,
-      "due": 1792814400000,
-      "t": 1792784873868
-    },
-    "c-l6-10": {
-      "box": 0,
-      "due": 1792814400000,
-      "t": 1792783979124
-    },
-    "c-l6-11": {
-      "box": 0,
-      "due": 1792814400000,
-      "t": 1792784654023
-    },
-    "c-l6-12": {
-      "box": 0,
-      "due": 1792814400000,
-      "t": 1792785065035
-    },
-    "c-l6-13": {
-      "box": 0,
-      "due": 1792814400000,
-      "t": 1792784596501
-    },
-    "c-l6-14": {
-      "box": 0,
-      "due": 1792814400000,
-      "t": 1792784378414
-    },
-    "c-l6-2": {
-      "box": 2,
-      "due": 1793332800000,
-      "t": 1792784306550
-    },
-    "c-l6-3": {
-      "box": 2,
-      "due": 1793332800000,
-      "t": 1792784491771
-    },
-    "c-l6-4": {
-      "box": 0,
-      "due": 1792814400000,
-      "t": 1792784022422
-    },
-    "c-l6-5": {
-      "box": 2,
-      "due": 1793332800000,
-      "t": 1792784687383
-    },
-    "c-l6-7": {
-      "box": 0,
-      "due": 1792814400000,
-      "t": 1792784987118
-    },
-    "c-l6-8": {
-      "box": 0,
-      "due": 1792814400000,
-      "t": 1792784197029
-    },
-    "c-l6-9": {
-      "box": 2,
-      "due": 1793332800000,
-      "t": 1792783855561
-    },
-    "c-l7-0": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793144153616
-    },
-    "c-l7-1": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793144308592
-    },
-    "c-l7-10": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793143754892
-    },
-    "c-l7-11": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793144124394
-    },
-    "c-l7-2": {
-      "box": 0,
-      "due": 1793160000000,
-      "t": 1793143893789
-    },
-    "c-l7-3": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793143999891
-    },
-    "c-l7-4": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793144236028
-    },
-    "c-l7-5": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793143919860
-    },
-    "c-l7-6": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793144259458
-    },
-    "c-l7-7": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793144222208
-    },
-    "c-l7-8": {
-      "box": 0,
-      "due": 1793160000000,
-      "t": 1793144254798
-    },
-    "c-l7-9": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793144278647
-    },
+  "c-l5-8": {
+   "at": 1793983494301,
+   "kind": "card",
+   "lesson": "l5",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "Disincentive: What is a disincentive? Give an example."
+  },
+  "c-l6-9": {
+   "at": 1793989025488,
+   "kind": "card",
+   "lesson": "l6",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "Expectations and demand: How do buyers' expectations about future prices shift demand today?"
+  },
+  "l11-g-cs": {
+   "at": 1793989274260,
+   "kind": "question",
+   "lesson": "l11",
+   "note": "",
+   "reasons": [
+    "easy",
+    "repetitive"
+   ],
+   "txt": "Made-up numbers. Five fans would each buy one concert T-shirt and are willing to pay at most:Fan | A | B | C | D | E | Willingness to pay | $9 | $6.50 | $5.50 | $3.50 | $2 | The shirts sell for $3. What is the total consumer surplus?"
+  },
+  "l11-water": {
+   "at": 1793983171208,
+   "kind": "question",
+   "lesson": "l11",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "At a hot summer concert, you would pay up to $5.00 for a bottle of water. The vendor charges $2.50. What is your consumer surplus?"
+  },
+  "l12-rev": {
+   "at": 1793501093621,
+   "kind": "question",
+   "lesson": "l12",
+   "note": "",
+   "reasons": [
+    "dislike"
+   ],
+   "txt": "In your course's sock example ($1 tax; quantity falls from 300 to 200), how much tax revenue does the government collect?"
+  },
+  "l14-best": {
+   "at": 1793982588612,
+   "kind": "question",
+   "lesson": "l14",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "Made-up numbers. Omar has $6 for lunch snacks. Chips cost $1 a bag; juice costs $2 a bottle.Unit | Chips: MU ($1 a bag) | Juice: MU ($2 a bottle) | 1st | 8 | 16 | 2nd | 6 | 12 | 3rd | 5 | 8 | 4th | 4 | 6 | 5th | 3 | \u2013 | 6th | 2 | \u2013 | Which combination gives Omar the most total utility?"
+  },
+  "l14-bundle-tu": {
+   "at": 1794157987122,
+   "kind": "question",
+   "lesson": "l14",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "Your course's pizza and soda:Unit | Soda: marginal utility | Pizza: marginal utility | 1st | 8 | 20 | 2nd | 7 | 16 | 3rd | 6 | 12 | 4th | 5 | 8 | 5th | 4 | 4 | Soda costs $1 a can, pizza $2 a slice, and the budget is $5. What is the total utility of 3 cans of soda and 1 slice of pizza?"
+  },
+  "l14-cheap": {
+   "at": 1794157818965,
+   "kind": "question",
+   "lesson": "l14",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "Made-up numbers. A $1 snack gives 6 utils; a $4 sandwich gives 16 utils. Which gives more satisfaction per dollar?"
+  },
+  "l14-g-cost": {
+   "at": 1793792645337,
+   "kind": "question",
+   "lesson": "l14",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "Made-up numbers. Kai has $12 for school supplies. Notebooks cost $4 each and pens cost $1 each. If he buys 2 notebooks and spends the rest on pens, how many pens can he buy?"
+  },
+  "l14-g-mup": {
+   "at": 1794157567085,
+   "kind": "question",
+   "lesson": "l14",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "Made-up numbers. One more phone game gives Theo 9 utils of marginal utility, and it costs $3. What is its marginal utility per dollar?"
+  },
+  "l14-gr-mup": {
+   "at": 1793983255957,
+   "kind": "question",
+   "lesson": "l14",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "Made-up numbers. The bars show the marginal utility per dollar of the next unit of each good Mia could buy: [graph: Next coffee ($3) \u00b7 6 utils per $ \u00b7 Next muffin ($2) \u00b7 4 utils per $ \u00b7 Next juice ($4) \u00b7 3 utils per $] She has money left. Which should she buy next?"
+  },
+  "l14-net": {
+   "at": 1794157849833,
+   "kind": "question",
+   "lesson": "l14",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "Your course textbook's Jos\u00e9 considers moving from point P (4 T-shirts, 0 movies) to point Q (3 T-shirts, 2 movies). He loses the 4th T-shirt's 18 utils and gains the first two movies' 16 and 15 utils. What is the net change in his total utility?"
+  },
+  "l16-fixedvar": {
+   "at": 1794158007362,
+   "kind": "question",
+   "lesson": "l16",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "Made-up example. A pizza shop has a 5-year lease, one oven it owns and a manager on a 3-year contract. Which of the following is a variable input for it this month?"
+  },
+  "l16-g-tp": {
+   "at": 1794157797682,
+   "kind": "question",
+   "lesson": "l16",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "Made-up numbers. A caf\u00e9 makes 22 drinks an hour with 2 baristas. The next 3 baristas have marginal products of 9 and 6 and 3 drinks an hour. How many drinks an hour does it make with 5 baristas?"
+  },
+  "l3-alone": {
+   "at": 1793390077053,
+   "kind": "question",
+   "lesson": "l3",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "The seamstress can make 8 bread or 4 sweaters in an 8-hour day. Working alone, she makes 2 sweaters. With the rest of her day, how many loaves of bread can she make?"
+  },
+  "l4-underground": {
+   "at": 1793576860083,
+   "kind": "question",
+   "lesson": "l4",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "An underground economy is which of the following?"
+  },
+  "l5-calorie": {
+   "at": 1793985709219,
+   "kind": "question",
+   "lesson": "l5",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "Posting calorie counts on fast-food menus works mainly as which of the following?"
+  },
+  "l5-dis": {
+   "at": 1793985732106,
+   "kind": "question",
+   "lesson": "l5",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "Which of the following is a disincentive?"
+  },
+  "l5-g-firm": {
+   "at": 1793390599442,
+   "kind": "question",
+   "lesson": "l5",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "A factory is thinking about adding a weekend shift. It would add $8,400 a week in wages, materials and power, and sell 1,200 more units at $10 each. What is the weekly net gain from the extra shift? (Use a minus sign for a loss.)"
+  },
+  "l5-g-pricedrop": {
+   "at": 1793985808034,
+   "kind": "question",
+   "lesson": "l5",
+   "note": "",
+   "reasons": [
+    "repetitive"
+   ],
+   "txt": "Your marginal benefit from each extra movie ticket this month:Ticket | 1 | 2 | 3 | 4 | 5 | 6 | Marginal benefit | $10 | $8 | $6 | $4 | $3 | $1 | A theater discount cuts the price from $9 to $7. How many more tickets should you buy?"
+  },
+  "l5-gr-mb": {
+   "at": 1793985836183,
+   "kind": "question",
+   "lesson": "l5",
+   "note": "",
+   "reasons": [
+    "repetitive"
+   ],
+   "txt": "Bars show the marginal benefit of each unit to you; the dashed line is the price. [graph: 0 \u00b7 4 \u00b7 8 \u00b7 Unit \u00b7 Dollars \u00b7 1 \u00b7 $7 \u00b7 2 \u00b7 $6 \u00b7 3 \u00b7 $4.50 \u00b7 4 \u00b7 $2.50 \u00b7 5 \u00b7 $1.50 \u00b7 price $5.25] How many units should you buy?"
+  },
+  "l5-incentive": {
+   "at": 1793270571502,
+   "kind": "question",
+   "lesson": "l5",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "Which of the following is an incentive?"
+  },
+  "l5-study": {
+   "at": 1793985863172,
+   "kind": "question",
+   "lesson": "l5",
+   "note": "",
+   "reasons": [
+    "repetitive"
+   ],
+   "txt": "You're deciding whether to study one more hour tonight. Marginal thinking says to compare which of the following?"
+  },
+  "l5-sugar": {
+   "at": 1793271336045,
+   "kind": "question",
+   "lesson": "l5",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "The UK's tax on high-sugar soft drinks, introduced in April 2018, is best described as which of the following?"
+  },
+  "l5-sunk": {
+   "at": 1793988536731,
+   "kind": "question",
+   "lesson": "l5",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "You paid $40 for a non-refundable concert ticket. On the night, a friend offers you a free trip you would enjoy more than the concert. What should you do?"
+  },
+  "l5-tf-incent": {
+   "at": 1793988559938,
+   "kind": "question",
+   "lesson": "l5",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "True or false: Incentives and disincentives work by changing the costs or benefits of a choice."
+  },
+  "l5-tf-sunk": {
+   "at": 1793988566647,
+   "kind": "question",
+   "lesson": "l5",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "True or false: Sunk costs should be included when deciding whether to keep going with a project."
+  },
+  "l5-third": {
+   "at": 1793988576816,
+   "kind": "question",
+   "lesson": "l5",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "A factory already runs one shift. Here is what each extra shift would add per week:Shift | Added cost | Added revenue | Second | $9,000 | $12,000 | Third | $11,000 | $9,000 | Which of the following should the factory do?"
+  },
+  "l5c-dmu": {
+   "at": 1793270468510,
+   "kind": "question",
+   "lesson": "l5",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "Maya values her 1st, 2nd, 3rd and 4th slice of pizza at $6.00, $4.00, $2.50 and $1.00. Slices cost $2.00. Which of the following is true?"
+  },
+  "l6-buyers-expect": {
+   "at": 1793989473150,
+   "kind": "question",
+   "lesson": "l6",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "Shoppers hear that coffee prices will jump next month because of a bad harvest. What most likely happens to the demand for coffee this week?"
+  },
+  "l6-g-income": {
+   "at": 1793270991823,
+   "kind": "question",
+   "lesson": "l6",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "Your course textbook's car example (Table 3.4). When incomes rise, demand moves from D0 to D1:Price | D0 (millions) | D1 (millions) | $16,000 | 22.0 | 24.0 | $18,000 | 20.0 | 22.0 | $20,000 | 18.0 | 20.0 | $22,000 | 17.0 | 19.0 | $24,000 | 16.5 | 18.5 | $26,000 | 16.0 | 18.0 | At a price of $26,000,"
+  },
+  "l6-g-schedule": {
+   "at": 1793989641129,
+   "kind": "question",
+   "lesson": "l6",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "Made-up numbers. A firm's supply schedule:Price | $5 | $6 | $7 | Quantity supplied | 9 | 10 | 12 | If the market price rises from $5 to $7 and nothing else changes, by how many units does the quantity supplied change?"
+  },
+  "l6-g-shift": {
+   "at": 1793270778190,
+   "kind": "question",
+   "lesson": "l6",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "Made-up numbers. After a popular video praises a sneaker brand, its demand schedule changes:Price | $6 | $7 | $8 | $9 | Quantity demanded before | 14 | 13 | 11 | 10 | Quantity demanded after | 17 | 16 | 14 | 13 | At a price of $8, by how many pairs did the quantity demanded change?"
+  },
+  "l6-law": {
+   "at": 1793989777371,
+   "kind": "question",
+   "lesson": "l6",
+   "note": "",
+   "reasons": [
+    "repetitive"
+   ],
+   "txt": "The law of demand states which of the following?"
+  },
+  "l6-tastes": {
+   "at": 1793989798396,
+   "kind": "question",
+   "lesson": "l6",
+   "note": "",
+   "reasons": [
+    "dislike"
+   ],
+   "txt": "From 1980 to 2014, U.S. chicken consumption per person rose from 48 to 85 pounds a year while beef fell from 77 to 54. Your course textbook says this was largely due to which of the following?"
+  },
+  "l7-g-gap": {
+   "at": 1793312423258,
+   "kind": "question",
+   "lesson": "l7",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "Your course textbook's gasoline market (Table 3.3, millions of gallons):Price | Quantity demanded | Quantity supplied | $1 | 800 | 500 | $1.20 | 700 | 550 | $1.40 | 600 | 600 | $1.60 | 550 | 640 | $1.80 | 500 | 680 | $2 | 460 | 700 | $2.20 | 420 | 720 | If the price were $1.80 a gallon, how large wo"
+  },
+  "l8c-binding": {
+   "at": 1793501814958,
+   "kind": "question",
+   "lesson": "l8",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "The equilibrium wage for summer lifeguards is $14 an hour. Which of the following minimum wages would be binding?"
+  },
+  "l9-g-tr": {
+   "at": 1793982610124,
+   "kind": "question",
+   "lesson": "l9",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "Made-up numbers. A movie theater changes its ticket price from $4 to $5, and tickets sold per night go from 300 to 260. By how much does nightly total revenue change, in dollars? (Use a minus sign for a decrease.)"
+  },
+  "l9-salmon": {
+   "at": 1793500831946,
+   "kind": "question",
+   "lesson": "l9",
+   "note": "",
+   "reasons": [
+    "easy"
+   ],
+   "txt": "Your course's grocer raises smoked salmon from $11.00 to $12.10, and sales fall from 40 to 25 units. What happens to his total revenue from salmon?"
+  }
+ },
+ "lessons": {
+  "l1": {
+   "practice": {
     "l1-airport": {
-      "box": 3,
-      "due": 1794373200000,
-      "t": 1792630522716
+     "ok": true
     },
     "l1-burger-price": {
-      "box": 3,
-      "due": 1794373200000,
-      "t": 1792630540199
+     "ok": true
     },
     "l1-capital": {
-      "box": 3,
-      "due": 1794373200000,
-      "t": 1792630549177
+     "ok": true
     },
     "l1-college-mc": {
-      "box": 3,
-      "due": 1794373200000,
-      "t": 1792630561523
+     "ok": true
     },
     "l1-def": {
-      "box": 3,
-      "due": 1794373200000,
-      "t": 1792630567372
+     "ok": true
     },
     "l1-econdef": {
-      "box": 3,
-      "due": 1794373200000,
-      "t": 1792630575022
+     "ok": true
     },
     "l1-g-budget": {
-      "box": 3,
-      "due": 1794373200000,
-      "t": 1792630595781
+     "ok": true
     },
     "l1-g-college": {
-      "box": 0,
-      "due": 1793160000000,
-      "t": 1793142741677
+     "ok": true
     },
     "l1-g-lunch": {
-      "box": 3,
-      "due": 1794373200000,
-      "t": 1792630607134
+     "ok": true
     },
     "l1-g-maxunits": {
-      "box": 3,
-      "due": 1794373200000,
-      "t": 1792630626251
+     "ok": true
     },
     "l1-g-time": {
-      "box": 3,
-      "due": 1794373200000,
-      "t": 1792630635637
+     "ok": true
     },
     "l1-gr-intercepts": {
-      "box": 3,
-      "due": 1794373200000,
-      "t": 1792630645370
+     "ok": true
     },
     "l1-gr-outside": {
-      "box": 3,
-      "due": 1794373200000,
-      "t": 1792630661464
+     "ok": true
     },
     "l1-gr-shift": {
-      "box": 3,
-      "due": 1794373200000,
-      "t": 1792630671458
+     "ok": true
     },
     "l1-land": {
-      "box": 3,
-      "due": 1794373200000,
-      "t": 1792630685305
+     "ok": true
     },
     "l1-macro2": {
-      "box": 3,
-      "due": 1794373200000,
-      "t": 1792630696581
+     "ok": true
+    },
+    "l1-micro": {
+     "ok": true
     },
     "l1-normative2": {
-      "box": 3,
-      "due": 1794373200000,
-      "t": 1792630715403
+     "ok": true
     },
     "l1-notfactor": {
-      "box": 3,
-      "due": 1794373200000,
-      "t": 1792630733160
+     "ok": true
     },
     "l1-positive": {
-      "box": 3,
-      "due": 1794373200000,
-      "t": 1792630739821
+     "ok": true
     },
     "l1-shift": {
-      "box": 0,
-      "due": 1792641600000,
-      "t": 1792630755116
+     "ok": true
     },
     "l1-tf-capital-money": {
-      "box": 3,
-      "due": 1794805200000,
-      "t": 1793052669127
+     "ok": true
     },
     "l1-tf-diff": {
-      "box": 3,
-      "due": 1794805200000,
-      "t": 1793052675747
+     "ok": true
     },
     "l1-tf-free": {
-      "box": 3,
-      "due": 1794805200000,
-      "t": 1793052680055
+     "ok": true
     },
     "l1-tf-positive-true": {
-      "box": 3,
-      "due": 1794805200000,
-      "t": 1793052686173
+     "ok": true
     },
     "l1-tf-rich": {
-      "box": 3,
-      "due": 1794805200000,
-      "t": 1793052693299
+     "ok": true
     },
     "l1-tf-sum": {
-      "box": 0,
-      "due": 1793073600000,
-      "t": 1793052699393
+     "ok": true
     },
     "l1-tradeoff": {
-      "box": 3,
-      "due": 1794891600000,
-      "t": 1793142233585
+     "ok": true
+    }
+   }
+  },
+  "l10": {
+   "practice": {
+    "l10-camry": {
+     "ok": true
     },
+    "l10-g-ied": {
+     "ok": false
+    },
+    "l10-g-ied-pct": {
+     "ok": false
+    },
+    "l10-g-xed": {
+     "ok": false
+    },
+    "l10-g-xed-pct": {
+     "ok": false
+    },
+    "l10-gas-cars": {
+     "ok": true
+    },
+    "l10-gr-income": {
+     "ok": true
+    },
+    "l10-ied-def": {
+     "ok": false
+    },
+    "l10-ied-order": {
+     "ok": true
+    },
+    "l10-inferior-sign": {
+     "ok": true
+    },
+    "l10-luxury": {
+     "ok": true
+    },
+    "l10-magic": {
+     "ok": true
+    },
+    "l10-pretzels": {
+     "ok": true
+    },
+    "l10-recession": {
+     "ok": true
+    },
+    "l10-shift-size": {
+     "ok": false
+    },
+    "l10-steak": {
+     "ok": true
+    },
+    "l10-substitutes": {
+     "ok": true
+    },
+    "l10-table": {
+     "ok": true
+    },
+    "l10-tf-inferior": {
+     "ok": true
+    },
+    "l10-tf-luxury": {
+     "ok": true
+    },
+    "l10-tf-negxed": {
+     "ok": true
+    },
+    "l10-tf-sign": {
+     "ok": true
+    },
+    "l10-tf-zero": {
+     "ok": true
+    },
+    "l10-transit": {
+     "ok": true
+    },
+    "l10-unrelated": {
+     "ok": true
+    },
+    "l10-which-price": {
+     "ok": true
+    },
+    "l10-wording": {
+     "ok": true
+    },
+    "l10-xed-def": {
+     "ok": true
+    }
+   }
+  },
+  "l11": {
+   "practice": {
+    "l11-beyond": {
+     "ok": true
+    },
+    "l11-ceiling": {
+     "ok": false
+    },
+    "l11-cs-def": {
+     "ok": true
+    },
+    "l11-efficient": {
+     "ok": true
+    },
+    "l11-g-cs": {
+     "ok": false
+    },
+    "l11-g-ps": {
+     "ok": true
+    },
+    "l11-g-total": {
+     "ok": true
+    },
+    "l11-g-triangle": {
+     "ok": true
+    },
+    "l11-gr-areas": {
+     "ok": true
+    },
+    "l11-gr-ps": {
+     "ok": true
+    },
+    "l11-gr-total": {
+     "ok": true
+    },
+    "l11-price-fall": {
+     "ok": true
+    },
+    "l11-ps-def": {
+     "ok": true
+    },
+    "l11-short": {
+     "ok": true
+    },
+    "l11-tablets": {
+     "ok": true
+    },
+    "l11-tf-each": {
+     "ok": true
+    },
+    "l11-tf-paid": {
+     "ok": true
+    },
+    "l11-tf-ps-revenue": {
+     "ok": true
+    },
+    "l11-tf-words": {
+     "ok": true
+    },
+    "l11-total": {
+     "ok": true
+    },
+    "l11-vendor-who": {
+     "ok": true
+    },
+    "l11-vendors": {
+     "ok": true
+    },
+    "l11-water": {
+     "ok": true
+    },
+    "l11-water-new": {
+     "ok": true
+    },
+    "l11-welfare": {
+     "ok": true
+    },
+    "l11-who": {
+     "ok": false
+    },
+    "l11-wtp": {
+     "ok": true
+    }
+   }
+  },
+  "l12": {
+   "practice": {
+    "l12-beach": {
+     "ok": true
+    },
+    "l12-ceiling": {
+     "ok": true
+    },
+    "l12-cig": {
+     "ok": true
+    },
+    "l12-cs-ps": {
+     "ok": true
+    },
+    "l12-double": {
+     "ok": true
+    },
+    "l12-dwl-def": {
+     "ok": false
+    },
+    "l12-dwl-why": {
+     "ok": true
+    },
+    "l12-equal-why": {
+     "ok": false
+    },
+    "l12-floor": {
+     "ok": false
+    },
+    "l12-g-burden": {
+     "ok": true
+    },
+    "l12-g-dwl": {
+     "ok": true
+    },
+    "l12-g-rev": {
+     "ok": true
+    },
+    "l12-g-square": {
+     "ok": true
+    },
+    "l12-gr-areas": {
+     "ok": true
+    },
+    "l12-gr-incidence": {
+     "ok": false
+    },
+    "l12-inelastic": {
+     "ok": true
+    },
+    "l12-quota": {
+     "ok": false
+    },
+    "l12-rev": {
+     "ok": true
+    },
+    "l12-revenue-el": {
+     "ok": false
+    },
+    "l12-socks": {
+     "ok": true
+    },
+    "l12-statutory": {
+     "ok": true
+    },
+    "l12-tf-ceiling": {
+     "ok": true
+    },
+    "l12-tf-equal": {
+     "ok": true
+    },
+    "l12-tf-rev": {
+     "ok": true
+    },
+    "l12-tf-who": {
+     "ok": true
+    },
+    "l12-total": {
+     "ok": true
+    },
+    "l12-wedge": {
+     "ok": true
+    },
+    "l12-why": {
+     "ok": true
+    }
+   }
+  },
+  "l13": {
+   "practice": {
+    "l13-avg": {
+     "ok": true
+    },
+    "l13-buffet": {
+     "ok": true
+    },
+    "l13-candy-peak": {
+     "ok": true
+    },
+    "l13-candy-tu": {
+     "ok": true
+    },
+    "l13-course-mu": {
+     "ok": true
+    },
+    "l13-dmu-def": {
+     "ok": true
+    },
+    "l13-g-mu": {
+     "ok": true
+    },
+    "l13-g-peak": {
+     "ok": true
+    },
+    "l13-g-tu": {
+     "ok": true
+    },
+    "l13-gr-mu": {
+     "ok": true
+    },
+    "l13-gr-pair": {
+     "ok": true
+    },
+    "l13-gr-tu": {
+     "ok": true
+    },
+    "l13-movie": {
+     "ok": true
+    },
+    "l13-mu-def": {
+     "ok": true
+    },
+    "l13-neg": {
+     "ok": true
+    },
+    "l13-rational": {
+     "ok": true
+    },
+    "l13-slope": {
+     "ok": true
+    },
+    "l13-tf-dmu-tu": {
+     "ok": true
+    },
+    "l13-tf-first": {
+     "ok": true
+    },
+    "l13-tf-neg": {
+     "ok": false
+    },
+    "l13-tf-rising": {
+     "ok": true
+    },
+    "l13-tf-sum": {
+     "ok": true
+    },
+    "l13-tf-utils": {
+     "ok": true
+    },
+    "l13-tshirt": {
+     "ok": true
+    },
+    "l13-tu-def": {
+     "ok": false
+    },
+    "l13-which-table": {
+     "ok": false
+    },
+    "l13-why-dmu": {
+     "ok": true
+    },
+    "l13-zero": {
+     "ok": true
+    }
+   }
+  },
+  "l14": {
+   "practice": {
+    "l14-best": {
+     "ok": false
+    },
+    "l14-bundle-tu": {
+     "ok": true
+    },
+    "l14-cheap": {
+     "ok": true
+    },
+    "l14-cons-eq": {
+     "ok": false
+    },
+    "l14-corner": {
+     "ok": true
+    },
+    "l14-first": {
+     "ok": true
+    },
+    "l14-g-cost": {
+     "ok": true
+    },
+    "l14-g-move": {
+     "ok": true
+    },
+    "l14-g-mup": {
+     "ok": true
+    },
+    "l14-g-opt": {
+     "ok": true
+    },
+    "l14-gr-budget": {
+     "ok": true
+    },
+    "l14-gr-mup": {
+     "ok": false
+    },
+    "l14-gr-points": {
+     "ok": true
+    },
+    "l14-jose": {
+     "ok": true
+    },
+    "l14-ms-mup": {
+     "ok": true
+    },
+    "l14-net": {
+     "ok": true
+    },
+    "l14-rule": {
+     "ok": false
+    },
+    "l14-slope": {
+     "ok": false
+    },
+    "l14-tf-all": {
+     "ok": true
+    },
+    "l14-tf-equal": {
+     "ok": true
+    },
+    "l14-tf-highmu": {
+     "ok": false
+    },
+    "l14-tf-mu-zero": {
+     "ok": false
+    },
+    "l14-tf-ratio": {
+     "ok": true
+    },
+    "l14-unspent": {
+     "ok": true
+    },
+    "l14-which-more": {
+     "ok": false
+    },
+    "l14-why-converge": {
+     "ok": true
+    },
+    "l14-why44": {
+     "ok": false
+    }
+   }
+  },
+  "l15": {
+   "practice": {
+    "l15-both": {
+     "ok": true
+    },
+    "l15-budget-pivot": {
+     "ok": true
+    },
+    "l15-ceteris": {
+     "ok": false
+    },
+    "l15-demand-pts": {
+     "ok": false
+    },
+    "l15-g-market": {
+     "ok": true
+    },
+    "l15-g-mupnew": {
+     "ok": true
+    },
+    "l15-g-relp": {
+     "ok": true
+    },
+    "l15-gr-demand": {
+     "ok": true
+    },
+    "l15-gr-sum": {
+     "ok": true
+    },
+    "l15-heating": {
+     "ok": true
+    },
+    "l15-inc-def": {
+     "ok": true
+    },
+    "l15-income-shift": {
+     "ok": true
+    },
+    "l15-inferior": {
+     "ok": true
+    },
+    "l15-kimberly": {
+     "ok": true
+    },
+    "l15-ms-income": {
+     "ok": true
+    },
+    "l15-new-opt": {
+     "ok": true
+    },
+    "l15-optimal-point": {
+     "ok": true
+    },
+    "l15-other-good": {
+     "ok": true
+    },
+    "l15-price-mup": {
+     "ok": true
+    },
+    "l15-rel": {
+     "ok": false
+    },
+    "l15-sergei": {
+     "ok": true
+    },
+    "l15-slide-56": {
+     "ok": true
+    },
+    "l15-sub-def": {
+     "ok": true
+    },
+    "l15-tf-inc": {
+     "ok": true
+    },
+    "l15-tf-market": {
+     "ok": true
+    },
+    "l15-tf-move": {
+     "ok": true
+    },
+    "l15-tf-subboth": {
+     "ok": true
+    },
+    "l15-why-slope": {
+     "ok": true
+    }
+   }
+  },
+  "l16": {
+   "practice": {
+    "l16-clip-zone": {
+     "ok": true
+    },
+    "l16-course-mp": {
+     "ok": true
+    },
+    "l16-fixedvar": {
+     "ok": true
+    },
+    "l16-g-mp": {
+     "ok": true
+    },
+    "l16-g-mpdec": {
+     "ok": true
+    },
+    "l16-g-pf": {
+     "ok": true
+    },
+    "l16-g-tp": {
+     "ok": true
+    },
+    "l16-g-zone": {
+     "ok": true
+    },
+    "l16-gr-fall": {
+     "ok": true
+    },
+    "l16-gr-mp": {
+     "ok": true
+    },
+    "l16-gr-tp": {
+     "ok": true
+    },
+    "l16-irrigate": {
+     "ok": true
+    },
+    "l16-lr": {
+     "ok": true
+    },
+    "l16-match": {
+     "ok": true
+    },
+    "l16-mp-def": {
+     "ok": true
+    },
+    "l16-notfixed": {
+     "ok": false
+    },
+    "l16-pf-course": {
+     "ok": true
+    },
+    "l16-scale": {
+     "ok": true
+    },
+    "l16-sixth": {
+     "ok": true
+    },
+    "l16-sr-def": {
+     "ok": true
+    },
+    "l16-tf-falls": {
+     "ok": true
+    },
+    "l16-tf-incr": {
+     "ok": true
+    },
+    "l16-tf-lr-time": {
+     "ok": true
+    },
+    "l16-tf-shortrun": {
+     "ok": true
+    },
+    "l16-tf-skill": {
+     "ok": true
+    },
+    "l16-tf-zero": {
+     "ok": true
+    },
+    "l16-truck": {
+     "ok": true
+    },
+    "l16-why": {
+     "ok": true
+    }
+   }
+  },
+  "l17": {
+   "practice": {
+    "l17-atc-def": {
+     "ok": true
+    },
+    "l17-atc-sum": {
+     "ok": true
+    },
+    "l17-clip-avc": {
+     "ok": true
+    },
+    "l17-clip-min": {
+     "ok": true
+    },
+    "l17-course-atc": {
+     "ok": true
+    },
+    "l17-course-fix": {
+     "ok": true
+    },
+    "l17-course-tc": {
+     "ok": false
+    },
+    "l17-fc-def": {
+     "ok": true
+    },
+    "l17-g-avg": {
+     "ok": true
+    },
+    "l17-g-tc": {
+     "ok": true
+    },
+    "l17-g-tcq": {
+     "ok": true
+    },
+    "l17-g-vc": {
+     "ok": true
+    },
+    "l17-gap": {
+     "ok": false
+    },
+    "l17-gr-afc": {
+     "ok": true
+    },
+    "l17-gr-tc": {
+     "ok": true
+    },
+    "l17-overhead": {
+     "ok": false
+    },
+    "l17-profit": {
+     "ok": true
+    },
+    "l17-tf-afc": {
+     "ok": false
+    },
+    "l17-tf-afc-u": {
+     "ok": true
+    },
+    "l17-tf-avc": {
+     "ok": true
+    },
+    "l17-tf-avc-below": {
+     "ok": true
+    },
+    "l17-tf-contract": {
+     "ok": true
+    },
+    "l17-tf-intercept": {
+     "ok": true
+    },
+    "l17-tf-zero": {
+     "ok": true
+    },
+    "l17-vc-def": {
+     "ok": true
+    },
+    "l17-why-rise": {
+     "ok": true
+    },
+    "l17-why-u": {
+     "ok": true
+    }
+   }
+  },
+  "l18": {
+   "practice": {
+    "l18-barber-mc": {
+     "ok": true
+    },
+    "l18-clip-mc": {
+     "ok": true
+    },
+    "l18-course-mc": {
+     "ok": true
+    },
+    "l18-cross": {
+     "ok": true
+    },
+    "l18-eff-scale": {
+     "ok": false
+    },
+    "l18-fc-mc": {
+     "ok": true
+    },
+    "l18-g-mc": {
+     "ok": true
+    },
+    "l18-g-mcfromtable": {
+     "ok": true
+    },
+    "l18-g-pull": {
+     "ok": true
+    },
+    "l18-g-wmp": {
+     "ok": true
+    },
+    "l18-gr-cross": {
+     "ok": true
+    },
+    "l18-gr-curves": {
+     "ok": true
+    },
+    "l18-gr-mirror": {
+     "ok": true
+    },
+    "l18-grades": {
+     "ok": true
+    },
+    "l18-mc-def": {
+     "ok": true
+    },
+    "l18-mc-vs-atc": {
+     "ok": true
+    },
+    "l18-print": {
+     "ok": true
+    },
+    "l18-prod-mc": {
+     "ok": true
+    },
+    "l18-rising-mc": {
+     "ok": true
+    },
+    "l18-sunk": {
+     "ok": true
+    },
+    "l18-table": {
+     "ok": true
+    },
+    "l18-tf-atc-mc": {
+     "ok": true
+    },
+    "l18-tf-cross-max": {
+     "ok": true
+    },
+    "l18-tf-mc-avc": {
+     "ok": true
+    },
+    "l18-tf-mc-vc": {
+     "ok": false
+    },
+    "l18-tf-mp-mc": {
+     "ok": false
+    },
+    "l18-units": {
+     "ok": true
+    },
+    "l18-website": {
+     "ok": true
+    }
+   }
+  },
+  "l19": {
+   "practice": {
+    "l19-alarm": {
+     "ok": true
+    },
+    "l19-causes": {
+     "ok": true
+    },
+    "l19-coffee": {
+     "ok": true
+    },
+    "l19-coffee-200": {
+     "ok": true
+    },
+    "l19-constant": {
+     "ok": true
+    },
+    "l19-dis-cause": {
+     "ok": true
+    },
+    "l19-env": {
+     "ok": true
+    },
+    "l19-eos-def": {
+     "ok": true
+    },
+    "l19-flat": {
+     "ok": true
+    },
+    "l19-g-coffee": {
+     "ok": true
+    },
+    "l19-g-mpd": {
+     "ok": true
+    },
+    "l19-g-tech": {
+     "ok": true
+    },
+    "l19-gr-env": {
+     "ok": true
+    },
+    "l19-gr-zones": {
+     "ok": true
+    },
+    "l19-least": {
+     "ok": true
+    },
+    "l19-lr-costs": {
+     "ok": true
+    },
+    "l19-natural": {
+     "ok": true
+    },
+    "l19-park-a": {
+     "ok": true
+    },
+    "l19-park-c": {
+     "ok": true
+    },
+    "l19-pipe": {
+     "ok": true
+    },
+    "l19-rule": {
+     "ok": true
+    },
+    "l19-selfcheck": {
+     "ok": true
+    },
+    "l19-tf-both": {
+     "ok": true
+    },
+    "l19-tf-cheaper": {
+     "ok": true
+    },
+    "l19-tf-contradict": {
+     "ok": true
+    },
+    "l19-tf-lr-fixed": {
+     "ok": true
+    },
+    "l19-wage-rise": {
+     "ok": true
+    },
+    "l19-week": {
+     "ok": true
+    }
+   }
+  },
+  "l2": {
+   "practice": {
     "l2-boots": {
-      "box": 2,
-      "due": 1792900800000,
-      "t": 1792370016190
+     "ok": true
     },
     "l2-bowed": {
-      "box": 3,
-      "due": 1794891600000,
-      "t": 1793142753061
+     "ok": true
     },
     "l2-g-ppf": {
-      "box": 1,
-      "due": 1793332800000,
-      "t": 1793142263090
+     "ok": true
     },
     "l2-gr-biased": {
-      "box": 2,
-      "due": 1792468800000,
-      "t": 1791931129137
+     "ok": true
     },
     "l2-gr-points": {
-      "box": 2,
-      "due": 1792468800000,
-      "t": 1791931012078
+     "ok": true
     },
     "l2-inside": {
-      "box": 2,
-      "due": 1792468800000,
-      "t": 1791930439245
+     "ok": true
     },
     "l2-prodeff": {
-      "box": 2,
-      "due": 1792468800000,
-      "t": 1791931466821
+     "ok": true
     },
     "l2-reverse": {
-      "box": 1,
-      "due": 1793332800000,
-      "t": 1793142325254
+     "ok": false
     },
     "l2-rubber": {
-      "box": 2,
-      "due": 1792468800000,
-      "t": 1791931116809
+     "ok": true
     },
     "l2-shift": {
-      "box": 2,
-      "due": 1792468800000,
-      "t": 1791930461210
+     "ok": true
     },
     "l2-straight": {
-      "box": 2,
-      "due": 1792468800000,
-      "t": 1791931360670
+     "ok": true
     },
     "l2-tf-unemp": {
-      "box": 2,
-      "due": 1792468800000,
-      "t": 1791931065370
+     "ok": true
+    }
+   }
+  },
+  "l20": {
+   "practice": {
+    "l20-accountant": {
+     "ok": false
     },
+    "l20-carA": {
+     "ok": false
+    },
+    "l20-caroline": {
+     "ok": true
+    },
+    "l20-def-exp": {
+     "ok": false
+    },
+    "l20-def-imp": {
+     "ok": true
+    },
+    "l20-entry-signal": {
+     "ok": true
+    },
+    "l20-farm": {
+     "ok": true
+    },
+    "l20-fred-switch": {
+     "ok": true
+    },
+    "l20-g-acc": {
+     "ok": true
+    },
+    "l20-g-econ": {
+     "ok": true
+    },
+    "l20-g-fred": {
+     "ok": true
+    },
+    "l20-g-implicit": {
+     "ok": false
+    },
+    "l20-g-normal": {
+     "ok": true
+    },
+    "l20-g-rate": {
+     "ok": true
+    },
+    "l20-gr-bars": {
+     "ok": true
+    },
+    "l20-gr-normal": {
+     "ok": true
+    },
+    "l20-home-store": {
+     "ok": true
+    },
+    "l20-leisure": {
+     "ok": true
+    },
+    "l20-normal": {
+     "ok": false
+    },
+    "l20-raise-econ": {
+     "ok": true
+    },
+    "l20-selfcheck": {
+     "ok": true
+    },
+    "l20-tax": {
+     "ok": true
+    },
+    "l20-tf-acc-pos": {
+     "ok": true
+    },
+    "l20-tf-borrow": {
+     "ok": true
+    },
+    "l20-tf-econ-lower": {
+     "ok": true
+    },
+    "l20-tf-implicit": {
+     "ok": true
+    },
+    "l20-tf-zero": {
+     "ok": true
+    },
+    "l20-why-same": {
+     "ok": true
+    }
+   }
+  },
+  "l3": {
+   "practice": {
     "l3-absex": {
-      "box": 2,
-      "due": 1792728000000,
-      "t": 1792188210589
+     "ok": true
     },
     "l3-alone": {
-      "box": 2,
-      "due": 1792728000000,
-      "t": 1792188567662
+     "ok": true
     },
     "l3-both": {
-      "box": 2,
-      "due": 1792555200000,
-      "t": 1792026455611
+     "ok": true
     },
     "l3-brazil": {
-      "box": 2,
-      "due": 1792728000000,
-      "t": 1792188076940
+     "ok": true
     },
     "l3-defs": {
-      "box": 2,
-      "due": 1792555200000,
-      "t": 1792026219562
+     "ok": true
     },
     "l3-g-ca": {
-      "box": 1,
-      "due": 1792468800000,
-      "t": 1792291129631
+     "ok": true
     },
     "l3-g-export": {
-      "box": 2,
-      "due": 1792728000000,
-      "t": 1792188156914
+     "ok": true
     },
     "l3-g-input": {
-      "box": 2,
-      "due": 1792728000000,
-      "t": 1792187873193
+     "ok": true
     },
     "l3-g-max": {
-      "box": 1,
-      "due": 1792468800000,
-      "t": 1792291983372
+     "ok": false
     },
     "l3-g-oc": {
-      "box": 1,
-      "due": 1792468800000,
-      "t": 1792291151103
+     "ok": true
     },
     "l3-g-oc2": {
-      "box": 2,
-      "due": 1792728000000,
-      "t": 1792188246351
+     "ok": true
     },
     "l3-gains": {
-      "box": 2,
-      "due": 1792728000000,
-      "t": 1792187906073
+     "ok": true
     },
     "l3-gr-absy": {
-      "box": 2,
-      "due": 1792728000000,
-      "t": 1792188578694
+     "ok": true
     },
     "l3-gr-trade": {
-      "box": 2,
-      "due": 1792728000000,
-      "t": 1792188342470
+     "ok": true
     },
     "l3-gr-two": {
-      "box": 2,
-      "due": 1792728000000,
-      "t": 1792187315993
+     "ok": true
     },
     "l3-input": {
-      "box": 1,
-      "due": 1792468800000,
-      "t": 1792291169869
+     "ok": false
     },
     "l3-lawyer": {
-      "box": 2,
-      "due": 1792728000000,
-      "t": 1792188356190
+     "ok": true
     },
     "l3-meaning": {
-      "box": 2,
-      "due": 1792728000000,
-      "t": 1792188547702
+     "ok": true
     },
     "l3-smith": {
-      "box": 1,
-      "due": 1793332800000,
-      "t": 1793142335069
+     "ok": false
     },
     "l3-specialize": {
-      "box": 2,
-      "due": 1792728000000,
-      "t": 1792187766190
+     "ok": true
     },
     "l3-terms": {
-      "box": 2,
-      "due": 1792728000000,
-      "t": 1792187579262
+     "ok": true
     },
     "l3-terms2": {
-      "box": 1,
-      "due": 1792468800000,
-      "t": 1792292040377
+     "ok": false
     },
     "l3-tf-abs": {
-      "box": 2,
-      "due": 1792555200000,
-      "t": 1792026435961
+     "ok": true
     },
     "l3-tf-gains-both": {
-      "box": 2,
-      "due": 1792728000000,
-      "t": 1792188588747
+     "ok": true
     },
     "l3-tf-identical": {
-      "box": 1,
-      "due": 1792468800000,
-      "t": 1792292020699
+     "ok": false
     },
     "l3-tf-oc": {
-      "box": 2,
-      "due": 1792728000000,
-      "t": 1792188062681
+     "ok": true
     },
     "l3-tf-workers": {
-      "box": 2,
-      "due": 1792728000000,
-      "t": 1792188226510
-    },
+     "ok": true
+    }
+   }
+  },
+  "l4": {
+   "practice": {
     "l4-capitalism": {
-      "box": 0,
-      "due": 1792641600000,
-      "t": 1792631017699
+     "ok": false
     },
     "l4-command": {
-      "box": 2,
-      "due": 1792900800000,
-      "t": 1792373800796
+     "ok": true
     },
     "l4-decentral": {
-      "box": 0,
-      "due": 1792641600000,
-      "t": 1792631044260
+     "ok": false
     },
     "l4-factor": {
-      "box": 2,
-      "due": 1792900800000,
-      "t": 1792373730691
+     "ok": true
     },
     "l4-firms-buyers": {
-      "box": 0,
-      "due": 1792555200000,
-      "t": 1792547718836
+     "ok": false
     },
     "l4-forwhom": {
-      "box": 0,
-      "due": 1792641600000,
-      "t": 1792631002509
+     "ok": false
     },
     "l4-gr-cf1": {
-      "box": 1,
-      "due": 1793332800000,
-      "t": 1793142370372
+     "ok": true
     },
     "l4-gr-cf2": {
-      "box": 0,
-      "due": 1792641600000,
-      "t": 1792630903960
+     "ok": false
     },
     "l4-grid": {
-      "box": 2,
-      "due": 1793073600000,
-      "t": 1792547753028
+     "ok": true
     },
     "l4-invisible": {
-      "box": 2,
-      "due": 1793160000000,
-      "t": 1792630930531
+     "ok": true
     },
     "l4-labor": {
-      "box": 2,
-      "due": 1793160000000,
-      "t": 1792630947060
+     "ok": true
     },
     "l4-mktsoc": {
-      "box": 2,
-      "due": 1793160000000,
-      "t": 1792630861847
+     "ok": true
     },
     "l4-nk": {
-      "box": 2,
-      "due": 1793160000000,
-      "t": 1792630962995
+     "ok": true
     },
     "l4-questions": {
-      "box": 2,
-      "due": 1792900800000,
-      "t": 1792373710631
+     "ok": true
     },
     "l4-regs": {
-      "box": 0,
-      "due": 1792641600000,
-      "t": 1792631032006
+     "ok": false
     },
     "l4-revenue": {
-      "box": 2,
-      "due": 1793160000000,
-      "t": 1792630973297
+     "ok": true
     },
     "l4-rights": {
-      "box": 2,
-      "due": 1793073600000,
-      "t": 1792547785470
+     "ok": true
     },
     "l4-tf-cfgov": {
-      "box": 2,
-      "due": 1793160000000,
-      "t": 1792630936273
+     "ok": true
     },
     "l4-tf-cmdmkts": {
-      "box": 2,
-      "due": 1793160000000,
-      "t": 1792630976926
+     "ok": true
     },
     "l4-tf-direction": {
-      "box": 2,
-      "due": 1793160000000,
-      "t": 1792631038076
+     "ok": true
     },
     "l4-tf-market": {
-      "box": 2,
-      "due": 1792900800000,
-      "t": 1792373774414
+     "ok": true
     },
     "l4-tf-mixed": {
-      "box": 2,
-      "due": 1793160000000,
-      "t": 1792630878592
+     "ok": true
     },
     "l4-tf-transfer": {
-      "box": 2,
-      "due": 1793073600000,
-      "t": 1792547797793
+     "ok": true
     },
     "l4-traditional": {
-      "box": 2,
-      "due": 1792900800000,
-      "t": 1792373863993
+     "ok": true
     },
     "l4-underground": {
-      "box": 2,
-      "due": 1793160000000,
-      "t": 1792630921054
+     "ok": true
     },
     "l4-us": {
-      "box": 2,
-      "due": 1793073600000,
-      "t": 1792547805335
+     "ok": true
     },
     "l4-wages": {
-      "box": 2,
-      "due": 1792900800000,
-      "t": 1792373762048
+     "ok": true
     },
     "l4-who": {
-      "box": 2,
-      "due": 1793160000000,
-      "t": 1792630891092
-    },
-    "l4c-cmdweak": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793099951648
-    },
-    "l4c-commons": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793143237743
-    },
-    "l4c-entre": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793143185876
-    },
-    "l4c-grid": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793100151931
-    },
-    "l4c-hhroles": {
-      "box": 2,
-      "due": 1793768400000,
-      "t": 1793184717760
-    },
-    "l4c-market": {
-      "box": 2,
-      "due": 1793595600000,
-      "t": 1793052880250
-    },
+     "ok": true
+    }
+   }
+  },
+  "l5": {
+   "practice": {
     "l5-calorie": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792717144590
+     "ok": true
     },
     "l5-concorde": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792717270111
+     "ok": true
     },
     "l5-def": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792716760027
+     "ok": true
     },
     "l5-dis": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792716861321
+     "ok": true
     },
     "l5-dmu": {
-      "box": 0,
-      "due": 1792728000000,
-      "t": 1792717006599
+     "ok": false
     },
     "l5-g-firm": {
-      "box": 0,
-      "due": 1792728000000,
-      "t": 1792716976975
+     "ok": false
     },
     "l5-g-mb": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792716785190
+     "ok": true
     },
     "l5-g-mc": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792717060592
+     "ok": true
     },
     "l5-g-pricedrop": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792717306898
+     "ok": true
     },
     "l5-g-sunk": {
-      "box": 0,
-      "due": 1792728000000,
-      "t": 1792716902797
+     "ok": false
     },
     "l5-gr-line": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792717218721
+     "ok": true
     },
     "l5-gr-mb": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792716843861
+     "ok": true
     },
     "l5-incentive": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792716850975
+     "ok": true
     },
     "l5-marginaldecision": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792717324269
+     "ok": true
     },
     "l5-mcdef": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792717095698
+     "ok": true
     },
     "l5-selena": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792717085834
+     "ok": true
     },
     "l5-spread": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792717318965
+     "ok": true
     },
     "l5-study": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792717162127
+     "ok": true
     },
     "l5-sugar": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792717044586
+     "ok": true
     },
     "l5-sunk": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792716828543
+     "ok": true
     },
     "l5-tf-dmu": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792717067310
+     "ok": true
     },
     "l5-tf-equal": {
-      "box": 0,
-      "due": 1793160000000,
-      "t": 1793099943912
+     "ok": true
     },
     "l5-tf-incent": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792717150197
+     "ok": true
     },
     "l5-tf-sunk": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792716992350
+     "ok": true
     },
     "l5-tf-total": {
-      "box": 0,
-      "due": 1793160000000,
-      "t": 1793142770092
+     "ok": false
     },
     "l5-third": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792717240256
+     "ok": true
     },
     "l5-water": {
-      "box": 2,
-      "due": 1793246400000,
-      "t": 1792716985466
-    },
-    "l5c-classify": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793143024878
-    },
-    "l5c-dmu": {
-      "box": 2,
-      "due": 1793595600000,
-      "t": 1793052752839
-    },
-    "l5c-expand": {
-      "box": 2,
-      "due": 1793768400000,
-      "t": 1793184916932
-    },
-    "l5c-margin": {
-      "box": 2,
-      "due": 1793595600000,
-      "t": 1793052821046
-    },
-    "l5c-subsidy": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793099862343
-    },
+     "ok": true
+    }
+   }
+  },
+  "l6": {
+   "practice": {
     "l6-assume": {
-      "box": 2,
-      "due": 1793332800000,
-      "t": 1792782915755
+     "ok": true
     },
     "l6-buyers-expect": {
-      "box": 2,
-      "due": 1793332800000,
-      "t": 1792783360523
+     "ok": true
     },
     "l6-complement": {
-      "box": 2,
-      "due": 1793332800000,
-      "t": 1792782487882
+     "ok": true
     },
     "l6-dvsqd": {
-      "box": 2,
-      "due": 1793332800000,
-      "t": 1792782300331
+     "ok": true
     },
     "l6-expect": {
-      "box": 0,
-      "due": 1792814400000,
-      "t": 1792782835052
+     "ok": false
     },
     "l6-g-income": {
-      "box": 2,
-      "due": 1793332800000,
-      "t": 1792783344385
+     "ok": true
     },
     "l6-g-schedule": {
-      "box": 2,
-      "due": 1793332800000,
-      "t": 1792782892055
+     "ok": true
     },
     "l6-g-shift": {
-      "box": 2,
-      "due": 1793332800000,
-      "t": 1792782554567
+     "ok": true
     },
     "l6-gr-demand-right": {
-      "box": 0,
-      "due": 1793073600000,
-      "t": 1793052965754
+     "ok": true
     },
     "l6-gr-move": {
-      "box": 2,
-      "due": 1793332800000,
-      "t": 1792782336817
+     "ok": true
     },
     "l6-gr-shiftvsmove": {
-      "box": 2,
-      "due": 1793332800000,
-      "t": 1792783672935
+     "ok": true
     },
     "l6-gr-supply": {
-      "box": 2,
-      "due": 1793332800000,
-      "t": 1792782809519
+     "ok": true
     },
     "l6-inferior": {
-      "box": 2,
-      "due": 1793332800000,
-      "t": 1792782423367
+     "ok": true
     },
     "l6-law": {
-      "box": 2,
-      "due": 1793332800000,
-      "t": 1792782282005
+     "ok": true
     },
     "l6-notshift": {
-      "box": 0,
-      "due": 1793073600000,
-      "t": 1793053694334
+     "ok": true
     },
     "l6-population": {
-      "box": 2,
-      "due": 1793332800000,
-      "t": 1792783044619
+     "ok": true
     },
     "l6-qsdef": {
-      "box": 0,
-      "due": 1792814400000,
-      "t": 1792783467520
+     "ok": false
     },
     "l6-sellers": {
-      "box": 0,
-      "due": 1792814400000,
-      "t": 1792783623156
+     "ok": false
     },
     "l6-subsidy": {
-      "box": 2,
-      "due": 1793332800000,
-      "t": 1792783222735
+     "ok": true
     },
     "l6-substitute": {
-      "box": 0,
-      "due": 1792814400000,
-      "t": 1792782975687
+     "ok": false
     },
     "l6-supply-shifter": {
-      "box": 0,
-      "due": 1792814400000,
-      "t": 1792782598806
+     "ok": false
     },
     "l6-tastes": {
-      "box": 2,
-      "due": 1793332800000,
-      "t": 1792783029348
+     "ok": true
     },
     "l6-tech": {
-      "box": 2,
-      "due": 1793332800000,
-      "t": 1792783194561
+     "ok": true
     },
     "l6-tf-inferior": {
-      "box": 2,
-      "due": 1793332800000,
-      "t": 1792782821296
+     "ok": true
     },
     "l6-tf-ownprice": {
-      "box": 2,
-      "due": 1793332800000,
-      "t": 1792782387072
+     "ok": true
     },
     "l6-tf-related": {
-      "box": 0,
-      "due": 1792814400000,
-      "t": 1792783394328
+     "ok": false
     },
     "l6-tf-supply-up": {
-      "box": 0,
-      "due": 1792814400000,
-      "t": 1792783112132
+     "ok": false
     },
     "l6-tf-willing": {
-      "box": 2,
-      "due": 1793332800000,
-      "t": 1792782927124
-    },
-    "l6c-complement": {
-      "box": 0,
-      "due": 1793160000000,
-      "t": 1793143117082
-    },
-    "l6c-expect": {
-      "box": 2,
-      "due": 1793768400000,
-      "t": 1793184607492
-    },
-    "l6c-supply": {
-      "box": 2,
-      "due": 1793595600000,
-      "t": 1793053665914
-    },
+     "ok": true
+    }
+   }
+  },
+  "l7": {
+   "practice": {
     "l7-adjust": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793143552121
+     "ok": true
     },
     "l7-clearing": {
-      "box": 2,
-      "due": 1793595600000,
-      "t": 1793057938463
+     "ok": true
     },
     "l7-coffee": {
-      "box": 2,
-      "due": 1793595600000,
-      "t": 1793058111703
+     "ok": true
     },
     "l7-def": {
-      "box": 2,
-      "due": 1793595600000,
-      "t": 1793057452233
+     "ok": true
     },
     "l7-double": {
-      "box": 0,
-      "due": 1793073600000,
-      "t": 1793057735270
+     "ok": false
     },
     "l7-ecar": {
-      "box": 0,
-      "due": 1793160000000,
-      "t": 1793100037751
+     "ok": true
     },
     "l7-equal": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793143583730
+     "ok": true
     },
     "l7-frost": {
-      "box": 2,
-      "due": 1793595600000,
-      "t": 1793057605853
+     "ok": true
     },
     "l7-g-both": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793143537683
+     "ok": true
     },
     "l7-g-gap": {
-      "box": 0,
-      "due": 1793073600000,
-      "t": 1793057513243
+     "ok": false
     },
     "l7-g-neweq": {
-      "box": 2,
-      "due": 1793595600000,
-      "t": 1793057868128
+     "ok": true
     },
     "l7-g-schedule": {
-      "box": 2,
-      "due": 1793595600000,
-      "t": 1793057460020
+     "ok": true
     },
     "l7-gas": {
-      "box": 2,
-      "due": 1793595600000,
-      "t": 1793057988073
+     "ok": true
     },
     "l7-gr-double": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793143374589
+     "ok": true
     },
     "l7-gr-shift": {
-      "box": 2,
-      "due": 1793595600000,
-      "t": 1793057685408
+     "ok": true
     },
     "l7-gr-supply": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793143010286
+     "ok": true
     },
     "l7-gr-surplus": {
-      "box": 2,
-      "due": 1793595600000,
-      "t": 1793057562481
+     "ok": true
     },
     "l7-income": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793143448767
+     "ok": true
     },
     "l7-salmon": {
-      "box": 2,
-      "due": 1793595600000,
-      "t": 1793058029145
+     "ok": true
     },
     "l7-shortage-def": {
-      "box": 2,
-      "due": 1793595600000,
-      "t": 1793057914959
+     "ok": true
     },
     "l7-snowboard": {
-      "box": 0,
-      "due": 1793073600000,
-      "t": 1793058174533
+     "ok": false
     },
     "l7-substitute": {
-      "box": 0,
-      "due": 1793073600000,
-      "t": 1793057656110
+     "ok": false
     },
     "l7-surplus": {
-      "box": 2,
-      "due": 1793595600000,
-      "t": 1793057471810
+     "ok": true
     },
     "l7-tech": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793143499001
+     "ok": true
     },
     "l7-tf-above": {
-      "box": 2,
-      "due": 1793595600000,
-      "t": 1793057525572
+     "ok": true
     },
     "l7-tf-both": {
-      "box": 0,
-      "due": 1793073600000,
-      "t": 1793058333665
+     "ok": true
     },
     "l7-tf-lee": {
-      "box": 2,
-      "due": 1793595600000,
-      "t": 1793057840009
+     "ok": true
     },
     "l7-tf-scarcity": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793143407452
-    },
-    "l7c-shift": {
-      "box": 2,
-      "due": 1793768400000,
-      "t": 1793184791084
-    },
-    "l7c-surplus": {
-      "box": 2,
-      "due": 1793768400000,
-      "t": 1793184751207
-    },
+     "ok": true
+    }
+   }
+  },
+  "l8": {
+   "practice": {
     "l8-binding": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793147961926
+     "ok": true
     },
     "l8-black": {
-      "box": 2,
-      "due": 1793768400000,
-      "t": 1793185043470
+     "ok": true
     },
     "l8-ceiling-def": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793147945516
+     "ok": true
     },
     "l8-ceiling-why": {
-      "box": 2,
-      "due": 1793768400000,
-      "t": 1793185409407
+     "ok": true
     },
     "l8-cleaners": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793148072168
+     "ok": true
     },
     "l8-farm": {
-      "box": 2,
-      "due": 1793768400000,
-      "t": 1793185082151
+     "ok": true
     },
     "l8-fewer": {
-      "box": 2,
-      "due": 1793768400000,
-      "t": 1793185010924
+     "ok": true
     },
     "l8-floor-def": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793148637129
+     "ok": true
     },
     "l8-floor-low": {
-      "box": 2,
-      "due": 1793768400000,
-      "t": 1793185367554
+     "ok": true
     },
     "l8-g-gas": {
-      "box": 0,
-      "due": 1793160000000,
-      "t": 1793148589640
+     "ok": false
     },
     "l8-g-quota": {
-      "box": 2,
-      "due": 1793768400000,
-      "t": 1793185324391
+     "ok": true
     },
     "l8-g-rent": {
-      "box": 0,
-      "due": 1793160000000,
-      "t": 1793148154095
+     "ok": false
     },
     "l8-gaslines": {
-      "box": 2,
-      "due": 1793768400000,
-      "t": 1793185447831
+     "ok": true
     },
     "l8-gr-ceiling": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793148004436
+     "ok": true
     },
     "l8-gr-floor": {
-      "box": 0,
-      "due": 1793160000000,
-      "t": 1793148623618
+     "ok": false
     },
     "l8-gr-quota": {
-      "box": 2,
-      "due": 1793768400000,
-      "t": 1793185381847
+     "ok": true
     },
     "l8-import": {
-      "box": 2,
-      "due": 1793768400000,
-      "t": 1793185422893
+     "ok": true
     },
     "l8-lawyers": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793148049369
+     "ok": true
     },
     "l8-living": {
-      "box": 0,
-      "due": 1793160000000,
-      "t": 1793148695316
+     "ok": true
     },
     "l8-minwage-evidence": {
-      "box": 2,
-      "due": 1793768400000,
-      "t": 1793185355708
+     "ok": true
     },
     "l8-quality": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793148206147
+     "ok": true
     },
     "l8-quota": {
-      "box": 0,
-      "due": 1793160000000,
-      "t": 1793148390924
+     "ok": false
     },
     "l8-tf-floor-short": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793148041279
+     "ok": true
     },
     "l8-tf-helpall": {
-      "box": 2,
-      "due": 1793768400000,
-      "t": 1793185429628
+     "ok": true
     },
     "l8-tf-nonbinding": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793148642811
+     "ok": true
     },
     "l8-tf-quota": {
-      "box": 2,
-      "due": 1793768400000,
-      "t": 1793185332919
+     "ok": true
     },
     "l8-tf-shift": {
-      "box": 2,
-      "due": 1793682000000,
-      "t": 1793148219192
+     "ok": true
     },
     "l8-who": {
-      "box": 2,
-      "due": 1793768400000,
-      "t": 1793185154434
+     "ok": true
     }
+   }
   },
-  "updated": 1793185447831,
-  "v": 1,
-  "writing": {
-    "w-l2-1": {
-      "at": 1791931690021,
-      "max": 4,
-      "result": {
-        "error": "The PPF is called the 'Productivity possibilities frontier' and described as a company's allocation; it is the production possibilities frontier and shows an entire economy's output choices, not a single company's.",
-        "fix": "Explain that resources are not equally good at making both goods, so each additional boot costs more jackets than the last (for example 10, then 20, 30, 40 jackets). Then say this rising opportunity cost makes the curve steeper as you move along it, which creates the bowed-out shape.",
-        "points": [
-          {
-            "met": false,
-            "note": "The answer never says resources are specialized or better suited to making one good than the other."
-          },
-          {
-            "met": false,
-            "note": "It mentions a trade-off between jackets and boots but does not say the opportunity cost rises as more of one good is made."
-          },
-          {
-            "met": false,
-            "note": "No numbers or specific figures from the boots and jackets example are used."
-          },
-          {
-            "met": false,
-            "note": "It does not link opportunity cost to the bowed-out shape of the curve."
-          }
-        ],
-        "strength": "You correctly identified the basic trade-off idea: producing more jackets means giving up boots."
-      },
-      "score": 0,
-      "text": "The Productivity possibilitie frontier represents an economies productive allocation. This means a company can only produce more of something by taking away from something. In this case, the more jackets produced equals less boots."
+  "l9": {
+   "practice": {
+    "l9-band": {
+     "ok": false
     },
-    "w-l2-2": {
-      "at": 1791931956155,
-      "max": 4,
-      "result": {
-        "error": "Saying the economy cannot produce 'that good' is slightly off: the outside point is an unattainable combination of two goods, not a single good the economy can't make.",
-        "fix": "Add a real-world cause for a point inside the curve, such as a recession with high unemployment where resources sit idle, and then explain that an outside point only becomes reachable if the PPF shifts outward through more workers, better technology, or trade.",
-        "points": [
-          {
-            "met": true,
-            "note": "You correctly say a point on the PPF means the economy is efficient, though you don't mention that all resources are fully used or that gaining more of one good means giving up some of the other."
-          },
-          {
-            "met": false,
-            "note": "You correctly say an inside point means producing less than possible, but you give no cause or example such as unemployment or a recession, which this point requires."
-          },
-          {
-            "met": true,
-            "note": "You say an outside point is something the economy cannot produce, which captures that it is unattainable, though 'that good' should be 'that combination of goods' and you could add 'with current resources and technology'."
-          },
-          {
-            "met": false,
-            "note": "You don't say what could make an outside point reachable, such as more resources, better technology, or trade."
-          }
-        ],
-        "strength": "You correctly link the three regions to inefficiency, efficiency, and unattainability, which shows you have the core idea of the PPF."
-      },
-      "score": 2,
-      "text": "A point inside a PPF is the economy is not producing as many goods as it could. On the PPF would mean the economy is efficient. Outside the PPF is that the economy cannot produce that good."
+    "l9-bread": {
+     "ok": true
     },
-    "w-l2-3": {
-      "at": 1791932110457,
-      "max": 4,
-      "result": {
-        "error": "Saying that consumer goods production today 'decreases' the future PPF is misleading: consuming more now doesn't shrink the PPF, it just means the PPF grows more slowly (or stays about the same) than it would with more capital investment.",
-        "fix": "Say explicitly that making more capital goods today means giving up some consumer goods now (the opportunity cost), and that this is the trade-off of less consumption today for more growth later.",
-        "points": [
-          {
-            "met": true,
-            "note": "The student describes capital goods as 'goods that produce other goods,' which correctly captures their role."
-          },
-          {
-            "met": false,
-            "note": "The answer never says that producing more capital goods means giving up consumer goods today, so the opportunity cost is not stated."
-          },
-          {
-            "met": true,
-            "note": "The student says producing more capital goods tends to expand the PPF outward in the future."
-          },
-          {
-            "met": false,
-            "note": "The answer contrasts the two choices but never frames it as consumption now versus growth later, and the trade-off is only implied."
-          }
-        ],
-        "strength": "You correctly link capital goods, which are goods that produce other goods, to an outward shift of the PPF."
-      },
-      "score": 2,
-      "text": "Producing more capital goods or goods that produce other goods generally expand the countries PPF curve outward. Consumer goods today tend to decreese or maintain the countries PPF curve in the future."
+    "l9-budget": {
+     "ok": false
     },
-    "w-l4-1": {
-      "at": 1792631414704,
-      "max": 4,
-      "result": {
-        "error": "A command economy does not work by the population telling the government what it needs; the central authority makes production decisions through planning, often without direct consumer input.",
-        "fix": "Clarify that in a command economy a central authority or government plan decides what is produced, not consumer requests, and give a clear strength such as quickly directing resources toward national goals like infrastructure or ensuring everyone gets basic goods.",
-        "points": [
-          {
-            "met": true,
-            "note": "You correctly say individuals and firms figure out what people want and produce it, which captures the demand-driven idea, though mentioning prices as signals would make it stronger."
-          },
-          {
-            "met": false,
-            "note": "You do say the government produces the goods, but describing the population telling the government what it needs misstates the model; in a command economy a central authority decides through a plan."
-          },
-          {
-            "met": true,
-            "note": "Saying a market economy is quicker and needs less oversight is a reasonable strength, since it responds to consumers without central direction."
-          },
-          {
-            "met": false,
-            "note": "'Less risk to the government' is unclear and not a recognized strength; a better answer would be the ability to direct resources quickly toward a chosen goal or guarantee basic necessities."
-          }
-        ],
-        "strength": "Your description of the market economy is on target: you recognize that firms and individuals decide what to produce based on what people want."
-      },
-      "score": 2,
-      "text": "A market economy would decide what is produced by individuals or firms figuring out what people want and producing it. It is quicker, requires less oversight. \nA command economy would have the population tell the government what they need and the government produces it. There is less risk to the government by producing said good."
+    "l9-capacity": {
+     "ok": true
+    },
+    "l9-cigarettes": {
+     "ok": false
+    },
+    "l9-classify": {
+     "ok": false
+    },
+    "l9-def": {
+     "ok": true
+    },
+    "l9-farm": {
+     "ok": false
+    },
+    "l9-g-mid": {
+     "ok": false
+    },
+    "l9-g-pct": {
+     "ok": false
+    },
+    "l9-g-pes": {
+     "ok": false
+    },
+    "l9-g-tr": {
+     "ok": false
+    },
+    "l9-gr-horizontal": {
+     "ok": false
+    },
+    "l9-gr-linear": {
+     "ok": false
+    },
+    "l9-gr-perfect": {
+     "ok": false
+    },
+    "l9-nuclear": {
+     "ok": true
+    },
+    "l9-pes": {
+     "ok": true
+    },
+    "l9-salmon": {
+     "ok": false
+    },
+    "l9-substitutes": {
+     "ok": true
+    },
+    "l9-table": {
+     "ok": true
+    },
+    "l9-tf-elastic-def": {
+     "ok": true
+    },
+    "l9-tf-negative": {
+     "ok": true
+    },
+    "l9-tf-slope": {
+     "ok": true
+    },
+    "l9-tf-tr": {
+     "ok": true
+    },
+    "l9-time": {
+     "ok": false
+    },
+    "l9-tr-rule": {
+     "ok": true
+    },
+    "l9-unit": {
+     "ok": true
+    },
+    "l9-why-mid": {
+     "ok": true
     }
+   }
   }
+ },
+ "mastered": {},
+ "quiz": {
+  "attempts": 0,
+  "best": null,
+  "last": null
+ },
+ "quiz2": {
+  "attempts": 0,
+  "best": null,
+  "history": [],
+  "last": null
+ },
+ "quiz3": {
+  "attempts": 0,
+  "best": null,
+  "history": [],
+  "last": null
+ },
+ "quiz4": {
+  "attempts": 0,
+  "best": null,
+  "history": [],
+  "last": null
+ },
+ "quiz5": {
+  "attempts": 0,
+  "best": null,
+  "history": [],
+  "last": null
+ },
+ "ratings": {
+  "c-l11-1": {
+   "at": 1793358702799,
+   "r": 3
+  },
+  "c-l11-10": {
+   "at": 1793990969070,
+   "r": 3
+  },
+  "c-l11-2": {
+   "at": 1793990985056,
+   "r": 3
+  },
+  "c-l11-3": {
+   "at": 1793990993023,
+   "r": 3
+  },
+  "c-l11-4": {
+   "at": 1793990179336,
+   "r": 3
+  },
+  "c-l11-5": {
+   "at": 1793991042386,
+   "r": 3
+  },
+  "c-l11-8": {
+   "at": 1793990459711,
+   "r": 3
+  },
+  "c-l11-9": {
+   "at": 1793991051361,
+   "r": 3
+  },
+  "c-l12-0": {
+   "at": 1793990692059,
+   "r": 3
+  },
+  "c-l12-2": {
+   "at": 1793990713749,
+   "r": 3
+  },
+  "c-l12-4": {
+   "at": 1793991192913,
+   "r": 3
+  },
+  "c-l12-5": {
+   "at": 1793991200950,
+   "r": 3
+  },
+  "c-l12-6": {
+   "at": 1793991205101,
+   "r": 3
+  },
+  "c-l12-9": {
+   "at": 1793991291908,
+   "r": 3
+  },
+  "c-l18-1": {
+   "at": 1794157422843,
+   "r": 3
+  },
+  "c-l18-9": {
+   "at": 1794157328477,
+   "r": 3
+  },
+  "c-l2-2": {
+   "at": 1793991297115,
+   "r": 3
+  },
+  "c-l4-0": {
+   "at": 1793388717928,
+   "r": 2
+  },
+  "c-l4-10": {
+   "at": 1793991321599,
+   "r": 3
+  },
+  "c-l4-11": {
+   "at": 1793991394274,
+   "r": 3
+  },
+  "c-l6-3": {
+   "at": 1793988930094,
+   "r": 3
+  },
+  "c-l6-5": {
+   "at": 1793989004499,
+   "r": 3
+  },
+  "c-l6-8": {
+   "at": 1793391675039,
+   "r": 3
+  },
+  "c-l9-5": {
+   "at": 1793985371526,
+   "r": 3
+  },
+  "c-l9-6": {
+   "at": 1793985536375,
+   "r": 3
+  },
+  "c-l9-7": {
+   "at": 1793985636318,
+   "r": 3
+  },
+  "c-l9-9": {
+   "at": 1793985697907,
+   "r": 3
+  },
+  "l10-g-xed": {
+   "at": 1793989127948,
+   "r": 3
+  },
+  "l10-g-xed-pct": {
+   "at": 1793989217463,
+   "r": 3
+  },
+  "l10-wording": {
+   "at": 1793273658042,
+   "r": 3
+  },
+  "l10-xed-def": {
+   "at": 1794158583472,
+   "r": 3
+  },
+  "l10c-ied": {
+   "at": 1793501722443,
+   "r": 3
+  },
+  "l11-tablets": {
+   "at": 1794158631293,
+   "r": 2
+  },
+  "l12-gr-areas": {
+   "at": 1793362143261,
+   "r": 3
+  },
+  "l13-why-dmu": {
+   "at": 1794157712059,
+   "r": 2
+  },
+  "l14-cons-eq": {
+   "at": 1794158540985,
+   "r": 3
+  },
+  "l14-unspent": {
+   "at": 1794157922880,
+   "r": 2
+  },
+  "l15-budget-pivot": {
+   "at": 1794157555243,
+   "r": 2
+  },
+  "l16-lr": {
+   "at": 1794157523023,
+   "r": 2
+  },
+  "l16-sixth": {
+   "at": 1794157774155,
+   "r": 2
+  },
+  "l2-prodeff": {
+   "at": 1793387821989,
+   "r": 3
+  },
+  "l3-smith": {
+   "at": 1793989385384,
+   "r": 2
+  },
+  "l4-capitalism": {
+   "at": 1793989420359,
+   "r": 3
+  },
+  "l4-nk": {
+   "at": 1793270554735,
+   "r": 1
+  },
+  "l5-def": {
+   "at": 1793985720502,
+   "r": 2
+  },
+  "l5-g-mc": {
+   "at": 1793985794154,
+   "r": 2
+  },
+  "l5-gr-line": {
+   "at": 1793985827072,
+   "r": 2
+  },
+  "l5-spread": {
+   "at": 1793985851377,
+   "r": 2
+  },
+  "l5-water": {
+   "at": 1793988583635,
+   "r": 2
+  },
+  "l5c-dmu": {
+   "at": 1793270450261,
+   "r": 1
+  },
+  "l7c-shift": {
+   "at": 1793270683807,
+   "r": 3
+  },
+  "l8-minwage-evidence": {
+   "at": 1793270740285,
+   "r": 2
+  },
+  "l9-classify": {
+   "at": 1793988608436,
+   "r": 2
+  },
+  "l9-gr-linear": {
+   "at": 1793988800561,
+   "r": 3
+  },
+  "l9c-tr": {
+   "at": 1793312772217,
+   "r": 1
+  }
+ },
+ "repSeen": 1792786300000,
+ "reports": [],
+ "review": {
+  "c-l1-0": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593407
+  },
+  "c-l1-1": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593407
+  },
+  "c-l1-10": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593407
+  },
+  "c-l1-11": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593407
+  },
+  "c-l1-12": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593407
+  },
+  "c-l1-13": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593407
+  },
+  "c-l1-2": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593407
+  },
+  "c-l1-3": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593407
+  },
+  "c-l1-4": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593407
+  },
+  "c-l1-5": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593407
+  },
+  "c-l1-6": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593407
+  },
+  "c-l1-7": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593407
+  },
+  "c-l1-8": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593407
+  },
+  "c-l1-9": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593407
+  },
+  "c-l10-0": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l10-1": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l10-10": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l10-2": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l10-3": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l10-4": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l10-5": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l10-6": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l10-7": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l10-8": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l10-9": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l11-0": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793989897136
+  },
+  "c-l11-1": {
+   "box": 0,
+   "due": 1794027600000,
+   "t": 1793989986434
+  },
+  "c-l11-10": {
+   "box": 0,
+   "due": 1794027600000,
+   "t": 1793990971636
+  },
+  "c-l11-11": {
+   "box": 2,
+   "due": 1793941200000,
+   "t": 1793359808833
+  },
+  "c-l11-2": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793990989178
+  },
+  "c-l11-3": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793990993610
+  },
+  "c-l11-4": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793990188758
+  },
+  "c-l11-5": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793991043358
+  },
+  "c-l11-6": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793990254775
+  },
+  "c-l11-7": {
+   "box": 2,
+   "due": 1793941200000,
+   "t": 1793359910173
+  },
+  "c-l11-8": {
+   "box": 0,
+   "due": 1794027600000,
+   "t": 1793990604271
+  },
+  "c-l11-9": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793991052459
+  },
+  "c-l12-0": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793990693552
+  },
+  "c-l12-1": {
+   "box": 2,
+   "due": 1793941200000,
+   "t": 1793386778043
+  },
+  "c-l12-10": {
+   "box": 2,
+   "due": 1793941200000,
+   "t": 1793386742781
+  },
+  "c-l12-2": {
+   "box": 0,
+   "due": 1794027600000,
+   "t": 1793990719516
+  },
+  "c-l12-3": {
+   "box": 2,
+   "due": 1793941200000,
+   "t": 1793386877223
+  },
+  "c-l12-4": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793991193727
+  },
+  "c-l12-5": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793991201444
+  },
+  "c-l12-6": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793991205615
+  },
+  "c-l12-7": {
+   "box": 2,
+   "due": 1793941200000,
+   "t": 1793386946101
+  },
+  "c-l12-8": {
+   "box": 0,
+   "due": 1793419200000,
+   "t": 1793387049931
+  },
+  "c-l12-9": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793991292735
+  },
+  "c-l13-0": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793503959084
+  },
+  "c-l13-1": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793503378992
+  },
+  "c-l13-10": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793503750384
+  },
+  "c-l13-11": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l13-2": {
+   "box": 0,
+   "due": 1793505600000,
+   "t": 1793503426500
+  },
+  "c-l13-3": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793503908234
+  },
+  "c-l13-4": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793503606030
+  },
+  "c-l13-5": {
+   "box": 0,
+   "due": 1793505600000,
+   "t": 1793503812328
+  },
+  "c-l13-6": {
+   "box": 3,
+   "due": 1795928400000,
+   "t": 1794157266567
+  },
+  "c-l13-7": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793503293217
+  },
+  "c-l13-8": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l13-9": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793503702351
+  },
+  "c-l14-0": {
+   "box": 0,
+   "due": 1793595600000,
+   "t": 1793533614602
+  },
+  "c-l14-1": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793534366360
+  },
+  "c-l14-10": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l14-11": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l14-3": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793533555070
+  },
+  "c-l14-4": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793534278542
+  },
+  "c-l14-5": {
+   "box": 0,
+   "due": 1793595600000,
+   "t": 1793533949209
+  },
+  "c-l14-6": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793534188304
+  },
+  "c-l14-7": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793534238627
+  },
+  "c-l14-8": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793533824225
+  },
+  "c-l14-9": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793533675583
+  },
+  "c-l15-0": {
+   "box": 0,
+   "due": 1793595600000,
+   "t": 1793576127251
+  },
+  "c-l15-1": {
+   "box": 0,
+   "due": 1793595600000,
+   "t": 1793574881750
+  },
+  "c-l15-10": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793575187421
+  },
+  "c-l15-11": {
+   "box": 0,
+   "due": 1793595600000,
+   "t": 1793574818169
+  },
+  "c-l15-2": {
+   "box": 1,
+   "due": 1794373200000,
+   "t": 1794157142847
+  },
+  "c-l15-3": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793574964124
+  },
+  "c-l15-4": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793575257194
+  },
+  "c-l15-5": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793575033091
+  },
+  "c-l15-6": {
+   "box": 0,
+   "due": 1793595600000,
+   "t": 1793576147737
+  },
+  "c-l15-7": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793575977838
+  },
+  "c-l15-8": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793576051689
+  },
+  "c-l15-9": {
+   "box": 0,
+   "due": 1793595600000,
+   "t": 1793575844712
+  },
+  "c-l16-0": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l16-1": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l16-10": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793579183003
+  },
+  "c-l16-11": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l16-2": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l16-3": {
+   "box": 0,
+   "due": 1793595600000,
+   "t": 1793579325828
+  },
+  "c-l16-4": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l16-5": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l16-6": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l16-7": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l16-8": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l16-9": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l17-0": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l17-1": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l17-10": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l17-11": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l17-2": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l17-3": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l17-4": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l17-5": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l17-6": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l17-7": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l17-8": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l17-9": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l18-0": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l18-1": {
+   "box": 0,
+   "due": 1794200400000,
+   "t": 1794157425197
+  },
+  "c-l18-10": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l18-11": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l18-2": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l18-3": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l18-4": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l18-5": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l18-6": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l18-7": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l18-8": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l18-9": {
+   "box": 1,
+   "due": 1794373200000,
+   "t": 1794157329012
+  },
+  "c-l19-0": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793708788608
+  },
+  "c-l19-1": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793708788608
+  },
+  "c-l19-10": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793708788608
+  },
+  "c-l19-11": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793708788608
+  },
+  "c-l19-2": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793708788608
+  },
+  "c-l19-3": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793708788608
+  },
+  "c-l19-4": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793708788608
+  },
+  "c-l19-5": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793708788608
+  },
+  "c-l19-6": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793708788608
+  },
+  "c-l19-7": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793708788608
+  },
+  "c-l19-8": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793708788608
+  },
+  "c-l19-9": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793708788608
+  },
+  "c-l2-0": {
+   "box": 2,
+   "due": 1793941200000,
+   "t": 1793390686147
+  },
+  "c-l2-1": {
+   "box": 3,
+   "due": 1794891600000,
+   "t": 1793142427655
+  },
+  "c-l2-10": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793388373273
+  },
+  "c-l2-11": {
+   "box": 2,
+   "due": 1793941200000,
+   "t": 1793390751015
+  },
+  "c-l2-12": {
+   "box": 3,
+   "due": 1795323600000,
+   "t": 1793576394264
+  },
+  "c-l2-13": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793391950790
+  },
+  "c-l2-2": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793991297797
+  },
+  "c-l2-3": {
+   "box": 2,
+   "due": 1793682000000,
+   "t": 1793142550402
+  },
+  "c-l2-4": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793388589184
+  },
+  "c-l2-5": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793388689011
+  },
+  "c-l2-6": {
+   "box": 3,
+   "due": 1794891600000,
+   "t": 1793142571135
+  },
+  "c-l2-7": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793390767652
+  },
+  "c-l2-8": {
+   "box": 3,
+   "due": 1794891600000,
+   "t": 1793142633916
+  },
+  "c-l2-9": {
+   "box": 3,
+   "due": 1794891600000,
+   "t": 1793142725001
+  },
+  "c-l20-0": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793754054806
+  },
+  "c-l20-1": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793754054806
+  },
+  "c-l20-10": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793754054806
+  },
+  "c-l20-11": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793754054806
+  },
+  "c-l20-2": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793754054806
+  },
+  "c-l20-3": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793754054806
+  },
+  "c-l20-4": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793754054806
+  },
+  "c-l20-5": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793754054806
+  },
+  "c-l20-6": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793754054806
+  },
+  "c-l20-7": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793754054806
+  },
+  "c-l20-8": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793754054806
+  },
+  "c-l20-9": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793754054806
+  },
+  "c-l3-0": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l3-1": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l3-10": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l3-2": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l3-3": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l3-4": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l3-5": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l3-6": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l3-7": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l3-8": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l3-9": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l4-0": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793388721271
+  },
+  "c-l4-1": {
+   "box": 3,
+   "due": 1795323600000,
+   "t": 1793576418866
+  },
+  "c-l4-10": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793991322132
+  },
+  "c-l4-11": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793991394830
+  },
+  "c-l4-12": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793389118574
+  },
+  "c-l4-13": {
+   "box": 0,
+   "due": 1793419200000,
+   "t": 1793389305816
+  },
+  "c-l4-14": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793389347937
+  },
+  "c-l4-15": {
+   "box": 3,
+   "due": 1795323600000,
+   "t": 1793576480334
+  },
+  "c-l4-2": {
+   "box": 3,
+   "due": 1795323600000,
+   "t": 1793576514378
+  },
+  "c-l4-3": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793389411487
+  },
+  "c-l4-4": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793389464282
+  },
+  "c-l4-5": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793389556421
+  },
+  "c-l4-6": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793389661383
+  },
+  "c-l4-7": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793389691981
+  },
+  "c-l4-8": {
+   "box": 3,
+   "due": 1795323600000,
+   "t": 1793576534225
+  },
+  "c-l4-9": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793389717582
+  },
+  "c-l5-0": {
+   "box": 3,
+   "due": 1795323600000,
+   "t": 1793577272765
+  },
+  "c-l5-1": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793389866249
+  },
+  "c-l5-10": {
+   "box": 3,
+   "due": 1795323600000,
+   "t": 1793577325898
+  },
+  "c-l5-11": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793389958283
+  },
+  "c-l5-2": {
+   "box": 3,
+   "due": 1795323600000,
+   "t": 1793577412971
+  },
+  "c-l5-3": {
+   "box": 3,
+   "due": 1795323600000,
+   "t": 1793577464163
+  },
+  "c-l5-4": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793983440927
+  },
+  "c-l5-5": {
+   "box": 0,
+   "due": 1793419200000,
+   "t": 1793389976392
+  },
+  "c-l5-6": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793390032193
+  },
+  "c-l5-7": {
+   "box": 2,
+   "due": 1793246400000,
+   "t": 1792725552369
+  },
+  "c-l5-8": {
+   "box": 2,
+   "due": 1793246400000,
+   "t": 1792725177002
+  },
+  "c-l5-9": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793983573417
+  },
+  "c-l6-0": {
+   "box": 0,
+   "due": 1793419200000,
+   "t": 1793390869189
+  },
+  "c-l6-1": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793390977067
+  },
+  "c-l6-10": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793391103110
+  },
+  "c-l6-11": {
+   "box": 0,
+   "due": 1793419200000,
+   "t": 1793391171176
+  },
+  "c-l6-12": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793391246720
+  },
+  "c-l6-13": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793391261749
+  },
+  "c-l6-14": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793391313156
+  },
+  "c-l6-15": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l6-2": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793988868159
+  },
+  "c-l6-3": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793988931346
+  },
+  "c-l6-4": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793391363558
+  },
+  "c-l6-5": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793989005332
+  },
+  "c-l6-6": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l6-7": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793391575837
+  },
+  "c-l6-8": {
+   "box": 0,
+   "due": 1793419200000,
+   "t": 1793391676114
+  },
+  "c-l6-9": {
+   "box": 2,
+   "due": 1793332800000,
+   "t": 1792783855561
+  },
+  "c-l7-0": {
+   "box": 2,
+   "due": 1793682000000,
+   "t": 1793144153616
+  },
+  "c-l7-1": {
+   "box": 2,
+   "due": 1793682000000,
+   "t": 1793144308592
+  },
+  "c-l7-10": {
+   "box": 2,
+   "due": 1793682000000,
+   "t": 1793143754892
+  },
+  "c-l7-11": {
+   "box": 2,
+   "due": 1793682000000,
+   "t": 1793144124394
+  },
+  "c-l7-2": {
+   "box": 1,
+   "due": 1793768400000,
+   "t": 1793576695850
+  },
+  "c-l7-3": {
+   "box": 2,
+   "due": 1793682000000,
+   "t": 1793143999891
+  },
+  "c-l7-4": {
+   "box": 2,
+   "due": 1793682000000,
+   "t": 1793144236028
+  },
+  "c-l7-5": {
+   "box": 2,
+   "due": 1793682000000,
+   "t": 1793143919860
+  },
+  "c-l7-6": {
+   "box": 2,
+   "due": 1793682000000,
+   "t": 1793144259458
+  },
+  "c-l7-7": {
+   "box": 2,
+   "due": 1793682000000,
+   "t": 1793144222208
+  },
+  "c-l7-8": {
+   "box": 0,
+   "due": 1793595600000,
+   "t": 1793576716225
+  },
+  "c-l7-9": {
+   "box": 2,
+   "due": 1793682000000,
+   "t": 1793144278647
+  },
+  "c-l8-0": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l8-1": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l8-10": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l8-11": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l8-2": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l8-3": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l8-4": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l8-5": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l8-6": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l8-7": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l8-8": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l8-9": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l9-0": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793983675510
+  },
+  "c-l9-1": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793983739909
+  },
+  "c-l9-10": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793983786686
+  },
+  "c-l9-11": {
+   "box": 0,
+   "due": 1794027600000,
+   "t": 1793984815454
+  },
+  "c-l9-2": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793707593408
+  },
+  "c-l9-3": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793985018107
+  },
+  "c-l9-4": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793985187120
+  },
+  "c-l9-5": {
+   "box": 0,
+   "due": 1794200400000,
+   "t": 1794157197900
+  },
+  "c-l9-6": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793985542736
+  },
+  "c-l9-7": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793985637664
+  },
+  "c-l9-8": {
+   "box": 2,
+   "due": 1793768400000,
+   "t": 1793231181924
+  },
+  "c-l9-9": {
+   "box": 0,
+   "due": 1794027600000,
+   "t": 1793985699576
+  },
+  "l1-airport": {
+   "box": 3,
+   "due": 1794373200000,
+   "t": 1792630522716
+  },
+  "l1-burger-price": {
+   "box": 3,
+   "due": 1794373200000,
+   "t": 1792630540199
+  },
+  "l1-capital": {
+   "box": 3,
+   "due": 1794373200000,
+   "t": 1792630549177
+  },
+  "l1-college-mc": {
+   "box": 3,
+   "due": 1794373200000,
+   "t": 1792630561523
+  },
+  "l1-def": {
+   "box": 3,
+   "due": 1794373200000,
+   "t": 1792630567372
+  },
+  "l1-econdef": {
+   "box": 3,
+   "due": 1794373200000,
+   "t": 1792630575022
+  },
+  "l1-g-budget": {
+   "box": 3,
+   "due": 1794373200000,
+   "t": 1792630595781
+  },
+  "l1-g-college": {
+   "box": 1,
+   "due": 1793768400000,
+   "t": 1793576737487
+  },
+  "l1-g-lunch": {
+   "box": 3,
+   "due": 1794373200000,
+   "t": 1792630607134
+  },
+  "l1-g-maxunits": {
+   "box": 3,
+   "due": 1794373200000,
+   "t": 1792630626251
+  },
+  "l1-g-time": {
+   "box": 3,
+   "due": 1794373200000,
+   "t": 1792630635637
+  },
+  "l1-gr-intercepts": {
+   "box": 3,
+   "due": 1794373200000,
+   "t": 1792630645370
+  },
+  "l1-gr-outside": {
+   "box": 3,
+   "due": 1794373200000,
+   "t": 1792630661464
+  },
+  "l1-gr-shift": {
+   "box": 3,
+   "due": 1794373200000,
+   "t": 1792630671458
+  },
+  "l1-land": {
+   "box": 3,
+   "due": 1794373200000,
+   "t": 1792630685305
+  },
+  "l1-macro2": {
+   "box": 3,
+   "due": 1794373200000,
+   "t": 1792630696581
+  },
+  "l1-normative2": {
+   "box": 3,
+   "due": 1794373200000,
+   "t": 1792630715403
+  },
+  "l1-notfactor": {
+   "box": 3,
+   "due": 1794373200000,
+   "t": 1792630733160
+  },
+  "l1-positive": {
+   "box": 3,
+   "due": 1794373200000,
+   "t": 1792630739821
+  },
+  "l1-shift": {
+   "box": 0,
+   "due": 1793419200000,
+   "t": 1793389737671
+  },
+  "l1-tf-capital-money": {
+   "box": 3,
+   "due": 1794805200000,
+   "t": 1793052669127
+  },
+  "l1-tf-diff": {
+   "box": 3,
+   "due": 1794805200000,
+   "t": 1793052675747
+  },
+  "l1-tf-free": {
+   "box": 3,
+   "due": 1794805200000,
+   "t": 1793052680055
+  },
+  "l1-tf-positive-true": {
+   "box": 3,
+   "due": 1794805200000,
+   "t": 1793052686173
+  },
+  "l1-tf-rich": {
+   "box": 3,
+   "due": 1794805200000,
+   "t": 1793052693299
+  },
+  "l1-tf-sum": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793392869465
+  },
+  "l1-tradeoff": {
+   "box": 3,
+   "due": 1794891600000,
+   "t": 1793142233585
+  },
+  "l10-camry": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793273368055
+  },
+  "l10-g-ied": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793982974380
+  },
+  "l10-g-ied-pct": {
+   "box": 0,
+   "due": 1793854800000,
+   "t": 1793796236810
+  },
+  "l10-g-xed": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793989126315
+  },
+  "l10-g-xed-pct": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793989215362
+  },
+  "l10-gas-cars": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793273384862
+  },
+  "l10-gr-income": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793273678014
+  },
+  "l10-ied-def": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793989256449
+  },
+  "l10-ied-order": {
+   "box": 1,
+   "due": 1794027600000,
+   "t": 1793795671226
+  },
+  "l10-inferior-sign": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793272982418
+  },
+  "l10-luxury": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793273197557
+  },
+  "l10-magic": {
+   "box": 3,
+   "due": 1795928400000,
+   "t": 1794158691479
+  },
+  "l10-pretzels": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793273141789
+  },
+  "l10-recession": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793273543456
+  },
+  "l10-shift-size": {
+   "box": 1,
+   "due": 1793682000000,
+   "t": 1793501796444
+  },
+  "l10-steak": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793983282712
+  },
+  "l10-substitutes": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793982695457
+  },
+  "l10-table": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793273632010
+  },
+  "l10-tf-inferior": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793273012362
+  },
+  "l10-tf-luxury": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793273504472
+  },
+  "l10-tf-negxed": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793273149630
+  },
+  "l10-tf-sign": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793273207996
+  },
+  "l10-tf-zero": {
+   "box": 3,
+   "due": 1795928400000,
+   "t": 1794158258279
+  },
+  "l10-transit": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793273262207
+  },
+  "l10-unrelated": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793273221431
+  },
+  "l10-which-price": {
+   "box": 1,
+   "due": 1794373200000,
+   "t": 1794157694672
+  },
+  "l10-wording": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793273654769
+  },
+  "l10-xed-def": {
+   "box": 3,
+   "due": 1795928400000,
+   "t": 1794158581294
+  },
+  "l10c-general": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793501888677
+  },
+  "l10c-ied": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793501713627
+  },
+  "l10c-ied2": {
+   "box": 1,
+   "due": 1794027600000,
+   "t": 1793795682928
+  },
+  "l10c-xed": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793312335751
+  },
+  "l11-beyond": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793318394457
+  },
+  "l11-ceiling": {
+   "box": 2,
+   "due": 1794718800000,
+   "t": 1794180185639
+  },
+  "l11-cs-def": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793318081347
+  },
+  "l11-efficient": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793318358780
+  },
+  "l11-g-cs": {
+   "box": 0,
+   "due": 1793332800000,
+   "t": 1793318114392
+  },
+  "l11-g-ps": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793318530317
+  },
+  "l11-g-total": {
+   "box": 1,
+   "due": 1794373200000,
+   "t": 1794158369139
+  },
+  "l11-g-triangle": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793318340304
+  },
+  "l11-gr-areas": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793318224646
+  },
+  "l11-gr-ps": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793983217734
+  },
+  "l11-gr-total": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793318842433
+  },
+  "l11-price-fall": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793318436514
+  },
+  "l11-ps-def": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793318163999
+  },
+  "l11-short": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793318792061
+  },
+  "l11-tablets": {
+   "box": 3,
+   "due": 1795928400000,
+   "t": 1794158629060
+  },
+  "l11-tf-each": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793318370498
+  },
+  "l11-tf-paid": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793982764026
+  },
+  "l11-tf-ps-revenue": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793318505426
+  },
+  "l11-tf-words": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793318579705
+  },
+  "l11-total": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793982635364
+  },
+  "l11-vendor-who": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793318832285
+  },
+  "l11-vendors": {
+   "box": 3,
+   "due": 1795928400000,
+   "t": 1794158807065
+  },
+  "l11-water": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793983166516
+  },
+  "l11-water-new": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793318811719
+  },
+  "l11-welfare": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793318803379
+  },
+  "l11-who": {
+   "box": 2,
+   "due": 1794373200000,
+   "t": 1793796162140
+  },
+  "l11-wtp": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793982508546
+  },
+  "l11c-total": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793620218112
+  },
+  "l12-beach": {
+   "box": 2,
+   "due": 1793941200000,
+   "t": 1793362199751
+  },
+  "l12-ceiling": {
+   "box": 2,
+   "due": 1793941200000,
+   "t": 1793362306251
+  },
+  "l12-cig": {
+   "box": 3,
+   "due": 1795928400000,
+   "t": 1794158651436
+  },
+  "l12-cs-ps": {
+   "box": 2,
+   "due": 1793941200000,
+   "t": 1793362165651
+  },
+  "l12-double": {
+   "box": 2,
+   "due": 1793941200000,
+   "t": 1793386583062
+  },
+  "l12-dwl-def": {
+   "box": 0,
+   "due": 1793419200000,
+   "t": 1793362062119
+  },
+  "l12-dwl-why": {
+   "box": 2,
+   "due": 1793941200000,
+   "t": 1793386369947
+  },
+  "l12-equal-why": {
+   "box": 0,
+   "due": 1793419200000,
+   "t": 1793386420022
+  },
+  "l12-floor": {
+   "box": 0,
+   "due": 1793854800000,
+   "t": 1793792788184
+  },
+  "l12-g-burden": {
+   "box": 3,
+   "due": 1795928400000,
+   "t": 1794158074688
+  },
+  "l12-g-dwl": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793983120064
+  },
+  "l12-g-rev": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793982778840
+  },
+  "l12-g-square": {
+   "box": 2,
+   "due": 1793941200000,
+   "t": 1793386535493
+  },
+  "l12-gr-areas": {
+   "box": 2,
+   "due": 1793941200000,
+   "t": 1793362140241
+  },
+  "l12-gr-incidence": {
+   "box": 0,
+   "due": 1793419200000,
+   "t": 1793362263790
+  },
+  "l12-inelastic": {
+   "box": 2,
+   "due": 1793941200000,
+   "t": 1793362052401
+  },
+  "l12-quota": {
+   "box": 0,
+   "due": 1793419200000,
+   "t": 1793386250441
+  },
+  "l12-rev": {
+   "box": 0,
+   "due": 1793505600000,
+   "t": 1793501076648
+  },
+  "l12-revenue-el": {
+   "box": 2,
+   "due": 1794718800000,
+   "t": 1794157940413
+  },
+  "l12-socks": {
+   "box": 2,
+   "due": 1793941200000,
+   "t": 1793361972566
+  },
+  "l12-statutory": {
+   "box": 2,
+   "due": 1793941200000,
+   "t": 1793386412949
+  },
+  "l12-tf-ceiling": {
+   "box": 2,
+   "due": 1793941200000,
+   "t": 1793362330606
+  },
+  "l12-tf-equal": {
+   "box": 3,
+   "due": 1795928400000,
+   "t": 1794157625513
+  },
+  "l12-tf-rev": {
+   "box": 3,
+   "due": 1795928400000,
+   "t": 1794157631546
+  },
+  "l12-tf-who": {
+   "box": 2,
+   "due": 1793941200000,
+   "t": 1793362004195
+  },
+  "l12-total": {
+   "box": 2,
+   "due": 1793941200000,
+   "t": 1793386629649
+  },
+  "l12-wedge": {
+   "box": 2,
+   "due": 1793941200000,
+   "t": 1793361857427
+  },
+  "l12-why": {
+   "box": 2,
+   "due": 1793941200000,
+   "t": 1793362172328
+  },
+  "l12c-surplus": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793501672658
+  },
+  "l12c-wedge": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793620172043
+  },
+  "l13-avg": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793502860987
+  },
+  "l13-buffet": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793503076527
+  },
+  "l13-candy-peak": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793502676094
+  },
+  "l13-candy-tu": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793503139911
+  },
+  "l13-course-mu": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793503213357
+  },
+  "l13-dmu-def": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793502724439
+  },
+  "l13-g-mu": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793502666467
+  },
+  "l13-g-peak": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793502956738
+  },
+  "l13-g-tu": {
+   "box": 0,
+   "due": 1793505600000,
+   "t": 1793502781944
+  },
+  "l13-gr-mu": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793502895229
+  },
+  "l13-gr-pair": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793503094487
+  },
+  "l13-gr-tu": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793502710226
+  },
+  "l13-movie": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793502984202
+  },
+  "l13-mu-def": {
+   "box": 3,
+   "due": 1795928400000,
+   "t": 1794158251555
+  },
+  "l13-neg": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793502817557
+  },
+  "l13-rational": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793503225336
+  },
+  "l13-slope": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793503159730
+  },
+  "l13-tf-dmu-tu": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793502681095
+  },
+  "l13-tf-first": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793503239963
+  },
+  "l13-tf-neg": {
+   "box": 0,
+   "due": 1793854800000,
+   "t": 1793795809990
+  },
+  "l13-tf-rising": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793503147601
+  },
+  "l13-tf-sum": {
+   "box": 3,
+   "due": 1795928400000,
+   "t": 1794158812901
+  },
+  "l13-tf-utils": {
+   "box": 3,
+   "due": 1795928400000,
+   "t": 1794157638068
+  },
+  "l13-tshirt": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793502876595
+  },
+  "l13-tu-def": {
+   "box": 0,
+   "due": 1793505600000,
+   "t": 1793502596657
+  },
+  "l13-which-table": {
+   "box": 0,
+   "due": 1793505600000,
+   "t": 1793502844429
+  },
+  "l13-why-dmu": {
+   "box": 3,
+   "due": 1795928400000,
+   "t": 1794157710462
+  },
+  "l13-zero": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793502913370
+  },
+  "l13c-mu": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793619688387
+  },
+  "l14-best": {
+   "box": 0,
+   "due": 1794027600000,
+   "t": 1793982573273
+  },
+  "l14-bundle-tu": {
+   "box": 3,
+   "due": 1795928400000,
+   "t": 1794157977430
+  },
+  "l14-cheap": {
+   "box": 3,
+   "due": 1795928400000,
+   "t": 1794157813687
+  },
+  "l14-cons-eq": {
+   "box": 2,
+   "due": 1794718800000,
+   "t": 1794158536170
+  },
+  "l14-corner": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793505931415
+  },
+  "l14-first": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793506583645
+  },
+  "l14-g-cost": {
+   "box": 0,
+   "due": 1793595600000,
+   "t": 1793505996931
+  },
+  "l14-g-move": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793506282299
+  },
+  "l14-g-mup": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793505396073
+  },
+  "l14-g-opt": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793505669304
+  },
+  "l14-gr-budget": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793505615115
+  },
+  "l14-gr-mup": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793983246528
+  },
+  "l14-gr-points": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793506640849
+  },
+  "l14-jose": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793505823260
+  },
+  "l14-ms-mup": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793505981842
+  },
+  "l14-net": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793506038007
+  },
+  "l14-rule": {
+   "box": 1,
+   "due": 1794027600000,
+   "t": 1793792634091
+  },
+  "l14-slope": {
+   "box": 0,
+   "due": 1793595600000,
+   "t": 1793506098254
+  },
+  "l14-tf-all": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793506605908
+  },
+  "l14-tf-equal": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793506045448
+  },
+  "l14-tf-highmu": {
+   "box": 1,
+   "due": 1794027600000,
+   "t": 1793792300662
+  },
+  "l14-tf-mu-zero": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793983202200
+  },
+  "l14-tf-ratio": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793506522034
+  },
+  "l14-unspent": {
+   "box": 3,
+   "due": 1795928400000,
+   "t": 1794157920889
+  },
+  "l14-which-more": {
+   "box": 0,
+   "due": 1793505600000,
+   "t": 1793505405432
+  },
+  "l14-why-converge": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793506626281
+  },
+  "l14-why44": {
+   "box": 0,
+   "due": 1793595600000,
+   "t": 1793506534830
+  },
+  "l14c-skill": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793620083083
+  },
+  "l15-both": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793536590677
+  },
+  "l15-budget-pivot": {
+   "box": 3,
+   "due": 1795928400000,
+   "t": 1794157551065
+  },
+  "l15-ceteris": {
+   "box": 1,
+   "due": 1794027600000,
+   "t": 1793821628244
+  },
+  "l15-demand-pts": {
+   "box": 0,
+   "due": 1793595600000,
+   "t": 1793536076378
+  },
+  "l15-g-market": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793536209802
+  },
+  "l15-g-mupnew": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793536459863
+  },
+  "l15-g-relp": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793536578731
+  },
+  "l15-gr-demand": {
+   "box": 1,
+   "due": 1794373200000,
+   "t": 1794158525068
+  },
+  "l15-gr-sum": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793536545454
+  },
+  "l15-heating": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793536748324
+  },
+  "l15-inc-def": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793536221285
+  },
+  "l15-income-shift": {
+   "box": 3,
+   "due": 1795928400000,
+   "t": 1794158671799
+  },
+  "l15-inferior": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793536407309
+  },
+  "l15-kimberly": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793536607840
+  },
+  "l15-ms-income": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793536697652
+  },
+  "l15-new-opt": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793536055947
+  },
+  "l15-optimal-point": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793536771506
+  },
+  "l15-other-good": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793536380073
+  },
+  "l15-price-mup": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793535965590
+  },
+  "l15-rel": {
+   "box": 0,
+   "due": 1793854800000,
+   "t": 1793792399133
+  },
+  "l15-sergei": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793536671430
+  },
+  "l15-slide-56": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793536433594
+  },
+  "l15-sub-def": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793536239836
+  },
+  "l15-tf-inc": {
+   "box": 0,
+   "due": 1793854800000,
+   "t": 1793796178162
+  },
+  "l15-tf-market": {
+   "box": 3,
+   "due": 1795928400000,
+   "t": 1794157578768
+  },
+  "l15-tf-move": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793536509493
+  },
+  "l15-tf-subboth": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793536650521
+  },
+  "l15-why-slope": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793536495877
+  },
+  "l15c-new": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793620266529
+  },
+  "l16-clip-zone": {
+   "box": 3,
+   "due": 1795928400000,
+   "t": 1794157619372
+  },
+  "l16-course-mp": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793578626304
+  },
+  "l16-fixedvar": {
+   "box": 3,
+   "due": 1795928400000,
+   "t": 1794158002051
+  },
+  "l16-g-mp": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793578602158
+  },
+  "l16-g-mpdec": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793579073298
+  },
+  "l16-g-pf": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793983153599
+  },
+  "l16-g-tp": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793578805462
+  },
+  "l16-g-zone": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793578928729
+  },
+  "l16-gr-fall": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793578960743
+  },
+  "l16-gr-mp": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793578783847
+  },
+  "l16-gr-tp": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793578642587
+  },
+  "l16-irrigate": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793578913648
+  },
+  "l16-lr": {
+   "box": 3,
+   "due": 1795928400000,
+   "t": 1794157519955
+  },
+  "l16-match": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793579097922
+  },
+  "l16-mp-def": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793578882491
+  },
+  "l16-notfixed": {
+   "box": 1,
+   "due": 1794373200000,
+   "t": 1794157599085
+  },
+  "l16-pf-course": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793578849946
+  },
+  "l16-scale": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793579039977
+  },
+  "l16-sixth": {
+   "box": 3,
+   "due": 1795928400000,
+   "t": 1794157772390
+  },
+  "l16-sr-def": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793578585149
+  },
+  "l16-tf-falls": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793578633262
+  },
+  "l16-tf-incr": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793578967262
+  },
+  "l16-tf-lr-time": {
+   "box": 3,
+   "due": 1795928400000,
+   "t": 1794158764002
+  },
+  "l16-tf-shortrun": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793578811508
+  },
+  "l16-tf-skill": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793578773100
+  },
+  "l16-tf-zero": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793579084998
+  },
+  "l16-truck": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793579014583
+  },
+  "l16-why": {
+   "box": 2,
+   "due": 1794114000000,
+   "t": 1793578675303
+  },
+  "l17-atc-def": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793622410958
+  },
+  "l17-atc-sum": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793622983646
+  },
+  "l17-clip-avc": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793623088125
+  },
+  "l17-clip-min": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793622639106
+  },
+  "l17-course-atc": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793623069123
+  },
+  "l17-course-fix": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793622485738
+  },
+  "l17-course-tc": {
+   "box": 1,
+   "due": 1794027600000,
+   "t": 1793792264991
+  },
+  "l17-fc-def": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793622305633
+  },
+  "l17-g-avg": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793622438198
+  },
+  "l17-g-tc": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793622324055
+  },
+  "l17-g-tcq": {
+   "box": 1,
+   "due": 1794027600000,
+   "t": 1793792120932
+  },
+  "l17-g-vc": {
+   "box": 0,
+   "due": 1793682000000,
+   "t": 1793622687508
+  },
+  "l17-gap": {
+   "box": 0,
+   "due": 1793854800000,
+   "t": 1793795927869
+  },
+  "l17-gr-afc": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793623019991
+  },
+  "l17-gr-tc": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793622401659
+  },
+  "l17-overhead": {
+   "box": 1,
+   "due": 1794027600000,
+   "t": 1793792073832
+  },
+  "l17-profit": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793622663420
+  },
+  "l17-tf-afc": {
+   "box": 1,
+   "due": 1794373200000,
+   "t": 1794157731363
+  },
+  "l17-tf-afc-u": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793623094607
+  },
+  "l17-tf-avc": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793622616328
+  },
+  "l17-tf-avc-below": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793623043623
+  },
+  "l17-tf-contract": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793622795240
+  },
+  "l17-tf-intercept": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793622938388
+  },
+  "l17-tf-zero": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793622388988
+  },
+  "l17-vc-def": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793622654205
+  },
+  "l17-why-rise": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793622955053
+  },
+  "l17-why-u": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793622991642
+  },
+  "l18-barber-mc": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793706313928
+  },
+  "l18-clip-mc": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793666756122
+  },
+  "l18-course-mc": {
+   "box": 1,
+   "due": 1793941200000,
+   "t": 1793706096234
+  },
+  "l18-cross": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793666769630
+  },
+  "l18-eff-scale": {
+   "box": 1,
+   "due": 1794027600000,
+   "t": 1793792086667
+  },
+  "l18-fc-mc": {
+   "box": 2,
+   "due": 1794546000000,
+   "t": 1793983265619
+  },
+  "l18-g-mc": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793666616256
+  },
+  "l18-g-mcfromtable": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793706575394
+  },
+  "l18-g-pull": {
+   "box": 1,
+   "due": 1794027600000,
+   "t": 1793796096060
+  },
+  "l18-g-wmp": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793666738866
+  },
+  "l18-gr-cross": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793706563603
+  },
+  "l18-gr-curves": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793666794570
+  },
+  "l18-gr-mirror": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793706182171
+  },
+  "l18-grades": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793706369901
+  },
+  "l18-mc-def": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793666603946
+  },
+  "l18-mc-vs-atc": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793706550974
+  },
+  "l18-print": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793706495739
+  },
+  "l18-prod-mc": {
+   "box": 1,
+   "due": 1793941200000,
+   "t": 1793705951038
+  },
+  "l18-rising-mc": {
+   "box": 1,
+   "due": 1793941200000,
+   "t": 1793706077548
+  },
+  "l18-sunk": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793706203421
+  },
+  "l18-table": {
+   "box": 2,
+   "due": 1794200400000,
+   "t": 1793666987033
+  },
+  "l18-tf-atc-mc": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793706452661
+  },
+  "l18-tf-cross-max": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793706582189
+  },
+  "l18-tf-mc-avc": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793706435442
+  },
+  "l18-tf-mc-vc": {
+   "box": 0,
+   "due": 1793768400000,
+   "t": 1793706122747
+  },
+  "l18-tf-mp-mc": {
+   "box": 0,
+   "due": 1793854800000,
+   "t": 1793792313442
+  },
+  "l18-units": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793706248670
+  },
+  "l18-website": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793706351121
+  },
+  "l19-alarm": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793709083415
+  },
+  "l19-causes": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793709103547
+  },
+  "l19-coffee": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793708806733
+  },
+  "l19-coffee-200": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793709062730
+  },
+  "l19-constant": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793709122814
+  },
+  "l19-dis-cause": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793708949678
+  },
+  "l19-env": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793708998384
+  },
+  "l19-eos-def": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793708821076
+  },
+  "l19-flat": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793709491844
+  },
+  "l19-g-coffee": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793709520989
+  },
+  "l19-g-mpd": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793709024038
+  },
+  "l19-g-tech": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793708885733
+  },
+  "l19-gr-env": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793709363920
+  },
+  "l19-gr-zones": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793708920506
+  },
+  "l19-least": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793708941011
+  },
+  "l19-lr-costs": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793708788608
+  },
+  "l19-natural": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793709585220
+  },
+  "l19-park-a": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793709210750
+  },
+  "l19-park-c": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793709256176
+  },
+  "l19-pipe": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793709286628
+  },
+  "l19-rule": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793709547120
+  },
+  "l19-selfcheck": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793709569386
+  },
+  "l19-tf-both": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793709507365
+  },
+  "l19-tf-cheaper": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793709269227
+  },
+  "l19-tf-contradict": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793708895813
+  },
+  "l19-tf-lr-fixed": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793709073466
+  },
+  "l19-wage-rise": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793709041205
+  },
+  "l19-week": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793709598836
+  },
+  "l2-boots": {
+   "box": 0,
+   "due": 1793419200000,
+   "t": 1793392001137
+  },
+  "l2-bowed": {
+   "box": 3,
+   "due": 1794891600000,
+   "t": 1793142753061
+  },
+  "l2-g-ppf": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793989323581
+  },
+  "l2-gr-biased": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793387789280
+  },
+  "l2-gr-points": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793387796693
+  },
+  "l2-inside": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793387806036
+  },
+  "l2-prodeff": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793387816892
+  },
+  "l2-reverse": {
+   "box": 2,
+   "due": 1794546000000,
+   "t": 1793989373072
+  },
+  "l2-rubber": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793387842610
+  },
+  "l2-shift": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793387855410
+  },
+  "l2-straight": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793387863662
+  },
+  "l2-tf-unemp": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793387868653
+  },
+  "l20-accountant": {
+   "box": 0,
+   "due": 1793854800000,
+   "t": 1793790990894
+  },
+  "l20-carA": {
+   "box": 0,
+   "due": 1793854800000,
+   "t": 1793790764696
+  },
+  "l20-caroline": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793754177830
+  },
+  "l20-def-exp": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793983293972
+  },
+  "l20-def-imp": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793754054806
+  },
+  "l20-entry-signal": {
+   "box": 2,
+   "due": 1794373200000,
+   "t": 1793791048643
+  },
+  "l20-farm": {
+   "box": 2,
+   "due": 1794373200000,
+   "t": 1793791184994
+  },
+  "l20-fred-switch": {
+   "box": 2,
+   "due": 1794373200000,
+   "t": 1793790536213
+  },
+  "l20-g-acc": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793754102601
+  },
+  "l20-g-econ": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793754137984
+  },
+  "l20-g-fred": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793982497990
+  },
+  "l20-g-implicit": {
+   "box": 0,
+   "due": 1793854800000,
+   "t": 1793791348539
+  },
+  "l20-g-normal": {
+   "box": 2,
+   "due": 1794373200000,
+   "t": 1793790713283
+  },
+  "l20-g-rate": {
+   "box": 0,
+   "due": 1793854800000,
+   "t": 1793790878316
+  },
+  "l20-gr-bars": {
+   "box": 2,
+   "due": 1794373200000,
+   "t": 1793790488181
+  },
+  "l20-gr-normal": {
+   "box": 2,
+   "due": 1794373200000,
+   "t": 1793791120895
+  },
+  "l20-home-store": {
+   "box": 2,
+   "due": 1794373200000,
+   "t": 1793790928542
+  },
+  "l20-leisure": {
+   "box": 2,
+   "due": 1794373200000,
+   "t": 1793791139082
+  },
+  "l20-normal": {
+   "box": 0,
+   "due": 1793768400000,
+   "t": 1793754191500
+  },
+  "l20-raise-econ": {
+   "box": 2,
+   "due": 1794373200000,
+   "t": 1793790666339
+  },
+  "l20-selfcheck": {
+   "box": 2,
+   "due": 1794373200000,
+   "t": 1793790631778
+  },
+  "l20-tax": {
+   "box": 2,
+   "due": 1794373200000,
+   "t": 1793791169826
+  },
+  "l20-tf-acc-pos": {
+   "box": 2,
+   "due": 1794373200000,
+   "t": 1793791144952
+  },
+  "l20-tf-borrow": {
+   "box": 2,
+   "due": 1794373200000,
+   "t": 1793791008711
+  },
+  "l20-tf-econ-lower": {
+   "box": 2,
+   "due": 1794373200000,
+   "t": 1793790737644
+  },
+  "l20-tf-implicit": {
+   "box": 2,
+   "due": 1794286800000,
+   "t": 1793754185671
+  },
+  "l20-tf-zero": {
+   "box": 2,
+   "due": 1794373200000,
+   "t": 1793790542944
+  },
+  "l20-why-same": {
+   "box": 2,
+   "due": 1794373200000,
+   "t": 1793790567161
+  },
+  "l3-absex": {
+   "box": 0,
+   "due": 1793419200000,
+   "t": 1793390043754
+  },
+  "l3-alone": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793390072254
+  },
+  "l3-both": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793388092041
+  },
+  "l3-brazil": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793390087550
+  },
+  "l3-defs": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793388110105
+  },
+  "l3-g-ca": {
+   "box": 0,
+   "due": 1793419200000,
+   "t": 1793387880598
+  },
+  "l3-g-export": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793390123355
+  },
+  "l3-g-input": {
+   "box": 0,
+   "due": 1793419200000,
+   "t": 1793390152004
+  },
+  "l3-g-max": {
+   "box": 2,
+   "due": 1793941200000,
+   "t": 1793387939051
+  },
+  "l3-g-oc": {
+   "box": 2,
+   "due": 1793941200000,
+   "t": 1793387958382
+  },
+  "l3-g-oc2": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793390164776
+  },
+  "l3-gains": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793390174924
+  },
+  "l3-gr-absy": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793390401818
+  },
+  "l3-gr-trade": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793390418871
+  },
+  "l3-gr-two": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793390429891
+  },
+  "l3-input": {
+   "box": 0,
+   "due": 1793419200000,
+   "t": 1793387974357
+  },
+  "l3-lawyer": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793390445968
+  },
+  "l3-meaning": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793390458660
+  },
+  "l3-smith": {
+   "box": 2,
+   "due": 1794546000000,
+   "t": 1793989382941
+  },
+  "l3-specialize": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793390510176
+  },
+  "l3-terms": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793390522352
+  },
+  "l3-terms2": {
+   "box": 2,
+   "due": 1793941200000,
+   "t": 1793388033423
+  },
+  "l3-tf-abs": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793388122112
+  },
+  "l3-tf-gains-both": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793390532136
+  },
+  "l3-tf-identical": {
+   "box": 2,
+   "due": 1793941200000,
+   "t": 1793388081268
+  },
+  "l3-tf-oc": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793390538644
+  },
+  "l3-tf-workers": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793390548053
+  },
+  "l4-capitalism": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793989418152
+  },
+  "l4-command": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793392056697
+  },
+  "l4-decentral": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793389752219
+  },
+  "l4-factor": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793392808800
+  },
+  "l4-firms-buyers": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793388138104
+  },
+  "l4-forwhom": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793389770365
+  },
+  "l4-gr-cf1": {
+   "box": 2,
+   "due": 1794546000000,
+   "t": 1793989432533
+  },
+  "l4-gr-cf2": {
+   "box": 0,
+   "due": 1793419200000,
+   "t": 1793389778497
+  },
+  "l4-grid": {
+   "box": 0,
+   "due": 1793419200000,
+   "t": 1793392901850
+  },
+  "l4-invisible": {
+   "box": 3,
+   "due": 1795064400000,
+   "t": 1793270782823
+  },
+  "l4-labor": {
+   "box": 3,
+   "due": 1795323600000,
+   "t": 1793576744283
+  },
+  "l4-mktsoc": {
+   "box": 0,
+   "due": 1793595600000,
+   "t": 1793576789607
+  },
+  "l4-nk": {
+   "box": 3,
+   "due": 1795064400000,
+   "t": 1793270544301
+  },
+  "l4-questions": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793392839489
+  },
+  "l4-regs": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793389796005
+  },
+  "l4-revenue": {
+   "box": 0,
+   "due": 1793595600000,
+   "t": 1793576831450
+  },
+  "l4-rights": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793392913529
+  },
+  "l4-tf-cfgov": {
+   "box": 3,
+   "due": 1795323600000,
+   "t": 1793576836840
+  },
+  "l4-tf-cmdmkts": {
+   "box": 3,
+   "due": 1795323600000,
+   "t": 1793576841906
+  },
+  "l4-tf-direction": {
+   "box": 3,
+   "due": 1795064400000,
+   "t": 1793270747480
+  },
+  "l4-tf-market": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793392847211
+  },
+  "l4-tf-mixed": {
+   "box": 3,
+   "due": 1795323600000,
+   "t": 1793576847236
+  },
+  "l4-tf-transfer": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793392918902
+  },
+  "l4-traditional": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793392853105
+  },
+  "l4-underground": {
+   "box": 3,
+   "due": 1795323600000,
+   "t": 1793576856244
+  },
+  "l4-us": {
+   "box": 3,
+   "due": 1795064400000,
+   "t": 1793271200936
+  },
+  "l4-wages": {
+   "box": 3,
+   "due": 1795150800000,
+   "t": 1793392865511
+  },
+  "l4-who": {
+   "box": 3,
+   "due": 1795323600000,
+   "t": 1793576865520
+  },
+  "l4c-cmdweak": {
+   "box": 2,
+   "due": 1793682000000,
+   "t": 1793099951648
+  },
+  "l4c-commons": {
+   "box": 2,
+   "due": 1793682000000,
+   "t": 1793143237743
+  },
+  "l4c-entre": {
+   "box": 2,
+   "due": 1793682000000,
+   "t": 1793143185876
+  },
+  "l4c-grid": {
+   "box": 2,
+   "due": 1793682000000,
+   "t": 1793100151931
+  },
+  "l4c-hhroles": {
+   "box": 2,
+   "due": 1793768400000,
+   "t": 1793184717760
+  },
+  "l4c-market": {
+   "box": 2,
+   "due": 1793595600000,
+   "t": 1793052880250
+  },
+  "l5-calorie": {
+   "box": 0,
+   "due": 1794027600000,
+   "t": 1793985702406
+  },
+  "l5-concorde": {
+   "box": 1,
+   "due": 1793854800000,
+   "t": 1793668737070
+  },
+  "l5-def": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793985718304
+  },
+  "l5-dis": {
+   "box": 2,
+   "due": 1793246400000,
+   "t": 1792716861321
+  },
+  "l5-dmu": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793390567317
+  },
+  "l5-g-firm": {
+   "box": 0,
+   "due": 1792728000000,
+   "t": 1792716976975
+  },
+  "l5-g-mb": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793985775598
+  },
+  "l5-g-mc": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793985789944
+  },
+  "l5-g-pricedrop": {
+   "box": 2,
+   "due": 1793246400000,
+   "t": 1792717306898
+  },
+  "l5-g-sunk": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793390617371
+  },
+  "l5-gr-line": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793985824518
+  },
+  "l5-gr-mb": {
+   "box": 2,
+   "due": 1793246400000,
+   "t": 1792716843861
+  },
+  "l5-incentive": {
+   "box": 3,
+   "due": 1795064400000,
+   "t": 1793270563745
+  },
+  "l5-marginaldecision": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793985841963
+  },
+  "l5-mcdef": {
+   "box": 3,
+   "due": 1795064400000,
+   "t": 1793271131614
+  },
+  "l5-selena": {
+   "box": 3,
+   "due": 1795064400000,
+   "t": 1793270887540
+  },
+  "l5-spread": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793985849281
+  },
+  "l5-study": {
+   "box": 2,
+   "due": 1793246400000,
+   "t": 1792717162127
+  },
+  "l5-sugar": {
+   "box": 3,
+   "due": 1795064400000,
+   "t": 1793271328753
+  },
+  "l5-sunk": {
+   "box": 2,
+   "due": 1793246400000,
+   "t": 1792716828543
+  },
+  "l5-tf-dmu": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793988545450
+  },
+  "l5-tf-equal": {
+   "box": 1,
+   "due": 1793768400000,
+   "t": 1793576872129
+  },
+  "l5-tf-incent": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793988556072
+  },
+  "l5-tf-sunk": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793988563539
+  },
+  "l5-tf-total": {
+   "box": 0,
+   "due": 1793595600000,
+   "t": 1793576876844
+  },
+  "l5-third": {
+   "box": 2,
+   "due": 1793246400000,
+   "t": 1792717240256
+  },
+  "l5-water": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793988581909
+  },
+  "l5c-classify": {
+   "box": 2,
+   "due": 1793682000000,
+   "t": 1793143024878
+  },
+  "l5c-dmu": {
+   "box": 2,
+   "due": 1793595600000,
+   "t": 1793052752839
+  },
+  "l5c-expand": {
+   "box": 2,
+   "due": 1793768400000,
+   "t": 1793184916932
+  },
+  "l5c-margin": {
+   "box": 2,
+   "due": 1793595600000,
+   "t": 1793052821046
+  },
+  "l5c-subsidy": {
+   "box": 2,
+   "due": 1793682000000,
+   "t": 1793099862343
+  },
+  "l6-assume": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793989446300
+  },
+  "l6-buyers-expect": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793989468052
+  },
+  "l6-complement": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793989628664
+  },
+  "l6-dvsqd": {
+   "box": 3,
+   "due": 1795582800000,
+   "t": 1793821843097
+  },
+  "l6-expect": {
+   "box": 0,
+   "due": 1793419200000,
+   "t": 1793391726490
+  },
+  "l6-g-income": {
+   "box": 2,
+   "due": 1793332800000,
+   "t": 1792783344385
+  },
+  "l6-g-schedule": {
+   "box": 2,
+   "due": 1793332800000,
+   "t": 1792782892055
+  },
+  "l6-g-shift": {
+   "box": 2,
+   "due": 1793332800000,
+   "t": 1792782554567
+  },
+  "l6-gr-demand-right": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793392927889
+  },
+  "l6-gr-move": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793989649975
+  },
+  "l6-gr-shiftvsmove": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793989666496
+  },
+  "l6-gr-supply": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793989746756
+  },
+  "l6-inferior": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793989759893
+  },
+  "l6-law": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793989768802
+  },
+  "l6-notshift": {
+   "box": 2,
+   "due": 1794373200000,
+   "t": 1793821543838
+  },
+  "l6-population": {
+   "box": 3,
+   "due": 1795582800000,
+   "t": 1793821259781
+  },
+  "l6-qsdef": {
+   "box": 0,
+   "due": 1793419200000,
+   "t": 1793391769614
+  },
+  "l6-sellers": {
+   "box": 1,
+   "due": 1793505600000,
+   "t": 1793270484984
+  },
+  "l6-subsidy": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793989788065
+  },
+  "l6-substitute": {
+   "box": 2,
+   "due": 1794373200000,
+   "t": 1793821470844
+  },
+  "l6-supply-shifter": {
+   "box": 0,
+   "due": 1793419200000,
+   "t": 1793391791361
+  },
+  "l6-tastes": {
+   "box": 2,
+   "due": 1793332800000,
+   "t": 1792783029348
+  },
+  "l6-tech": {
+   "box": 3,
+   "due": 1795582800000,
+   "t": 1793821454666
+  },
+  "l6-tf-inferior": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793989801712
+  },
+  "l6-tf-ownprice": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793989807084
+  },
+  "l6-tf-related": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793391819214
+  },
+  "l6-tf-supply-up": {
+   "box": 2,
+   "due": 1794373200000,
+   "t": 1793821362422
+  },
+  "l6-tf-willing": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793989816442
+  },
+  "l6c-complement": {
+   "box": 1,
+   "due": 1793768400000,
+   "t": 1793577026351
+  },
+  "l6c-expect": {
+   "box": 2,
+   "due": 1793768400000,
+   "t": 1793184607492
+  },
+  "l6c-inferior": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793271196242
+  },
+  "l6c-qd": {
+   "box": 1,
+   "due": 1794027600000,
+   "t": 1793821321795
+  },
+  "l6c-supply": {
+   "box": 3,
+   "due": 1795582800000,
+   "t": 1793821821197
+  },
+  "l7-adjust": {
+   "box": 2,
+   "due": 1793682000000,
+   "t": 1793143552121
+  },
+  "l7-clearing": {
+   "box": 2,
+   "due": 1793595600000,
+   "t": 1793057938463
+  },
+  "l7-coffee": {
+   "box": 3,
+   "due": 1795582800000,
+   "t": 1793821302909
+  },
+  "l7-def": {
+   "box": 2,
+   "due": 1793595600000,
+   "t": 1793057452233
+  },
+  "l7-double": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793392999565
+  },
+  "l7-ecar": {
+   "box": 1,
+   "due": 1794027600000,
+   "t": 1793821780876
+  },
+  "l7-equal": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793989860565
+  },
+  "l7-frost": {
+   "box": 2,
+   "due": 1793595600000,
+   "t": 1793057605853
+  },
+  "l7-g-both": {
+   "box": 2,
+   "due": 1793682000000,
+   "t": 1793143537683
+  },
+  "l7-g-gap": {
+   "box": 0,
+   "due": 1793073600000,
+   "t": 1793057513243
+  },
+  "l7-g-neweq": {
+   "box": 2,
+   "due": 1793595600000,
+   "t": 1793057868128
+  },
+  "l7-g-schedule": {
+   "box": 2,
+   "due": 1793595600000,
+   "t": 1793057460020
+  },
+  "l7-gas": {
+   "box": 2,
+   "due": 1793595600000,
+   "t": 1793057988073
+  },
+  "l7-gr-double": {
+   "box": 3,
+   "due": 1795582800000,
+   "t": 1793821504596
+  },
+  "l7-gr-shift": {
+   "box": 2,
+   "due": 1793595600000,
+   "t": 1793057685408
+  },
+  "l7-gr-supply": {
+   "box": 2,
+   "due": 1793682000000,
+   "t": 1793143010286
+  },
+  "l7-gr-surplus": {
+   "box": 3,
+   "due": 1795582800000,
+   "t": 1793821674681
+  },
+  "l7-income": {
+   "box": 2,
+   "due": 1793682000000,
+   "t": 1793143448767
+  },
+  "l7-salmon": {
+   "box": 2,
+   "due": 1793595600000,
+   "t": 1793058029145
+  },
+  "l7-shortage-def": {
+   "box": 0,
+   "due": 1793505600000,
+   "t": 1793500786841
+  },
+  "l7-snowboard": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793393226833
+  },
+  "l7-substitute": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793393263511
+  },
+  "l7-surplus": {
+   "box": 2,
+   "due": 1793595600000,
+   "t": 1793057471810
+  },
+  "l7-tech": {
+   "box": 2,
+   "due": 1793682000000,
+   "t": 1793143499001
+  },
+  "l7-tf-above": {
+   "box": 2,
+   "due": 1793595600000,
+   "t": 1793057525572
+  },
+  "l7-tf-both": {
+   "box": 1,
+   "due": 1793595600000,
+   "t": 1793393270966
+  },
+  "l7-tf-lee": {
+   "box": 2,
+   "due": 1793595600000,
+   "t": 1793057840009
+  },
+  "l7-tf-scarcity": {
+   "box": 2,
+   "due": 1793682000000,
+   "t": 1793143407452
+  },
+  "l7c-eq": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793270967956
+  },
+  "l7c-shift": {
+   "box": 2,
+   "due": 1793768400000,
+   "t": 1793184791084
+  },
+  "l7c-surplus": {
+   "box": 3,
+   "due": 1795582800000,
+   "t": 1793821534489
+  },
+  "l8-binding": {
+   "box": 3,
+   "due": 1795582800000,
+   "t": 1793796144177
+  },
+  "l8-black": {
+   "box": 2,
+   "due": 1793768400000,
+   "t": 1793185043470
+  },
+  "l8-ceiling-def": {
+   "box": 3,
+   "due": 1795582800000,
+   "t": 1793792433149
+  },
+  "l8-ceiling-why": {
+   "box": 2,
+   "due": 1793768400000,
+   "t": 1793185409407
+  },
+  "l8-cleaners": {
+   "box": 2,
+   "due": 1793682000000,
+   "t": 1793148072168
+  },
+  "l8-farm": {
+   "box": 2,
+   "due": 1793768400000,
+   "t": 1793185082151
+  },
+  "l8-fewer": {
+   "box": 0,
+   "due": 1793505600000,
+   "t": 1793501391212
+  },
+  "l8-floor-def": {
+   "box": 3,
+   "due": 1795582800000,
+   "t": 1793821410158
+  },
+  "l8-floor-low": {
+   "box": 2,
+   "due": 1793768400000,
+   "t": 1793185367554
+  },
+  "l8-g-gas": {
+   "box": 1,
+   "due": 1793768400000,
+   "t": 1793577143348
+  },
+  "l8-g-quota": {
+   "box": 3,
+   "due": 1795755600000,
+   "t": 1793983081138
+  },
+  "l8-g-rent": {
+   "box": 2,
+   "due": 1794718800000,
+   "t": 1794158758523
+  },
+  "l8-gaslines": {
+   "box": 3,
+   "due": 1795582800000,
+   "t": 1793795840545
+  },
+  "l8-gr-ceiling": {
+   "box": 3,
+   "due": 1795928400000,
+   "t": 1794157869697
+  },
+  "l8-gr-floor": {
+   "box": 0,
+   "due": 1793595600000,
+   "t": 1793577197565
+  },
+  "l8-gr-quota": {
+   "box": 2,
+   "due": 1793768400000,
+   "t": 1793185381847
+  },
+  "l8-import": {
+   "box": 2,
+   "due": 1793768400000,
+   "t": 1793185422893
+  },
+  "l8-lawyers": {
+   "box": 2,
+   "due": 1793682000000,
+   "t": 1793148049369
+  },
+  "l8-living": {
+   "box": 2,
+   "due": 1794373200000,
+   "t": 1793795762810
+  },
+  "l8-minwage-evidence": {
+   "box": 2,
+   "due": 1793768400000,
+   "t": 1793185355708
+  },
+  "l8-quality": {
+   "box": 3,
+   "due": 1795582800000,
+   "t": 1793821562591
+  },
+  "l8-quota": {
+   "box": 1,
+   "due": 1793768400000,
+   "t": 1793577229762
+  },
+  "l8-tf-floor-short": {
+   "box": 2,
+   "due": 1793682000000,
+   "t": 1793148041279
+  },
+  "l8-tf-helpall": {
+   "box": 2,
+   "due": 1793768400000,
+   "t": 1793185429628
+  },
+  "l8-tf-nonbinding": {
+   "box": 2,
+   "due": 1793682000000,
+   "t": 1793148642811
+  },
+  "l8-tf-quota": {
+   "box": 3,
+   "due": 1795582800000,
+   "t": 1793795770042
+  },
+  "l8-tf-shift": {
+   "box": 3,
+   "due": 1795582800000,
+   "t": 1793796063445
+  },
+  "l8-who": {
+   "box": 2,
+   "due": 1793768400000,
+   "t": 1793185154434
+  },
+  "l8c-binding": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793501808519
+  },
+  "l8c-floor": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793271185588
+  },
+  "l8c-rationing": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793271125308
+  },
+  "l8c-skill": {
+   "box": 2,
+   "due": 1794027600000,
+   "t": 1793501036757
+  },
+  "l9-band": {
+   "box": 2,
+   "due": 1794373200000,
+   "t": 1793792604448
+  },
+  "l9-bread": {
+   "box": 3,
+   "due": 1795582800000,
+   "t": 1793821275951
+  },
+  "l9-budget": {
+   "box": 1,
+   "due": 1794027600000,
+   "t": 1793795792285
+  },
+  "l9-capacity": {
+   "box": 3,
+   "due": 1795582800000,
+   "t": 1793792448635
+  },
+  "l9-cigarettes": {
+   "box": 2,
+   "due": 1794373200000,
+   "t": 1793792286287
+  },
+  "l9-classify": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793988605726
+  },
+  "l9-def": {
+   "box": 2,
+   "due": 1793768400000,
+   "t": 1793229524780
+  },
+  "l9-farm": {
+   "box": 1,
+   "due": 1794027600000,
+   "t": 1793795734285
+  },
+  "l9-g-mid": {
+   "box": 1,
+   "due": 1794373200000,
+   "t": 1794180283227
+  },
+  "l9-g-pct": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793988651882
+  },
+  "l9-g-pes": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793988749522
+  },
+  "l9-g-tr": {
+   "box": 0,
+   "due": 1793246400000,
+   "t": 1793229875899
+  },
+  "l9-gr-horizontal": {
+   "box": 1,
+   "due": 1793854800000,
+   "t": 1793619825366
+  },
+  "l9-gr-linear": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793988797883
+  },
+  "l9-gr-perfect": {
+   "box": 0,
+   "due": 1793854800000,
+   "t": 1793821809476
+  },
+  "l9-nuclear": {
+   "box": 3,
+   "due": 1795928400000,
+   "t": 1794157499322
+  },
+  "l9-pes": {
+   "box": 2,
+   "due": 1793768400000,
+   "t": 1793229892523
+  },
+  "l9-salmon": {
+   "box": 0,
+   "due": 1793246400000,
+   "t": 1793229757690
+  },
+  "l9-substitutes": {
+   "box": 2,
+   "due": 1793768400000,
+   "t": 1793229773836
+  },
+  "l9-table": {
+   "box": 2,
+   "due": 1793768400000,
+   "t": 1793230011579
+  },
+  "l9-tf-elastic-def": {
+   "box": 3,
+   "due": 1795582800000,
+   "t": 1793792274771
+  },
+  "l9-tf-negative": {
+   "box": 1,
+   "due": 1794027600000,
+   "t": 1793792246784
+  },
+  "l9-tf-slope": {
+   "box": 3,
+   "due": 1795582800000,
+   "t": 1793791963879
+  },
+  "l9-tf-tr": {
+   "box": 3,
+   "due": 1795582800000,
+   "t": 1793821513446
+  },
+  "l9-time": {
+   "box": 2,
+   "due": 1794373200000,
+   "t": 1793795648274
+  },
+  "l9-tr-rule": {
+   "box": 3,
+   "due": 1795582800000,
+   "t": 1793796127480
+  },
+  "l9-unit": {
+   "box": 3,
+   "due": 1795582800000,
+   "t": 1793792566112
+  },
+  "l9-why-mid": {
+   "box": 2,
+   "due": 1793768400000,
+   "t": 1793229964062
+  },
+  "l9c-pes": {
+   "box": 1,
+   "due": 1794200400000,
+   "t": 1793983193517
+  },
+  "l9c-tr": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793270537525
+  },
+  "l9c-what": {
+   "box": 2,
+   "due": 1793854800000,
+   "t": 1793311981039
+  }
+ },
+ "updated": 1794180283227,
+ "v": 1,
+ "writing": {
+  "w-l2-1": {
+   "at": 1791931690021,
+   "max": 4,
+   "result": {
+    "error": "The PPF is called the 'Productivity possibilities frontier' and described as a company's allocation; it is the production possibilities frontier and shows an entire economy's output choices, not a single company's.",
+    "fix": "Explain that resources are not equally good at making both goods, so each additional boot costs more jackets than the last (for example 10, then 20, 30, 40 jackets). Then say this rising opportunity cost makes the curve steeper as you move along it, which creates the bowed-out shape.",
+    "points": [
+     {
+      "met": false,
+      "note": "The answer never says resources are specialized or better suited to making one good than the other."
+     },
+     {
+      "met": false,
+      "note": "It mentions a trade-off between jackets and boots but does not say the opportunity cost rises as more of one good is made."
+     },
+     {
+      "met": false,
+      "note": "No numbers or specific figures from the boots and jackets example are used."
+     },
+     {
+      "met": false,
+      "note": "It does not link opportunity cost to the bowed-out shape of the curve."
+     }
+    ],
+    "strength": "You correctly identified the basic trade-off idea: producing more jackets means giving up boots."
+   },
+   "score": 0,
+   "text": "The Productivity possibilitie frontier represents an economies productive allocation. This means a company can only produce more of something by taking away from something. In this case, the more jackets produced equals less boots."
+  },
+  "w-l2-2": {
+   "at": 1791931956155,
+   "max": 4,
+   "result": {
+    "error": "Saying the economy cannot produce 'that good' is slightly off: the outside point is an unattainable combination of two goods, not a single good the economy can't make.",
+    "fix": "Add a real-world cause for a point inside the curve, such as a recession with high unemployment where resources sit idle, and then explain that an outside point only becomes reachable if the PPF shifts outward through more workers, better technology, or trade.",
+    "points": [
+     {
+      "met": true,
+      "note": "You correctly say a point on the PPF means the economy is efficient, though you don't mention that all resources are fully used or that gaining more of one good means giving up some of the other."
+     },
+     {
+      "met": false,
+      "note": "You correctly say an inside point means producing less than possible, but you give no cause or example such as unemployment or a recession, which this point requires."
+     },
+     {
+      "met": true,
+      "note": "You say an outside point is something the economy cannot produce, which captures that it is unattainable, though 'that good' should be 'that combination of goods' and you could add 'with current resources and technology'."
+     },
+     {
+      "met": false,
+      "note": "You don't say what could make an outside point reachable, such as more resources, better technology, or trade."
+     }
+    ],
+    "strength": "You correctly link the three regions to inefficiency, efficiency, and unattainability, which shows you have the core idea of the PPF."
+   },
+   "score": 2,
+   "text": "A point inside a PPF is the economy is not producing as many goods as it could. On the PPF would mean the economy is efficient. Outside the PPF is that the economy cannot produce that good."
+  },
+  "w-l2-3": {
+   "at": 1791932110457,
+   "max": 4,
+   "result": {
+    "error": "Saying that consumer goods production today 'decreases' the future PPF is misleading: consuming more now doesn't shrink the PPF, it just means the PPF grows more slowly (or stays about the same) than it would with more capital investment.",
+    "fix": "Say explicitly that making more capital goods today means giving up some consumer goods now (the opportunity cost), and that this is the trade-off of less consumption today for more growth later.",
+    "points": [
+     {
+      "met": true,
+      "note": "The student describes capital goods as 'goods that produce other goods,' which correctly captures their role."
+     },
+     {
+      "met": false,
+      "note": "The answer never says that producing more capital goods means giving up consumer goods today, so the opportunity cost is not stated."
+     },
+     {
+      "met": true,
+      "note": "The student says producing more capital goods tends to expand the PPF outward in the future."
+     },
+     {
+      "met": false,
+      "note": "The answer contrasts the two choices but never frames it as consumption now versus growth later, and the trade-off is only implied."
+     }
+    ],
+    "strength": "You correctly link capital goods, which are goods that produce other goods, to an outward shift of the PPF."
+   },
+   "score": 2,
+   "text": "Producing more capital goods or goods that produce other goods generally expand the countries PPF curve outward. Consumer goods today tend to decreese or maintain the countries PPF curve in the future."
+  },
+  "w-l4-1": {
+   "at": 1792631414704,
+   "max": 4,
+   "result": {
+    "error": "A command economy does not work by the population telling the government what it needs; the central authority makes production decisions through planning, often without direct consumer input.",
+    "fix": "Clarify that in a command economy a central authority or government plan decides what is produced, not consumer requests, and give a clear strength such as quickly directing resources toward national goals like infrastructure or ensuring everyone gets basic goods.",
+    "points": [
+     {
+      "met": true,
+      "note": "You correctly say individuals and firms figure out what people want and produce it, which captures the demand-driven idea, though mentioning prices as signals would make it stronger."
+     },
+     {
+      "met": false,
+      "note": "You do say the government produces the goods, but describing the population telling the government what it needs misstates the model; in a command economy a central authority decides through a plan."
+     },
+     {
+      "met": true,
+      "note": "Saying a market economy is quicker and needs less oversight is a reasonable strength, since it responds to consumers without central direction."
+     },
+     {
+      "met": false,
+      "note": "'Less risk to the government' is unclear and not a recognized strength; a better answer would be the ability to direct resources quickly toward a chosen goal or guarantee basic necessities."
+     }
+    ],
+    "strength": "Your description of the market economy is on target: you recognize that firms and individuals decide what to produce based on what people want."
+   },
+   "score": 2,
+   "text": "A market economy would decide what is produced by individuals or firms figuring out what people want and producing it. It is quicker, requires less oversight. \nA command economy would have the population tell the government what they need and the government produces it. There is less risk to the government by producing said good."
+  }
+ },
+ "written": {
+  "l18-units": {
+   "at": 1793706252967,
+   "from": "mc",
+   "key": "Marginal cost",
+   "model": "Marginal cost is the measure that describes only the next unit. It is the additional cost of producing one more unit of output. Average total cost and average fixed cost are also measured per unit, but they spread cost over all units produced, while total cost and fixed cost are dollar totals rather than per-unit amounts.",
+   "points": [
+    "marginal cost",
+    "additional cost of one more unit",
+    "averages cover all units, not just the next one"
+   ],
+   "prompt": "In the short run, a firm's costs can be measured in several ways. Name the cost measure that is expressed in dollars per unit of output but describes only the next unit produced, not all units. Briefly explain how it differs from the other per-unit cost measures."
+  },
+  "l5-concorde": {
+   "at": 1793668750611,
+   "from": "mc",
+   "key": "The sunk cost fallacy",
+   "model": "The managers are committing the sunk cost fallacy. The $5 million has already been spent and cannot be recovered no matter what they choose, so it should be ignored. They should decide based only on the future (marginal) costs and benefits of continuing the product.",
+   "points": [
+    "sunk cost fallacy",
+    "the $5 million is already spent and cannot be recovered",
+    "decide based on future or marginal costs and benefits"
+   ],
+   "prompt": "A company spent $5 million launching a new product that is selling badly. Its managers keep funding it \"so the $5 million isn't wasted.\" What economic mistake are the managers making? Explain why their reasoning is flawed."
+  }
+ }
 }
