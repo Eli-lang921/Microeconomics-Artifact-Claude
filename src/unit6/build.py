@@ -106,7 +106,7 @@ def main():
     out = once(out, "<div class=\"wr-prev\"><p style=\"margin:0\">${esc(p)}</p>${exhibitsOf(inst.prompt)?", "<div class=\"wr-prev\"><p style=\"margin:0\">${esc(p)}</p>${qExhibits(inst)?", 'preview note')
     out = once(out, "b.options.map((o,i)=>`${'ABCDE'[i]}. ${plainOf(o)}`).join('\\n')", "b.options.map((o,i)=>`${'ABCDE'[i]}. ${optPlain(b,i)}`).join('\\n')", 'variant ctx')
     # qCard: grid class for graph choices; Claude's context uses the graph descriptions
-    a = out.index('function qCard(qid, { ctx, label, onAnswer, onNext, nextLabel }){'); b = out.index('/* ---------- flashcard ---------- */', a)
+    a = out.index('function qCard(qid, { ctx, label, onAnswer, onNext, nextLabel, onLucky }){'); b = out.index('/* ---------- flashcard ---------- */', a)
     qc = out[a:b]
     qc = once(qc, "<div class=\"opts${kind==='tf'?' tf':''}\">", "<div class=\"opts${kind==='tf'?' tf':''}${inst.visual?' vis':''}\">", 'qCard vis class')
     qc = once(qc, "${textOf(Object.assign(document.createElement('div'),{innerHTML:o.t}))}", "${optPlain(inst,o.i)}", 'qCard ctx choices')
