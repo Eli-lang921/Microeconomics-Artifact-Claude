@@ -123,7 +123,7 @@ mc('l31-derived-fall','l31','Made-up scenario. A recession cuts the number of ne
 gen('l31-g-vmpshift','l31',()=>{
   const mp = pick([6,8,10,12,15]), P1 = pick([4,5,6,8]), P2 = P1 + pick([1,2,3,4]), ans = mp*(P2-P1);
   return { type:'num', kind:'num', unit:'dollars', prompt:`Made-up numbers. A worker adds <b>${mp}</b> units of output a day. The product\'s price rises from <b>$${P1}</b> to <b>$${P2}</b>. By how much does the value of this worker\'s marginal product rise?`, answer:ans,
-    explain:`<div class="math">Before: ${mp} × $${P1} = $${mp*P1}<br>After: ${mp} × $${P2} = $${mp*P2}<br>Rise: $${mp*P2} − $${mp*P1} = <b>$${ans}</b></div><p>His marginal product (${mp} units) didn\'t change; only its price did. Because every worker\'s value rises like this, the whole labor demand curve shifts up and to the right. The slip is answering the price rise alone ($${P2-P1}).</p>` };
+    explain:`<div class="math">Before: ${mp} × $${P1} = $${mp*P1}<br>After: ${mp} × $${P2} = $${mp*P2}<br>Rise: $${mp*P2} − $${mp*P1} = <b>$${ans}</b></div>${atable(['Price','Units he adds','Value of MP'],[['$'+P1,mp,'$'+mp*P1],['$'+P2,mp,'$'+mp*P2]],{cls:'compact',hl:{1:{row:'u3z2'}}})}<p>His marginal product (${mp} units) didn\'t change; only its price did. Because every worker\'s value rises like this, the whole labor demand curve shifts up and to the right. The slip is answering the price rise alone ($${P2-P1}).</p>` };
 });
 lazy('l31-gr-read','l31',()=>({ type:'mc', kind:'graph',
   prompt:`Your course\'s toaster company with a made-up price rise from $10 to $15 and a made-up wage of $250 a day:${sdg({ xmax:6.5, ymax:800, xt:[0,1,2,3,4,5,6], yt:[0,150,250,450,600,750], xlab:'Workers', ylab:'Dollars per day', aria:'Two value of marginal product curves, D1 and D2, and a wage line',
@@ -152,8 +152,8 @@ mc('l31-notshifter','l31','Which of the following does <b>not</b> shift the dema
 tf('l31-tf-companies','l31','A decrease in the number of companies producing a product decreases the demand for the labor that makes it.',true,
   `<p>True. The textbook: "A decrease in the number of companies producing a given product will decrease the demand for labor resulting in a shift to the left."</p>`);
 lazy('l31-gr-movement','l31',()=>visMC({
-  prompt:`Made-up scenario. The wage that warehouses must pay forklift drivers falls, and nothing else changes. Which graph shows how the warehouses\' hiring responds?`,
-  choices: DEM_CH('mv'),
+  prompt:`Made-up scenario. A warehouse hires forklift drivers at the market wage. That wage falls, and nothing else changes for the warehouse. Each graph shows the warehouse\'s demand for drivers (wage up the side, drivers along the bottom). Which graph shows how its hiring responds?`,
+  choices: ['mv','mvUp','Dr','Dl','vert'].map(k => firmChoice(k, k==='mv')),
   explain: L => `<p><b>Graph ${L}</b>: no curve shifts. A lower wage moves employers down along their existing demand curve to more drivers.</p>${u6moveBig('The answer graph, marked up: the wage falls from W1 to W2, and employers move from A to B on the same demand curve, hiring more drivers.')}<p>Shifting the demand curve for a wage change is the most common slip on this topic (M1).</p>` }));
 gen('l31-g-shiftpick','l31',()=>{
   const SET = pick([['apples','apple pickers'],['houses','carpenters'],['pizzas','pizza cooks'],['bicycles','bicycle mechanics'],['sofas','furniture makers']]);
@@ -179,8 +179,8 @@ mc('l31-ms-vs-textbook','l31','Your course\'s slide says technological progress 
 
 /* ===== Lesson 31 quick checks ===== */
 lazy('l31c-move','l31',()=>visMC({
-  prompt:`Made-up scenario. A café raises the hourly wage it pays baristas, and nothing else changes. Which graph shows what happens on its labor demand graph?`,
-  choices: ['Dr','Dl','Sr','mv','mvUp'].map(k => shiftChoice(k, k==='mvUp')),
+  prompt:`Made-up scenario. A café raises the hourly wage it pays baristas, and nothing else changes. Each graph shows the café\'s demand for baristas (wage up the side, baristas along the bottom). Which graph shows what happens?`,
+  choices: ['Dr','Dl','vert','mv','mvUp'].map(k => firmChoice(k, k==='mvUp')),
   explain: L => `<p><b>Graph ${L}</b>: no curve shifts. Only the wage changed, so the café moves up along its demand curve: at a higher wage, fewer baristas are worth hiring.</p>${u6moveBig('The answer graph, marked up: the wage rises from W1 to W2, so the café moves up the same curve from B to A and hires fewer baristas.','W2','W1',true)}<p>A leftward shift is the classic slip (M1): the wage moves the café along the curve, it doesn\'t move the curve.</p>` }));
 mc('l31c-price','l31','Made-up numbers. A worker adds 8 bowls a day. The price of a bowl rises from $10 to $12. What is the new value of his marginal product, and what happens to the firm\'s labor demand?',
   [`$96; labor demand shifts right`,`$80; labor demand shifts right`,`$96; labor demand shifts left`,`$16; no change in labor demand`,`$12; a movement along the curve`],0,
@@ -212,7 +212,7 @@ const L31TAGS = {
   'l31-g-vmpshift':['MS6','der','data','M3'], 'l31-gr-read':['MS6','lab','graphs','M1'], 'l31-tf-pricesupply':['MS6 OS41','der','terms','M3'],
   'l31-ms-scarce':['MS6 OS41','lab','models','M4 M1 M3'], 'l31-direction':['OS41','lab','terms','M5 M1'], 'l31-boomers':['OS40 OS41 FEDL','der','models','M5 M3 M1'],
   'l31-productivity':['OSE141 OS41','lab','models','M2 M1 M3'], 'l31-notshifter':['OS41','lab','terms','M6 M3'], 'l31-tf-companies':['OS41','lab','terms','M6'],
-  'l31-gr-movement':['OS41','lab','graphs','M1 M3'], 'l31-g-shiftpick':['OS41 MS6','lab','graphs','M1 M3'], 'l31-robots':['OS41','lab','models','M2'], 'l31-ms-vs-textbook':['MS6 OS41','lab','terms','M2'],
+  'l31-gr-movement':['OS41','lab','graphs','M1 M3'], 'l31-g-shiftpick':['OS41 MS6','lab','graphs','M1 M3'], 'l31-robots':['OS41','lab','models','M2 M1'], 'l31-ms-vs-textbook':['MS6 OS41','lab','terms','M2'],
   'l31c-move':['OS41','lab','models','M1'], 'l31c-price':['MS6','der','data','M5 M1'], 'l31c-tech':['OS41','lab','models','M2 M3'],
   'l31c-inputs':['OS41','lab','models','M4 M2'], 'l31c-other':['OS41','lab','terms','M6 M1'], 'l31c-skill':['OS41','der','models','M3 M1']
 };
@@ -257,12 +257,12 @@ U6_LESSONS.push({ id:'l31', unit:6, title:'Shifts in the Demand for Labor', mins
 <!-- src: OS41 ("A change in the wage or salary will result in a change in the quantity demanded of labor ... there will be a movement upward along the demand curve"; "A change in salary will lead to a movement along labor demand or labor supply curves, but it will not shift those curves. However, other events like those outlined here will cause either the demand or the supply of labor to shift") -->
 <p>The same rule as Unit 2\'s demand curve applies. Your course textbook: "A change in salary will lead to a movement along labor demand or labor supply curves, but it will not shift those curves. However, other events ... will cause either the demand or the supply of labor to shift."</p>
 ${FIG6.l31two()}
-<p><b>Why:</b> the ${dt('labor-demand','labor demand')} curve already shows how many workers the firm wants at every wage, so a new wage just picks a different point on it. A shift means the firm wants a different number of workers <b>at the same wage</b>, which happens only when workers\' value to the firm changes.</p>
+<p><b>Why:</b> the ${dt('labor-demand','labor demand')} curve already shows how many workers the firm wants at every wage, so a new wage just picks a different point on it. A shift means the firm wants a different number of workers <b>at the same wage</b>, which happens when something other than the wage changes what workers are worth to employers or how many workers employers need.</p>
 <div data-check="l31c-move"></div>
 
 <h2>A change in the price of the output</h2>
 <!-- src: FEDL ("The demand for labor is derived from or determine[d] by the demand for goods and services produced"); ELMW (Gorman); MS6 (video 6.1: "one of the first is a change in the output price. As the price of the good increases, the firm will be able to produce more, and therefore the demand for labor will go up. The value of the Marginal Product of Labor goes up, because the price has risen"; slide 261: D.1 → D.2); OS41 (Table 4.2, Demand for Output: "When the demand for the good produced (output) increases, both the output price and profitability increase. As a result, producers demand more labor") -->
-<p>Your course\'s first shifter: "As the price of the good increases ... the demand for labor will go up. The value of the Marginal Product of Labor goes up, because the price has risen." This is ${dt('derived-demand','derived demand')} (Lesson 29) with numbers attached: Federal Reserve Education says the demand for labor is "derived from ... the demand for goods and services produced," and a higher price is how that demand reaches the firm. Econlib\'s Gorman explains why the price matters: employers "are not willing to pay a worker more than the value of the additional product that he produces," so when that ${dt('vmp','value')} rises, so does what they will pay.</p>
+<p>Your course\'s first shifter: "As the price of the good increases ... the demand for labor will go up. The value of the Marginal Product of Labor goes up, because the price has risen." This is ${dt('derived-demand','derived demand')} (Lesson 29) with numbers attached: Federal Reserve Education says the demand for labor is "derived from ... the demand for goods and services produced," and a higher price is how that demand reaches the firm. Econlib\'s Gorman explains why the price matters: employers "typically are not willing to pay a worker more than the value of the additional product that he produces," so when that ${dt('vmp','value')} rises, so does what they will pay.</p>
 <p><b>Worked example: the toaster company</b>, made-up price rise from $10 to $15 and made-up wage of $250.</p>
 ${FIG6.l31pricetbl()}
 <div class="math">4th worker before: 20 × $10 = $200 &lt; $250 → don\'t hire (3 workers)<br>4th worker after: 20 × $15 = $300 &gt; $250 → hire<br>5th worker after: 10 × $15 = $150 &lt; $250 → stop at <b>4 workers</b></div>

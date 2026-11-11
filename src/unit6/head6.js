@@ -9,9 +9,9 @@
 /* ---------- Unit 6 sources ---------- */
 Object.assign(SOURCES, {
   MS6:  { t:'Modern States, Principles of Microeconomics, Module 6 video (6.1) and slides', u:'https://modernstates.org/course/principles-of-microeconomics/' },
-  OS40: { t:'OpenStax, Principles of Microeconomics (your course textbook), ch. 4 introduction (labor markets)', u:'https://openstax.org/books/principles-economics-3e/pages/4-introduction-to-labor-and-financial-markets' },
-  OS151:{ t:'OpenStax, Principles of Microeconomics (your course textbook), §15.1 (unions)', u:'https://openstax.org/books/principles-economics-3e/pages/15-1-unions' },
-  OS153:{ t:'OpenStax, Principles of Microeconomics (your course textbook), §15.3 (immigration)', u:'https://openstax.org/books/principles-economics-3e/pages/15-3-immigration' },
+  OS40: { t:'OpenStax, Principles of Microeconomics (your course textbook), ch. 4 introduction (labor markets); the link opens the same section in OpenStax Principles of Economics 3e', u:'https://openstax.org/books/principles-economics-3e/pages/4-introduction-to-labor-and-financial-markets' },
+  OS151:{ t:'OpenStax, Principles of Microeconomics (your course textbook), §15.1 (unions); the link opens the same section in OpenStax Principles of Economics 3e', u:'https://openstax.org/books/principles-economics-3e/pages/15-1-unions' },
+  OS153:{ t:'OpenStax, Principles of Microeconomics (your course textbook), §15.3 (immigration); the link opens the same section in OpenStax Principles of Economics 3e', u:'https://openstax.org/books/principles-economics-3e/pages/15-3-immigration' },
   OSE141:{ t:'OpenStax, Principles of Microeconomics 2e (a newer edition, not your course textbook), §14.1', u:'https://openstax.org/books/principles-microeconomics-2e/pages/14-1-the-theory-of-labor-markets' },
   OSE142:{ t:'OpenStax, Principles of Microeconomics 2e (a newer edition, not your course textbook), §14.2', u:'https://openstax.org/books/principles-microeconomics-2e/pages/14-2-wages-and-employment-in-an-imperfectly-competitive-labor-market' },
   ELMW: { t:'Econlib, "Minimum Wages" (Linda Gorman)', u:'https://www.econlib.org/library/Enc/MinimumWages.html' },
@@ -99,8 +99,8 @@ function u6shift(kind, aria, xlab, ylab){
     Dl:{ lines:[D(LD2,'D1',true), D(LD1,'D2'), Sx(LS1,'S')], arrows:[{a:[6.6,4.8],b:[4.6,4.8]}] },
     Sr:{ lines:[Sx(LS1,'S1',true), Sx(LS2,'S2'), D(LD2,'D')], arrows:[{a:[4.2,5.4],b:[6.2,5.4]}] },
     Sl:{ lines:[Sx(LS2,'S1',true), Sx(LS1,'S2'), D(LD2,'D')], arrows:[{a:[6.6,6.2],b:[4.6,6.2]}] },
-    mv:{ lines:[D(LD2,'D'), Sx(LS1,'S')], arrows:[{a:[4.5,7.5],b:[6.5,5.5]}], hls:[{y:7.5,x:4.5},{y:5.5,x:6.5}] },
-    mvUp:{ lines:[D(LD2,'D'), Sx(LS1,'S')], arrows:[{a:[6.5,5.5],b:[4.5,7.5]}], hls:[{y:7.5,x:4.5},{y:5.5,x:6.5}] }
+    mv:{ lines:[D(LD2,'D'), Sx(LS1,'S')], arrows:[{a:[5.5,6.5],b:[7,5]}], hls:[{y:6.5,x:5.5},{y:5,x:7}] },
+    mvUp:{ lines:[D(LD2,'D'), Sx(LS1,'S')], arrows:[{a:[5.5,6.5],b:[4,8]}], hls:[{y:6.5,x:5.5},{y:8,x:4}] }
   }[kind];
   return u6mini({ ...spec, aria: aria || 'Graph', ...(xlab ? { xlab } : {}), ...(ylab ? { ylab } : {}) });
 }

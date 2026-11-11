@@ -1,7 +1,7 @@
 /* ===== Lesson 32 figures ===== */
 /* L32 V1: marginal factor cost from the labor-cost column (slides 263-265) */
-FIG6.l32mfc = () => fig(atable(['Workers','Labor cost (wage $100)','MFC = change in cost ÷ 1'],
-  TO.map((r,i)=>[r.L, usd6(r.cost), i ? `$${r.cost} − $${TO[i-1].cost} = <b>$100</b>` : '–']), { cls:'compact', hl:{3:{row:'u3z2'}} }),
+FIG6.l32mfc = () => fig(atable(['Workers','Labor cost','MFC'],
+  TO.map((r,i)=>[r.L, usd6(r.cost), i ? `<b>+$100</b>` : '–']), { cls:'compact', hl:{3:{row:'u3z2'}} }),
   'Your course\'s toaster company, $100 a day per worker. Labor cost climbs $100 at a time, so each extra worker adds $100 to cost: MFC = $100 on every row, the same as the wage. The highlighted row: going from 2 to 3 workers raises cost from $200 to $300.');
 
 /* L32 V2: the market sets the wage; the firm takes it (slides 266 and 268; OpenStax 2e §14.1) */
@@ -37,8 +37,8 @@ FIG6.l32shifters = () => fig(atable(['What changes','Example','Labor supply'],
 FIG6.l32supshift = () => u6shiftBig('Sl', 'Made-up curves for the child-care example. At the old $18 wage, fewer people offer to work once child care doubles, so supply shifts left from S1 to S2. With employers\' demand unchanged, the wage rises to the line marked "higher" and fewer people are employed (E1 to E2).', '$18', 'higher');
 
 /* L32 V5: equilibrium, surplus and shortage for nurses (textbook Table 4.1, Figure 4.2) */
-FIG6.l32nurses = (mark) => fig(sdg({ xmax:47, ymax:82, xmin:18, ymin:52, xt:[20,27,34,40,45], yt:[55,60,70,75,80], xlab:'Nurses (thousands)', ylab:'Salary ($ thousands)', aria:'Supply and demand for nurses crossing at 70 thousand dollars and 34 thousand nurses',
-  lines:[ {pts:NU_W.map((w,i)=>[NU_D[i],w]), c:DC, label:'D', lx:4, ly:4}, {pts:NU_W.map((w,i)=>[NU_S[i],w]), c:SC, label:'S', lx:4, ly:4} ],
+FIG6.l32nurses = (mark) => fig(sdg({ xmax:47, ymax: mark==='80' ? 87 : 82, xmin:18, ymin:52, xt:[20,27,34,40,45], yt:[55,60,70,75,80], xlab:'Nurses (thousands)', ylab:'Salary ($ thousands)', aria:'Supply and demand for nurses crossing at 70 thousand dollars and 34 thousand nurses',
+  lines:[ {pts:NU_W.map((w,i)=>[NU_D[i],w]), c:DC, label:'D', lx:-8, ly:4, anchor:'end'}, {pts:NU_W.map((w,i)=>[NU_S[i],w]), c:SC, label:'S', lx:4, ly:4} ],
   dots:[{q:34,p:70,label:'E: $70,000, 34,000',c:'var(--ink)',lx:-8,ly:4,anchor:'end'}],
   spans: mark==='65' ? [{p:65,q1:31,q2:37,c:'var(--bad)',label:'shortage 6,000',ly:14}] : mark==='80' ? [{p:80,q1:32,q2:41,c:'var(--g2)',label:'surplus 9,000',ly:14}]
     : [{p:75,q1:33,q2:38,c:'var(--g2)',label:'surplus 5,000',ly:14},{p:60,q1:27,q2:40,c:'var(--bad)',label:'shortage 13,000',ly:14}] }),
@@ -67,10 +67,10 @@ FIG6.l32link = () => fig(flow([
 const SUP_CH = (ok) => ['Dr','Dl','Sr','Sl','mv'].map(k => shiftChoice(k, k===ok));
 
 mc('l32-mfc-def','l32','Your course defines marginal factor cost (MFC) as',
-  [`the additional cost the firm incurs by employing one more unit of an input`,`the wage paid to the first worker hired`,`the value of the last worker\'s output`,`total labor cost divided by the number of workers`,`the extra output from one more worker`],0,
+  [`the additional cost the firm incurs by employing one more unit of an input`,`an amount always above the wage, because each hire adds to total cost`,`the value of the last worker\'s output`,`total labor cost divided by the number of workers`,`the wage plus the extra pay of all earlier workers, even at a fixed wage`],0,
   `<p>Your course: "The additional cost that the firm incurs to employ one more unit is called the Marginal Factor Cost," computed as (Cost2 − Cost1) ÷ (L2 − L1). The value of the last worker\'s output is the value of MP (Lesson 30), the other side of the hiring decision. Total cost ÷ workers is an average.</p>`);
 mc('l32-mfc-comp','l32','A small café hires baristas in a perfectly competitive labor market at the going wage of $15 an hour. As it hires more baristas, its marginal factor cost for labor',
-  [`stays at $15, equal to the wage`,`rises above $15 with each barista`,`falls below $15 with each barista`,`equals the value of the last barista\'s output, whatever the wage`,`is zero once the café has enough baristas`],0,
+  [`stays at $15, equal to the wage`,`rises above $15 with each barista`,`falls below $15 with each barista`,`equals the value of the last barista\'s output, whatever the wage`,`rises above $15, because the market supply curve slopes up`],0,
   `<p>In a perfectly competitive labor market the café can hire as many baristas as it wants at $15, so each one adds exactly $15 to cost. Your course: "when wages don\'t change with the number of workers employed, the Marginal Factor Cost ... is going to be equal to the wage rate." MFC rises above the wage only for a firm that must raise pay to attract more workers (M1).</p>${fig(u6mini({ lines:[{a:[0.5,5],b:[9.5,5],c:'var(--g2)',label:'MFC = wage = $15',lx:-2,ly:-5,anchor:'end'}], xlab:'Baristas hired', ylab:'Dollars', aria:'A flat MFC line at 15 dollars' }), 'Marked up: every barista adds the same $15 to cost, so MFC is a flat line at the wage.')}`);
 gen('l32-g-mfc','l32',()=>{
   const rising = Math.random() < 0.5, n = 5;
@@ -91,7 +91,7 @@ lazy('l32-gr-firmsupply','l32',()=>visMC({
     { svg:L=>u6mini({ lines:[{pts:[[1,2],[3,6],[5,8],[7,6],[9,2]],c:SC}], xlab:'Workers at one firm', aria:'Graph '+L }), desc:'a hill-shaped curve' } ],
   explain: L => `<p><b>Graph ${L}</b>: a horizontal line at the market wage. The firm is too small to move the wage, so it can hire as many workers as it wants at that wage, and each one adds the wage to cost (MFC = wage).</p>${FIG6.l32firm()}<p>The upward line is the <b>market</b> supply of labor from all households (M2). A downward line is a demand curve.</p>` }));
 mc('l32-why-up','l32','Why does the market supply curve of labor slope upward?',
-  [`A higher wage makes leisure costlier and draws more people into that work`,`Firms want more workers when wages are higher, so they offer more jobs`,`Each extra worker adds less output, so each one must be paid more`,`A higher wage lowers the price of the product, so more is produced`,`Workers\' marginal product rises with the wage, so each works more`],0,
+  [`A higher wage makes leisure costlier and draws more people into that work`,`Firms want more workers when wages are higher, so they offer more jobs`,`More income always means people want to work more hours`,`A higher wage shifts the supply curve right, so more people work`,`Workers\' marginal product rises with the wage, so each works more`],0,
   `<p>Your course textbook: the supply curve "models the tradeoff between supplying labor into the market or using time in leisure activities ... The higher the wage, the more labor is willing to work and forego leisure activities." Higher nursing pay brings more people to move, train and work as nurses.</p><p>"Firms want more workers at higher wages" has demand backwards. "Each extra worker adds less" is why demand slopes down (Lesson 30).</p>`);
 mc('l32-childcare','l32','Your course lists the "price of related services" as a shifter of labor supply. Made-up scenario: child care in a city becomes much more expensive. What happens to the supply of labor there?',
   [`It decreases (shifts left), because some parents choose not to work`,`It increases, because parents need more money for child care`,`It doesn\'t change, because child care is not a wage`,`The demand for labor decreases instead`,`Workers move down along the supply curve`],0,
@@ -115,25 +115,25 @@ lazy('l32-gr-immig','l32',()=>visMC({
   choices: SUP_CH('Sr'),
   explain: L => `<p><b>Graph ${L}</b>: the supply of construction labor shifts right. Your course: "Influx of workers → shifts supply curve." With demand unchanged, the wage falls and more workers are employed.</p>${u6shiftBig('Sr','The answer graph, marked up: S1 to S2 lowers the wage (W1 to W2) and raises employment (E1 to E2).')}<p>Thinking more workers raise the wage is the trap (M5): more people offering the same work, with the same demand, pushes pay down. Employers\' demand didn\'t change, so demand doesn\'t shift.</p>` }));
 mc('l32-highlow','l32','Your course textbook argues that new information technology is a substitute for low-skill workers and a complement to high-skill workers. Using supply and demand, what does it predict?',
-  [`Low-skill wages and jobs fall; high-skill wages and jobs rise`,`Both groups\' wages rise, because technology raises productivity`,`Both groups\' wages fall, because technology replaces workers`,`Low-skill wages rise; high-skill wages fall as their supply grows`,`Only labor supply changes, in both of the two markets`],0,
+  [`Low-skill wages and jobs fall; high-skill wages and jobs rise`,`Both groups\' wages rise, because technology raises productivity`,`Both groups\' wages fall, because technology replaces workers`,`Low-skill wages rise, because displaced workers crowd into low-skill jobs`,`High-skill wages rise, which shifts their supply right until wages fall`],0,
   `<p>The textbook\'s four steps: the technology affects demand; demand for low-skill labor shifts left (lower wage and quantity) and demand for high-skill labor shifts right (higher wage and quantity). It reports that a college graduate earned about 30% more than a comparable high school graduate in 1980 and about 60% more by 2012.</p>${FIG6.l32tech()}`);
 mc('l32-linkage','l32','Made-up scenario. A farm buys more tractors, so each farm worker can work more land and produces more. According to your course\'s "linkages among the factors of production," what happens to farm workers\' earnings?',
-  [`They tend to rise: the extra capital raises workers\' marginal product`,`They fall, because the tractors replace all of the farm workers`,`They don\'t change, because tractors are capital, not labor at all`,`They rise, because the supply of farm workers falls as tractors come`,`They fall, because the farm has spent its money on the tractors`],0,
+  [`They tend to rise: the extra capital raises workers\' marginal product`,`They fall, because the tractors replace all of the farm workers`,`They don\'t change, because tractors are capital, not labor at all`,`They rise only if more people come to farm work, pushing wages up`,`They fall, because the farm has spent its money on the tractors`],0,
   `<p>Your course: "Productivity of each factor depends on the quantities of the other factors available," and a change in one factor "can change the earnings of all of the factors." Here the tractors work alongside the workers, so each worker\'s marginal product and value of MP rise, demand for them shifts right, and wages tend to rise.</p>${FIG6.l32link()}`);
 /* L32 more */
 mc('l32-eq-rule','l32','Your course: "Equilibrium in the Factors Market occurs when the Value of output produced by the last worker is equal to the cost of employing that worker." In a competitive labor market, this means that at equilibrium',
-  [`value of the marginal product = marginal factor cost = the market wage`,`value of the marginal product is greater than the wage`,`the wage equals the value of the first worker\'s output`,`marginal factor cost is zero`,`every worker produces the same output`],0,
+  [`value of the marginal product = marginal factor cost = the market wage`,`value of the marginal product is greater than the wage`,`the wage equals the value of the first worker\'s output`,`marginal factor cost is above the market wage`,`the wage rises as the firm hires, so MFC is above it`],0,
   `<p>Each firm hires until the last worker\'s value of MP equals what he adds to cost (MFC), and in a competitive labor market MFC is the market wage. Your course\'s slide 268: "Value MPL = MFC," and the video adds that this is "equal to the wage rate."</p>`);
 tf('l32-tf-mfcwage','l32','In your course\'s toaster company, where every worker is paid $100 a day, the marginal factor cost of each worker is $100.',true,
   `<p>True. Labor cost rises $100, $200, $300 ... so each worker adds $100. Your course: "the Marginal Factor Cost, is exactly equal to our wage rate." (M1)</p>`);
 mc('l32-retire','l32','Your course lists "expectations" such as retirement age and pensions as a labor supply shifter. Made-up scenario: a country raises the age at which people can collect a full pension, so many people plan to keep working longer. What happens to labor supply?',
-  [`It increases (shifts right)`,`It decreases (shifts left)`,`It doesn\'t change`,`The demand for labor shifts right instead`,`It moves along the supply curve to a higher wage`],0,
+  [`It increases (shifts right)`,`It decreases (shifts left)`,`It increases only after the wage rises first`,`The demand for labor shifts right instead`,`It moves along the supply curve to a higher wage`],0,
   `<p>More people stay in the workforce at each wage, so supply shifts right. This direction is a reading of your course\'s slide, which lists "Retirement age/pension" under expectations without giving a direction. The textbook adds that "an aging and therefore retiring population will decrease the supply of labor," the reverse case.</p>`);
 mc('l32-education-req','l32','Your course textbook: "There is a lower supply of PhD mathematicians than of high school mathematics teachers." Why?',
-  [`The more education a job requires, the fewer people can supply it`,`Employers demand fewer PhD mathematicians than math teachers`,`PhD mathematicians earn less, so fewer people want those jobs`,`PhD pay is high, and higher pay shifts labor supply to the right`,`Required education shifts the demand curve for that labor left`],0,
+  [`The more education a job requires, the fewer people can supply it`,`Employers demand fewer PhD mathematicians than math teachers`,`More PhDs entering the field would raise their pay, keeping supply low`,`PhD pay is high, and higher pay shifts labor supply to the right`,`Required education shifts the demand curve for that labor left`],0,
   `<p>The textbook: "The more required education, the lower the supply." Fewer people complete the training, so fewer can offer that labor at any wage. That is a supply fact; demand is a separate question.</p>`);
 mc('l32-license','l32','Your course textbook: when a government makes the qualifications for a job tougher (licenses, certificates), what happens to the supply of labor for that job?',
-  [`It decreases: fewer workers qualify at any wage`,`It increases: the job becomes more attractive`,`It doesn\'t change`,`The demand for the job shifts left`,`It moves along the supply curve`],0,
+  [`It decreases: fewer workers qualify at any wage`,`It increases: the job becomes more attractive`,`It increases, because licensed jobs pay more and higher pay shifts supply`,`The demand for the job shifts left`,`It moves along the supply curve`],0,
   `<p>The textbook: "When these qualifications are made tougher, the number of qualified workers will decrease at any given wage." That is a leftward shift in supply, which tends to raise the wage in that job.</p>`);
 mc('l32-subsidy','l32','Your course textbook: the government offers subsidies for nursing schools and nursing students. What does this do?',
   [`Shifts the supply of nurses to the right`,`Shifts the demand for nurses to the right`,`Shifts the supply of nurses to the left`,`Raises nurses\' salaries directly`,`Has no effect on the nursing market`],0,
@@ -144,7 +144,7 @@ lazy('l32-gr-eq','l32',()=>({ type:'mc', kind:'graph',
   options:[`A shortage of 6,000 nurses`,`A surplus of 6,000 nurses`,`A shortage of 3,000 nurses`,`No shortage or surplus`,`A surplus of 37,000 nurses`], answer:0,
   explain:`<p>At $65,000, employers want 37,000 nurses (demand curve) but only 31,000 offer to work (supply curve): a <b>shortage</b> of 37,000 − 31,000 = 6,000. The salary is below the $70,000 equilibrium, so employers will bid it up.</p>${FIG6.l32nurses('65')}<p>"Surplus" reverses which side is bigger (M6). 37,000 is the quantity demanded, not a gap.</p>` }));
 mc('l32-shortage','l32','Your course textbook\'s market for nurses has an equilibrium salary of $70,000. At $60,000, employers would want 40,000 nurses, but only 27,000 would want to work. If salaries were at $60,000, what would happen?',
-  [`A shortage, so employers would offer more and salaries would rise`,`A surplus, so salaries would fall even further below $60,000`,`Nothing: the market would simply stay at a salary of $60,000`,`Employers would hire all 40,000 nurses they want at $60,000`,`The demand for nurses would shift left until the market clears`],0,
+  [`A shortage, so employers would offer more and salaries would rise`,`A surplus, so salaries would fall even further below $60,000`,`Nothing: the market would simply stay at a salary of $60,000`,`Employers would hire all 40,000 nurses they want at $60,000`,`A surplus, because a below-equilibrium salary leaves nurses without jobs`],0,
   `<p>The textbook: "if the salary is below the equilibrium at, say, $60,000 ... a situation of excess demand or a shortage arises ... some employers will offer higher pay to attract the nurses." Employers want 40,000 but only 27,000 are available, so 40,000 can\'t actually be hired.</p>${FIG6.l32nurses()}`);
 mc('l32-caption','l32','Your course textbook\'s Figure 4.2 caption says that at a below-equilibrium salary of $60,000, "excess demand or a surplus exists." The textbook\'s own paragraph calls it "excess demand or a shortage." Which is right?',
   [`Shortage: at $60,000, 40,000 nurses are demanded but 27,000 supplied`,`Surplus: at $60,000 the quantity supplied is greater than demanded`,`Both: excess demand and a surplus mean the same thing here`,`Neither: the market is in equilibrium at a salary of $60,000`,`Surplus, because a low salary leaves some nurses without jobs`],0,
@@ -166,7 +166,7 @@ mc('l32-preferences','l32','According to your course, if people come to "prefer 
   [`It increases, because they need to work more for more income`,`It decreases, because they spend more time shopping`,`It doesn\'t change, because only wages affect labor supply`,`The demand for labor decreases`,`It moves down along the supply curve`],0,
   `<p>Your course: "If people prefer to buy more goods and services, well, then they need to work for more income, so the supply of labor would go up." A change in preferences shifts the curve; only the wage moves along it (M3).</p>`);
 mc('l32-both','l32','Made-up scenario. In a city, the demand for software developers rises and, at the same time, more developers move there. What happens to developers\' employment and wage?',
-  [`Employment rises; the wage change depends on which shift is bigger`,`Employment rises and the wage rises, because demand always wins`,`Employment rises and the wage falls, because more developers came`,`Employment falls and the wage rises, because the shifts work against`,`Both stay the same, because the two shifts cancel each other out`],0,
+  [`Employment rises; the wage change depends on which shift is bigger`,`Employment rises and the wage rises, because demand always wins`,`Employment rises and the wage falls, because more developers came`,`Employment rises and the wage rises, because more developers push pay up`,`Both stay the same, because the two shifts cancel each other out`],0,
   `<p>Both shifts push employment up. Demand shifting right pushes the wage up; supply shifting right pushes it down, so the net wage change depends on which shift is bigger (the same two-shift rule as Lesson 7).</p>`);
 mc('l32-mfc-rising','l32','Made-up scenario. A firm is the only employer in a small town. To hire a 6th worker it must raise the wage from $14 to $15 an hour for all six workers. What is its marginal factor cost of the 6th worker?',
   [`$20`,`$15`,`$14`,`$1`,`$90`],0,
@@ -210,12 +210,12 @@ mc('l32c-skill','l32','Made-up scenario. A state cuts its unemployment benefits 
    slide 267 price of related services (child care), expectations (retirement age/pension, life expectancy, health); slide 268 "Value MPL = MFC"; slide 269 linkages); course textbook §4.1 (upward-sloping supply, leisure tradeoff; nurses Table 4.1, $70,000 and 34,000; surplus at $75,000; shortage at $60,000;
    Figure 4.2 caption slip "excess demand or a surplus"; Table 4.3 number of workers, required education, government policies; four-step process, Figure 4.3, 30% → 60%); CLEP sample question 6 (marginal factor cost in a perfectly competitive labor market is constant and equal to the market wage); OpenStax 2e §14.1-§14.2. */
 const L32TAGS = {
-  'l32-mfc-def':['MS6','lab','terms','M1'], 'l32-mfc-comp':['MS6 CBS','lab','models','M1'], 'l32-g-mfc':['MS6 OSE142','lab','data','M1'],
-  'l32-gr-firmsupply':['MS6 OSE141','lab','graphs','M2'], 'l32-why-up':['OS41','lab','models','M3'], 'l32-childcare':['MS6','lab','models','M3 M4'],
+  'l32-mfc-def':['MS6','lab','terms','M1'], 'l32-mfc-comp':['MS6 CBS','lab','models','M1 M2'], 'l32-g-mfc':['MS6 OSE142','lab','data','M1'],
+  'l32-gr-firmsupply':['MS6 OSE141','lab','graphs','M2'], 'l32-why-up':['OS41','lab','models','M3 M4'], 'l32-childcare':['MS6','lab','models','M3 M4'],
   'l32-tf-income':['MS6','lab','terms','M4'], 'l32-nurses-eq':['OS41','lab','data','M6'], 'l32-g-surplus':['OS41','lab','data','M6'],
-  'l32-gr-immig':['MS6 OS41','lab','graphs','M5 M3'], 'l32-highlow':['OS41','lab','models','M5'], 'l32-linkage':['MS6','lab','models','M5'],
-  'l32-eq-rule':['MS6','lab','terms','M1'], 'l32-tf-mfcwage':['MS6','lab','terms','M1'], 'l32-retire':['MS6 OS41','lab','models','M3'],
-  'l32-education-req':['OS41','lab','terms','M3'], 'l32-license':['OS41','lab','models','M3'], 'l32-subsidy':['OS41','lab','models','M3 M5'],
+  'l32-gr-immig':['MS6 OS41','lab','graphs','M5 M3'], 'l32-highlow':['OS41','lab','models','M5 M3'], 'l32-linkage':['MS6','lab','models','M5'],
+  'l32-eq-rule':['MS6','lab','terms','M1 M2'], 'l32-tf-mfcwage':['MS6','lab','terms','M1'], 'l32-retire':['MS6 OS41','lab','models','M3'],
+  'l32-education-req':['OS41','lab','terms','M3 M5'], 'l32-license':['OS41','lab','models','M3'], 'l32-subsidy':['OS41','lab','models','M3 M5'],
   'l32-gr-eq':['OS41','lab','graphs','M6'], 'l32-shortage':['OS41','lab','models','M6'], 'l32-caption':['OS41','lab','data','M6'],
   'l32-g-shift':['OS41','lab','data','M5'], 'l32-tf-supplyflat':['MS6 OSE141','lab','terms','M2'], 'l32-gr-supplyleft':['MS6','lab','graphs','M3'],
   'l32-preferences':['MS6','lab','terms','M3 M4'], 'l32-both':['OS41','lab','models','M5'], 'l32-mfc-rising':['OSE142 CBS','lab','data','M1'], 'l32-pop':['OS41','lab','models','M5 M3'],
@@ -254,7 +254,7 @@ U6_PLAN.l32 = {
 };
 
 U6_LESSONS.push({ id:'l32', unit:6, title:'Labor Supply, Marginal Factor Cost and the Equilibrium Wage', mins:45, src:'Modern States video 6.1 (last part) and Module 6 slides 263-269 · Course textbook (OpenStax) §4.1',
-  sources:['MS6','OS41','CB','CBS','OSE141','OSE142','ELLU','OS151','OS153'],
+  sources:['MS6','OS41','CB','CBS','OSE141','OSE142','ELMW','ELLU','OS151','OS153'],
   oneline:'Each extra worker adds the wage to a firm\'s costs (marginal factor cost); households\' supply and firms\' demand set the market wage, where the value of the last worker\'s output equals that cost, and shifts in either curve move the wage and employment.',
   body:`
 <p>Lessons 30 and 31 built the employers\' side, the ${dt('labor-demand','demand for labor')}: the ${dt('vmp','value of each worker\'s output')} and what shifts it. This lesson adds the cost side of the hiring decision and the workers\' side of the market, then puts them together to find the wage.</p>
@@ -269,13 +269,15 @@ ${FIG6.l32mfc()}
 <div data-check="l32c-mfc"></div>
 
 <h2>The firm\'s labor supply and the market\'s</h2>
-<!-- src: MS6 (video 6.1: "when you work at a job, you are essentially offering your labor, or supplying your labor to your employer. In exchange, he pays you a wage rate"; slide 266: an upward "Supply by Households" line and a flat "Marginal Factor Cost = Market Wage Rate" line; the transcript's wording "the supply of labor by the household is going to reflect the point where the Marginal Factor Cost is equal to the Marginal Wage Rate" mixes the two); OS41 ("The supply of labor is upward-sloping ... The supply curve models the tradeoff between supplying labor into the market or using time in leisure activities"; nurses move, train, work full time); OSE141 ("a Perfectly Competitive Labor Market as one where firms can hire all the labor they wish at the going market wage"; firms "face a horizontal supply curve for labor") -->
+<!-- src: ELMW (Gorman: "Employers typically are not willing to pay a worker more than the value of the additional product that he produces"); MS6 (video 6.1: "when you work at a job, you are essentially offering your labor, or supplying your labor to your employer. In exchange, he pays you a wage rate"; slide 266: an upward "Supply by Households" line and a flat "Marginal Factor Cost = Market Wage Rate" line; the transcript's wording "the supply of labor by the household is going to reflect the point where the Marginal Factor Cost is equal to the Marginal Wage Rate" mixes the two); OS41 ("The supply of labor is upward-sloping ... The supply curve models the tradeoff between supplying labor into the market or using time in leisure activities"; nurses move, train, work full time); OSE141 ("a Perfectly Competitive Labor Market as one where firms can hire all the labor they wish at the going market wage"; firms "face a horizontal supply curve for labor") -->
 <p>Slide 266 draws two lines on one graph: an upward "Supply by Households" and a flat line, "Marginal Factor Cost = Market Wage Rate." They answer different questions.</p>
 ${FIG6.l32firm()}
 <p><b>The market:</b> the ${dt('labor-supply','supply of labor')} from all households slopes up. <b>One firm:</b> a small firm in a ${dt('competitive-labor-market','perfectly competitive labor market')} "can hire all the labor [it] wish[es] at the going market wage" (OpenStax 2e). So the supply it faces is flat at the ${dt('market-wage','market wage')}. Econlib\'s Gorman adds the firm\'s limit: employers "typically are not willing to pay a worker more than the value of the additional product that he produces."</p>
-<p><b>Watch the course\'s picture:</b> slide 266 draws the households\' upward supply curve and one firm\'s flat MFC line on the same axes, and they cross. The two lines count workers on different scales (everyone in the market versus one firm\'s staff), so the crossing is not where the firm or the market settles. MFC is a one-firm idea and doesn\'t belong on the market graph. The video\'s sentence about "the supply of labor by the household" equalling MFC runs the two together in the same way. Keep them apart, as in the two panels above.</p>
+<p><b>Watch the course\'s picture:</b> slide 266 draws the households\' upward supply curve and one firm\'s flat MFC line on the same axes, and they cross. The flat line is one firm\'s MFC, measured against one firm\'s workers; the upward curve is every household\'s supply. On a market graph, a line at the market wage would only show how many people in the whole market offer to work at that wage. That tells you nothing about how many one firm hires. The video\'s sentence about "the supply of labor by the household" equalling MFC runs the two together in the same way. Keep them apart, as in the two panels above.</p>
 <div class="analogy"><div class="eyebrow">Analogy</div><p>This is Lesson 22\'s wheat farmer, seen from the buying side. One farmer can\'t move the price of wheat, so he sells at the market price. One small café can\'t move the wage of baristas, so it hires at the market wage. ${dt('price-taker','Price taker')} in the product market, wage taker in the labor market.</p></div>
+<p>Why does the market curve slope up? Follow one wage rise through:</p>
 ${FIG6.l32why()}
+<p>Each step adds people or hours, so a higher wage brings out more labor in total.</p>
 <div data-check="l32c-firm"></div>
 
 <h2>Shifts in the supply of labor</h2>
@@ -385,3 +387,16 @@ u6xv({
 });
 u6cv('l32', { 'Marginal factor cost (MFC)': FIG6.l32mfc(), 'Labor supply shifters (course)': u6shift('Sl','Labor supply shifts left'), 'Labor supply shifters (textbook)': u6shift('Sr','Labor supply shifts right'),
   'Income and labor supply': u6shift('Sl','Labor supply shifts left'), 'Linkages among factors': FIG6.l32link() });
+u6xv({
+  'l32-mfc-def':['', 'MFC isn\'t automatically above the wage: when the wage is fixed, one more worker adds exactly the wage to cost, and earlier workers\' pay doesn\'t change (M1).'],
+  'l32-mfc-comp':['', 'The market supply curve does slope up, but one small firm is too small to move the market wage, so the supply it faces is flat (M2).'],
+  'l32-why-up':['', 'A higher wage moves along the supply curve; it doesn\'t shift it (M3). And more income can lead people to work less, not more (M4).'],
+  'l32-highlow':['', 'Displaced low-skill workers looking for other work would push low-skill wages down, not up (M5). A higher wage moves high-skill workers along their supply curve rather than shifting it (M3).'],
+  'l32-linkage':['', 'More people coming into farm work would push wages down, not up (M5); here the wage rises because each worker is worth more.'],
+  'l32-eq-rule':['', 'In a competitive labor market the firm takes the wage as given, so MFC equals the wage rather than rising above it (M1, M2).'],
+  'l32-retire':['', 'The pension rule changes how many people want to work at every wage, so supply shifts without any wage change first (M3).'],
+  'l32-education-req':['', 'More PhDs entering the field would increase supply and push pay down, not up (M5).'],
+  'l32-license':['', 'A higher wage moves along the supply curve; it doesn\'t shift it (M3). Tougher rules shift it left.'],
+  'l32-shortage':['', 'A surplus happens above equilibrium, not below it (M6).'],
+  'l32-both':['', 'More developers arriving pushes pay down, not up (M5); the wage rises only if the demand shift is bigger.']
+});

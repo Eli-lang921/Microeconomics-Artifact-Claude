@@ -22,7 +22,8 @@ W.toaster = el => {
 };
 
 /* L29 exam skill: does the demand for these workers rise, fall or stay? Made-up scenarios plus the textbook's chefs, attorneys and nurses.
-   TEST NOTE (2026-11-04): each item clicked with its right and a wrong choice: feedback shows the right answer and reason; score text counts correctly. */
+   TEST NOTE (2026-11-04): each item clicked with its right and a wrong choice: feedback shows the right answer and reason; score text counts correctly.
+   UI checked by Playwright (2026-11-08): no overflow at 375 px light and 1100 px dark; choice buttons are native buttons that respond to Enter (sorter Enter key tested by script). */
 W.dersort = el => sorterWidget(el, { title:'Trace it back from the product', hint:'Made-up scenarios unless marked. Ask what happens to the product first, then to the workers who make it.', aria:'Effect on labor demand',
   kinds:[['up','Labor demand rises'],['down','Labor demand falls'],['none','Labor demand unchanged']],
   items:[
@@ -137,7 +138,7 @@ W.ldsort = el => sorterWidget(el, { title:'Shift or move, and which way?', hint:
 /* L32 widget: a labor market with shiftable curves (made-up numbers). Demand Qd = 600 − 20W + d; supply Qs = −100 + 30W + s; d and s from −150 to +150.
    Equilibrium W = (700 + d − s) ÷ 50, L = 600 − 20W + d.
    TEST NOTE (2026-11-04), expected (checked by script): d 0, s 0 → W $14.00, L 320; d +150 → W $17.00, L 410; s +150 → W $11.00, L 380; d +150, s +150 → W $14.00, L 470;
-   d −150, s +150 → W $8.00, L 290; d +150, s −150 → W $20.00, L 350. UI checked by Playwright (2026-11-08): no overflow at 375 px light and 1100 px dark; both sliders move with arrow keys; the D label is clamped inside the chart for positive demand shifts; when employment falls below 320 the two point labels sit on opposite sides so they don\'t touch. */
+   d −150, s +150 → W $8.00, L 290; d +150, s −150 → W $20.00, L 350. UI checked by Playwright (2026-11-08): no overflow at 375 px light and 1100 px dark; both sliders move with arrow keys; the D label is clamped inside the chart for positive demand shifts; checked at all four corners and at d/s −150/−100 and −100/−150: when employment falls below the start, "start" moves above its dot and the new label sits below-right, clear of the axis. */
 W.labormkt = el => {
   el.innerHTML = `<p class="widget-title">Shift the labor market</p><p class="hint">Made-up market for warehouse workers. Shift employers\' demand or households\' supply and watch the wage and employment. Dashed lines are the starting curves.</p>
   <div class="slider"><label for="lm-d">Demand shift (workers at every wage)</label><input id="lm-d" type="range" min="-150" max="150" step="50" value="0"><output></output></div>
@@ -155,7 +156,7 @@ W.labormkt = el => {
     $('.lm-g', el).innerHTML = sdg({ xmax:700, ymax:32, xt:[0,200,400,600], yt:[0,10,20,30], xlab:'Workers employed', ylab:'Hourly wage ($)', aria:`Labor market with equilibrium wage ${W} dollars and ${L} workers`,
       lines:[ ...(d? [dLine(0,'',true)] : []), ...(s? [sLine(0,'',true)] : []), dLine(d,'D'), sLine(s,'S') ],
       labels:[ (570+d)/20 + 1.2 <= 30.5 ? [30, (570+d)/20 + 1.2, 'D', DC, 'start'] : [d + 40, 30.5, 'D', DC, 'start'], [640, (640+100-s)/30 + 1.6, 'S', SC, 'end'] ],
-      dots:[ ...((d||s) ? [{q:320,p:14,c:'var(--muted)',label:'start',lx: L<320 ? 8 : -8,ly:14,anchor: L<320 ? 'start' : 'end'}] : []), {q:L,p:W,label:`$${W.toFixed(2)}, ${L}`,c:'var(--ink)',lx: L<320 ? -8 : 8,ly: L<320 ? 18 : -8, anchor: L<320 ? 'end' : 'start'}], vls:[{q:L,p:W}], hl:[{p:W,q:L,c:'var(--g2)'}] });
+      dots:[ ...((d||s) ? [{q:320,p:14,c:'var(--muted)',label:'start',lx: L<320 ? 8 : -8,ly: L<320 ? -8 : 14,anchor: L<320 ? 'start' : 'end'}] : []), {q:L,p:W,label:`$${W.toFixed(2)}, ${L}`,c:'var(--ink)',lx:8, ly: L<320 ? 22 : -8, anchor:'start'}], vls:[{q:L,p:W}], hl:[{p:W,q:L,c:'var(--g2)'}] });
     $('.lm-w', el).textContent = '$'+W.toFixed(2); $('.lm-l', el).textContent = L; $('.lm-c', el).textContent = `${W>14?'+':W<14?'−':''}$${Math.abs(W-14).toFixed(2)}, ${L>320?'+':L<320?'−':''}${Math.abs(L-320)}`;
     const m = $('.msg', el);
     m.innerHTML = !d && !s ? 'Starting point: $14.00 an hour and 320 workers. Shift a curve.' :
