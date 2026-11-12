@@ -133,6 +133,5 @@ Eli's request (Nov 2 2026), with his answers to 16 questions: ratings unchanged 
 
 ## Next
 - Unit 7 (the last CLEP area: market failure and the role of government).
-- Optional Unit 6 polish: a few distractors still map to one common-mistake entry; some long sentences.
-- Pre-existing live issues found by the Unit 6 reviewers: first render before stored progress loads shows blank progress until you navigate; "Lucky guess" on a unit-quiz single-question view changes only the text.
+- Done Nov 12 (live Version 27): Unit 6 polish, and fixes for the blank first render with device-only progress and the do-nothing "Lucky guess" on unit-quiz single-question views (src/fix1/patch.py).
 - Later (Eli, Nov 2: ratings stay tracking-only for now): use the 1-3 ratings and the Deleted list to weight which questions Review shows.
