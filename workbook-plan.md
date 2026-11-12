@@ -118,7 +118,21 @@ Eli's request (Nov 2 2026), with his answers to 16 questions: ratings unchanged 
 - Course slips flagged in the lessons: per-unit table AVC/ATC values, the video's marginal costs (1.25/2.5 should be 0.25/0.50), a slide's worker label, and the "LRATC meets the lowest points" wording.
 - Source: `src/unit4/` (build.py patches the Unit 3 staging build; `--live` for promotion). Audited by a separate agent; all must-fix and should-fix items applied. Details and test record: docs/unit4-build-notes.md.
 
+## Unit 5: Firm Behavior and Market Structure (live; Lessons 20-28)
+- Details in docs/unit5-build-notes.md.
+
+## Review upgrades 4 (built Nov 9 2026; live Version 25)
+- "More practice" questions and quick checks are optional: they join Review only via "Add to Review" (one-time move parked existing ones in `S.parked`, schedule kept). "Lucky guess? Count it as a miss" (with Undo) after right answers outside unit quizzes. Code: `src/review4/patch.py`.
+
+## Unit 6: Factor Markets (built Nov 4-11 2026; live since Nov 11 2026, Version 26)
+- Decisions (Eli, Nov 4): build on the live page with a GitHub backup first; 20-item quiz; reading mapping labelled as inference (core: video 6.1, slides 247-269, textbook ch. 4 intro and §4.1; go deeper: §15.1, §15.3, monopsony); commit straight to main; independent audits until every gate passes, no cap; publish only after Eli's OK (given Nov 11).
+- Lessons: 29 Factor Markets and Derived Demand (toaster widget, product-to-labor sorter) · 30 Marginal Revenue Product and the Hiring Rule (hire widget, value-of-MP fill-in) · 31 Shifts in the Demand for Labor (what-moves-demand widget, shifter sorter) · 32 Labor Supply, MFC and the Equilibrium Wage (labor-market widget, wage sorter). 12 core + 16 more questions, quick checks, 12 flashcards (all with pictures) and 2 writing prompts each; graph answer choices for choose-a-graph skills; explanation visuals after answering.
+- Unit 6 quiz (`#quiz6`): 20 five-choice items (derived demand 5, MRP 6, labor market and hiring 9), submit-then-reveal, stored as `quiz6`.
+- App additions: graph answer choices (`visual` items, `.opts.vis`), written-response conversion keeps the graphs (`written[qid].vis`), flashcard pictures (6th card field).
+- Audits: 5 rounds; final L29 90, L30 100, L31 97.5, L32 90, quiz 90%, all gates pass. Source: `src/unit6/`; full notes: docs/unit6-build-notes.md.
+
 ## Next
-- Commit `src/unit4/` to GitHub (its source files are not in the repo or the Project; `docs/unit4-build-notes.md`, this plan and the live page were committed Nov 2 2026).
-- Unit 5: Firm Behavior and Market Structure. Starts with explicit vs implicit costs and accounting vs economic profit (held back from Unit 4 by Eli's choice).
-- Later (Eli, Nov 2: ratings stay tracking-only for now): use the 1-3 ratings and the Deleted list to weight which questions Review shows (Eli wants an algorithm eventually; not designed yet).
+- Unit 7 (the last CLEP area: market failure and the role of government).
+- Optional Unit 6 polish: a few distractors still map to one common-mistake entry; some long sentences.
+- Pre-existing live issues found by the Unit 6 reviewers: first render before stored progress loads shows blank progress until you navigate; "Lucky guess" on a unit-quiz single-question view changes only the text.
+- Later (Eli, Nov 2: ratings stay tracking-only for now): use the 1-3 ratings and the Deleted list to weight which questions Review shows.
