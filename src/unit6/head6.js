@@ -157,7 +157,7 @@ function u6SortNumeric(){
 /* ---------- shared exhibits ---------- */
 /* The toaster table with chosen columns; hl marks a row (index = workers) with the u3z2 highlight. */
 function toTbl(cols=['q'], { hl=-1, rows=[0,1,2,3,4,5,6], P=TO_P, W=TO_W }={}){
-  const head = { q:'Output (toasters)', mp:'Marginal product', vmp:`Value of MP (MP × $${P})`, w:'Wage', mprof:'Marginal profit', cost:'Labor cost', mfc:'MFC' };
+  const head = { q:'Output (toasters)', mp:'Marginal product', vmp:`MP × $${P}`, w:'Wage', mprof:'Marg. profit', cost:'Labor cost', mfc:'MFC' };
   const cell = (r,c) => {
     if(c==='q') return r.q;
     if(c==='mp') return r.L ? r.mp : '–';

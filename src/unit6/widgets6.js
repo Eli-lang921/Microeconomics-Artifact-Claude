@@ -177,5 +177,5 @@ W.wagesort = el => sorterWidget(el, { title:'Which curve moves, and what happens
     ['A boom in home building raises the price of new houses. (Carpenters)','dr','Carpenters\' output is worth more, so builders want more of them: demand right, wage and jobs up.'],
     ['New software replaces most file clerks (your textbook\'s low-skill workers).','dl','The software substitutes for clerks: demand left, so their wage and employment fall.'],
     ['A state makes licenses for electricians much harder to get (your textbook\'s government policies).','sl','Fewer people qualify at each wage: supply shifts left, raising the wage and cutting employment.'],
-    ['The government subsidizes training for welders (your textbook\'s example of training subsidies).','sr','More people can train, so more welders are available at each wage: supply right.']
+    ['The government subsidizes training for welders (made up; your textbook lists training subsidies).','sr','More people can train, so more welders are available at each wage: supply right.']
   ]});

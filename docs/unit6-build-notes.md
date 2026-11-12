@@ -68,7 +68,7 @@ Graph-choice items: l29-gr-derived, l29-gr-mplbars, l29-gr-tp, l30-gr-demand, l3
 Generators: l29-g-prodfn, -mpl, -prodchg, -mpl2 · l30-g-vmp, -hire, -mrp, -gr-hire, -mprof, -maxwage · l31-g-pricehire, -vmpshift, -shiftpick · l32-g-mfc, -surplus, -shift.
 
 ## Quiz blueprint (q6-*, 20 items, five-choice, separate pool, submit-then-reveal)
-Derived factor demand 5 (q6-der-1..5) · Marginal revenue product 7 (q6-mrp-1..7) · Labor market and firms' hiring of labor 8 (q6-lab-1..8). Exhibit items: q6-mrp-1, q6-mrp-4, q6-lab-2, q6-lab-5 (tables), q6-lab-3 (graph), q6-der-3, q6-mrp-5, q6-lab-7 (graph choices, fixed order so a saved draft keeps its meaning).
+Derived factor demand 5 (q6-der-1..5) · Marginal revenue product 6 (q6-mrp-1..5, 7; q6-mrp-6 retired in round 2) · Labor market and firms' hiring of labor 9 (q6-lab-1..9). Graph-choice items: q6-mrp-5 and q6-lab-7 (fixed order so a saved draft keeps its letters); exhibit items: tables in q6-mrp-1, mrp-2, mrp-4, lab-1, lab-2, lab-5; graph in q6-lab-3. Mistake codes are tagged but not shown in quiz explanations (no mistakes box on the quiz page).
 
 ## ID scheme and storage
 Questions l29-* … l32-*; quick checks l29c-* … l32c-*; quiz q6-*; cards c-l29-N …; writing w-l29-N …; containers U6_LESSONS, U6_CARDS, U6_WRITE, U6_PLAN, FIG6; tags U6CLEP/u6tag.
@@ -97,5 +97,17 @@ General hooks that change nothing for existing items:
 - Cloud store mocked: `unavailable` retries; `quota_exceeded` shows "Progress storage is full..."; other errors show "Could not reach your account..."; progress kept on the device each time.
 Not tested here: a real phone (touch), a screen reader, the live claude.ai runtime (sample/db capabilities), Claude's actual rewrite quality.
 
-## Audits
-(filled in after the independent audits)
+## Audits (independent reviewers, rubric gates G1-G8 + 10 criteria + creation-prompt checks; pass = all gates Pass, score >= 85, nothing Unverified)
+| Round | Date | L29 | L30 | L31 | L32 | Quiz |
+|---|---|---|---|---|---|---|
+| 1 | 11-04 | 85 | 82.5 | 70 (G3, G7 fail) | 72.5 | 62.5/75 |
+| 2 | 11-04 | 85, G8 fail | 82.5, G8 fail | 87.5 (prompt checks fail) | 85 (prompt checks fail) | 72% |
+| 3 | 11-08 | 92.5 PASS | 92.5, G7 fail | 95, G3 unverified | 82.5 | 83% |
+| 4 | 11-11 | 90 PASS | 100 PASS | 97.5 PASS | 77.5, G1 fail | 78.6%, G7 fail |
+| 5 | 11-11 | 90 PASS (recheck) | 100 PASS (recheck) | 97.5 PASS (recheck) | 90 PASS | 90% PASS |
+
+Main fixes across rounds: graph choices for every choose-a-graph skill, explanation visuals and card pictures throughout, self-contained stems (no "your course says"), one-firm demand pictures (no supply curve) for movement-along items, quiz items rebuilt to avoid lesson near-duplicates, slide 266 wording corrected, labels re-placed at 375 px, mistake-box mapping of distractors.
+Web quotes (Gorman, Reynolds, Federal Reserve Education, OpenStax 2e §14.1-14.2, CLEP fact sheet) opened and confirmed word for word by reviewers in rounds 2, 4 and 5.
+Round-5 minor items fixed afterwards: toaster-table headers shortened (no sideways scroll at 375 px), q6-lab-2 header, q6-der-5 "adds", q6-lab-7 stem, l32-why-up and l32c-link explanation sentences, l32-g-surplus shading text, shifter-table caption, wagesort attribution. Not yet done (low): a few distractors still map to one mistakes-box entry; some sentences over 30 words.
+Base: rebuilt 2026-11-11 on live Version 25 (Review upgrades 4: optional extras, Lucky guess); Unit 6 tested with both features.
+Pre-existing live issues seen by reviewers (not caused by Unit 6): first render before storage loads shows blank progress until navigation; Lucky guess on a unit-quiz single-question view changes only the text.
