@@ -168,7 +168,8 @@ W.labormkt = el => {
 };
 
 /* L32 exam skill: which curve, and what happens to the wage and employment?
-   TEST NOTE (2026-11-04): each item clicked with its right and a wrong choice: feedback shows the right answer and reason; score text counts correctly. */
+   TEST NOTE (2026-11-04): each item clicked with its right and a wrong choice: feedback shows the right answer and reason; score text counts correctly.
+   UI checked by Playwright (2026-11-11): no overflow at 375 px light and 1100 px dark; choice buttons respond to Enter and Tab moves between them. */
 W.wagesort = el => sorterWidget(el, { title:'Which curve moves, and what happens?', hint:'Made-up scenarios unless marked. Decide whether employers (demand) or workers (supply) changed, then the direction.', aria:'Effect on the labor market',
   kinds:[['dr','Demand right: wage up, jobs up'],['dl','Demand left: wage down, jobs down'],['sr','Supply right: wage down, jobs up'],['sl','Supply left: wage up, jobs down']],
   items:[

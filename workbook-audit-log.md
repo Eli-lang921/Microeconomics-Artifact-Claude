@@ -92,3 +92,8 @@ Lesson 2
 - Independent audits, 5 rounds: final L29 90, L30 100, L31 97.5, L32 90, quiz 90%; all gates pass.
 - Tests (Playwright): 1,073 old questions, 345 cards, 28 lessons and quiz pools 1-5 unchanged; Review upgrades 4 (optional extras, Lucky guess) work on Unit 6; no page errors; no sideways scroll at 375 px.
 - Published: live Version 26 (1794444486-0c15), force-overwrite approved by Eli; live Version 25 was byte-identical to the build base. Capabilities carried forward.
+
+## 2026-11-12: Unit 6 polish + two live-page fixes (live Version 27, 1794512096-47ca)
+- Polish (src/unit6): wrong choices remapped to the lessons' common mistakes (L32 firm-supply graphs, linkage, subsidy; quiz der-2, mrp-1 new story, mrp-3, lab-6, lab-9), explanation sentences for the new choices, shorter one-line summaries (L31, L32) and CLEP line (L32), nurses-graph label and ticks, minus sign in l32-g-shift, tap-to-define on first uses, unemployment benefits in the L32 shifter table, shiftpick caption.
+- Fixes (src/fix1/patch.py, applied after the Unit 6 build): (1) with progress saved only on the device, the page now re-renders once saved progress and auto-added cards are loaded (before: blank progress until you navigated); (2) "Lucky guess" no longer shows on a unit-quiz question opened on its own page, where it did nothing.
+- Tests: both bugs reproduced on Version 26 and gone in the new build; full Unit 6 suite passes; Units 1-5 unchanged; no page errors; no sideways table scroll at 375 px.

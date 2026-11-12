@@ -168,7 +168,7 @@ gen('l31-g-shiftpick','l31',()=>{
   ]);
   return visMC({ prompt:`Made-up scenario. ${SET[1][0].toUpperCase()+SET[1].slice(1)} currently earn about <b>$${w0}</b> an hour. Then ${ev.t}. Which graph shows the effect on the labor market for ${SET[1]}?`,
     choices:(ev.k==='mvUp' ? ['Dr','Dl','Sr','mv','mvUp'] : ['Dr','Dl','Sr','Sl','mv']).map(k=>shiftChoice(k, k===ev.k)),
-    explain: L => `<p><b>Graph ${L}</b>: ${SHIFT_DESC[ev.k]}, because ${ev.why}.</p>${ev.k==='mvUp' ? u6moveBig(`The answer graph, marked up with your numbers: the wage rises from $${w0} (B) to $${w0+3} (A), so employers move up the same curve and hire fewer ${SET[1]}.`, '$'+(w0+3), '$'+w0, true) : u6shiftBig(ev.k, `The answer graph, marked up with your numbers: the wage starts at $${w0} (W1) and ends ${ev.k==='Dr'?'higher':'lower'} (W2).`, '$'+w0, ev.k==='Dr'?'higher':'lower')}<p>Every change on the employers\' side moves labor <b>demand</b>; supply shifts come from the workers\' side (Lesson 32).</p>` });
+    explain: L => `<p><b>Graph ${L}</b>: ${SHIFT_DESC[ev.k]}, because ${ev.why}.</p>${ev.k==='mvUp' ? u6moveBig(`The move, marked up with your numbers (supply curve left out): the required wage is $${w0+3}, above the old $${w0} (B), so employers move up the same demand curve to A and hire fewer ${SET[1]}.`, '$'+(w0+3), '$'+w0, true) : u6shiftBig(ev.k, `The answer graph, marked up with your numbers: the wage starts at $${w0} (W1) and ends ${ev.k==='Dr'?'higher':'lower'} (W2).`, '$'+w0, ev.k==='Dr'?'higher':'lower')}<p>Every change on the employers\' side moves labor <b>demand</b>; supply shifts come from the workers\' side (Lesson 32).</p>` });
 });
 mc('l31-robots','l31','Made-up scenario. A warehouse adds robots that carry boxes, a task its workers used to do, and also hires technicians to repair the robots. What happens to the warehouse\'s demand for box carriers and for robot technicians?',
   [`Demand for box carriers falls; demand for technicians rises`,`Both rise`,`Both fall`,`Demand for box carriers rises; demand for technicians falls`,`Neither changes; only wages change`],0,
@@ -249,7 +249,7 @@ U6_PLAN.l31 = {
 
 U6_LESSONS.push({ id:'l31', unit:6, title:'Shifts in the Demand for Labor', mins:35, src:'Modern States video 6.1 (shifts in demand for labor) and Module 6 slides 261-262 · Course textbook (OpenStax) §4.1',
   sources:['MS6','OS40','OS41','OSE141','CB','FEDL','ELMW'],
-  oneline:'A change in the wage moves a firm along its labor demand curve; anything that changes what workers are worth to the firm (the product\'s price, technology, other inputs, training, the number of firms, regulations) shifts the whole curve.',
+  oneline:'A change in the wage moves a firm along its labor demand curve. Anything else that changes what workers are worth, or how many employers need, shifts the whole curve.',
   body:`
 <p>Lesson 30 built a firm\'s demand curve for labor from the ${dt('vmp','value of each worker\'s output')} and showed that a change in the wage moves the firm along it. This lesson asks what moves the curve itself. Each answer is a change in what a worker is worth to employers (his ${dt('marginal-product','marginal product')} times the price), or in how many workers employers need.</p>
 
