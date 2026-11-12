@@ -86,3 +86,9 @@ Lesson 2
 - Change (src/review4/patch.py): "More practice" questions and quick checks no longer join Review automatically; "Add to Review" / "Remove from Review" on each after answering. One-time move on first load: optional items in Review go to `S.parked` (schedule kept), flag `S.trim1`. "Lucky guess? Count it as a miss" (with Undo) after every right answer except unit quizzes.
 - Tests (Playwright, Eli's progress record v1464): 336 optional items parked, 463 left in Review, 343 due now (was 535); lesson core lucky guess resets to day one and Undo restores step 4 exactly; extra missed stays out of Review, Add puts it at day one, Remove parks it; Review session lucky guess drops the score by one and shows the miss choices; no page errors; no horizontal scroll at 390 px.
 - Published: live Version 25 (1794267266-8554), force-overwrite approved by Eli because the live version was byte-identical (sha256 5cd5aac4…) to the base edited here. Capabilities carried forward.
+
+## 2026-11-11: Unit 6 Factor Markets (Lessons 29-32 + unit quiz) published
+- Built by src/unit6/build.py on live Version 25; notes in docs/unit6-build-notes.md.
+- Independent audits, 5 rounds: final L29 90, L30 100, L31 97.5, L32 90, quiz 90%; all gates pass.
+- Tests (Playwright): 1,073 old questions, 345 cards, 28 lessons and quiz pools 1-5 unchanged; Review upgrades 4 (optional extras, Lucky guess) work on Unit 6; no page errors; no sideways scroll at 375 px.
+- Published: live Version 26 (1794444486-0c15), force-overwrite approved by Eli; live Version 25 was byte-identical to the build base. Capabilities carried forward.
