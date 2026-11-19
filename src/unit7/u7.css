@@ -1,1 +1,4 @@
-/* Unit 7: no new styles beyond Unit 6's graph-choice and card-picture rules */
+/* Unit 7: cell-level highlights in Unit 7 tables (row highlights already exist; scoped with .u7t so earlier units' tables are unchanged) */
+.u3tbl.u7t td.u3z1{background:var(--ok-soft)}.u3tbl.u7t td.u3z2{background:var(--accent-soft);font-weight:700}.u3tbl.u7t td.u3z3{background:var(--bad-soft)}
+/* Text-only Unit 7 tables: left-align every column */
+.u3tbl.u7l td,.u3tbl.u7l th{text-align:left}

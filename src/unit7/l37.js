@@ -11,12 +11,14 @@ const giniQ = sh => { const Y = [0, ...cumOf(sh).map(v=>v/100)]; let s = 0; for(
 
 /* Lorenz chart on a 0-100 grid. sets: [{sh, label, c, dash}]; shade: shade the gap between the line of equality and the first curve (area A). */
 function u7lorenz(sets, { aria='Lorenz curve', shade=false, ab=false }={}){
-  const lines = [ {a:[0,0],b:[100,100],c:'var(--muted)',dash:'5 4',w:2,label:'Perfect equality',lx:-4,ly:-8,anchor:'end'} ];
-  const areas = [];
-  sets.forEach((s,k) => { const pts = [[0,0], ...cumOf(s.sh).map((v,i)=>[(i+1)*20, v])]; lines.push({ pts, c:s.c||'var(--accent)', dash:s.dash||'', label:s.label, lx:-6, ly: k ? 16 : -8, anchor:'end' });
+  const lines = [ {a:[0,0],b:[100,100],c:'var(--muted)',dash:'5 4',w:2} ];
+  const areas = [], labels = [[38,50,'Perfect equality','var(--muted)','end']];
+  const v80 = sets.map(s => cumOf(s.sh)[3]), top = v80.indexOf(Math.max(...v80));
+  sets.forEach((s,k) => { const pts = [[0,0], ...cumOf(s.sh).map((v,i)=>[(i+1)*20, v])]; lines.push({ pts, c:s.c||'var(--accent)', dash:s.dash||'' });
+    if(s.label) labels.push(sets.length===1 ? [98, 4, s.label, s.c||'var(--accent)', 'end'] : k===top ? [76, v80[k]+5, s.label, s.c||'var(--accent)', 'end'] : [83, v80[k]-7-4*k, s.label, s.c||'var(--accent)', 'start']);
     if(shade && !k) areas.push({ pts:[...pts, ...[...pts].reverse().map(([x])=>[x,x])], c:'var(--g2)', o:0.3, label: ab ? [52,40,'A'] : undefined });
     if(ab && !k) areas.push({ pts:[...pts, [100,0]], c:'var(--accent)', o:0.15, label:[78,18,'B'] }); });
-  return sdg({ xmax:100, ymax:100, xt:[0,20,40,60,80,100], yt:[0,20,40,60,80,100], xlab:'Cumulative % of households (poorest first)', ylab:'Cumulative % of income', aria, lines, areas,
+  return sdg({ xmax:100, ymax:100, xt:[0,20,40,60,80,100], yt:[0,20,40,60,80,100], xlab:'Cumulative % of households (poorest first)', ylab:'Cumulative % of income', aria, lines, areas, labels,
     dots: sets.length ? cumOf(sets[0].sh).map((v,i)=>({ q:(i+1)*20, p:v, c:sets[0].c||'var(--accent)' })) : [] });
 }
 /* Small Lorenz pictures for answer choices: curve y = x^k on the unit square (k = 1 is the equality line; k < 1 draws a curve above it, an impossible distractor). */
@@ -33,7 +35,7 @@ FIG7.l37two = () => fig(`<div class="u3pair">
 
 /* L37 V2: 2014 average incomes, as multiples of the bottom 90% (Module 7.3 slides) */
 FIG7.l37inc = () => fig(atable(['Group (2014)','Average income','Times the bottom 90% average'],
-  INC14.map(([g,v],i)=>[g, usd7(v), i ? (Math.round(v/INC14[0][1]*10)/10)+'×' : '1×']), { cls:'compact', hl:{3:{row:'u3z2'}} }),
+  INC14.map(([g,v],i)=>[g, usd7(v), i ? (Math.round(v/INC14[0][1]*10)/10)+'×' : '1×']), { cls:'u7t compact', hl:{3:{row:'u3z2'}} }),
   'Your course\'s slides (2014 data from inequality.org). The last column divides each average by $33,068. The top 1% averaged about 38 times the bottom 90%; the top 0.1%, about 184 times. A bar chart on one scale would make the bottom 90% bar almost invisible.');
 
 /* L37 V3: real weekly wages, 1979 vs 2014 (video 7.3) */
@@ -42,12 +44,12 @@ FIG7.l37wage = () => fig(`<div class="u2row"><div class="u2cell">${hbars([['Medi
   'Your course\'s real (inflation-adjusted) weekly wages. "Real" means the 1979 dollars are converted to 2014 buying power, so the comparison is fair. Your course adds that the top 10%\'s real wages rose steadily over the same years.');
 
 /* L37 V4: poverty and food insecurity, 2014 (Module 7.3 slides, from Feeding America) */
-FIG7.l37pov = () => fig(`<div class="u2row"><div class="u2cell">${hbars([['All people in poverty',14.8,'var(--accent)'],['Children under 18',21.1,'var(--bad)'],['Seniors 65 and older',10,'var(--accent)'],['Food-insecure households',14,'var(--g2)'],['Households with children',19,'var(--g2)']], { max:25, left:170, fmt:v=>v+'%' })}</div></div>`,
-  'Your course\'s 2014 figures: 46.7 million people (14.8%) in poverty, including 15.5 million children (21.1%) and 4.6 million seniors (10%); 48.1 million people in food-insecure households. Notice children have the highest rate, as do households with children for food insecurity (19% vs 12% for all households).');
+FIG7.l37pov = () => fig(`<div class="u2row"><div class="u2cell">${hbars([['All people in poverty',14.8,'var(--accent)'],['Children under 18',21.1,'var(--bad)'],['Seniors 65 and older',10,'var(--accent)'],['Food insecure: all households',14,'var(--g2)'],['… with children',19,'var(--g2)'],['… without children',12,'var(--g2)']], { max:25, left:190, fmt:v=>v+'%' })}</div></div>`,
+  'Your course\'s 2014 figures: 46.7 million people (14.8%) in poverty, including 15.5 million children (21.1%) and 4.6 million seniors (10%); 48.1 million people in food-insecure households. Notice children have the highest poverty rate. The last three bars are a different measure, the share of households that are food insecure: 14% of all households, 19% of households with children and 12% of households without children. (The video says the 12% is "across all households"; the slide shows it is households without children.)');
 
 /* L37 V5: quintile shares to cumulative shares (textbook Table 14.6) */
 FIG7.l37cum = () => fig(atable(['Quintile','1980','Cum. 1980','2013','Cum. 2013'],
-  ['1st','2nd','3rd','4th','5th'].map((q,i)=>[q, Q80[i]+'%', `<b>${cumOf(Q80)[i]}%</b>`, Q13[i]+'%', `<b>${cumOf(Q13)[i]}%</b>`]), { cls:'compact', hl:{1:{row:'u3z2'}} }),
+  ['1st','2nd','3rd','4th','5th'].map((q,i)=>[q, Q80[i]+'%', `<b>${cumOf(Q80)[i]}%</b>`, Q13[i]+'%', `<b>${cumOf(Q13)[i]}%</b>`]), { cls:'u7t compact', hl:{1:{row:'u3z2'}} }),
   'Your course textbook\'s Table 14.6, poorest quintile (1st) to richest (5th): each quintile\'s share of income and the cumulative ("Cum.") share. Each cumulative number adds that quintile\'s share to all poorer ones: in 2013 the bottom 40% received 3.2 + 8.4 = 11.6% of income. The last row is always 100%. The cumulative columns are the points of the Lorenz curve.');
 
 /* L37 V6: the Lorenz curves (textbook Figure 14.8) */
@@ -57,7 +59,7 @@ FIG7.l37lor = () => fig(u7lorenz([{sh:Q13,label:'2013',c:'var(--bad)'},{sh:Q80,l
 /* L37 V7: the Gini coefficient as areas (FRED series notes; BEA primer) */
 FIG7.l37gini = () => fig(u7lorenz([{sh:Q13,label:'Lorenz curve (2013)',c:'var(--bad)'}], { shade:true, ab:true, aria:'Gini coefficient: area A between the equality line and the Lorenz curve, area B below the curve' }) +
   `<div class="math">Gini coefficient = A ÷ (A + B)<br>Perfect equality: the curve is the diagonal, A = 0 → Gini = <b>0</b><br>One household gets everything: B = 0 → Gini = <b>1</b><br>Textbook 2013 quintiles: Gini ≈ <b>0.44</b> (1980: ≈ 0.38), my estimate from the five points</div>`,
-  'Area A is the gap between perfect equality and the actual Lorenz curve; A + B is the whole triangle under the diagonal. FRED: the Gini index is "the area between the Lorenz curve and a hypothetical line of absolute equality, expressed as a percentage of the maximum area." A bigger gap means a bigger Gini and more inequality.');
+  'Area A is the gap between perfect equality and the actual Lorenz curve; A + B is the whole triangle under the diagonal. FRED: the Gini index is "the area between the Lorenz curve and a hypothetical line of absolute equality, expressed as a percentage of the maximum area under the line." A bigger gap means a bigger Gini and more inequality.');
 
 /* L37 V8: why wages of skilled workers rose (textbook Figure 14.9; made-up lines) */
 /* Lines: S0 p = q; S1 p = q − 2; D0 p = 7 − q; D1 p = 12 − q. E0 = (3.5, 3.5); E1 = (7, 5) (checked by script). */
@@ -74,7 +76,7 @@ FIG7.l37src = () => fig(atable(['Source','How it widens the gap','Course or text
   ['Changing households','More two-high-earner couples at the top and single-parent households at the bottom: about half the rise in household inequality','Textbook §14.4'],
   ['Age and choices','Earnings are low early in a career, peak in middle age and fall in retirement; people choose different work-leisure trade-offs','Textbook §14.5'],
   ['Wealth and inheritance','Wealth (assets minus debts) is more unequal than income; differences build up and can pass to children','Textbook §14.5']
-], { cls:'compact wrap' }), 'The main sources your course textbook gives, plus Lesson 29\'s link between pay and marginal product. Several sources are not unfair in themselves (age, choices); others raise harder questions (unequal starting points).');
+], { cls:'u7t u7l compact wrap' }), 'The main sources your course textbook gives, plus Lesson 29\'s link between pay and marginal product. Several sources are not unfair in themselves (age, choices); others raise harder questions (unequal starting points).');
 
 /* L37 V10: a negative income tax, worked (Econlib, Allen) */
 FIG7.l37nit = () => fig(`<div class="u4io"><div class="u3step"><b>Threshold</b><br>$10,000</div><div class="u3arrow" aria-hidden="true">−</div><div class="u3step"><b>Family\'s income</b><br>$8,000</div><div class="u3arrow" aria-hidden="true">=</div><div class="u3step"><b>Gap</b><br>$2,000</div><div class="u3arrow" aria-hidden="true">×</div><div class="u3step"><b>Negative tax rate</b><br>25%</div><div class="u3arrow" aria-hidden="true">=</div><div class="u3step u3end"><b>Payment</b><br>$500</div></div>
@@ -92,7 +94,7 @@ FIG7.l37trade = () => fig(flow([
    Common mistakes: M1 poverty and inequality are the same thing · M2 a Lorenz curve farther from the diagonal means more equality
    M3 a Gini of 1 means perfect equality · M4 the Lorenz curve plots each group's own share, not the cumulative share
    M5 inequality has only one cause (only unfairness, or only effort) · M6 anti-poverty programs never affect work incentives */
-const qTbl = (sh, yr='') => atable(['Quintile','Share of income'+(yr?' ('+yr+')':'')], ['First (poorest)','Second','Third','Fourth','Fifth (richest)'].map((q,i)=>[q, sh[i]+'%']), { cls:'compact' });
+const qTbl = (sh, yr='') => atable(['Quintile','Share of income'+(yr?' ('+yr+')':'')], ['First (poorest)','Second','Third','Fourth','Fifth (richest)'].map((q,i)=>[q, sh[i]+'%']), { cls:'u7t compact' });
 
 mc('l37-def','l37','Which of the following best describes income inequality?',
   [`The uneven distribution of income across a population, such as the gap between the rich and everyone else`,`The number of people below the poverty line`,`The difference between a worker\'s wage and the price of what he makes`,`A fall in average income`,`The gap between a country\'s exports and imports`],0,
@@ -100,7 +102,7 @@ mc('l37-def','l37','Which of the following best describes income inequality?',
 mc('l37-pov','l37','Made-up scenario. Every household\'s income rises by exactly 10%. What happens to poverty and to income inequality?',
   [`Poverty falls; inequality is unchanged`,`Poverty and inequality both fall`,`Poverty is unchanged; inequality falls`,`Poverty and inequality both rise`,`Poverty rises; inequality is unchanged`],0,
   `<p>Your textbook: "a general rise in income levels over time would keep inequality the same, but reduce poverty." Everyone\'s share of total income stays the same, so inequality doesn\'t change, but some households rise above the fixed poverty line (M1).</p>${FIG7.l37two()}`);
-mc('l37-data','l37',`Average incomes in the United States in 2014:${atable(['Group','Average income'], INC14.map(([g,v])=>[g, usd7(v)]), { cls:'compact' })}About how many times the bottom 90%\'s average was the top 1%\'s average?`,
+mc('l37-data','l37',`Average incomes in the United States in 2014:${atable(['Group','Average income'], INC14.map(([g,v])=>[g, usd7(v)]), { cls:'u7t compact' })}About how many times the bottom 90%\'s average was the top 1%\'s average?`,
   [`About 4 times`,`About 9 times`,`About 14 times`,`About 38 times`,`About 184 times`],3,
   `<p>$1,260,508 ÷ $33,068 ≈ <b>38</b>. About 9 times is the top 10%, about 14 the top 5%, and about 184 the top 0.1%.</p>${FIG7.l37inc()}`);
 mc('l37-wage','l37','Between 1979 and 2014, the median U.S. worker\'s real weekly wage rose from $733 to $791, and the bottom 10%\'s fell from $383 to $379. About how much did the median real wage rise, in percent?',
@@ -110,7 +112,7 @@ mc('l37-quint','l37',`U.S. household income shares by quintile in 2013:${qTbl(Q1
   [`3.2%`,`20%`,`23.0%`,`49.0%`,`51.0%`],4,
   `<p>The fifth (richest) quintile received <b>51.0%</b>, over half of all income. Your textbook: "the top 20% of householders (the fifth quintile) received over half (51%) of all the income." 20% is what it would get with perfect equality; 49.0% is the cumulative share of the bottom 80%.</p>`);
 mc('l37-cum','l37',`U.S. household income shares by quintile in 2013:${qTbl(Q13)}What point on the Lorenz curve corresponds to the bottom 40% of households?`,
-  [`40% of households receive 8.4% of income`,`40% of households receive 11.6% of income`,`40% of households receive 40% of income`,`40% of households receive 26.0% of income`,`40% of households receive 14.4% of income`],1,
+  [`40% of households receive 8.4% of income`,`40% of households receive 11.6% of income`,`40% of households receive 14.4% of income`,`40% of households receive 26.0% of income`,`40% of households receive 40% of income`],1,
   `<p>The Lorenz curve uses <b>cumulative</b> shares: the bottom 40% get the first plus the second quintile, 3.2 + 8.4 = <b>11.6%</b>. 8.4% is the second quintile alone (M4); 40% would be perfect equality; 26.0% is the bottom 60%.</p>${FIG7.l37cum()}`);
 gen('l37-g-cum','l37',()=>{
   let sh; do { const a = pick([2,3,4,5]), b = a + pick([3,4,5,6]), c = b + pick([4,5,6,7]), d = c + pick([6,8,10]); sh = [a,b,c,d,100-a-b-c-d]; } while(sh[4] <= sh[3] || sh[4] > 70);
@@ -125,7 +127,7 @@ lazy('l37-gr-lor','l37',()=>visMC({
   explain: L => `<p><b>Graph ${L}</b>: its curve bows farthest below the line of perfect equality.</p>${FIG7.l37lor()}<p>Your textbook: "a more unequal distribution of income will loop farther down and away from the 45-degree line." A curve on the diagonal is perfect equality (M2); a curve above the diagonal is impossible, since the poorest households can\'t have more than their share.</p>`
 }));
 mc('l37-axes','l37','What does a Lorenz curve measure on its two axes?',
-  [`Cumulative percentage of households (poorest first) across the bottom; cumulative percentage of income up the side`,`Income in dollars across the bottom; number of households up the side`,`Each quintile\'s own share of income across the bottom; time up the side`,`Price across the bottom; quantity up the side`,`Wealth across the bottom; poverty rate up the side`],0,
+  [`Cumulative percentage of households (poorest first) across the bottom; cumulative percentage of income up the side`,`Income in dollars across the bottom; number of households up the side`,`Each quintile\'s own share of income across the bottom; time up the side`,`Cumulative percentage of income across the bottom; cumulative percentage of households up the side`,`Wealth across the bottom; poverty rate up the side`],0,
   `<p>Your textbook: "The Lorenz curve shows the cumulative share of population on the horizontal axis and the cumulative percentage of total income received on the vertical axis." Both run from 0 to 100% (M4).</p>`);
 mc('l37-gini','l37','Which of the following is true of the Gini coefficient?',
   [`It ranges from 0 (perfect equality) to 1 (one household has all the income)`,`It ranges from 0 (one household has everything) to 1 (perfect equality)`,`It equals the share of income going to the top quintile`,`A higher value means income is more equal`,`It measures the number of people in poverty`],0,
@@ -146,6 +148,7 @@ mc('l37-trap','l37','A program guarantees a family $18,000 a year and cuts its a
   [`Working more doesn\'t raise the family\'s total income until earnings pass $18,000, so there is little reason to work`,`The family can never receive more than $18,000`,`The aid is paid as food instead of cash`,`The family must work 2,000 hours to get any aid`,`The aid grows when the family earns more`],0,
   `<p>The textbook: "every time a poor person earns $100, the person loses $100 in government support. As a result, the person experiences no net gain for working." That is why programs like the earned income tax credit and a negative income tax phase out slowly (M6).</p>`);
 /* L37 more */
+Q['l37-cum'].keepOrder = true;
 mc('l37-top01','l37','In 2014, the top 0.1% of U.S. earners averaged $6,087,113 and the bottom 90% averaged $33,068. About how many times larger is the first number?',
   [`About 18 times`,`About 38 times`,`About 100 times`,`About 184 times`,`About 1,840 times`],3,
   `<p>$6,087,113 ÷ $33,068 ≈ <b>184</b>. About 38 times is the top 1%.</p>${FIG7.l37inc()}`);
@@ -174,7 +177,7 @@ mc('l37-winner','l37','What do economists mean by "winner-take-all" labor market
   [`Technology raises the global demand for the very best performers, pushing their pay far above others\'`,`Only one worker in each market gets a job`,`Unions set the same wage for everyone`,`The government chooses which workers win`,`Workers bid down each other\'s wages`],0,
   `<p>The textbook: "Winner-take-all labor markets result from changes in technology, which have increased global demand for \'stars,\'—whether the best CEO, doctor, basketball player, or actor." It is one source of wider wage gaps (M5).</p>`);
 mc('l37-age','l37','Why would a society with people of many ages have some income inequality in any one year, even if lifetime earnings were similar?',
-  [`People earn little early in their careers, more in middle age and less after retirement, so a population of mixed ages has some inequality`,`Equality is illegal`,`Everyone prefers the same amount of work`,`Inequality has no effect on poverty`,`Incomes never change over a lifetime`],0,
+  [`People earn little early in their careers, more in middle age and less after retirement, so a population of mixed ages has some inequality`,`Older workers are always paid more than younger workers for the same job`,`Taxes take a larger share from young workers`,`Retirees\' pensions count as wealth, not income`,`Lifetime earnings differ by age group, even when they are similar`],0,
   `<p>The textbook: "most workers receive relatively low earnings in their first few jobs, higher earnings as they reach middle age, and then lower earnings after retirement." It adds that preferences differ: some choose long hours for more income (M5).</p>`);
 mc('l37-wealth','l37','How does wealth differ from income?',
   [`Income is a flow received over a period; wealth is the value of all assets minus debts at a point in time`,`They are the same thing`,`Wealth is income after taxes`,`Income includes the value of a home; wealth does not`,`Wealth is always more equally distributed than income`],0,
@@ -189,11 +192,11 @@ gen('l37-g-nit','l37',()=>{
   const T = pick([10000,12000,15000,20000]), r = pick([25,40,50]), inc = pick([0,2000,4000,5000,6000,8000].filter(x=>x<T));
   const pay = r/100*(T-inc);
   return { type:'num', kind:'num', unit:'dollars', prompt:`Made-up numbers. Under a negative income tax, the threshold is <b>$${T.toLocaleString('en-US')}</b> and the negative tax rate is <b>${r}%</b>. A family earns <b>$${inc.toLocaleString('en-US')}</b>. How much does it receive from the tax system?`, answer:pay,
-    explain:`<div class="math">Payment = ${r}% × ($${T.toLocaleString('en-US')} − $${inc.toLocaleString('en-US')}) = ${r}% × $${(T-inc).toLocaleString('en-US')} = <b>$${pay.toLocaleString('en-US')}</b><br>Total income = $${inc.toLocaleString('en-US')} + $${pay.toLocaleString('en-US')} = $${(inc+pay).toLocaleString('en-US')}</div><p>The common slip is applying the rate to the family\'s income (${r}% × $${inc.toLocaleString('en-US')}) instead of to the gap below the threshold. Each extra dollar earned cuts the payment by only ${r} cents, so working more still pays (M6).</p>${fig(`<div class="u4io"><div class="u3step"><b>Threshold</b><br>$${T.toLocaleString('en-US')}</div><div class="u3arrow" aria-hidden="true">−</div><div class="u3step"><b>Income</b><br>$${inc.toLocaleString('en-US')}</div><div class="u3arrow" aria-hidden="true">×</div><div class="u3step"><b>Rate</b><br>${r}%</div><div class="u3arrow" aria-hidden="true">=</div><div class="u3step u3end"><b>Payment</b><br>$${pay.toLocaleString('en-US')}</div></div>`, 'Marked up with these numbers: the rate applies to the gap below the threshold.')}`
+    explain:`<div class="math">Payment = ${r}% × ($${T.toLocaleString('en-US')} − $${inc.toLocaleString('en-US')}) = ${r}% × $${(T-inc).toLocaleString('en-US')} = <b>$${pay.toLocaleString('en-US')}</b><br>Total income = $${inc.toLocaleString('en-US')} + $${pay.toLocaleString('en-US')} = $${(inc+pay).toLocaleString('en-US')}</div><p>The common slip is applying the rate to the family\'s income (${r}% × $${inc.toLocaleString('en-US')}) instead of to the gap below the threshold. Each extra dollar earned cuts the payment by only ${r} cents, so working more still pays (M6).</p>${fig(`<div class="u4io"><div class="u3step"><b>Threshold</b><br>$${T.toLocaleString('en-US')}</div><div class="u3arrow" aria-hidden="true">−</div><div class="u3step"><b>Income</b><br>$${inc.toLocaleString('en-US')}</div><div class="u3arrow" aria-hidden="true">=</div><div class="u3step"><b>Gap</b><br>$${(T-inc).toLocaleString('en-US')}</div><div class="u3arrow" aria-hidden="true">×</div><div class="u3step"><b>Rate</b><br>${r}%</div><div class="u3arrow" aria-hidden="true">=</div><div class="u3step u3end"><b>Payment</b><br>$${pay.toLocaleString('en-US')}</div></div>`, 'Marked up with these numbers: the rate applies to the gap below the threshold.')}`
   };
 });
 mc('l37-prog','l37','A progressive income tax is one where',
-  [`People with higher incomes pay a higher percentage of their income in tax`,`Everyone pays the same dollar amount`,`Everyone pays the same percentage`,`People with lower incomes pay a higher percentage`,`Only businesses pay tax`],0,
+  [`People with higher incomes pay a higher percentage of their income in tax`,`Everyone pays the same dollar amount`,`Everyone pays the same percentage`,`People with lower incomes pay a higher percentage`,`Higher-income people pay more dollars of tax but the same percentage`],0,
   `<p>Your textbook: the federal income tax "is a progressive tax system designed in such a way that the rich pay a higher percent in income taxes than the poor." It pays for many antipoverty programs, so it redistributes income too.</p>`);
 mc('l37-trade','l37','What is the main concern about pushing redistribution very far?',
   [`Very high taxes and fast-shrinking benefits can weaken incentives to work and start businesses, reducing output`,`Redistribution always increases output`,`Redistribution has no effect on anyone\'s choices`,`It would make poverty rise in every case`,`It is impossible to measure inequality`],0,
@@ -257,7 +260,7 @@ U7_CARDS.l37 = [
   ['Lorenz curve','What does a Lorenz curve plot?','Cumulative % of households (poorest first) across; cumulative % of income up. The diagonal is perfect equality.','2013: the bottom 40% received 11.6% of income.','Use cumulative shares, not each quintile\'s own share.', FIG7.l37lor()],
   ['Reading a Lorenz curve','What does a curve farther below the diagonal mean?','More inequality. The 2013 curve is farther from the line than the 1980 curve.','1980 bottom 40%: 14.4%; 2013: 11.6%.','Farther away = less equal.', u7lmini(2.2,'A Lorenz curve bowed below the diagonal')],
   ['Gini coefficient','What is the Gini coefficient and its range?','Area A (between the diagonal and the Lorenz curve) ÷ (A + B), the whole area under the diagonal. 0 = perfect equality; 1 = one household has everything.','Textbook quintiles: about 0.38 in 1980 and 0.44 in 2013 (estimate).','Higher Gini = less equal. FRED shows it 0 to 100.', FIG7.l37gini()],
-  ['Sources of income inequality','Name four sources of income inequality.','Differences in skills and productivity; demand for skill rising faster than supply; changing households; age and choices; wealth and inheritance.','College graduates\' wages rose even as their numbers grew.','No single cause explains it.', FIG7.l37src()],
+  ['Sources of income inequality','Name the main sources of income inequality.','Differences in skills and productivity; demand for skill rising faster than supply; changing households; age and choices; wealth and inheritance.','College graduates\' wages rose even as their numbers grew.','No single cause explains it.', FIG7.l37src()],
   ['Rising wages for skill','Why did high-skilled wages rise even as supply grew?','Demand for high-skilled labor rose faster than supply, driven by technology and globalization.','Bachelor\'s degrees rose about 90% from 1970 to 2010 (textbook), yet wages rose.','A supply increase alone would lower the wage.', FIG7.l37skill()],
   ['Negative income tax','How does a negative income tax work?','Below a threshold, a family receives a payment equal to a rate times the gap; the payment shrinks gradually as income rises.','$10,000 threshold, 25%: income $8,000 → $500; zero income → $2,500.','Apply the rate to the gap, not to income.', FIG7.l37nit()],
   ['Poverty trap','What is the poverty trap?','When aid is cut by about $1 for each $1 earned, working more doesn\'t raise total income.','A $18,000 guarantee cut $1,000 per $1,000 earned (textbook).','The EITC and a negative income tax phase out slowly to avoid it.'],
@@ -274,12 +277,12 @@ Object.assign(U7_WRITE, {
 });
 
 U7_PLAN.l37 = {
-  core:['l37-def','l37-pov','l37-data','l37-wage','l37-quint','l37-cum','l37-g-cum','l37-gr-lor','l37-axes','l37-gini','l37-g-gini','l37-sources','l37-nit','l37-trap'],
-  more:['l37-top01','l37-child','l37-orsh','l37-tf-far','l37-time','l37-g-ginq','l37-house','l37-winner','l37-age','l37-wealth','l37-inkind','l37-eitc','l37-g-nit','l37-prog','l37-trade','l37-minwage']
+  core:['l37-def','l37-pov','l37-data','l37-wage','l37-quint','l37-cum','l37-g-cum','l37-gr-lor','l37-axes','l37-gini','l37-g-gini','l37-sources','l37-house','l37-nit','l37-trap'],
+  more:['l37-top01','l37-child','l37-orsh','l37-tf-far','l37-time','l37-g-ginq','l37-winner','l37-age','l37-wealth','l37-inkind','l37-eitc','l37-g-nit','l37-prog','l37-trade','l37-minwage']
 };
 
 U7_LESSONS.push({ id:'l37', unit:7, title:'Income Inequality, Poverty, the Lorenz Curve and the Gini Coefficient', mins:45, src:'Modern States video 7.3 and the Module 7.3 slides · Course textbook (OpenStax) §14.1-§14.5',
-  sources:['MS7','OS141','OS142','OS143','OS144','OS145','CB','FREDG','BEAG','ELNIT'],
+  sources:['MS7','MS6','OS141','OS142','OS143','OS144','OS145','CB','FREDG','BEAG','ELNIT','ELMW'],
   oneline:'Income inequality is how unevenly income is shared. The Lorenz curve draws it and the Gini coefficient sums it up in one number; it comes from differences in skills, households, age and wealth, and policies trade some work incentive for less poverty.',
   body:`
 <p>Lesson 29 explained why some workers earn more: their ${dt('marginal-product','marginal product')} is higher. Lesson 32 showed how the supply of and demand for labor set wages. This lesson steps back to the whole economy: how income ends up shared across households, how to measure it, and what policies do about it. It also closes the course: the last CLEP topic.</p>
@@ -297,10 +300,10 @@ ${FIG7.l37two()}
 <p>Your course shows average incomes in 2014 for five groups. Read the last column: it divides each average by the bottom 90%\'s.</p>
 ${FIG7.l37inc()}
 <p>(The video says "$440,000" for the top 5%; the slide\'s $448,489 is used here.) Your course adds that "the gap between the rich and everyone else has been growing": the top 1%\'s share of income was lowest from about 1963 to 1983 and has risen since.</p>
-<p><b>Worked example: real wages, 1979 to 2014.</b> "Real" means adjusted for inflation, so the dollars buy the same amount in both years.</p>
+<p><b>Worked example: ${dt('real-wage','real wages')}, 1979 to 2014.</b> "Real" means adjusted for inflation, so the dollars buy the same amount in both years.</p>
 ${FIG7.l37wage()}
 <p>Check: the median rose about 8% in 35 years, a fraction of a percent a year, while the bottom 10% slipped. Your course: the top 10%\'s real wages "have steadily increased" over the same period, so the gap widened from both ends.</p>
-<p>Your course\'s poverty figures for 2014:</p>
+<p>Your course\'s poverty figures for 2014. The first three bars are poverty rates for people; the last three are ${dt('food-insecure','food insecurity')} rates for households.</p>
 ${FIG7.l37pov()}
 <p><b>So what:</b> the CLEP outline lists "Income inequality" as a topic; expect a question that reads data like these, or asks what inequality means.</p>
 <div data-check="l37c-data"></div>
@@ -333,7 +336,7 @@ ${FIG7.l37gini()}
 
 <h2>Sources of income inequality</h2>
 <!-- src: OS144 (household composition: two-earner high-earner couples; single-parent households 13.1%; "account for roughly half of the rise"; wages: "the earnings of high-skilled labor relative to low-skilled labor have increased"; winner-take-all; college/high school earnings 1.67 in 2010 vs 1.59 in 1995; bachelor's degrees 840,000 (1970) to 1,602,480 (2009-2010), about 90%; Figure 14.9; technology and globalization; "a race between forces of supply and demand"); OS145 (age: low early, higher in middle age, lower in retirement; preferences; income vs wealth; wealth more unequal); MS6 via Lesson 29 ("some workers tend to be more productive because of experience, education and training, or access to the latest technology"). -->
-<p>There is no single cause. Your textbook and Lesson 29 point to several.</p>
+<p>There is no single cause. Your textbook and Lesson 29 point to several, including ${dt('winner-take-all','winner-take-all')} markets and differences in ${dt('wealth','wealth')}. Keep the two apart: income is a flow received over a period, like a year\'s pay; wealth is everything a household owns minus its debts, measured at a point in time.</p>
 ${FIG7.l37src()}
 <p><b>Worked example: your course textbook\'s skilled-labor market.</b> Bachelor\'s degrees awarded rose from 840,000 in 1970 to about 1.6 million in 2009-2010, about 90%. More supply should lower the wage, yet college graduates\' pay pulled further ahead.</p>
 ${FIG7.l37skill()}
@@ -344,14 +347,17 @@ ${FIG7.l37skill()}
 <h2>Policies to reduce poverty and inequality</h2>
 <!-- src: MS7 (video 7.3: "minimum wage laws, in-kind transfers, welfare and housing assistance, as well as a negative income tax. But these measures do not do enough to lower income inequality in the US and they don't do enough to lower poverty"; slide "Policies to Reduce Poverty ... Do not solve the larger issue of growing inequality"); OS142 (poverty trap; $18,000 guarantee, $1,000 cut per $1,000 earned); OS143 (TANF, EITC: "phased out slowly ... reduced by 21.06 cents", SNAP, Medicaid); OS145 (progressive federal income tax; trade-off between incentives and equality, Figure 14.10; public education may raise both); ELNIT (threshold $10,000, 25%, $8,000 → $500, zero → $2,500; "commonly thought to have originated with economist Milton Friedman"); ELMW (Gorman, minimum wages; Lesson 32). -->
 <p>Your course lists four policies: "minimum wage laws, ${dt('in-kind','in-kind transfers')}, welfare and housing assistance, as well as a ${dt('nit','negative income tax')}." Your textbook adds the main U.S. safety-net programs: TANF (cash welfare with work requirements and time limits), the ${dt('eitc','earned income tax credit')}, SNAP (food assistance) and Medicaid, paid for largely by a ${dt('progressive-tax','progressive')} income tax.</p>
+<p><b>In-kind transfers</b> give goods or services instead of cash: SNAP gives a debit-style card that can only buy food, Medicaid pays for health care, and federal housing programs subsidize rent. <b>Why goods instead of cash?</b> Your textbook: part of the political support for SNAP comes from the belief that aid that must be spent on food can\'t be "wasted." <b>So what:</b> the textbook points out that a family already spending more on food than its SNAP benefit can use the card for food it would have bought anyway and spend the freed-up cash on other things, so in-kind aid often works much like cash.</p>
+<p><b>Welfare and housing assistance</b> are cash and rent help for low-income families. The main cash program, TANF, has two rules your textbook stresses: most recipients must work (or attend school), and no one can receive federally funded benefits for more than five years in total. <b>Why:</b> those rules aim to keep aid from discouraging work. Housing assistance, mostly through the Department of Housing and Urban Development, lowers the rent low-income families pay.</p>
+<p><b>The catch for all of them:</b> each program shrinks as earnings rise. SNAP, for example, cuts food aid by about $30 for every $100 earned. Stack several such cuts together and earning more can leave a family little better off.</p>
 <p><b>The design problem: the poverty trap.</b> Your textbook\'s example: a program guarantees a family $18,000 and cuts aid by $1,000 for each $1,000 the family earns. Earning more then adds nothing to total income, so there is little reason to work. That is the ${dt('poverty-trap','poverty trap')}.</p>
-<p><b>Worked example: a negative income tax (Econlib).</b> Milton Friedman\'s idea: below a threshold, the tax system pays you, and the payment shrinks gradually as income rises.</p>
+<p><b>Worked example: a negative income tax (Econlib).</b> An idea usually credited to Milton Friedman: below a threshold, the tax system pays you, and the payment shrinks gradually as income rises.</p>
 ${FIG7.l37nit()}
 <p>Check: total income always rises with earnings ($8,000 earned → $8,500 total; $9,000 → $9,250), unlike the poverty trap.</p>
 <p>Change the rate below to see the trade-off.</p>
 <div data-widget="nit"></div>
 <p>What to notice: a higher rate gives the poorest families more but lets them keep less of each dollar they earn. At 100% you get the poverty trap.</p>
-<p><b>Minimum wage:</b> Lessons 8 and 32 showed a minimum wage above the market wage is a price floor in the labor market: higher pay for workers who keep their jobs, fewer jobs. How large the job loss is remains debated.</p>
+<p><b>Minimum wage:</b> Lessons 8 and 32 showed a minimum wage above the market wage is a ${dt('price-floor','price floor')} in the labor market: higher pay for workers who keep their jobs, fewer jobs. How large the job loss is remains debated.</p>
 ${FIG7.l37trade()}
 <p><b>So what:</b> your course\'s view is that these measures "do not do enough." Your textbook frames it as a trade-off between equality and the incentive to work, which well-designed programs can soften. Both are views about how much to redistribute; the CLEP asks you to know the tools and their effects.</p>
 <div data-check="l37c-pol"></div>
@@ -399,10 +405,16 @@ ${FIG7.l37trade()}
 
 u7xv({
   'l37-def':[FIG7.l37two(), ''], 'l37c-def':[FIG7.l37two(), ''], 'l37-orsh':[FIG7.l37two(), ''],
-  'l37-quint':[FIG7.l37cum(), ''], 'l37c-lorenz':[fig(atable(['Quintile','Share','Cumulative'], [[1,'5%','5%'],[2,'10%','15%'],[3,'15%','<b>30%</b>'],[4,'25%','55%'],[5,'45%','100%']], { cls:'compact', hl:{2:{row:'u3z2'}} }), 'Marked up: add the first three shares for the bottom 60%.'), ''],
+  'l37-quint':[fig(atable(['Quintile','Share of income (2013)'], ['First (poorest)','Second','Third','Fourth','Fifth (richest)'].map((q,i)=>[q, Q13[i]+'%']), { cls:'u7t compact', hl:{4:{row:'u3z2'}} }), 'Marked up: the fifth (richest) quintile\'s own share, 51.0%. Its share alone, not a cumulative total.'), ''], 'l37c-lorenz':[fig(atable(['Quintile','Share','Cumulative'], [[1,'5%','5%'],[2,'10%','15%'],[3,'15%','<b>30%</b>'],[4,'25%','55%'],[5,'45%','100%']], { cls:'u7t compact', hl:{2:{row:'u3z2'}} }), 'Marked up: add the first three shares for the bottom 60%.'), ''],
   'l37-axes':[FIG7.l37lor(), ''], 'l37-tf-far':[FIG7.l37lor(), ''], 'l37-gini':[FIG7.l37gini(), ''], 'l37c-gini':[FIG7.l37gini(), ''],
   'l37-child':['', ''], 'l37c-data':[FIG7.l37pov(), ''], 'l37-house':[FIG7.l37src(), ''], 'l37-winner':[FIG7.l37src(), ''], 'l37-age':[FIG7.l37src(), ''], 'l37-wealth':[FIG7.l37src(), ''], 'l37c-src':[FIG7.l37src(), ''],
-  'l37-trap':[fig(atable(['Earned','Aid','Total income'], [['$0','$18,000','$18,000'],['$6,000','$12,000','$18,000'],['$12,000','$6,000','$18,000'],['$18,000','$0','$18,000']], { cls:'compact', hl:{0:{2:'u3z2'},3:{2:'u3z2'}} }), 'Marked up: your textbook\'s guarantee. Total income stays at $18,000 however much the family earns, up to $18,000.'), ''],
+  'l37-trap':[fig(atable(['Earned','Aid','Total income'], [['$0','$18,000','$18,000'],['$6,000','$12,000','$18,000'],['$12,000','$6,000','$18,000'],['$18,000','$0','$18,000']], { cls:'u7t compact', hl:{0:{2:'u3z2'},3:{2:'u3z2'}} }), 'Marked up: your textbook\'s guarantee. Total income stays at $18,000 however much the family earns, up to $18,000.'), ''],
   'l37-eitc':[FIG7.l37trade(), ''], 'l37-inkind':['', ''], 'l37c-pol':[FIG7.l37nit(), ''], 'l37-minwage':['', ''], 'l37-prog':['', '']
 });
-u7cv('l37', {});
+U7_CARDS.l37.push(
+  ['In-kind transfer','What is an in-kind transfer, and why use one?','Aid given as goods or services instead of cash (SNAP food cards, Medicaid, housing help). Supporters like that it can\'t be "wasted" on other things.','SNAP: a debit-style card that can only buy food.','A family can use SNAP for food it would have bought anyway and spend the freed cash elsewhere, so it often works much like cash.'],
+  ['Earned income tax credit (EITC)','What is the EITC, and why do economists like it?','A payment through the tax system to low-income working families that rises with earnings and phases out slowly, so working always pays.','2013, single parent of two: the credit fell by 21.06 cents per dollar earned above $17,530.','It is not paid to people with no earnings: it rewards work.'],
+  ['Progressive tax','What makes a tax progressive?','People with higher incomes pay a higher percentage of their income in tax.','The U.S. federal income tax: higher brackets have higher rates.','Paying more dollars isn\'t enough: the percentage must rise with income.']
+);
+u7cv('l37', { 'Quintiles':fig(atable(['Quintile','Share of income (2013)'], ['First (poorest)','Second','Third','Fourth','Fifth (richest)'].map((q,i)=>[q, Q13[i]+'%']), { cls:'u7t compact', hl:{4:{row:'u3z2'},0:{row:'u3z1'}} }), 'Each fifth\'s own share. Equality would give each 20%.'),
+  'Poverty trap':fig(atable(['Earnings','Aid','Total income'], [['$0','$18,000','$18,000'],['$5,000','$13,000','$18,000'],['$10,000','$8,000','$18,000'],['$18,000','$0','$18,000']], { cls:'u7t compact', hl:{3:{row:'u3z2'}} }), 'The textbook\'s example: aid cut $1 per $1 earned, so total income never rises.') });

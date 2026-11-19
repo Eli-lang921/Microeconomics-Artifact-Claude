@@ -12,7 +12,7 @@ const hhiZone = h => h < 1000 ? 'under 1,000: probably approved' : h > 1800 ? 'o
 FIG7.l36why = () => fig(flow([
   'A firm (or a group acting together) faces little competition.',
   'It can restrict output and raise its price above marginal cost (Lesson 26).',
-  'Trades that buyers value more than they cost to make don\'t happen: <b>deadweight loss</b>.',
+  `Trades that buyers value more than they cost to make don\'t happen: ${dt('deadweight-loss','<b>deadweight loss</b>')}.`,
   {t:'Government\'s tools: <b>antitrust</b> to keep markets competitive, and <b>regulation</b> where competition can\'t work (natural monopoly).',c:'u3end'}
 ]), 'The case for public policy toward competition, built from Unit 5. Econlib\'s Fred McChesney: economists "generally believe that monopolies and other restraints of trade are bad because they usually reduce total output."');
 
@@ -23,7 +23,7 @@ FIG7.l36laws = () => fig(atable(['Year','Law or event','What it did'], [
   ['1914','<b>Clayton Antitrust Act</b>','Outlawed mergers that "substantially lessen competition," some price discrimination, and tied sales'],
   ['1914','Federal Trade Commission (FTC) created','To define and police unfair competition; today the FTC and the Justice Department enforce the laws'],
   ['1950','Celler-Kefauver Act','Extended the Clayton Act to vertical and conglomerate mergers']
-], { cls:'compact wrap', hl:{0:{row:'u3z1'},2:{row:'u3z1'}} }), 'Your course textbook\'s history of antitrust law. The two highlighted laws are the ones to remember. "Trust" was the 1800s legal form for combining firms, which is why these are called antitrust laws.');
+], { cls:'u7t u7l compact wrap', hl:{0:{row:'u3z1'},2:{row:'u3z1'}} }), 'Your course textbook\'s history of antitrust law. The two highlighted laws are the ones to remember. "Trust" was the 1800s legal form for combining firms, which is why these are called antitrust laws.');
 
 /* L36 V3: what antitrust law allows and forbids (textbook §11.2) */
 FIG7.l36rules = () => fig(atable(['Practice','Under U.S. antitrust law','Why'], [
@@ -33,12 +33,12 @@ FIG7.l36rules = () => fig(atable(['Practice','Under U.S. antitrust law','Why'], 
   ['Exclusive dealing (a maker sells only through its own dealers)','<b>Depends</b>','Legal if it encourages competition; illegal if it shuts rivals out'],
   ['Tying (buy product A only if you also buy product B)','<b>Often challenged</b>','It can force buyers to take something they don\'t want'],
   ['Predatory pricing (cut prices to drive out a new rival, then raise them)','<b>Illegal, but hard to prove</b>','A price below average variable cost is one proposed test']
-], { cls:'compact wrap', hl:{0:{1:'u3z2'},2:{1:'u3z2'},5:{1:'u3z2'}} }), 'Your course textbook\'s list. Notice the pattern: antitrust targets agreements and tactics that reduce competition. Being big, or being the only seller because you were better or first, is not by itself a violation.');
+], { cls:'u7t u7l compact wrap', hl:{0:{1:'u3z2'},2:{1:'u3z2'},5:{1:'u3z2'}} }), 'Your course textbook\'s list. Notice the pattern: antitrust targets agreements and tactics that reduce competition. Being big, or being the only seller because you were better or first, is not by itself a violation.');
 
 /* L36 V4: the windshield market, ratio and index (textbook Table 11.1 and Work It Out) */
 FIG7.l36ws = () => fig(`${atable(['Firms','Share each','Shares added (CR4)','Squared shares (HHI)'], [
-  ['Smooth as Glass','16%','16','16² = 256'],['Auto Glass Doctor','10%','10','10² = 100'],['Your Car Shield','8%','8','8² = 64'],['Seven firms','6% each','6 (only the largest one counts)','7 × 36 = 252'],['Eight firms','3% each','–','8 × 9 = 72'],
-  ['<b>Total</b>','100%','<b>40</b>','<b>744</b>']], { cls:'compact wrap', hl:{5:{row:'u3z2'}} })}`,
+  ['Smooth as Glass','16%','16','16² = 256'],['Auto Glass Doctor','10%','10','10² = 100'],['Your Car Shield','8%','8','8² = 64'],['Seven firms','6% each','6 (only one of the seven counts)','7 × 36 = 252'],['Eight firms','3% each','–','8 × 9 = 72'],
+  ['<b>Total</b>','100%','<b>40</b>','<b>744</b>']], { cls:'u7t compact wrap', hl:{5:{row:'u3z2'}} })}`,
   'Your course textbook\'s 18 windshield-repair firms. The four-firm ratio adds the four largest shares: 16 + 10 + 8 + 6 = 40. The HHI squares every firm\'s share and adds them all: 744. Both say this market is far from concentrated.');
 
 /* L36 V5: same four-firm ratio, very different HHI (textbook Work It Out step 5) */
@@ -71,12 +71,12 @@ FIG7.l36air = () => fig(atable(['','Regulated (Civil Aeronautics Board, 1938-197
   ['Average fares','Higher','About one-third lower over two decades'],
   ['Seats filled','About half','About two-thirds'],
   ['Passengers','Fewer','Doubled from the late 1970s to the early 2000s']
-], { cls:'compact wrap', hl:{2:{2:'u3z2'}} }), 'Your course textbook\'s airline example. Removing price and entry controls brought competition back. The textbook also notes the costs: bankruptcies and layoffs, and recent mergers that worry regulators again.');
+], { cls:'u7t compact wrap', hl:{2:{2:'u3z2'}} }), 'Your course textbook\'s airline example. Removing price and entry controls brought competition back. The textbook also notes the costs: bankruptcies and layoffs, and recent mergers that worry regulators again.');
 
 /* ===== Lesson 36: Antitrust Policy and Regulation (no Modern States video; Module 5 slide 223 names the options; textbook ch. 11) =====
    Common mistakes: M1 having a monopoly is illegal in itself · M2 regulators block most mergers · M3 breaking up a natural monopoly lowers costs
    M4 regulators should make a natural monopoly charge P = MC · M5 the four-firm ratio tells the whole story (HHI adds nothing) · M6 regulation always serves consumers */
-const shareTbl = (sh) => atable(['Firm','Market share'], sh.map((s,i)=>[`Firm ${'ABCDEFGHIJ'[i]||i+1}`, s+'%']), { cls:'compact' });
+const shareTbl = (sh) => atable(['Firm','Market share'], sh.map((s,i)=>[`Firm ${'ABCDEFGHIJ'[i]||i+1}`, s+'%']), { cls:'u7t compact' });
 
 mc('l36-why','l36','Why do economists generally support laws against monopolization and cartels?',
   [`Monopolies and cartels usually restrict output and raise prices, reducing total surplus`,`Large firms always have higher costs than small firms`,`Monopolies always lose money`,`Cartels lower prices too much`,`Competition always produces the most innovation, without exception`],0,
@@ -92,35 +92,43 @@ tf('l36-tf-mono','l36','Under U.S. antitrust law, it is illegal for a firm to ha
 mc('l36-cartel','l36','Made-up scenario. The three cement makers in a region secretly agree on the price each will charge. Under U.S. antitrust law, this is',
   [`Illegal price fixing`,`Legal, because each firm is still separate`,`Legal, if their prices stay below the monopoly price`,`A legal merger`,`Illegal only if one firm has a patent`],0,
   `<p>Your textbook: "it is illegal for competitors to form a cartel to collude to make pricing and output decisions, as if they were a monopoly firm"; the FTC and Justice Department "prohibit firms from agreeing to fix prices or output." Econlib\'s McChesney: "Economists remain almost unanimous in condemning all horizontal price-fixing."</p>`);
-mc('l36-cr4','l36',`Your course textbook\'s market for replacing car windshields has 18 firms:${atable(['Firms','Market share'], [['Smooth as Glass','16%'],['Auto Glass Doctor','10%'],['Your Car Shield','8%'],['Seven firms','6% each'],['Eight firms','3% each']], { cls:'compact' })}What is the four-firm concentration ratio?`,
+mc('l36-cr4','l36',`Your course textbook\'s market for replacing car windshields has 18 firms:${atable(['Firms','Market share'], [['Smooth as Glass','16%'],['Auto Glass Doctor','10%'],['Your Car Shield','8%'],['Seven firms','6% each'],['Eight firms','3% each']], { cls:'u7t compact' })}What is the four-firm concentration ratio?`,
   [`34`,`40`,`46`,`58`,`744`],1,
-  `<p>Add the four largest shares: 16 + 10 + 8 + 6 = <b>40</b>. Only one of the seven 6% firms is among the top four.</p>${FIG7.l36ws()}<p>34 stops at three firms; 58 adds all seven 6% firms\' worth incorrectly (16 + 10 + 8 + 4 × 6); 744 is the HHI, a different measure (M5).</p>`);
+  `<p>Add the four largest shares: 16 + 10 + 8 + 6 = <b>40</b>. Only one of the seven 6% firms is among the top four.</p>${FIG7.l36ws()}<p>34 stops at three firms; 46 is the ratio after the top two firms merge; 58 adds the top seven firms instead of four (16 + 10 + 8 + 4 × 6); 744 is the HHI, a different measure (M5).</p>`);
 gen('l36-g-cr4','l36',()=>{
   let sh; do { const k = pick([5,6,7]); sh = []; let left = 100; for(let i=0;i<k-1;i++){ const v = pick([4,6,8,10,12,15,18,20,25,30]); if(v < left-3){ sh.push(v); left -= v; } } sh.push(left); sh.sort((a,b)=>b-a); } while(sh.length<5 || new Set(sh).size < sh.length || sh[0] > 60);
   const ans = cr4(sh);
   return { type:'num', kind:'num', unit:'', prompt:`Made-up numbers. A market has ${sh.length} firms with these market shares:${shareTbl(sh)}What is the four-firm concentration ratio?`, answer:ans,
-    explain:`<div class="math">Four largest: ${sh.slice(0,4).join(' + ')} = <b>${ans}</b></div><p>The common slips: adding every firm (always 100), or squaring the shares, which gives the HHI (${hhiOf(sh).toLocaleString('en-US')}), a different measure (M5).</p>${fig(atable(['Firm','Share','In the top four?'], sh.map((s,i)=>[`Firm ${'ABCDEFGHIJ'[i]}`, s+'%', i<4?'Yes':'No']), { cls:'compact', hl:Object.fromEntries([0,1,2,3].map(i=>[i,{row:'u3z2'}])) }), 'Marked up: the four highlighted shares are the ones added.')}`
+    explain:`<div class="math">Four largest: ${sh.slice(0,4).join(' + ')} = <b>${ans}</b></div><p>The common slips: adding every firm (always 100), or squaring the shares, which gives the HHI (${hhiOf(sh).toLocaleString('en-US')}), a different measure (M5).</p>${fig(atable(['Firm','Share','In the top four?'], sh.map((s,i)=>[`Firm ${'ABCDEFGHIJ'[i]}`, s+'%', i<4?'Yes':'No']), { cls:'u7t compact', hl:Object.fromEntries([0,1,2,3].map(i=>[i,{row:'u3z2'}])) }), 'Marked up: the four highlighted shares are the ones added.')}`
   };
 });
 gen('l36-g-hhi','l36',()=>{
-  let sh; do { const k = pick([3,4,5]); sh = []; let left = 100; for(let i=0;i<k-1;i++){ const v = pick([10,15,20,25,30,40,50]); if(v < left-5){ sh.push(v); left -= v; } } sh.push(left); sh.sort((a,b)=>b-a); } while(sh.length<3);
+  let sh; do { const k = pick([3,4,5,8,10]); const opts = k > 5 ? [5,8,10,12,15] : [10,15,20,25,30,40,50]; sh = []; let left = 100; for(let i=0;i<k-1;i++){ const v = pick(opts); if(v < left-5){ sh.push(v); left -= v; } } sh.push(left); sh.sort((a,b)=>b-a); } while(sh.length<3 || sh.length>10);
   const ans = hhiOf(sh);
   return { type:'num', kind:'num', unit:'', prompt:`Made-up numbers. A market has ${sh.length} firms with these market shares:${shareTbl(sh)}What is the Herfindahl-Hirschman Index (HHI)?`, answer:ans,
-    explain:`<div class="math">HHI = ${sh.map(s=>s+'²').join(' + ')}<br>= ${sh.map(s=>(s*s).toLocaleString('en-US')).join(' + ')} = <b>${ans.toLocaleString('en-US')}</b></div><p>Under the 1980s FTC guideline your textbook reports, that is ${hhiZone(ans)}. The common slip is squaring the total (100² = 10,000) or adding the shares without squaring (100).</p>${fig(`<div class="qg" style="max-width:360px">${ubars(sh, { labels:sh.map((_,i)=>'ABCDE'[i]), ylab:'Market share (%)', xlab:'Firm', ymax:100, colorOf:()=>'var(--accent)' })}</div>`, `Marked up: each bar is squared and added. The biggest firm contributes ${(sh[0]*sh[0]).toLocaleString('en-US')} of the ${ans.toLocaleString('en-US')}.`)}`
+    explain:`<div class="math">HHI = ${sh.map(s=>s+'²').join(' + ')}<br>= ${sh.map(s=>(s*s).toLocaleString('en-US')).join(' + ')} = <b>${ans.toLocaleString('en-US')}</b></div><p>If a merger produced this HHI, the 1980s FTC guideline your textbook reports would say: ${hhiZone(ans)}. The common slip is squaring the total (100² = 10,000) or adding the shares without squaring (100).</p>${fig(`<div class="qg" style="max-width:360px">${ubars(sh, { labels:sh.map((_,i)=>String.fromCharCode(65+i)), ylab:'Market share (%)', xlab:'Firm', ymax:100, colorOf:()=>'var(--accent)' })}</div>`, `Marked up: each bar is squared and added. The biggest firm contributes ${(sh[0]*sh[0]).toLocaleString('en-US')} of the ${ans.toLocaleString('en-US')}.`)}`
   };
 });
 mc('l36-same80','l36','Two industries each have a four-firm concentration ratio of 80. In Industry X, five firms have 20% each. In Industry Y, one firm has 77% and 23 firms have 1% each. Which statement is correct?',
   [`Industry Y has the much higher HHI (5,952 vs 2,000), so it raises more concern about competition`,`Both industries have the same HHI, because their four-firm ratios match`,`Industry X has the higher HHI, because it has more large firms`,`Neither ratio matters, because both industries have more than four firms`,`Industry Y is perfectly competitive, because it has 24 firms`],0,
   `<p>X: 5 × 20² = 2,000. Y: 77² + 23 × 1² = 5,929 + 23 = 5,952. Your textbook: "it would be reasonable to worry more about the extent of competition in the second case—where the largest firm is nearly a monopoly." The four-firm ratio can\'t see the difference; the HHI can (M5).</p>${FIG7.l36same()}`);
+/* Market-share bar chart for answer choices: every bar labeled with its share (150 × 128, neutral labels). */
+function u7share(vals, aria){
+  const x0=30, y0=100, pw=112, ph=80, n=vals.length, bw=pw/n, Y=v=>y0-ph*v/100;
+  let s = `<svg class="u6m" viewBox="0 0 150 128" role="img" aria-label="${esc(aria)}"><line x1="${x0}" x2="${x0+pw}" y1="${y0}" y2="${y0}" class="ax"/><line x1="${x0}" x2="${x0}" y1="${y0}" y2="${y0-ph}" class="ax"/>`;
+  s += `<text x="${x0+pw/2}" y="${y0+23}" text-anchor="middle" class="lbl">Firm</text><text x="10" y="${y0-ph/2}" text-anchor="middle" class="lbl" transform="rotate(-90 10 ${y0-ph/2})">Share (%)</text>`;
+  vals.forEach((v,i)=>{ const x = x0+i*bw; s += `<rect x="${(x+bw*0.18).toFixed(1)}" y="${Y(v).toFixed(1)}" width="${(bw*0.64).toFixed(1)}" height="${(ph*v/100).toFixed(1)}" rx="1.5" fill="var(--accent)" opacity=".8"/><text x="${(x+bw/2).toFixed(1)}" y="${(Y(v)-3).toFixed(1)}" text-anchor="middle" class="lbl-ink" style="font-size:9.5px">${v}</text><text x="${(x+bw/2).toFixed(1)}" y="${y0+9}" text-anchor="middle" class="lbl" style="font-size:9px">${i+1}</text>`; });
+  return s + '</svg>';
+}
 lazy('l36-gr-hhi','l36',()=>visMC({
-  prompt:`Each bar chart shows the market shares (in percent) of every firm in a different industry; all shares add to 100%. Which industry has the <b>highest</b> Herfindahl-Hirschman Index?`,
+  prompt:`Each bar chart shows the market share (in percent, printed above each bar) of every firm in a different industry; all shares add to 100%. Which industry has the <b>highest</b> Herfindahl-Hirschman Index?`,
   choices:[
-    { svg:L=>u6minibars([70,10,10,10],{ymax:100,aria:'Graph '+L,xlab:'Firm',ylab:'Share (%)'}), desc:'four firms: 70, 10, 10, 10 percent', ok:true },
-    { svg:L=>u6minibars([50,50],{ymax:100,aria:'Graph '+L,xlab:'Firm',ylab:'Share (%)'}), desc:'two firms: 50 and 50 percent' },
-    { svg:L=>u6minibars([40,30,20,10],{ymax:100,aria:'Graph '+L,xlab:'Firm',ylab:'Share (%)'}), desc:'four firms: 40, 30, 20, 10 percent' },
-    { svg:L=>u6minibars([25,25,25,25],{ymax:100,aria:'Graph '+L,xlab:'Firm',ylab:'Share (%)'}), desc:'four firms: 25 percent each' },
-    { svg:L=>u6minibars([10,10,10,10,10,10,10,10,10,10],{ymax:100,aria:'Graph '+L,xlab:'Firm',ylab:'Share (%)'}), desc:'ten firms: 10 percent each' } ],
-  explain: L => `<p><b>Graph ${L}</b>: 70² + 3 × 10² = 4,900 + 300 = <b>5,200</b>.</p>${fig(atable(['Industry','HHI'], [['70, 10, 10, 10','4,900 + 100 + 100 + 100 = <b>5,200</b>'],['50, 50','2,500 + 2,500 = 5,000'],['40, 30, 20, 10','1,600 + 900 + 400 + 100 = 3,000'],['25 × 4','4 × 625 = 2,500'],['10 × 10','10 × 100 = 1,000']], { cls:'compact', hl:{0:{row:'u3z2'}} }), 'Marked up: every industry\'s HHI. Squaring makes one dominant firm count more than two equal halves.')}<p>Two firms at 50% each (5,000) is the tempting choice: fewer firms usually means more concentration, but one 70% firm outweighs it (M5).</p>`
+    { svg:L=>u7share([80,10,10],'Graph '+L), desc:'three firms: 80, 10, 10 percent', ok:true },
+    { svg:L=>u7share([50,50],'Graph '+L), desc:'two firms: 50 and 50 percent' },
+    { svg:L=>u7share([40,30,20,10],'Graph '+L), desc:'four firms: 40, 30, 20, 10 percent' },
+    { svg:L=>u7share([25,25,25,25],'Graph '+L), desc:'four firms: 25 percent each' },
+    { svg:L=>u7share([20,20,20,20,20],'Graph '+L), desc:'five firms: 20 percent each' } ],
+  explain: L => `<p><b>Graph ${L}</b>: 80² + 10² + 10² = 6,400 + 100 + 100 = <b>6,600</b>.</p>${fig(atable(['Industry','HHI'], [['80, 10, 10','6,400 + 100 + 100 = <b>6,600</b>'],['50, 50','2,500 + 2,500 = 5,000'],['40, 30, 20, 10','1,600 + 900 + 400 + 100 = 3,000'],['25 × 4','4 × 625 = 2,500'],['20 × 5','5 × 400 = 2,000']], { cls:'u7t compact', hl:{0:{row:'u3z2'}} }), 'Marked up: every industry\'s HHI. Squaring makes one dominant firm count more than two equal halves.')}<p>Two firms at 50% each (5,000) is the tempting choice: fewer firms usually means more concentration, but one 80% firm outweighs it (M5).</p>`
 }));
 mc('l36-natreg','l36',`Your course textbook\'s natural monopoly can be left alone or regulated:${FIG5.l26natBare()}A regulator wants the firm to cover its average cost and earn only a normal profit, without a subsidy. Which outcome should it require?`,
   [`Point F: 6 units at $6.50, where average cost meets demand`,`Point A: 4 units at $9.30, where MR = MC`,`Point C: 8 units at $3.50, where MC meets demand`,`Point B: split the firm in two, each making 2 units`,`Zero output`],0,
@@ -132,8 +140,8 @@ mc('l36-costplus','l36','What is the main weakness of cost-plus regulation of a 
   [`Because the firm can pass its costs on to customers, it has little reason to keep costs down`,`It forces the firm to charge less than average cost`,`It lets the firm earn unlimited monopoly profits`,`It sets the price for many years without looking at costs`,`It breaks the firm into smaller pieces`],0,
   `<p>The textbook: "If producers are reimbursed for their costs, plus a bit more, then at a minimum, producers have less reason to be concerned with high costs." Worse, they may have "an incentive to generate high costs." Setting a price for years ahead is price cap regulation, the alternative.</p>${FIG7.l36cap()}`);
 mc('l36-capture','l36','Before 1978, the airline industry suggested appointees to its regulatory board, lobbied the board, supplied most of its information and hired departing board members. What is this called?',
-  [`Regulatory capture`,`Predatory pricing`,`Price cap regulation`,`A tying sale`,`Deregulation`],0,
-  `<p>The textbook: "regulatory capture, in which the firms supposedly being regulated end up playing a large role in setting the regulations that they will follow." The result can be regulation that helps existing firms "reduce output, keep prices high, and limit competition" (M6).</p>${FIG7.l36capture()}`);
+  [`Regulatory capture`,`Regulation that protects consumers from high prices`,`Price cap regulation`,`A tying sale`,`Deregulation`],0,
+  `<p>The textbook: "regulatory capture, in which the firms supposedly being regulated end up playing a large role in setting the regulations that they will follow." The result can be regulation that helps existing firms "reduce output, keep prices high, and limit competition," the opposite of protecting consumers (M6).</p>${FIG7.l36capture()}`);
 /* L36 more */
 mc('l36-standard','l36','In 1911 the U.S. Supreme Court upheld breaking up Standard Oil under the Sherman Act. About what share of U.S. oil refining had Standard Oil controlled, and into how many firms was it split?',
   [`About 90%; 34 firms`,`About 50%; 2 firms`,`About 25%; 4 firms`,`100%; 100 firms`,`About 75%; 10 firms`],0,
@@ -156,7 +164,7 @@ gen('l36-g-merge','l36',()=>{
   let a, b, rest; do { a = pick([10,15,20,25,30]); b = pick([10,15,20,25]); rest = 100 - a - b; } while(rest < 20 || a < b || rest % 10);
   const others = Array(rest/10).fill(10), before = [a,b,...others], after = [a+b,...others], h1 = hhiOf(before), h2 = hhiOf(after), ans = h2 - h1;
   return { type:'num', kind:'num', unit:'points', prompt:`Made-up numbers. In a market, Firm A has <b>${a}%</b>, Firm B has <b>${b}%</b>, and ${others.length} other firms have 10% each. If A and B merge, by how much does the HHI rise?`, answer:ans,
-    explain:`<div class="math">Before: ${a}² + ${b}² + ${others.length} × 10² = ${(a*a).toLocaleString('en-US')} + ${(b*b).toLocaleString('en-US')} + ${others.length*100} = ${h1.toLocaleString('en-US')}<br>After: ${a+b}² + ${others.length} × 10² = ${((a+b)*(a+b)).toLocaleString('en-US')} + ${others.length*100} = ${h2.toLocaleString('en-US')}<br>Rise = <b>${ans.toLocaleString('en-US')}</b></div><p>A shortcut: the rise is always 2 × ${a} × ${b} = ${2*a*b}. The common slip is adding the two shares (${a+b}) and stopping, or forgetting to square the merged share.</p>${fig(atable(['','Before','After'], [['Merging firms', `${a}² + ${b}² = ${(a*a+b*b).toLocaleString('en-US')}`, `${a+b}² = ${((a+b)*(a+b)).toLocaleString('en-US')}`],['Other firms', `${others.length*100}`, `${others.length*100}`],['HHI', h1.toLocaleString('en-US'), `<b>${h2.toLocaleString('en-US')}</b>`]], { cls:'compact', hl:{0:{row:'u3z2'}} }), `Marked up: only the merging firms\' part changes. Before: ${hhiZone(h1)}; after: ${hhiZone(h2)}.`)}`
+    explain:`<div class="math">Before: ${a}² + ${b}² + ${others.length} × 10² = ${(a*a).toLocaleString('en-US')} + ${(b*b).toLocaleString('en-US')} + ${others.length*100} = ${h1.toLocaleString('en-US')}<br>After: ${a+b}² + ${others.length} × 10² = ${((a+b)*(a+b)).toLocaleString('en-US')} + ${others.length*100} = ${h2.toLocaleString('en-US')}<br>Rise = <b>${ans.toLocaleString('en-US')}</b></div><p>A shortcut: the rise is always 2 × ${a} × ${b} = ${2*a*b}. The common slip is adding the two shares (${a+b}) and stopping, or forgetting to square the merged share.</p>${fig(atable(['','Before','After'], [['Merging firms', `${a}² + ${b}² = ${(a*a+b*b).toLocaleString('en-US')}`, `${a+b}² = ${((a+b)*(a+b)).toLocaleString('en-US')}`],['Other firms', `${others.length*100}`, `${others.length*100}`],['HHI', h1.toLocaleString('en-US'), `<b>${h2.toLocaleString('en-US')}</b>`]], { cls:'u7t compact', hl:{0:{row:'u3z2'}} }), `Marked up: only the merging firms\' part changes. Before: ${hhiZone(h1)}; after: ${hhiZone(h2)}.`)}`
   };
 });
 mc('l36-rpm','l36','Under U.S. antitrust law, which practice is illegal?',
@@ -202,6 +210,9 @@ mc('l36c-hhi','l36','Made-up numbers. A market has three firms with shares of 50
 mc('l36c-reg','l36','A regulator sets a natural monopoly\'s price equal to its average cost. Compared with leaving it unregulated, which is true?',
   [`Price is lower and output higher, and the firm earns only a normal profit`,`Price and output are both lower`,`The firm loses money on every unit`,`Price is higher and output lower`,`Nothing changes`],0,
   `<p>Moving from A (4 units at $9.30) to F (6 units at $6.50) lowers price and raises output; at P = AC the firm covers its costs with a normal profit. Losses happen at P = MC (point C) (M4).</p>${FIG7.l36nm()}`);
+mc('l36c-capture','l36','Made-up scenario. A state board sets taxi fares and decides how many taxi licenses exist. Taxi companies nominate most of the board\'s members, and the board has issued no new licenses in 20 years. What is the most likely result?',
+  [`Regulatory capture: fares stay high and new competitors are kept out`,`Fares fall, because regulators always protect riders`,`Predatory pricing by the taxi companies`,`A natural monopoly that should be broken up`,`Price cap regulation that rewards cost cutting`],0,
+  `<p>The regulated firms control the regulator, the textbook\'s definition of regulatory capture, and the result is the airline pattern before 1978: limited entry and high prices. Assuming regulation must help consumers is the trap (M6).</p>${FIG7.l36capture()}`);
 mc('l36c-skill','l36','Made-up scenario. A town\'s electricity is delivered by one company over one set of wires, because a second set would double the cost. Which policy fits best?',
   [`Regulate its price, for example at average cost or with a price cap`,`Break it into several competing companies with their own wires`,`Leave it alone, because monopoly is illegal`,`Fine it for price fixing`,`Ban it from earning any profit at all`],0,
   `<p>Duplicate wires would raise average cost, the mark of a natural monopoly, so breaking it up makes things worse (M3). The standard answer is regulation of price. A normal profit is allowed; "no profit at all" would drive it out.</p>`);
@@ -223,21 +234,21 @@ const L36TAGS = {
   'l36-guide':['OS111','anti','data','M2'], 'l36-merge2':['OS111','anti','data','M5'], 'l36-g-merge':['OS111','anti','data','M5'], 'l36-rpm':['OS112','anti','terms','M1'],
   'l36-tying':['OS112 ELAT','anti','models',''], 'l36-predatory':['OS112','anti','terms',''], 'l36-microsoft':['OS112','anti','terms','M1'], 'l36-mc-loss':['OS113','reg','graphs','M4'],
   'l36-pricecap':['OS113','reg','terms',''], 'l36-airline':['OS114','reg','data','M6'], 'l36-market':['OS111','anti','terms','M5'], 'l36-vitamin':['OS112','anti','terms',''],
-  'l36c-why':['ELAT MS5','anti','terms','M3'], 'l36c-law':['OS111','anti','models','M2'], 'l36c-practice':['OS112 ELAT','anti','models',''], 'l36c-hhi':['OS111','anti','data','M5'],
-  'l36c-reg':['OS113','reg','models','M4'], 'l36c-skill':['OS113 MS5','reg','models','M3']
+  'l36c-why':['ELAT MS5S','anti','terms','M3'], 'l36c-law':['OS111','anti','models','M2'], 'l36c-practice':['OS112 ELAT','anti','models',''], 'l36c-hhi':['OS111','anti','data','M5'],
+  'l36c-reg':['OS113','reg','models','M4'], 'l36c-skill':['OS113 MS5S','reg','models','M3'], 'l36c-capture':['OS114','reg','models','M6']
 };
 u7tag(L36TAGS);
 
 U7_CARDS.l36 = [
   ['Antitrust laws','What are antitrust laws?','Laws that let government block mergers, break up firms and outlaw practices that reduce competition. Main U.S. laws: Sherman (1890) and Clayton (1914).','Standard Oil was split into 34 firms in 1911.','They target anticompetitive behavior, not size alone.', FIG7.l36laws()],
-  ['Sherman Act (1890)','What did the Sherman Antitrust Act outlaw?','Cartels and other restraints of trade, and monopolizing or attempting to monopolize.','A secret price-fixing agreement among cement makers.','Econlib: it didn\'t define these terms, so courts filled them in.'],
-  ['Clayton Act (1914)','What did the Clayton Act outlaw?','Mergers that substantially lessen competition, some price discrimination, and tied sales.','Regulators can block a merger of two of the three largest airlines.','It doesn\'t ban mergers in general; most are approved.'],
+  ['Sherman Act (1890)','What did the Sherman Antitrust Act outlaw?','Cartels and other restraints of trade, and monopolizing or attempting to monopolize.','A secret price-fixing agreement among cement makers.','Econlib: it didn\'t define these terms, so courts filled them in.', FIG7.l36laws()],
+  ['Clayton Act (1914)','What did the Clayton Act outlaw?','Mergers that substantially lessen competition, some price discrimination, and tied sales.','Regulators can block a merger of two of the three largest airlines.','It doesn\'t ban mergers in general; most are approved.', FIG7.l36laws()],
   ['Is monopoly illegal?','Is having a monopoly illegal under U.S. antitrust law?','No. Monopoly from a better product or a patent is legal; anticompetitive practices are not.','Microsoft\'s near-monopoly wasn\'t the charge; tying and exclusive deals were.','Size alone is not a violation.', FIG7.l36rules()],
-  ['Price fixing (cartel)','Why is agreeing with rivals on price illegal?','It is collusion: the firms act like one monopoly, restricting output and raising prices.','The vitamin cartel: a $500 million fine and jail time.','Matching a rival\'s price without an agreement can be legal.'],
-  ['Restrictive practices','What are restrictive practices? Name three.','Practices short of price fixing that can reduce competition: minimum resale prices, some exclusive deals, tying, predatory pricing.','A store sells a game only with a particular headset (tying).','Some exclusive deals and bundles are legal and common.'],
+  ['Price fixing (cartel)','Why is agreeing with rivals on price illegal?','It is collusion: the firms act like one monopoly, restricting output and raising prices.','The vitamin cartel: a $500 million fine and jail time.','Matching a rival\'s price without an agreement can be legal.', FIG7.l36rules()],
+  ['Restrictive practices','What are restrictive practices? Name three.','Practices short of price fixing that can reduce competition: minimum resale prices, some exclusive deals, tying, predatory pricing.','A store sells a game only with a particular headset (tying).','Some exclusive deals and bundles are legal and common.', FIG7.l36rules()],
   ['Four-firm concentration ratio','How do you calculate the four-firm concentration ratio?','Add the market shares of the four largest firms.','Windshields: 16 + 10 + 8 + 6 = 40.','It ignores how the shares are split among the top four.', FIG7.l36ws()],
   ['Herfindahl-Hirschman Index (HHI)','How do you calculate the HHI, and what is its range?','Square every firm\'s market share and add them. Monopoly = 10,000; very competitive = 100 or less.','50%, 30%, 20%: 2,500 + 900 + 400 = 3,800.','Squaring weights big firms heavily.', FIG7.l36same()],
-  ['HHI merger guideline (1980s)','What did the FTC\'s 1980s HHI guideline say?','Under 1,000: probably approve; over 1,800: probably challenge; in between: case by case.','A merger producing an HHI of 2,400 would probably be challenged.','Today regulators rely more on case-by-case evidence.'],
+  ['HHI merger guideline (1980s)','What did the FTC\'s 1980s HHI guideline say?','Under 1,000: probably approve; over 1,800: probably challenge; in between: case by case.','A merger producing an HHI of 2,400 would probably be challenged.','Today regulators rely more on case-by-case evidence.', numline({ min:0, max:3000, regions:[[0,1000,'Approve','var(--accent-soft)'],[1000,1800,'Case by case','var(--g2-soft, #f3e3b5)'],[1800,3000,'Challenge','#f2c4c4']], points:[[2400,'2,400']], ticks:[0,1000,1800,3000] })],
   ['Regulating a natural monopoly','Which outcome do regulators usually aim for, and why not the others?','Point F: price = average cost, so the firm covers costs with a normal profit. P = MC causes losses; splitting raises average cost.','Textbook: F = 6 units at $6.50.','Don\'t break up a natural monopoly; regulate its price.', FIG7.l36nm()],
   ['Cost-plus vs price cap','How do cost-plus and price cap regulation differ?','Cost-plus: price = cost + normal profit, so little reason to cut costs. Price cap: a set price for years, so cost cuts earn extra profit.','Utilities moved to price caps in the 1980s and 1990s.','Price caps fail if set unrealistically low.', FIG7.l36cap()],
   ['Regulatory capture','What is regulatory capture?','When the regulated firms gain strong influence over their regulator, so rules protect the industry instead of consumers.','Pre-1978 airline regulation: no new airlines on main routes for 40 years.','Deregulation cut airfares by about one-third.', FIG7.l36capture()]
@@ -258,10 +269,10 @@ U7_PLAN.l36 = {
 };
 
 U7_LESSONS.push({ id:'l36', unit:7, title:'Antitrust Policy and Regulation', mins:40, src:'No Modern States video covers this CLEP topic; Module 5 slide 223 names the options · Course textbook (OpenStax) ch. 11 (§11.1-§11.4)',
-  sources:['MS5','OS111','OS112','OS113','OS114','CB','ELAT'],
+  sources:['MS5S','OS111','OS112','OS113','OS114','CB','ELAT'],
   oneline:'Government promotes competition two ways: antitrust laws stop mergers and practices that reduce competition, and regulation sets prices where only one firm makes sense, the natural monopoly.',
   body:`
-<p>Lesson 26 showed that a ${dt('monopoly','monopoly')} produces less and charges more than a competitive market, and listed your course\'s four responses (Module 5, slide 223): "Increase competition with Antitrust Laws; Regulate natural monopolies ...; Public Ownership ...; Do nothing." Lesson 27 showed firms trying to act like a monopoly through a ${dt('cartel','cartel')}. The CLEP outline calls the first two responses "Public policy to promote competition." Modern States has no video on them, so this lesson follows your course textbook\'s chapter 11.</p>
+<p>Lesson 26 showed that a ${dt('monopoly','monopoly')} produces less and charges more than a competitive market, and listed your course\'s four responses (Module 5, slide 223): "Increase competition with Antitrust Laws; Regulate natural monopolies ...; Public Ownership ...; Do nothing." Lesson 27 showed firms trying to act like a monopoly through a ${dt('cartel','cartel')}. The CLEP outline calls the first two responses "Public policy to promote competition." Modern States has no video on them, so this lesson follows your course textbook\'s chapter 11. It takes the illegal practices (§11.2) before the concentration measures (§11.1) on purpose, so the tools for spotting risky mergers come right before they are used.</p>
 
 <h2>Why promote competition?</h2>
 <!-- src: MS5 (slide 223, as above); ELAT ("Economists generally believe that monopolies and other restraints of trade are bad because they usually reduce total output, and therefore the overall economic well-being for producers and consumers"); Lesson 26 (monopoly deadweight loss); OS111 (critics of the trusts: "when competition was reduced, these firms were free to charge more and make permanently higher profits"). -->
@@ -276,7 +287,7 @@ ${FIG7.l36why()}
 <p>In the late 1800s, groups of firms were combined under a legal form called a "trust" and run "as if they were a single firm" (your textbook). Laws to limit them became antitrust laws.</p>
 ${FIG7.l36laws()}
 <p><b>Why these rules:</b> the Sherman Act goes after the two ways to get monopoly power without being better: agreeing with rivals (a cartel) and monopolizing. The Clayton Act adds a preventive tool: stop a merger before it "substantially lessen[s] competition." Econlib notes the Sherman Act "defines neither the practices that constitute restraints of trade nor monopolization," so courts and agencies have filled in the details.</p>
-<p><b>A key limit:</b> your textbook: "Under U.S. antitrust laws, monopoly itself is not illegal." A patent holder or a firm that wins customers "by producing a better product at a lower price" breaks no law.</p>
+<p><b>A key limit.</b> Your textbook: "Under U.S. antitrust laws, monopoly itself is not illegal." A patent holder or a firm that wins customers "by producing a better product at a lower price" breaks no law.</p>
 <div data-check="l36c-law"></div>
 
 <h2>Illegal agreements and restrictive practices</h2>
@@ -286,7 +297,7 @@ ${FIG7.l36laws()}
 ${FIG7.l36rules()}
 <p><b>Worked example: your course textbook\'s Microsoft case.</b> Microsoft\'s Windows had a near-monopoly. Regulators argued it used that power to win the browser market, by ${dt('tying-sale','tying')} Internet Explorer to Windows and threatening computer makers who installed a rival browser. In 2000 a court ordered a breakup; on appeal that was overturned, and in 2002 Microsoft settled by agreeing to end the practices.</p>
 <p>Check: the charge was the tactics, not the near-monopoly itself, consistent with "monopoly itself is not illegal."</p>
-<p><b>So what:</b> on the exam, an agreement among rivals on price or output is illegal; a big market share by itself is not. ${dt('predatory-pricing','Predatory pricing')} is illegal but "difficult to prove," since cutting a price may just be competing.</p>
+<p><b>So what:</b> on the exam, an agreement among rivals on price or output is illegal; a big market share by itself is not. ${dt('predatory-pricing','Predatory pricing')} is illegal but hard to prove (your textbook says so in chapter 9), since cutting a price may just be competing.</p>
 <div data-check="l36c-practice"></div>
 
 <h2>Mergers and measuring concentration</h2>
@@ -324,6 +335,7 @@ ${FIG7.l36capture()}
 <p><b>Worked example: your course textbook\'s airlines.</b> From 1938 to 1978 the Civil Aeronautics Board set fares and routes and let no new airline onto the main routes. Then Congress deregulated.</p>
 ${FIG7.l36air()}
 <p>Check: lower fares and fuller planes are what Unit 5 predicts when entry opens a market to competition.</p>
+<div data-check="l36c-capture"></div>
 <p><b>So what:</b> regulation fits natural monopolies; where competition can work, removing price and entry controls can help consumers. The textbook is balanced: deregulation also brought bankruptcies and layoffs, and the 2008 financial crisis left "many Americans ... disenchanted with deregulation, at least of financial markets."</p>
 
 <h2>Which policy fits?</h2>
@@ -370,10 +382,10 @@ ${FIG7.l36air()}
 u7xv({
   'l36-why':[FIG7.l36why(), ''], 'l36c-why':[FIG7.l36why(), ''], 'l36-sherman':[FIG7.l36laws(), ''], 'l36-clayton':[FIG7.l36laws(), ''], 'l36-standard':[FIG7.l36laws(), ''], 'l36-ftc':[FIG7.l36laws(), ''], 'l36c-law':[FIG7.l36laws(), ''],
   'l36-tf-mono':[FIG7.l36rules(), ''], 'l36-cartel':[FIG7.l36rules(), ''], 'l36-rpm':[FIG7.l36rules(), ''], 'l36-tying':[FIG7.l36rules(), ''], 'l36-predatory':[FIG7.l36rules(), ''], 'l36c-practice':[FIG7.l36rules(), ''], 'l36-vitamin':[FIG7.l36rules(), ''], 'l36-microsoft':[FIG7.l36rules(), ''],
-  'l36-merge2':[fig(atable(['','Top four shares','CR4'], [['Before','16 + 10 + 8 + 6','40'],['After the top two merge','26 + 8 + 6 + 6','<b>46</b>']], { cls:'compact', hl:{1:{row:'u3z2'}} }), 'Marked up: the merged firm counts once, and another 6% firm joins the top four.'), ''],
+  'l36-merge2':[fig(atable(['','Top four shares','CR4'], [['Before','16 + 10 + 8 + 6','40'],['After the top two merge','26 + 8 + 6 + 6','<b>46</b>']], { cls:'u7t compact', hl:{1:{row:'u3z2'}} }), 'Marked up: the merged firm counts once, and another 6% firm joins the top four.'), ''],
   'l36c-hhi':[fig(`<div class="qg" style="max-width:360px">${ubars([50,30,20], { labels:['A','B','C'], ylab:'Market share (%)', xlab:'Firm', ymax:100, colorOf:()=>'var(--accent)' })}</div>`, 'Marked up: 50² + 30² + 20² = 2,500 + 900 + 400 = 3,800.'), ''],
   'l36-guide':[fig(numline({ min:0, max:3000, regions:[[0,1000,'Approve','var(--accent-soft)'],[1000,1800,'Case by case','var(--g2-soft, #f3e3b5)'],[1800,3000,'Challenge','#f2c4c4']], points:[[2400,'2,400']], ticks:[0,1000,1800,3000] }), 'Marked up: the 1980s FTC zones; 2,400 falls in the challenge zone.'), ''],
-  'l36-tf-mergers':[FIG7.l36laws(), ''], 'l36-natreg':[FIG7.l36nm(), ''], 'l36-mc-loss':[FIG7.l36nm(), ''], 'l36c-skill':[FIG7.l36nm(), ''], 'l36-pricecap':[FIG7.l36cap(), ''],
-  'l36-capture':['', ''], 'l36-market':[FIG7.l36same(), ''], 'l36-merger-def':[FIG7.l36laws(), '']
+  'l36-natreg':[FIG7.l36nm(), ''], 'l36-mc-loss':[FIG7.l36nm(), ''], 'l36c-skill':[FIG7.l36nm(), ''], 'l36-pricecap':[FIG7.l36cap(), ''],
+  'l36-market':[fig(`<div class="u2row"><div class="u2cell">${hbars([['Share of premium organic groceries',60,'var(--bad)'],['Share of all groceries',3,'var(--accent)']], { max:70, left:200, fmt:v=>v+'%' })}</div></div>`, 'Made-up shares for one chain: the narrow market makes it look dominant; the broad market makes it look small.'), '']
 });
 u7cv('l36', {});

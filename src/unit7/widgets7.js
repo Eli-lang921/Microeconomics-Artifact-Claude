@@ -41,7 +41,8 @@ W.extsort = el => sorterWidget(el, { title:'Too much or too little?', hint:'Made
 /* L34 widget: set a pollution tax (your course textbook's particulate example, Figure 12.3).
    The firm cuts each 10-pound step whose cost is at or below the tax (at a tie it is indifferent; the widget counts it as cut and says so).
    TEST NOTE (2026-11-19), expected (checked by script): tax $0 → cut 0, emit 50, cutting cost $0, tax paid $0; tax $1,000 → cut 30, emit 20, cutting cost $1,700, tax paid $2,000, total $3,700;
-   tax $1,500 (tie) → cut 40, emit 10, cutting cost $3,200, tax paid $1,500; tax $3,000 → cut 50, emit 0, cutting cost $5,700, tax paid $0. */
+   tax $1,500 (tie) → cut 40, emit 10, cutting cost $3,200, tax paid $1,500; tax $2,500 (tie) → cut 50, tax paid $0; tax $200 → cut 0, tax paid $1,000; tax $3,000 → cut 50, emit 0, cutting cost $5,700, tax paid $0.
+   Messages: n = 0 → "cuts nothing"; ties → "no more than the tax" plus the tie note; n = 5 → "at or above every step"; step/steps by count. Dashed line marks the tax. */
 W.taxlab = el => {
   el.innerHTML = `<p class="widget-title">Set a pollution tax</p><p class="hint">Your course textbook\'s firm emits 50 pounds of soot a year. Each further 10 pounds costs more to cut: $300, $500, $900, $1,500, $2,500. Choose the tax on each 10 pounds still emitted.</p>
   <div class="slider"><label for="tl-t">Tax per 10 pounds</label><input id="tl-t" type="range" min="0" max="3000" step="100" value="1000"><output></output></div>
@@ -52,10 +53,12 @@ W.taxlab = el => {
   const draw = () => {
     const T = +S7.value; S7.nextElementSibling.textContent = usd7(T);
     const n = AB_C.filter(c => c <= T).length, cutCost = AB_C.slice(0,n).reduce((a,b)=>a+b,0), taxPaid = (5-n)*T, tie = AB_C.includes(T);
-    $('.tl-g', el).innerHTML = `<div class="qg" style="max-width:420px">${ubars(AB_C, { labels:['1st 10 lb','2nd','3rd','4th','5th'], ylab:'Cost to cut ($)', xlab:'Each 10 pounds cut', ymax:2600, colorOf:(v)=> v <= T ? 'var(--accent)' : 'var(--bad)' })}</div>`;
+    $('.tl-g', el).innerHTML = `<div class="qg" style="max-width:420px">${u7barsTax(AB_C, T, { labels:['1st 10 lb','2nd','3rd','4th','5th'], ylab:'Cost to cut ($)', xlab:'Each 10 pounds cut', ymax:3200, colorOf:(v)=> v <= T ? 'var(--accent)' : 'var(--bad)' })}</div>`;
     $('.tl-c', el).textContent = `${n*10} of 50`; $('.tl-k', el).textContent = usd7(cutCost); $('.tl-p', el).textContent = usd7(taxPaid);
+    const steps = k => k === 1 ? '1 step' : `${k} steps`;
     $('.msg', el).innerHTML = !T ? 'With no tax, polluting is free, so the firm cuts nothing.'
-      : `Cutting is cheaper than the tax for the green steps, so the firm cuts <b>${n*10} pounds</b> and pays ${usd7(T)} on each of the other ${5-n} steps.` + (tie ? ` At ${usd7(T)} one step costs exactly the tax, so the firm doesn\'t care which it does; this widget counts it as cut.` : '') + (n===5 ? ' The tax is above every step, so it cuts everything.' : '');
+      : n === 0 ? `Every step costs more than the ${usd7(T)} tax, so the firm cuts nothing and pays the tax on all 50 pounds.`
+      : `The green steps cost no more than the ${usd7(T)} tax, so the firm cuts <b>${n*10} pounds</b>` + (n < 5 ? ` and pays ${usd7(T)} on each of the other ${steps(5-n)}.` : ' and pays no tax: the tax is at or above every step.') + (tie ? ` One step costs exactly the tax, so the firm doesn\'t care which it does; this widget counts it as cut.` : '');
   };
   S7.addEventListener('input', draw); draw();
 };
@@ -75,21 +78,22 @@ W.remsort = el => sorterWidget(el, { title:'Which kind of remedy?', hint:'Classi
 
 /* L35 widget: is a public good worth providing, and will anyone buy it alone? (made-up streetlight; same numbers as the lesson's figure at the start)
    Total value = households × value each; worth providing if total ≥ cost; one household buys alone only if its own value ≥ cost.
-   TEST NOTE (2026-11-19), expected (checked by script): 50 households × $40, cost $1,500 → total $2,000, worth it, no one alone;
-   10 × $40 → $400, not worth it; 200 × $10 → $2,000, worth it; 5 × $100 → $500, not worth it. */
+   TEST NOTE (2026-11-19), expected (checked by script): 50 households × $40, cost $1,500 → total $2,000, Yes, equal share $30;
+   10 × $40 → $400, No; 200 × $10 → $2,000, Yes; 5 × $100 → $500, No; tie 150 × $10 or 30 × $50 → $1,500, Break-even. */
 W.pgcalc = el => {
   el.innerHTML = `<p class="widget-title">Worth building, but who pays?</p><p class="hint">Made-up numbers. A streetlight costs $1,500 and lights the whole street for everyone. Set how many households live on the street and what it is worth to each.</p>
   <div class="slider"><label for="pg-n">Households</label><input id="pg-n" type="range" min="5" max="200" step="5" value="50"><output></output></div>
   <div class="slider"><label for="pg-v">Value to each household</label><input id="pg-v" type="range" min="10" max="100" step="5" value="40"><output></output></div>
   <div class="pg-g"></div>
-  <div class="readout"><div><b class="pg-t"></b><span>total value to the street</span></div><div><b class="pg-w"></b><span>worth building? (total vs $1,500)</span></div><div><b class="pg-a"></b><span>would one household buy it alone?</span></div></div>
+  <div class="readout"><div><b class="pg-t"></b><span>total value to the street</span></div><div><b class="pg-w"></b><span>worth building? (total vs $1,500)</span></div><div><b class="pg-a"></b><span>each household\'s share if all pay equally</span></div></div>
   <div class="msg"></div>`;
   const N = $('#pg-n', el), V = $('#pg-v', el), C = 1500;
   const draw = () => {
     const n = +N.value, v = +V.value, tot = n*v; N.nextElementSibling.textContent = n; V.nextElementSibling.textContent = usd7(v);
     $('.pg-g', el).innerHTML = `<div class="u2row"><div class="u2cell">${hbars([['One household\'s value',v],['Cost of the streetlight',C,'var(--bad)'],[`All ${n} households`,tot,'var(--accent)']], { max:Math.max(tot,C)*1.1, left:170, fmt:x=>'$'+x.toLocaleString('en-US') })}</div></div>`;
-    $('.pg-t', el).textContent = usd7(tot); $('.pg-w', el).textContent = tot >= C ? 'Yes' : 'No'; $('.pg-a', el).textContent = v >= C ? 'Yes' : 'No';
-    $('.msg', el).innerHTML = tot >= C ? `Together the street values the light at ${usd7(tot)}, more than its ${usd7(C)} cost, so building it adds ${usd7(tot-C)} of value. But each household gets only ${usd7(v)} of that, so each hopes the others will pay: free riding. Taxes make everyone chip in.`
+    $('.pg-t', el).textContent = usd7(tot); $('.pg-w', el).textContent = tot > C ? 'Yes' : tot === C ? 'Break-even' : 'No'; $('.pg-a', el).textContent = usd7(Math.round(C/n*100)/100);
+    $('.msg', el).innerHTML = tot > C ? `Together the street values the light at ${usd7(tot)}, more than its ${usd7(C)} cost, so building it adds ${usd7(tot-C)} of value. If everyone paid an equal ${usd7(Math.round(C/n*100)/100)}, each would come out ahead, but each household gets only ${usd7(v)} of value and hopes the others will pay: free riding. Taxes make everyone chip in.`
+      : tot === C ? `The total value exactly equals the ${usd7(C)} cost, so building it neither adds nor loses value for the street.`
       : `Added up, the light is worth only ${usd7(tot)}, less than its ${usd7(C)} cost, so it isn\'t worth building even for the whole street. Here the market\'s "no" is the right answer.`;
   };
   N.addEventListener('input', draw); V.addEventListener('input', draw); draw();
@@ -117,7 +121,7 @@ W.hhi = el => {
   <div class="seg" role="group" aria-label="Market">${Object.entries(MK).map(([k,[t]])=>`<button data-k="${k}" aria-pressed="${k==='ws'}">${t}</button>`).join('')}</div>
   <label class="small" style="display:block;margin:.6rem 0"><input type="checkbox" class="hh-m"> Merge the two largest firms</label>
   <div class="hh-g"></div>
-  <div class="readout"><div><b class="hh-c"></b><span>four-firm concentration ratio</span></div><div><b class="hh-h"></b><span>HHI</span></div><div><b class="hh-z"></b><span>1980s FTC guideline</span></div></div>
+  <div class="readout"><div><b class="hh-c"></b><span>four-firm concentration ratio</span></div><div><b class="hh-h"></b><span>HHI</span></div><div><b class="hh-z"></b><span>1980s FTC guideline (for a merger)</span></div></div>
   <div class="msg"></div>`;
   let cur = 'ws';
   const draw = () => {
@@ -125,7 +129,7 @@ W.hhi = el => {
     const sh = m.checked ? mergeTop2(base) : [...base].sort((a,b)=>b-a), c = cr4(sh), h = hhiOf(sh), c0 = cr4(base), h0 = hhiOf(base);
     const shown = sh.slice(0,10);
     $('.hh-g', el).innerHTML = `<div class="qg" style="max-width:420px">${ubars(shown, { labels:shown.map((_,i)=>String(i+1)), ylab:'Market share (%)', xlab: sh.length>10 ? `Largest 10 of ${sh.length} firms` : 'Firm', ymax:100, colorOf:(v,i)=> i<4 ? 'var(--accent)' : 'var(--line)' })}</div>`;
-    $('.hh-c', el).textContent = c; $('.hh-h', el).textContent = h.toLocaleString('en-US'); $('.hh-z', el).textContent = hhiZone(h);
+    $('.hh-c', el).textContent = c; $('.hh-h', el).textContent = h.toLocaleString('en-US'); $('.hh-z', el).textContent = m.checked ? hhiZone(h) : 'applies only to a merger';
     $('.msg', el).innerHTML = (cur==='mono' ? 'One firm with 100%: the HHI hits its maximum, 100² = 10,000.' : m.checked
       ? `Merging the two largest firms raised the ratio from ${c0} to <b>${c}</b> and the HHI from ${h0.toLocaleString('en-US')} to <b>${h.toLocaleString('en-US')}</b> (a rise of ${(h-h0).toLocaleString('en-US')}).`
       : `Green bars are the four largest firms; their shares add to the ratio, ${c}. The HHI squares every firm\'s share, so a few big firms push it up fast.`);
@@ -139,12 +143,12 @@ W.hhi = el => {
 W.polsort = el => sorterWidget(el, { title:'Which policy fits?', hint:'Ask what causes the market power: an agreement or merger (antitrust), a natural monopoly (regulate the price), or being better (usually legal).', aria:'Policy',
   kinds:[['anti','Antitrust action'],['reg','Regulate the price'],['ok','Legal: no action needed']],
   items:[
-    ['The two largest of three cement makers plan to merge, leaving one dominant firm.','anti','A merger that would substantially lessen competition can be blocked under the Clayton Act.'],
     ['A city\'s water is supplied by one company through one set of pipes.','reg','A second set of pipes would raise average cost: a natural monopoly, so regulate its price.'],
-    ['A drug company sells a new medicine it holds a patent on, and no one else may make it.','ok','A patent is a legal source of monopoly; the law rewards innovation for a time.'],
     ['Vitamin makers secretly agree on prices and which customers each will serve (textbook).','anti','A cartel fixing prices and dividing customers is illegal under the Sherman Act.'],
-    ['One electricity company delivers power over the only wires in a region.','reg','Duplicating the wires would raise costs; regulators set the price instead.'],
-    ['A bakery wins most of its town\'s customers by making better bread at a lower price.','ok','A large share won by being better is not illegal: monopoly itself is not a violation.']
+    ['The two largest of three cement makers plan to merge, leaving one dominant firm.','anti','A merger that would substantially lessen competition can be blocked under the Clayton Act.'],
+    ['A bakery wins most of its town\'s customers by making better bread at a lower price.','ok','A large share won by being better is not illegal: monopoly itself is not a violation.'],
+    ['A drug company sells a new medicine it holds a patent on, and no one else may make it.','ok','A patent is a legal source of monopoly; the law rewards innovation for a time.'],
+    ['One electricity company delivers power over the only wires in a region.','reg','Duplicating the wires would raise costs; regulators set the price instead.']
   ]});
 
 /* L37 widget: build a Lorenz curve (your course textbook's 1980 and 2013 quintiles, perfect equality, and a made-up very unequal country).
@@ -161,7 +165,7 @@ W.lorenz = el => {
   let cur = 'y13';
   const draw = () => {
     const [t, sh] = SETS[cur], cum = cumOf(sh), g = giniQ(sh), shade = $('.lz-a', el).checked && g > 0;
-    $('.lz-t', el).innerHTML = atable(['Quintile','Share','Cumulative'], sh.map((s,i)=>[i+1, s+'%', `<b>${cum[i]}%</b>`]), { cls:'compact' });
+    $('.lz-t', el).innerHTML = atable(['Quintile','Share','Cumulative'], sh.map((s,i)=>[i+1, s+'%', `<b>${cum[i]}%</b>`]), { cls:'u7t compact' });
     $('.lz-g', el).innerHTML = u7lorenz([{sh, label:t, c:'var(--bad)'}], { shade, ab:shade, aria:`Lorenz curve: ${t}` });
     $('.lz-b', el).textContent = cum[1] + '%'; $('.lz-q', el).textContent = sh[4] + '%'; $('.lz-gi', el).textContent = g.toFixed(2);
     $('.msg', el).innerHTML = g === 0 ? 'Every fifth gets 20%, so the curve is the diagonal itself: area A is zero and the Gini is 0.'

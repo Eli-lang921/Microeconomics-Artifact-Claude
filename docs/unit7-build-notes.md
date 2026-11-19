@@ -31,3 +31,61 @@ L36 is inserted between the Modern States 7.2 and 7.3 material, in CLEP outline 
 - 2016 textbook has no "Gini coefficient" (only the Lorenz curve, §14.4); Gini taught from FRED (World Bank series note) and BEA primer (Hood, Aug 2025).
 - 2016 textbook does not mention the negative income tax; taught from Econlib (Jodie Allen).
 - Textbook never says "marginal social cost/benefit"; CLEP outline and sample Q7 use the terms; FRBSF Dr. Econ gives Private + External = Social costs.
+
+## CLEP outline coverage map (all in core lesson sections)
+- Externalities: MSB and MSC → L33 "Private and social costs and benefits", "The efficient quantity and why the market misses it"; positive → L33 "Positive externalities: education and research"; negative → L33 "Negative externalities: pollution"; remedies → L34 (all sections). Quiz q7-msb-1/2, q7-pos-1/2, q7-neg-1/2, q7-rem-1/2.
+- Public goods and private goods: excludability, rivalry, free-rider → L35 "Two questions", "Four types", "Public goods and the free-rider problem"; provision → L35 "Provision of public goods". Common resources (Modern States topic) → L35. Quiz q7-exc-1/2, q7-prov-1/2.
+- Public policy to promote competition: antitrust → L36 "Why promote competition?", "The antitrust laws", "Illegal agreements and restrictive practices", "Mergers and measuring concentration"; regulation → L36 "Regulating natural monopolies", "When regulation goes wrong" (natural monopoly A/B/C/F also in L26). Quiz q7-anti-1/2, q7-reg-1/2.
+- Income distribution: income inequality → L37 "Income inequality and poverty", "How unequal is U.S. income?", "Policies"; sources → L37 "Sources of income inequality"; Lorenz and Gini → L37 "Measuring inequality", "The Gini coefficient". Quiz q7-ineq-1/2, q7-src-1/2, q7-lor-1/2.
+
+## Visual inventory (instructional visuals; question exhibits, graph choices and explanation visuals not counted)
+L33 (9 figures + 2 widgets): who is inside/outside the deal · negative vs positive table · MPC + external = MSC calculation · refrigerator Table 12.2 annotated · refrigerator graph with DWL · education MSB graph · Big Drug table · side-by-side negative/positive graphs · overproduction chain · W extlab (damage slider) · W extsort.
+L34 (9 + 2): internalizing table · tax onto MSC graph · subsidy onto MSB graph · command-and-control vs market-based cards · abatement-cost bars vs $1,000 tax · two-firm cost comparison · slide 264 permit trade flow · Table 12.4 permits · Coase railroad flow · W taxlab · W remsort.
+L35 (7 + 2): excludable/rival cards · four-types grid · Main Street flow · free-rider payoff table · streetlight value bars · commons chain · common-resource tools table · W pgcalc · W goodsort.
+L36 (9 + 2): why-promote-competition chain · antitrust law timeline · allowed/forbidden practices table · windshield CR4/HHI table · same-CR4-different-HHI bars · natural monopoly A/B/C/F graph (from L26) · cost-plus vs price cap cards · regulatory capture chain · airline before/after table · W hhi · W polsort.
+L37 (11 + 3): poverty vs inequality cards · 2014 incomes as multiples · real wage bars · poverty bars · quintile-to-cumulative table · Lorenz 1980 vs 2013 · Gini areas A/B · skilled-labor supply and demand graph · sources table · negative income tax calculation · equality-output trade-off flow · W lorenz · W nit · W lorsort.
+
+## Quiz blueprint (q7-*, 22 items, five-choice, separate pool, submit-then-reveal, stored as S.quiz7, draft in localStorage micro-quiz7-draft)
+Two per outline subtopic (11 × 2). Graph-choice items: q7-rem-1 (subsidy to sellers), q7-src-2 (skilled-labor shifts), q7-lor-2 (choose the Lorenz curve). Exhibits: lettered areas (q7-msb-2), tables (q7-neg-1, pos-1, rem-2, anti-1, reg-1, ineq-1), two Lorenz curves (q7-lor-1). Fixed order (keepOrder) only where choices are numbers in order, letters, or graphs.
+
+## IDs and storage
+Questions l33-* … l37-*; quick checks l33c-* …; quiz q7-*; cards c-l33-N …; writing w-l33-1/2 …; containers U7_LESSONS, U7_CARDS, U7_WRITE, U7_PLAN, FIG7; tags U7CLEP/u7tag. Widgets W.extlab, W.extsort, W.taxlab, W.remsort, W.pgcalc, W.goodsort, W.hhi, W.polsort, W.lorenz, W.nit, W.lorsort.
+New source keys MS7, OS112, OS114, OS121-OS123, OS131-OS133, OS141-OS145, ELEX, ELPG, ELAT, ELNIT, FRBSF, FREDG, BEAG. Glossary entries 'market-failure' and 'public-goods' re-pointed to l33/l35 (definitions kept). App changes: Unit 7 card, quiz route #quiz7 (renamed copy of the Unit 6 renderer), quiz switcher chip, report topics, S.quiz7 in blankState/normalize, LATER emptied and the "Later units" section hidden when empty. No existing id, storage path or record changed.
+
+## Source problems found (recorded; not repeated as fact)
+1. MS video 7.1 transcript: "uncomplicated impact"; slide 256 says "uncompensated". L33 notes it.
+2. MS video 7.1: "the voting behavior of firms is better"; slide 260: "better-educated voters". L33 notes it.
+3. MS video 7.1 closes "Thank you ... module 6 on externalities" (module 7). Not repeated.
+4. MS video 7.3: top 5% "earned $440,000"; slide: $448,489. L37 uses the slide and notes it.
+5. Textbook Figure 14.8 caption says 2011; Table 14.6 and text say 2013. L37 notes it.
+6. Textbook §14.4 text gives the top quintile 51.14% in 2011 and 51.0% in 2013 (Table 14.6 uses 51.0). L37 uses Table 14.6.
+7. Textbook spells Hardin "Garret"; Econlib "Garrett". L35 notes it.
+8. MS 7.3 conclusion ("these measures do not do enough") is a normative view; L37 labels it as the course's view next to the textbook's trade-off view.
+9. 2016 textbook lacks the Gini coefficient and the negative income tax; taught from FRED/BEA and Econlib (see Source gaps).
+
+## Test record (2026-11-19, Playwright/Chromium; src/unit7/test7.py BASE BUILD data/progress.json OUT)
+- Regression vs the live page: 1,231 existing questions identical after normalizing auto-generated SVG ids; Units 1-6 lesson order, bodies and quiz pools identical; 203 new items.
+- All 203 Unit 7 items built (generators 400×, lazy 40×): no NaN/undefined, answer index valid, five choices on every multiple-choice item, every graph item has five SVG choices, five descriptions and "Graph A-E" labels.
+- Each lesson at 375 px light and 1100 px dark with extras and Go deeper open: no page errors, no page overflow, no empty or uncaptioned figure; graph choices 2 per row at 375, 3 at 1100. Every table fits at 375 px (src/unit7/test_tables.py). Figures screenshot-checked (src/unit7/test_figs.py); label collisions fixed.
+- Quiz: answered all 22 at 375 px: no option colors, verdicts or explanations before submit; graph choices 2 per row; after submit 22 result cards with written/new-version buttons; S.quiz7 saved, S.quiz6 untouched; quiz answers queued no flashcards.
+- Flashcards: a "more practice" answer added nothing; the first core answer in l33 added its cards due today at step 1, kept a card already in Review at its step, skipped mastered and deleted cards; a second sync added nothing; l34 core answer added 12. Card pictures present (12/12/12/12 of 12 in L33-L36; 11 of 15 in L37, where the three definition-only cards added in round 1 have no picture).
+- Written response (Claude mocked): l33-gr-neg (graph choices: frozen graphs, key "Graph X: …"), l33-g-opt (generator), l33-cbs: preview → saved; new-version requests queued; unit quiz keeps the original.
+- Old progress (data/progress.json) loads: lessons, mastered, written, reports, deleted, ratings, quiz1-5 unchanged; review identical to what the live page produces from the same data; quiz7 added empty. Home shows Unit 7; "Later units" hidden.
+- localStorage blocked: lessons and quiz load with no page errors. Claude unavailable: written response says it needs Claude.
+- Widgets reproduce every TEST NOTE value (extlab 3, taxlab 4, pgcalc 4, hhi 9, lorenz 4, nit 6 settings); all 30 sorter items show the reason.
+Not tested here: a real phone (touch), a screen reader, the live claude.ai runtime (sample/db), Claude's actual rewrite quality.
+
+## Independent audit history
+Reviewers were separate agents that never saw the builder's grades; each read the rubric, the sources and the built page, and wrote a report to /home/claude/audit/.
+### Round 1 (2026-11-19)
+| Lesson | Score | Failed gates | Main defects fixed |
+| --- | --- | --- | --- |
+| L33 | 82.5 | learner checks | self-contained stems (cbs, coal), graph-choice explanation visuals (u7extBig), social-supply item rebuilt as graph choices, MSC/MSB cards |
+| L34 | 70 | G1, G8 | permit-trade caption and model answer reversed; taxlab messages at 0, ties and 5 steps; Coase quick check added; patents in core; Pigovian wording |
+| L35 | 72.5 | G7, G8 | l35-patent had two defensible answers; pgcalc tie said "Yes" (now "Break-even"; third readout = equal share C/n); Hardin and positive-externality bridge added |
+| L36 | 75 | G7 | HHI graph choices unreadable (now labeled bars 80/10/10 vs 50/50); FTC guideline shown only for mergers; capture quick check; source key MS5S; polsort order shuffled |
+| L37 | 72.5 | G1, G5 | food-insecurity caption repeated the video's slip (12% is households without children; 14% all households); NIT figure order of operations; in-kind transfers and welfare/housing assistance now explained (textbook §14.3); sources has 2 core questions |
+| Quiz | 16/22 well built | n/a | 4 near-copies replaced (prov-1 streetlight count, reg-2 rule comparison table, ineq-2 below-median payment, src-2 demand for less-skilled labor falls); msb-2 explanation corrected (U = Z = 1.25); ineq-1 marked-up table |
+Cross-cutting: cell-level table highlights (td.u3z1/u3z2/u3z3) never rendered anywhere in the workbook because no CSS rule targets cells. Fixed for Unit 7 only with `.u3tbl.u7t td.*` in u7.css; Units 1-6 are untouched and still have the bug. Single-curve Lorenz labels moved inside the plot; text-only tables left-aligned (`u7l`). Numeric choices starting with "About" now sort smallest to largest.
+Not a Unit 7 change: the live page already drops 336 old question entries from Review when it loads data/progress.json (the earlier Review change that moved practice questions out of Review); the build does exactly the same.
+Verified during fixes: USDA ERS food-insecurity definition (new source USDAFS); Econlib "Minimum Wages" is by Linda Gorman and argues minimum wages reduce employment (search result text).

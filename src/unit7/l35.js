@@ -28,7 +28,7 @@ FIG7.l35two = () => fig(`<div class="u3pair">
 FIG7.l35grid = () => fig(atable(['','Rival: yes','Rival: no'], [
   ['<b>Excludable: yes</b>', `<b>${GRID.pr[2]}</b><br>${GRID.pr[3]}<br><span class="small">Markets provide these well</span>`, `<b>${GRID.cl[2]}</b><br>${GRID.cl[3]}<br><span class="small">Sold with a ticket or subscription</span>`],
   ['<b>Excludable: no</b>', `<b>${GRID.cm[2]}</b><br>${GRID.cm[3]}<br><span class="small">Overused</span>`, `<b>${GRID.pu[2]}</b><br>${GRID.pu[3]}<br><span class="small">Underprovided by markets</span>`]
-], { cls:'compact wrap', hl:{1:{1:'u3z1',2:'u3z2'}} }), 'Your course\'s grid of the four types of goods, with its examples. The bottom row is where markets fail: no one can be kept out, so no one can be charged. Common resources get overused; public goods get underprovided.');
+], { cls:'u7t compact wrap', hl:{1:{1:'u3z1',2:'u3z2'}} }), 'Your course\'s grid of the four types of goods, with its examples. The bottom row is where markets fail: no one can be kept out, so no one can be charged. Common resources get overused; public goods get underprovided.');
 
 /* L35 V3: why no firm paves Main Street (video 7.2 and slide "Provision of Public Goods") */
 FIG7.l35main = () => fig(flow([
@@ -42,7 +42,7 @@ FIG7.l35main = () => fig(flow([
 FIG7.l35pd = () => fig(atable(['','Samuel contributes','Samuel doesn\'t'], [
   ['<b>Rachel contributes</b>','Each pays $4, gets $6<br><b>Rachel +$2, Samuel +$2</b>','Rachel pays $4, gets $3: <b>−$1</b><br>Samuel pays $0, gets $3: <b>+$3</b>'],
   ['<b>Rachel doesn\'t</b>','Rachel pays $0, gets $3: <b>+$3</b><br>Samuel pays $4, gets $3: <b>−$1</b>','Nothing built<br><b>$0 each</b>']
-], { cls:'compact wrap', hl:{0:{1:'u3z1'},1:{2:'u3z2'}} }), 'Your course textbook\'s fire-department game. Each contribution costs $4 and creates $6 of benefit, split between the two. Whatever the other does, not contributing pays $1 more ($3 vs $2, or $0 vs −$1), so both free ride and end at $0 instead of +$2 each.');
+], { cls:'u7t compact wrap', hl:{0:{1:'u3z1'},1:{2:'u3z2'}} }), 'Your course textbook\'s fire-department game. Each contribution costs $4 and creates $6 of benefit, split between the two. Whatever the other does, not contributing pays $1 more ($3 vs $2, or $0 vs −$1), so both free ride and end at $0 instead of +$2 each.');
 
 /* L35 V5: worth building, but no one buys it alone (made-up streetlight) */
 FIG7.l35sum = () => fig(`<div class="u2row"><div class="u2cell">${hbars([['One household\'s value',40],['Cost of the streetlight',1500,'var(--bad)'],['All 50 households\' value',2000,'var(--accent)']], { max:2200, left:170, fmt:v=>'$'+v.toLocaleString('en-US') })}</div></div>
@@ -63,7 +63,7 @@ FIG7.l35rules = () => fig(atable(['Tool','Source','How it limits use'], [
   ['Voucher system / fishing licenses','Course; textbook','Only license holders may fish'],
   ['Timing (shorter seasons)','Course; textbook','Fewer days to fish'],
   ['Ban until the population recovers','Textbook (queen conch)','Stops use when stocks are critically low']
-], { cls:'compact wrap' }), 'The tools your course and textbook name. Each makes the resource partly excludable or caps how much is taken. Your course adds that economists have not found a perfect solution yet.');
+], { cls:'u7t compact wrap' }), 'The tools your course and textbook name. Each makes the resource partly excludable or caps how much is taken. Your course adds that economists have not found a perfect solution yet.');
 
 /* ===== Lesson 35: Public Goods, Common Resources and the Free-Rider Problem (video 7.2; Module 7.2 slides) =====
    Common mistakes: M1 a public good is anything government provides · M2 mixing up excludable and rival
@@ -90,9 +90,9 @@ mc('l35-free-def','l35','Which of the following describes the free-rider problem
   [`People who receive the benefit of a good can avoid paying for it, so each has an incentive to let others pay`,`Firms charge too much for goods that are free to produce`,`Riders on public transit don\'t pay their fares because of a ticket shortage`,`People overuse a resource because it is rival`,`A good harms people who don\'t use it`],0,
   `<p>Your course: a free rider is "a person who receives the benefit of a good but avoids paying for it." Because everyone can benefit without paying, everyone hopes someone else will pay, and too little gets paid for. Overuse of a rival resource is the commons problem, a different failure.</p>`);
 mc('l35-mainst','l35','Paving the main street in a town would help every business on it. Anyone can drive on the street, and one more car doesn\'t use it up for others. Why won\'t any single business pay to pave it?',
-  [`It can\'t charge the others who use the road, so it would bear the whole cost while everyone benefits`,`The road isn\'t worth its cost to the businesses`,`Paving a road is illegal for private firms`,`The road is rival, so it would get used up`,`Businesses don\'t benefit from roads`],0,
-  `<p>Your course: "no single firm would be willing to pay the cost of paving that road: because everyone else will be driving on that road, they can\'t charge people for driving on that road to recoup the costs." The road may well be worth its cost to all of them together (M6).</p>`);
-mc('l35-pd','l35',`Two neighbors, Rachel and Samuel, can each contribute to a local fire department. A contribution costs the contributor $4 and creates $6 of benefit, split equally between the two of them. The table shows each person\'s net gain:${atable(['','Samuel: yes','Samuel: no'], [['Rachel: yes','R +$2, S +$2','R −$1, S +$3'],['Rachel: no','R +$3, S −$1','R $0, S $0']], { cls:'compact' })}If each person acts only in his or her own interest, what happens?`,
+  [`It can\'t charge the others who use the road, so it would bear the whole cost while everyone benefits`,`The road isn\'t worth its cost to the businesses`,`A road is a public good, so the law requires government to build it`,`The road is rival, so it would get used up`,`Each business could charge drivers a toll to cover its cost`],0,
+  `<p>Your course: "no single firm would be willing to pay the cost of paving that road: because everyone else will be driving on that road, they can\'t charge people for driving on that road to recoup the costs." The road may well be worth its cost to all of them together (M6). No law forbids a private road (M1), and the street can\'t charge tolls because anyone can drive on it (M4).</p>`);
+mc('l35-pd','l35',`Two neighbors, Rachel and Samuel, can each contribute to a local fire department. A contribution costs the contributor $4 and creates $6 of benefit, split equally between the two of them. The table shows each person\'s net gain:${atable(['','Samuel: yes','Samuel: no'], [['Rachel: yes','R +$2, S +$2','R −$1, S +$3'],['Rachel: no','R +$3, S −$1','R $0, S $0']], { cls:'u7t compact' })}If each person acts only in his or her own interest, what happens?`,
   [`Neither contributes, so each gets $0`,`Both contribute, so each gets +$2`,`Only Rachel contributes`,`Only Samuel contributes`,`They take turns contributing`],0,
   `<p>Whatever Samuel does, Rachel does better not contributing: +$3 instead of +$2 if he contributes, $0 instead of −$1 if he doesn\'t. Samuel reasons the same way. Your textbook: "When both people reason in that way, the public good never gets built." Both would be better off contributing (+$2 each), which is the dilemma.</p>${FIG7.l35pd()}`);
 gen('l35-g-sum','l35',()=>{
@@ -129,7 +129,7 @@ mc('l35-private','l35','Ice-cream cones and clothing are examples of which type 
   [`Private goods`,`Club goods`,`Public goods`,`Common resources`,`Positive externalities`],0,
   `<p>Your course: a good that is "rival in consumption and ... also excludable" is a private good. You can be charged for a cone, and once you eat it no one else can.</p>`);
 mc('l35-knowledge','l35','Knowledge is often given as an example of a public good. Which pair of facts explains why?',
-  [`One person using an idea doesn\'t leave less of it for others, and it is hard to stop people from using it`,`Knowledge is always provided by the government`,`Knowledge is rival but not excludable`,`Knowledge is sold in stores like other goods`,`Knowledge has no value to anyone`],0,
+  [`One person using an idea doesn\'t leave less of it for others, and it is hard to stop people from using it`,`Knowledge is always provided by the government`,`Knowledge is rival but not excludable`,`Knowledge is excludable but not rival`,`Knowledge is a club good shared by many people`],0,
   `<p>Public goods are non-rival and non-excludable. Two people can use the same idea without using it up, and once an idea is out it is hard to keep others from it. Your textbook notes patents try to make new inventions excludable for a while.</p>`);
 mc('l35-fireworks','l35','Economist Tyler Cowen (Econlib) says a fireworks show "may go unproduced, even if demand for the show is strong." Why?',
   [`People can watch from their windows or backyards, so the producer can\'t charge for it`,`Fireworks are rival, so they get used up`,`Fireworks are a negative externality`,`Too few people enjoy fireworks`,`The government bans private fireworks`],0,
@@ -138,7 +138,7 @@ gen('l35-g-pd','l35',()=>{
   let c, b; do { c = pick([3,4,5,6,8,10]); b = pick([6,8,10,12,14,16,18]); } while(!(b > c && b/2 < c) || b%2);
   const half = b/2, ans = half - c;
   return { type:'num', kind:'num', unit:'dollars', prompt:`Made-up numbers. Two neighbors can each contribute to a shared park. A contribution costs the contributor <b>$${c}</b> and creates <b>$${b}</b> of benefit, split equally between the two. If only one neighbor contributes, what is that neighbor\'s net gain? (Use a minus sign for a loss.)`, answer:ans,
-    explain:`<div class="math">Benefit to the contributor = $${b} ÷ 2 = $${half}<br>Net gain = $${half} − $${c} = <b>${ans<0?'−$'+(-ans):'$'+ans}</b></div><p>The other neighbor gets $${half} for nothing. Since contributing alone loses money, each waits for the other: the free-rider problem. Yet if both contribute, each gains $${b} − $${c} = $${b-c}. The common slip is counting the whole $${b} as the contributor\'s benefit.</p>${fig(atable(['','Other contributes','Other doesn\'t'], [['You contribute',`+$${b-c}`,`${ans<0?'−$'+(-ans):'+$'+ans}`],['You don\'t',`+$${half}`,'$0']], { cls:'compact', hl:{0:{2:'u3z2'}} }), 'Marked up: your payoff in each case. Not contributing beats contributing whatever the other does.')}`
+    explain:`<div class="math">Benefit to the contributor = $${b} ÷ 2 = $${half}<br>Net gain = $${half} − $${c} = <b>${ans<0?'−$'+(-ans):'$'+ans}</b></div><p>The other neighbor gets $${half} for nothing. Since contributing alone loses money, each waits for the other: the free-rider problem. Yet if both contribute, each gains $${b} − $${c} = $${b-c}. The common slip is counting the whole $${b} as the contributor\'s benefit.</p>${fig(atable(['','Other contributes','Other doesn\'t'], [['You contribute',`+$${b-c}`,`${ans<0?'−$'+(-ans):'+$'+ans}`],['You don\'t',`+$${half}`,'$0']], { cls:'u7t compact', hl:{0:{2:'u3z2'}} }), 'Marked up: your payoff in each case. Not contributing beats contributing whatever the other does.')}`
   };
 });
 mc('l35-police','l35','Why do fire and police protection for a neighborhood work much like public goods?',
@@ -151,8 +151,8 @@ mc('l35-pos-ext','l35','How are public goods related to positive externalities?'
   [`Public goods have positive externalities, but not every good with positive externalities is a public good`,`They are the same thing`,`Public goods have negative externalities`,`Goods with positive externalities are always public goods`,`They are unrelated`],0,
   `<p>The textbook: "Public goods have positive externalities, like police protection or public health funding. Not all goods and services with positive externalities, however, are public goods. Investments in education have huge positive spillovers but can be provided by a private company."</p>`);
 mc('l35-patent','l35','Patents can be seen as an attempt to turn new inventions into private goods. What does a patent change about an invention?',
-  [`It makes the invention excludable for a time, since others need permission to use it`,`It makes the invention rival`,`It makes the invention a common resource`,`It removes the invention\'s value`,`It turns the invention into a public good`],0,
-  `<p>The textbook: patents try to make new inventions "into private goods, which are excludable and rivalrous, so that no one but the inventor is allowed to use them during the length of the patent." The legal right supplies the excludability the idea lacks.</p>`);
+  [`It makes the invention excludable for a time, since others need permission to use it`,`It makes the invention non-excludable, so anyone may copy it`,`It makes the invention a common resource`,`It removes the invention\'s value`,`It turns the invention into a public good`],0,
+  `<p>The textbook: patents try to make new inventions "into private goods, which are excludable and rivalrous, so that no one but the inventor is allowed to use them during the length of the patent." The legal right supplies the excludability the idea lacks. (The textbook also calls patented inventions rivalrous, because only the holder may use them; the idea itself can still be used by many at once.)</p>`);
 gen('l35-g-commons','l35',()=>{
   let N, k, g; do { N = pick([4,5,8,10]); k = N*pick([1,2,3]); g = pick([2,3,4,5,6,8]); } while(!(g > k/N && g < k));
   const ans = k/N;
@@ -164,7 +164,7 @@ mc('l35-hardin','l35','Who gave the overuse of common resources the name "Traged
   [`Ecologist Garrett Hardin, in a 1968 article`,`Economist Ronald Coase`,`Economist Milton Friedman`,`Economist Adam Smith`,`Economist Arthur Pigou`],0,
   `<p>The textbook: "ecologist Garret Hardin put the tag \'Tragedy of the Commons\' to the problem in a 1968 article in the magazine Science." (The textbook spells it "Garret"; Econlib spells it "Garrett.") Coase is the property-rights economist from Lesson 34.</p>`);
 mc('l35-social','l35','Besides taxes, which of the following can reduce free riding on a local public good?',
-  [`Social pressure and personal appeals, such as neighborhood associations and fundraising drives`,`Banning people who don\'t pay from the country`,`Charging admission to national defense`,`Making the good rival`,`Raising the price of the good`],0,
+  [`Social pressure and personal appeals, such as neighborhood associations and fundraising drives`,`Charging each person a price to use the good`,`Making everyone use the good less`,`Making the good rival`,`Raising the price of the good`],0,
   `<p>The textbook: "social pressures and personal appeals can be used, rather than the force of law, to reduce the number of free riders," such as neighborhood patrols, farmers\' irrigation projects and fundraising for charities and colleges.</p>`);
 tf('l35-tf-value','l35','If no private firm is willing to provide a good, that proves people don\'t value it enough to cover its cost.',false,
   `<p>False. A public good can be worth far more than it costs to everyone together, yet no firm can collect payment because people can\'t be excluded. The market fails because of free riding, not because the good lacks value (M6).</p>`);
@@ -185,7 +185,7 @@ mc('l35c-provide','l35','Made-up numbers. 100 households each value a new park a
   [`The park is worth building, but no single household would pay for it alone`,`The park is not worth building, because $30 is less than $2,500`,`Each household should pay $2,500`,`The park should be built only if one household pays for it`,`The park is a private good`],0,
   `<p>Total value = 100 × $30 = $3,000, more than the $2,500 cost, so it is worth building. But each household compares its own $30 with the cost and hopes others pay (M6).</p>`);
 mc('l35c-commons','l35','Anyone can fish in a local pond, and the more one person fishes, the fewer fish remain for others. Which of the following is a way to regulate this?',
-  [`Regulating the quantity fished, a voucher system, or the timing of fishing`,`Subsidizing each fish caught`,`Removing all limits`,`Making the pond a club good by selling memberships to one firm`,`Taxing people who don\'t fish`],0,
+  [`Regulating the quantity fished, a voucher system, or the timing of fishing`,`Subsidizing each fish caught`,`Removing all limits`,`Making fishing licenses free and unlimited`,`Taxing people who don\'t fish`],0,
   `<p>Slide "Regulating Common Resources": "Regulating quantity fished/used; Voucher system; Time of fishing." Your course adds that none has proved a perfect solution.</p>`);
 lazy('l35c-skill','l35',()=>visMC({
   prompt:`Each grid sorts goods by two questions: rows ask whether the good is excludable, and columns ask whether it is rival in consumption. Which shaded cell holds goods that tend to be <b>overused</b>?`,
@@ -215,7 +215,7 @@ u7tag(L35TAGS);
 
 U7_CARDS.l35 = [
   ['Excludable','What does "excludable" mean?','A person can be prevented from using the good, usually by charging a price.','A pizza you bought; a fenced pool with a fee.','Excludable is about keeping people out, not about using it up.', FIG7.l35two()],
-  ['Rival in consumption','What does "rival in consumption" mean?','One person\'s use leaves less for others.','A slice of pizza is rival; a radio broadcast is not.','Rival is about using it up, not about keeping people out.'],
+  ['Rival in consumption','What does "rival in consumption" mean?','One person\'s use leaves less for others.','A slice of pizza is rival; a radio broadcast is not.','Rival is about using it up, not about keeping people out.', FIG7.l35two()],
   ['Private good','What is a private good? Give two examples.','Excludable and rival.','Ice-cream cones, clothing.','Markets provide these well.', u7grid(['pr'],{labels:true,aria:'Grid with private goods shaded'})],
   ['Club good','What is a club good? Give two examples.','Excludable but not rival.','Movie theaters, cable TV.','Shared use doesn\'t make it public: nonpayers can be kept out.', u7grid(['cl'],{labels:true,aria:'Grid with club goods shaded'})],
   ['Common resource','What is a common resource? Give two examples.','Rival but not excludable. It tends to be overused.','Fish in the ocean, the environment.','Not a public good: it gets used up.', u7grid(['cm'],{labels:true,aria:'Grid with common resources shaded'})],
@@ -260,7 +260,7 @@ ${FIG7.l35two()}
 <p>Answering both questions sorts goods into your course\'s four groups.</p>
 ${FIG7.l35grid()}
 <div class="math">${dt('private-good','Private good')}: excludable, rival (ice-cream cone)<br>${dt('club-good','Club good')}: excludable, not rival (cable TV)<br>${dt('common-resource','Common resource')}: not excludable, rival (fish in the ocean)<br>${dt('public-goods','Public good')}: not excludable, not rival (national defense)</div>
-<p><b>Worked example:</b> radio. Once a signal is broadcast, anyone with a radio can hear it (not excludable), and one more listener takes nothing from others (not rival): a public good, your textbook says. Satellite radio scrambles its signal for nonsubscribers, so it becomes excludable: a club good. Same music, different cell, because only excludability changed.</p>
+<p><b>Worked example:</b> radio. Once a signal is broadcast, anyone with a radio can hear it (not excludable), and one more listener takes nothing from others (not rival): a public good, your textbook says. Satellite radio can be heard only with a paid subscription, so it becomes excludable: a club good. Same music, different cell, because only excludability changed.</p>
 <p><b>So what:</b> the bottom row is where markets fail. The rest of this lesson takes its two cells one at a time.</p>
 <div data-check="l35c-grid"></div>
 
@@ -273,8 +273,10 @@ ${FIG7.l35main()}
 <p><b>Worked example: your course textbook\'s fire department.</b> Rachel and Samuel can each contribute. A contribution costs the giver $4 and creates $6 of benefit, split evenly.</p>
 ${FIG7.l35pd()}
 <div class="math">If Samuel contributes: Rachel gets +$2 by contributing, +$3 by not → don\'t<br>If Samuel doesn\'t: Rachel gets −$1 by contributing, $0 by not → don\'t<br>Samuel reasons the same way → <b>nobody contributes; each gets $0</b></div>
-<p>Check: both contributing (+$2 each) beats both free riding ($0 each), yet self-interest leads away from it. This is Lesson 27\'s prisoner\'s dilemma: the textbook: "When both people reason in that way, the public good never gets built."</p>
+<p>Check: both contributing (+$2 each) beats both free riding ($0 each), yet self-interest leads away from it. This is Lesson 27\'s prisoner\'s dilemma. The textbook: "When both people reason in that way, the public good never gets built."</p>
 <div data-check="l35c-free"></div>
+
+<p><b>Two related ideas.</b> Your textbook: "Public goods have positive externalities," like police protection, but not every good with positive externalities is a public good: education has big spillovers yet "can be provided by a private company." And a patent is an attempt to turn a new idea into a private good: the law makes it excludable, since no one but the inventor may use it while the patent lasts.</p>
 
 <h2>Provision of public goods</h2>
 <!-- src: MS7 (video 7.2: "the government needs to step in to provide these goods ... It will be left up to the government to ensure that the right infrastructure is in place, that the roads are paved, that national defense is provided"; slide "Due to this market failure à need the government to step in to provide public goods"); OS133 ("The key insight in paying for public goods is to find a way of assuring that everyone will make a contribution and to prevent free riders ... agree to pay taxes ... requiring, through the law, that everyone contributes"; radio advertising; satellite subscriptions; park fees; social pressure); ELPG ("almost all economists are convinced that the only way to provide a sufficient level of defense is to have government do it and fund defense with taxes"; fireworks "may go unproduced, even if demand for the show is strong"). Streetlight numbers are made up. -->
@@ -290,7 +292,7 @@ ${FIG7.l35sum()}
 
 <h2>Common resources and the tragedy of the commons</h2>
 <!-- src: MS7 (video 7.2: "These goods are not excludable but they are rival in consumption ... The perfect example of this is fishing in a pond ... Economists have struggled with understanding the perfect way to regulate common resources. Many have argued for systems such as voucher systems or timing of the fishing or regulating the quantity ... but none have provided the perfect solution yet"; slides "Common Resources" and "Regulating Common Resources"); OS133 (queen conch; "common resources like the conch tend to be overharvested"; Hardin 1968 "Tragedy of the Commons"; "Economists view this as a problem of property rights"; licenses, harvest limits, shorter seasons; bans); ELC (Hardin, Econlib); Lesson 4 ($5 gain, $0.80 of an $8 cost). -->
-<p>A ${dt('common-resource','<b>common resource</b>')} is rival but not excludable. Your course\'s example is a pond: "There\'s a limited amount of fish in the pond and if everyone came and fished ... the more that they fished the less fish are available for everyone else."</p>
+<p>A ${dt('common-resource','<b>common resource</b>')} is rival but not excludable. Ecologist Garrett Hardin named its problem the "Tragedy of the Commons" in a 1968 article in the magazine <i>Science</i> (your textbook spells it "Garret"). Your course\'s example is a pond: "There\'s a limited amount of fish in the pond and if everyone came and fished ... the more that they fished the less fish are available for everyone else."</p>
 ${FIG7.l35commons()}
 <p><b>Why overuse, not underprovision:</b> a public good is non-rival, so free use costs no one anything; the trouble is paying for it. A common resource is rival, so each use takes something from others. Each user keeps the whole gain but shares the loss, so everyone takes too much. The textbook: "Economists view this as a problem of property rights": since nobody owns it, nobody protects it.</p>
 <p>Your course admits "none have provided the perfect solution yet," but lists the tools.</p>
@@ -330,11 +332,11 @@ ${FIG7.l35rules()}
 </div>`,
   deeper:`
 <h3>Are lighthouses public goods?</h3>
-<p>Lighthouses are a classic textbook public good: every passing ship sees the light. Economists have argued about whether private lighthouses once collected fees at nearby ports, which would make them partly excludable. The CLEP treats lighthouses as a standard public good.</p>
+<p>Lighthouses are a classic textbook example of a public good: every passing ship sees the light. Economists have argued about whether private lighthouses once collected fees at nearby ports, which would make them partly excludable. Treat a lighthouse as a public good unless a question says otherwise.</p>
 <h3>Congestion</h3>
 <p>Many goods are non-rival only up to a point. A road is non-rival at 3 a.m. but rival at rush hour, when each extra car slows the rest (Lesson 33\'s traffic externality). Club goods have the same limit: a theater stops being non-rival when the seats are full.</p>
 <h3>Elinor Ostrom</h3>
-<p>Political economist Elinor Ostrom (Nobel Prize, 2009) studied communities that manage shared fisheries, forests and pastures well through their own rules, without either private ownership or central government control. Her work is one reason your course says no single solution is perfect.</p>`,
+<p>Political economist Elinor Ostrom (Nobel Prize, 2009) studied communities that manage shared fisheries, forests and pastures well through their own rules, without either private ownership or central government control. Her work is an extension beyond your course: it shows why no single solution fits every commons.</p>`,
   links:[ {k:'Textbook',t:'13.3 Public Goods',s:'OpenStax, Principles of Economics 3e (free online)',u:'https://openstax.org/books/principles-economics-3e/pages/13-3-public-goods',w:'The newer edition of your course textbook\'s §13.3: public goods, the free-rider game and common resources. Wording may differ slightly from your 2016 edition.'},
           {k:'Article',t:'Public Goods',s:'Econlib, Concise Encyclopedia of Economics (Tyler Cowen)',u:'https://www.econlib.org/library/Enc/PublicGoods.html',w:'A short overview of non-excludability, non-rivalry and the free-rider problem, with the fireworks example.'} ]
 });
@@ -345,6 +347,6 @@ u7xv({
   'l35-free-def':[FIG7.l35main(), ''], 'l35-mainst':[FIG7.l35main(), 'The road being "rival" is wrong: one more car doesn\'t use it up, which is part of why it is a public good.'], 'l35c-free':[FIG7.l35main(), ''],
   'l35-provide':[FIG7.l35sum(), ''], 'l35c-provide':[fig(`<div class="u2row"><div class="u2cell">${hbars([['One household\'s value',30],['Cost of the park',2500,'var(--bad)'],['All 100 households',3000,'var(--accent)']], { max:3300, left:170, fmt:v=>'$'+v.toLocaleString('en-US') })}</div></div>`, 'Marked up: $3,000 of total value beats the $2,500 cost; one household\'s $30 doesn\'t.'), ''],
   'l35-tf-value':[FIG7.l35sum(), ''], 'l35-fireworks':[FIG7.l35sum(), ''], 'l35-conch':[FIG7.l35rules(), ''], 'l35c-commons':[FIG7.l35rules(), ''], 'l35-hardin':[FIG7.l35commons(), ''],
-  'l35-tf-gov':[FIG7.l35grid(), ''], 'l35-police':[FIG7.l35main(), '']
+  'l35-tf-gov':[FIG7.l35grid(), ''], 'l35-environment':[fig(u7grid(['cm'], { labels:true, aria:'Grid with common resources shaded' }), 'Marked up: clean air and water sit with ocean fish in the common-resource cell.'), ''], 'l35-radio':[fig(u7grid(['pu','cl'], { labels:true, aria:'Grid: public goods and club goods shaded' }), 'Marked up: broadcast radio is a public good; a subscription would move it to the club-good cell.'), ''], 'l35-police':[FIG7.l35main(), '']
 });
 u7cv('l35', {});

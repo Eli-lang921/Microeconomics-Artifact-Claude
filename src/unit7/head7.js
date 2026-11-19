@@ -9,6 +9,8 @@
 /* ---------- Unit 7 sources ---------- */
 Object.assign(SOURCES, {
   MS7:  { t:'Modern States, Principles of Microeconomics, Module 7 videos (7.1-7.3) and slides', u:'https://modernstates.org/course/principles-of-microeconomics/' },
+  USDAFS: { t:'USDA Economic Research Service, Food security in the U.S.: measurement', u:'https://ers.usda.gov/topics/food-nutrition-assistance/food-security-in-the-us/measurement' },
+  MS5S: { t:'Modern States, Principles of Microeconomics, Module 5 slide 223 (ways to deal with monopoly)', u:'https://modernstates.org/course/principles-of-microeconomics/' },
   OS112:{ t:'OpenStax, Principles of Microeconomics (your course textbook), §11.2 (anticompetitive behavior); the link opens the same section in OpenStax Principles of Economics 3e', u:'https://openstax.org/books/principles-economics-3e/pages/11-2-regulating-anticompetitive-behavior' },
   OS114:{ t:'OpenStax, Principles of Microeconomics (your course textbook), §11.4 (deregulation and regulatory capture); the link opens the same section in OpenStax Principles of Economics 3e', u:'https://openstax.org/books/principles-economics-3e/pages/11-4-the-great-deregulation-experiment' },
   OS121:{ t:'OpenStax, Principles of Microeconomics (your course textbook), §12.1 (the economics of pollution); the link opens the same section in OpenStax Principles of Economics 3e', u:'https://openstax.org/books/principles-economics-3e/pages/12-1-the-economics-of-pollution' },
@@ -79,6 +81,10 @@ Object.assign(GLOSS, {
   nit:{ t:'Negative income tax', d:'A plan where households below an income threshold receive a payment from the tax system instead of paying tax; the payment shrinks gradually as income rises.', home:'l37', src:['MS7','ELNIT'] },
   eitc:{ t:'Earned income tax credit (EITC)', d:'A U.S. tax credit for low-income workers that grows with earnings up to a point and phases out slowly, so working more still pays.', home:'l37', src:['OS143','ELNIT'] },
   'poverty-trap':{ t:'Poverty trap', d:'When aid is cut by about a dollar for each dollar earned, a poor person gains little or nothing by working more.', home:'l37', src:['OS142'] },
+  'real-wage':{ t:'Real wage', d:'A wage adjusted for inflation, so it measures buying power: what the pay can actually buy.', home:'l37', src:['MS7'] },
+  'food-insecure':{ t:'Food insecurity', d:'A household is food insecure if, at some time during the year, it did not always have enough food for an active, healthy life for all its members because it lacked money or other resources (USDA).', home:'l37', src:['MS7','USDAFS'] },
+  'winner-take-all':{ t:'Winner-take-all market', d:'A market where the very best performers earn far more than those only slightly less skilled, such as top athletes, entertainers and executives.', home:'l37', src:['OS144'] },
+  wealth:{ t:'Wealth', d:'The value of everything a household owns minus its debts, measured at a point in time. Income is a flow over a period; wealth is a stock.', home:'l37', src:['OS145'] },
   'progressive-tax':{ t:'Progressive tax', d:'A tax that takes a higher percentage of income from people with higher incomes, like the U.S. federal income tax.', home:'l37', src:['OS145'] }
 });
 
@@ -105,7 +111,7 @@ function u7cv(lesson, map){ (U7_CARDS[lesson]||[]).forEach(c => { if(map[c[0]] !
 /* Number choices listed smallest to largest (workbook convention), for Unit 7 items whose choices all start with a number. */
 function u7SortNumeric(){
   const U7L = new Set(['l33','l34','l35','l36','l37']);
-  const lead = t => { const m = String(t).replace(/<[^>]+>/g,'').replace(/−/g,'-').replace(/,(?=\d{3}\b)/g,'').match(/^\s*([+-]?)\$?\s*([+-]?\d+(?:\.\d+)?)/); return m ? parseFloat((m[1]||'')+m[2]) : null; };
+  const lead = t => { const m = String(t).replace(/<[^>]+>/g,'').replace(/−/g,'-').replace(/,(?=\d{3}\b)/g,'').match(/^\s*(?:About\s+)?([+-]?)\$?\s*([+-]?\d+(?:\.\d+)?)/); return m ? parseFloat((m[1]||'')+m[2]) : null; };
   const sortInst = q => {
     if(q.type!=='mc' || q.kind==='tf' || q.visual || !Array.isArray(q.options) || q.keepOrder) return q;
     const v = q.options.map(lead); if(v.some(x => x===null)) return q;
@@ -160,5 +166,19 @@ function u7ext(kind, aria){
     posBelow:{ lines:[S, D, {a:[1,7],b:[7,1],c:'var(--g2)',label:'X',lx:2,ly:-3}], vls:[{x:5,y:5},{x:4,y:4}], dots:[{x:5,y:5},{x:4,y:4}] },
     none:{ lines:[D, S], vls:[{x:5,y:5}], dots:[{x:5,y:5}] } }[kind];
   return u6mini({ ...spec, xlab:'Quantity', ylab:'Price', aria: aria || 'Graph' });
+}
+/* Bar chart of costs with a dashed horizontal "Tax" line at T (ubars default size: plot top 14, plot height 142, x from 40 to 284). */
+function u7barsTax(vals, T, opts){ const ymax = opts.ymax || Math.max(...vals, T) * 1.1, y = 14 + 142 * (1 - T/ymax);
+  return ubars(vals, { ...opts, ymax }).replace(/<\/svg>\s*$/, `<line x1="40" x2="284" y1="${y}" y2="${y}" stroke="var(--ink)" stroke-dasharray="6 4" stroke-width="1.6"/><text x="282" y="${y-5}" text-anchor="end" class="lbl-ink" style="font-size:11px">Tax ${usd7(T)}</text></svg>`); }
+
+/* Full-size, marked-up version of u7ext (same lines: D p = 10 − q, S p = q, X as in u7ext), for explanations of graph-choice items.
+   neg: market (5,5), optimum where X (p = q + 2) meets D: (4,6); DWL triangle (4,6), (5,5), (5,7). pos: X p = 12 − q meets S at (6,6); DWL (5,5), (5,7), (6,6). (checked by hand) */
+function u7extBig(kind, note){
+  const neg = kind==='neg', D = {a:[1,9],b:[9,1],c:DC,label:'D (MPB)',lx:-4,ly:-8,anchor:'end'}, S = {a:[1,1],b:[9,9],c:SC,label:'S (MPC)',lx:-4,ly:16,anchor:'end'};
+  const X = neg ? {a:[1,3],b:[7,9],c:'var(--bad)',label:'X = MSC',lx:-4,ly:-8,anchor:'end'} : {a:[3,9],b:[9,3],c:'var(--g2)',label:'X = MSB',lx:-4,ly:-8,anchor:'end'};
+  const opt = neg ? [4,6] : [6,6], tri = neg ? [[4,6],[5,5],[5,7]] : [[5,5],[5,7],[6,6]];
+  return fig(sdg({ xmax:10, ymax:10, xt:[], yt:[], xlab:'Quantity', ylab:'Price', aria:'Marked-up answer graph', lines: neg ? [D,S,X] : [S,D,X],
+    areas:[Object.assign({ pts:tri }, DWLF)], vls:[{q:5,p:5},{q:opt[0],p:opt[1]}],
+    dots:[{q:5,p:5,label:'Market',c:'var(--muted)',lx:neg?9:-9,ly:14,anchor:neg?'start':'end'},{q:opt[0],p:opt[1],label:'Optimum',c:'var(--ink)',lx:neg?-9:9,ly:-8,anchor:neg?'end':'start'}] }), note);
 }
 const extChoice = (k, ok) => ({ svg: L => u7ext(k, 'Graph ' + L), desc: XDESC[k], ok: !!ok });
