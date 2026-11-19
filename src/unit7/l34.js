@@ -46,7 +46,7 @@ FIG7.l34abate = () => fig(`<div class="qg" style="max-width:420px">${u7barsTax(A
 FIG7.l34why = () => fig(atable(['','Firm A ($200 a ton)','Firm B ($800 a ton)','Total cost'], [
   ['Same rule: each cuts 10 tons','10 tons: $2,000','10 tons: $8,000','<b>$10,000</b>'],
   ['Tax of $500 a ton emitted','20 tons: $4,000','0 tons; pays the tax','<b>$4,000</b>']
-], { cls:'u7t compact wrap', hl:{1:{row:'u3z2'}} }), 'Made-up numbers for the slide\'s argument. The same 20 tons get cut either way, but the tax lets the cheap cutter do all of it, saving $6,000 of real resources. (The tax Firm B pays, $500 on each ton it still emits, is a transfer to the government, not a resource used up.)');
+], { cls:'u7t compact wrap', hl:{1:{row:'u3z2'}} }), 'Made-up numbers for the slide\'s argument. Each firm can cut at most 20 tons. The same 20 tons get cut either way, but the tax lets the cheap cutter do all of it, saving $6,000 of real resources. (The tax Firm B pays, $500 on each ton it still emits, is a transfer to the government, not a resource used up.)');
 
 /* L34 V7: the course's two-firm permit trade (slide 264) */
 FIG7.l34trade = () => fig(flow([

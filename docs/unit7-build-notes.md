@@ -89,3 +89,17 @@ Reviewers were separate agents that never saw the builder's grades; each read th
 Cross-cutting: cell-level table highlights (td.u3z1/u3z2/u3z3) never rendered anywhere in the workbook because no CSS rule targets cells. Fixed for Unit 7 only with `.u3tbl.u7t td.*` in u7.css; Units 1-6 are untouched and still have the bug. Single-curve Lorenz labels moved inside the plot; text-only tables left-aligned (`u7l`). Numeric choices starting with "About" now sort smallest to largest.
 Not a Unit 7 change: the live page already drops 336 old question entries from Review when it loads data/progress.json (the earlier Review change that moved practice questions out of Review); the build does exactly the same.
 Verified during fixes: USDA ERS food-insecurity definition (new source USDAFS); Econlib "Minimum Wages" is by Linda Gorman and argues minimum wages reduce employment (search result text).
+
+### Round 2 (2026-11-19)
+| Lesson | Score | Result | Fixed after |
+| --- | --- | --- | --- |
+| L33 | 92.5 | failed learner checks | l33-gr-dwl axis labels (were Unit 6 "Wage/Quantity of labor") and hinting descriptions; l33-cbs rewritten (too close to CLEP sample Q7) |
+| L34 | 90 | failed G2 | command-and-control moved before corrective taxes (slide order 262, 263); EPA and pollution charge tap-to-define; l34why caption |
+| L35 | 95 | pass | amber second highlight; Hardin key no longer repeats stem |
+| L36 | 92.5 | pass | predatory-pricing citation now textbook §11.2 quote; merge2 order; breakup quote exact |
+| L37 | 87.5 | pass | none required |
+| Quiz | 21/22 | q7-reg-2 table inconsistent | rebuilt from MC $6, fixed cost $54, demand P = 30 − 2Q |
+Unit-level checks passed (coverage 11/11 in core, ~92% exam-focused, Units 1-6 unchanged, old progress identical, byte-identical rebuild).
+### Round 3 (2026-11-19, L33, L34, q7-reg-2 only; Eli approved the narrower scope)
+L34 pass (90), q7-reg-2 pass, L33 100 with all gates passing but one uncaptioned explanation table (l33-trumpet). Caption added; Eli approved publishing without a further review.
+Published to the live artifact 2026-11-19 (version 1795128292-cfdc). Open minor items: some explanation tables scroll sideways at 375 px (l33-fridge-q, l34 permit items); L34 has no analogy; a few weak numeric distractors; the Units 1-6 cell-highlight bug.
