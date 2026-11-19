@@ -46,7 +46,7 @@ FIG7.l34abate = () => fig(`<div class="qg" style="max-width:420px">${u7barsTax(A
 FIG7.l34why = () => fig(atable(['','Firm A ($200 a ton)','Firm B ($800 a ton)','Total cost'], [
   ['Same rule: each cuts 10 tons','10 tons: $2,000','10 tons: $8,000','<b>$10,000</b>'],
   ['Tax of $500 a ton emitted','20 tons: $4,000','0 tons; pays the tax','<b>$4,000</b>']
-], { cls:'u7t compact wrap', hl:{1:{row:'u3z2'}} }), 'Made-up numbers for the slide\'s argument. The same 20 tons get cut either way, but the tax lets the cheap cutter do all of it, saving $6,000 of real resources. (The $500 tax Firm B pays is a transfer to the government, not a resource used up.)');
+], { cls:'u7t compact wrap', hl:{1:{row:'u3z2'}} }), 'Made-up numbers for the slide\'s argument. The same 20 tons get cut either way, but the tax lets the cheap cutter do all of it, saving $6,000 of real resources. (The tax Firm B pays, $500 on each ton it still emits, is a transfer to the government, not a resource used up.)');
 
 /* L34 V7: the course's two-firm permit trade (slide 264) */
 FIG7.l34trade = () => fig(flow([
@@ -160,7 +160,7 @@ mc('l34-paythrow','l34','Some towns charge households for each bag of garbage th
   [`Households pay more when they throw away more, so they have a reason to throw away less and recycle more`,`They ban households from throwing anything away`,`They make garbage collection free`,`They pay households to produce more garbage`,`They require every household to throw away the same amount`],0,
   `<p>The textbook: "When people have a financial incentive to put out less garbage and to increase recycling, they find ways of doing so." Charging per unit of garbage works like a pollution charge at the household level.</p>`);
 mc('l34-sulfur','l34','The 1990 amendments to the Clean Air Act aimed to cut sulfur dioxide from power plants to half of 1980 levels. Which tool did they use?',
-  [`With marketable permits that shrank over time, given free to power plants`,`By banning all coal-burning power plants`,`With a fixed subsidy for each ton of sulfur dioxide emitted`,`By requiring every plant to install the same equipment and nothing else`,`By breaking up the largest power companies`],0,
+  [`Marketable permits, given free to power plants, that shrank over time`,`A ban on all coal-burning power plants`,`A fixed subsidy for each ton of sulfur dioxide emitted`,`A rule requiring every plant to install the same equipment`,`A breakup of the largest power companies`],0,
   `<p>The textbook: the law aimed to cut sulfur dioxide "to half of the 1980 levels"; the permits "were free of charge" and were "of the \'shrinkable\' type; that is, the amount of pollution allowed by a given permit declined with time."</p>`);
 mc('l34-delta','l34','A city caps lead emissions with tradable permits, handed out free to the firms already operating. A new firm, Delta, wants to start up and emit 50 tons. What must it do?',
   [`Buy permits for 50 tons from a firm with spare permits`,`Get new permits free from the government`,`Pay nothing, because new firms are exempt`,`Emit without permits, since the total is unchanged`,`Shut down a rival firm`],0,
@@ -260,6 +260,14 @@ ${FIG7.l34int()}
 <p><b>So what:</b> harmful spillovers call for policies that raise private cost (taxes, limits); helpful ones call for policies that raise private benefit (subsidies, tax breaks). Mixing these up is the classic exam trap.</p>
 <div data-check="l34c-int"></div>
 
+<h2>Command-and-control regulation</h2>
+<!-- src: MS7 (slide 262: "Command-and-control: Externalities can be corrected by requiring or forbidding certain behaviors. In the United States, the Environmental Protection Agency (EPA) develops and enforces regulations aimed at protecting the environment. EPA regulations include maximum levels of pollution allowed or required adoption of a particular technology to reduce emissions"; video 7.1: "command-and-control ... direct government regulations"); OS122 (definition; EPA 1970; Clean Air Act 1970; Clean Water Act 1972; "largely responsible for America's cleaner air and water"; three weaknesses: "no incentive to improve the quality of the environment beyond the standard"; "inflexible ... the same standard for all polluters"; "subject to compromises in the political process ... loopholes, and exceptions"). -->
+<p>${dt('command-control','<b>Command-and-control</b>')} rules correct a spillover "by requiring or forbidding certain behaviors" (slide 262). The ${dt('epa','Environmental Protection Agency (EPA)')} sets "maximum levels of pollution allowed or required adoption of a particular technology." The textbook dates the EPA and the Clean Air Act to 1970 and the Clean Water Act to 1972.</p>
+<p><b>Why it works:</b> a limit or a required filter raises the firm\'s cost of polluting, so the firm pollutes less (the next section shows a tax does the same through price). The textbook: these laws "have been largely responsible for America\'s cleaner air and water in recent decades."</p>
+<p><b>Its weaknesses</b>, from the textbook: (1) once a firm meets the rule it has "zero incentive to do better"; (2) the same standard applies to firms that could cut cheaply and firms that can\'t; (3) the rules come out of politics, so they are "full of fine print, loopholes, and exceptions."</p>
+${FIG7.l34cmp()}
+<div data-check="l34c-cc"></div>
+
 <h2>Corrective taxes and subsidies</h2>
 <!-- src: MS7 (slide 263: "Externalities can be internalized through the use of taxes and subsidies. Corrective tax: a tax designed to induce private decision makers to take account of the social costs that arise from a negative externality"; video 7.1: "taxes or ... quotas on pollution ... force the social cost to be taken into account ... the firm ends up producing less widgets"; "subsidies on education or laws that force people to stay in school until a given age"); OS121 ("If the firm is required to pay $100 for the additional external costs of pollution each time it produces a refrigerator ... the entire supply curve shifts up by $100"). The name "Pigovian" is standard usage (after economist Arthur Pigou); not in the course materials. -->
 <p>A ${dt('corrective-tax','<b>corrective tax</b>')} is, in your course\'s words, "a tax designed to induce private decision makers to take account of the social costs that arise from a negative externality." You may also meet the name "Pigovian tax," after economist Arthur Pigou; it isn\'t used in your course materials.</p>
@@ -274,17 +282,9 @@ ${FIG7.l34sub()}
 <p><b>So what:</b> the ideal tax or subsidy matches the spillover per unit, not the price and not the total damage.</p>
 <div data-check="l34c-tax"></div>
 
-<h2>Command-and-control regulation</h2>
-<!-- src: MS7 (slide 262: "Command-and-control: Externalities can be corrected by requiring or forbidding certain behaviors. In the United States, the Environmental Protection Agency (EPA) develops and enforces regulations aimed at protecting the environment. EPA regulations include maximum levels of pollution allowed or required adoption of a particular technology to reduce emissions"; video 7.1: "command-and-control ... direct government regulations"); OS122 (definition; EPA 1970; Clean Air Act 1970; Clean Water Act 1972; "largely responsible for America's cleaner air and water"; three weaknesses: "no incentive to improve the quality of the environment beyond the standard"; "inflexible ... the same standard for all polluters"; "subject to compromises in the political process ... loopholes, and exceptions"). -->
-<p>${dt('command-control','<b>Command-and-control</b>')} rules correct a spillover "by requiring or forbidding certain behaviors" (slide 262). The ${'Environmental Protection Agency (EPA)'} sets "maximum levels of pollution allowed or required adoption of a particular technology." The textbook dates the EPA and the Clean Air Act to 1970 and the Clean Water Act to 1972.</p>
-<p><b>Why it works:</b> a limit or a required filter raises the firm\'s cost of polluting, just as a tax does. The textbook: these laws "have been largely responsible for America\'s cleaner air and water in recent decades."</p>
-<p><b>Its weaknesses</b>, from the textbook: (1) once a firm meets the rule it has "zero incentive to do better"; (2) the same standard applies to firms that could cut cheaply and firms that can\'t; (3) the rules come out of politics, so they are "full of fine print, loopholes, and exceptions."</p>
-${FIG7.l34cmp()}
-<div data-check="l34c-cc"></div>
-
 <h2>Why economists prefer the tax</h2>
 <!-- src: MS7 (slide 263: "These taxes are preferred by economists over regulation, because firms that can reduce pollution with the least cost are likely to do so (to avoid the tax) while firms that encounter high costs when reducing pollution will simply pay the tax. Thus, this tax allows firms that face the highest cost of reducing pollution to continue to pollute while encouraging less pollution over all"); OS123 (pollution charge definition; Figure 12.3: $300, $500, $900, $1,500, $2,500 per 10 pounds; $1,000 tax → reduce by 30 pounds; "Firms that can reduce pollution cheaply and easily will do so ... whereas firms that will incur high costs ... will end up paying the pollution tax instead"; gasoline taxes; bottle deposits; pay-as-you-throw, over 7,000 communities). Two-firm numbers are made up. -->
-<p>Your course textbook calls a tax on emissions a pollution charge. Each firm compares two prices: what it costs to cut one more unit of pollution, and the tax it pays on that unit if it doesn\'t.</p>
+<p>Your course textbook calls a tax on emissions a ${dt('pollution-charge','pollution charge')}. Each firm compares two prices: what it costs to cut one more unit of pollution, and the tax it pays on that unit if it doesn\'t.</p>
 <p><b>Worked example: your course textbook\'s soot.</b> A small firm emits 50 pounds of soot a year. Cutting the first 10 pounds is cheap; each further 10 costs more, because "the firm can use the cheapest and easiest method to make initial reductions."</p>
 ${FIG7.l34abate()}
 <p>Check: the firm stops exactly where the next cut ($1,500) would cost more than the tax ($1,000), so it never pays more to cut than it saves in tax.</p>

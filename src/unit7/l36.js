@@ -135,7 +135,7 @@ mc('l36-natreg','l36',`Your course textbook\'s natural monopoly can be left alon
   `<p>At F, price equals average cost ($6.50 at 6 units), so the firm just covers its costs including a normal profit. Your textbook calls F "perhaps the most plausible option." C sets price equal to marginal cost, efficient but below the $5.70 average cost there, so the firm loses money without "an ongoing public subsidy" (M4). A is the unregulated monopoly; B raises average cost (M3).</p>`);
 mc('l36-breakup','l36','Why do economists generally argue against breaking up a natural monopoly such as a local water company?',
   [`Average cost falls with output, so two smaller firms would each produce at a higher average cost`,`Natural monopolies never charge high prices`,`Breaking up firms is illegal`,`Water is a public good`,`Smaller firms always collude`],0,
-  `<p>The textbook\'s point B: two half-size firms each producing 2 units have an average cost of $9.75, versus $7.75 for one firm producing 4. "Two smaller firms will always have higher average costs of production than one larger firm." Imagine four sets of water pipes under one city (M3).</p>${FIG7.l36nm()}`);
+  `<p>The textbook\'s point B: two half-size firms each producing 2 units have an average cost of $9.75, versus $7.75 for one firm producing 4. Your textbook: with a downward-sloping average cost curve, "two smaller firms will always have higher average costs of production than one larger firm for any quantity of total output." Imagine four sets of water pipes under one city (M3).</p>${FIG7.l36nm()}`);
 mc('l36-costplus','l36','What is the main weakness of cost-plus regulation of a natural monopoly?',
   [`Because the firm can pass its costs on to customers, it has little reason to keep costs down`,`It forces the firm to charge less than average cost`,`It lets the firm earn unlimited monopoly profits`,`It sets the price for many years without looking at costs`,`It breaks the firm into smaller pieces`],0,
   `<p>The textbook: "If producers are reimbursed for their costs, plus a bit more, then at a minimum, producers have less reason to be concerned with high costs." Worse, they may have "an incentive to generate high costs." Setting a price for years ahead is price cap regulation, the alternative.</p>${FIG7.l36cap()}`);
@@ -158,7 +158,7 @@ mc('l36-guide','l36','Under the 1980s FTC guidelines reported in your course tex
   [`Probably challenge it, because the HHI would be above 1,800`,`Probably approve it, because the HHI would be under 10,000`,`Examine it case by case, because it is between 1,000 and 2,500`,`Approve it automatically, because most mergers are approved`,`Block it, because any HHI above 1,000 is illegal`],0,
   `<p>The textbook: under 1,000, "probably approve"; over 1,800, "probably challenge"; between, case by case. 2,400 is above 1,800. The textbook adds that regulators now rely less on these cutoffs and more on case-by-case evidence.</p>`);
 mc('l36-merge2','l36',`In your course textbook\'s windshield market (shares 16%, 10%, 8%, seven firms at 6%, eight at 3%), the four-firm ratio is 40. What would it become if the two largest firms merged?`,
-  [`40`,`42`,`46`,`52`,`26`],2,
+  [`26`,`40`,`42`,`46`,`52`],3,
   `<p>The merged firm has 16 + 10 = 26%. The new top four: 26 + 8 + 6 + 6 = <b>46</b>, the textbook\'s answer. It adds that this "might barely raise an eyebrow," since the top four still hold less than half the market. 40 forgets that a 6% firm moves into the top four.</p>`);
 gen('l36-g-merge','l36',()=>{
   let a, b, rest; do { a = pick([10,15,20,25,30]); b = pick([10,15,20,25]); rest = 100 - a - b; } while(rest < 20 || a < b || rest % 10);
@@ -297,7 +297,7 @@ ${FIG7.l36laws()}
 ${FIG7.l36rules()}
 <p><b>Worked example: your course textbook\'s Microsoft case.</b> Microsoft\'s Windows had a near-monopoly. Regulators argued it used that power to win the browser market, by ${dt('tying-sale','tying')} Internet Explorer to Windows and threatening computer makers who installed a rival browser. In 2000 a court ordered a breakup; on appeal that was overturned, and in 2002 Microsoft settled by agreeing to end the practices.</p>
 <p>Check: the charge was the tactics, not the near-monopoly itself, consistent with "monopoly itself is not illegal."</p>
-<p><b>So what:</b> on the exam, an agreement among rivals on price or output is illegal; a big market share by itself is not. ${dt('predatory-pricing','Predatory pricing')} is illegal but hard to prove (your textbook says so in chapter 9), since cutting a price may just be competing.</p>
+<p><b>So what:</b> on the exam, an agreement among rivals on price or output is illegal; a big market share by itself is not. ${dt('predatory-pricing','Predatory pricing')} is illegal but hard to tell apart from ordinary competition. Your textbook (§11.2) asks of a firm that cuts its price to match a new entrant: "is this predatory pricing? Or is it just market competition at work?"</p>
 <div data-check="l36c-practice"></div>
 
 <h2>Mergers and measuring concentration</h2>

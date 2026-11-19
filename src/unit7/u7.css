@@ -1,4 +1,5 @@
 /* Unit 7: cell-level highlights in Unit 7 tables (row highlights already exist; scoped with .u7t so earlier units' tables are unchanged) */
-.u3tbl.u7t td.u3z1{background:var(--ok-soft)}.u3tbl.u7t td.u3z2{background:var(--accent-soft);font-weight:700}.u3tbl.u7t td.u3z3{background:var(--bad-soft)}
+:root{--u7amber:#f6e7c1}@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--u7amber:#3a311a}}:root[data-theme="dark"]{--u7amber:#3a311a}
+.u3tbl.u7t td.u3z1{background:var(--u7amber)}.u3tbl.u7t td.u3z2{background:var(--accent-soft);font-weight:700}.u3tbl.u7t td.u3z3{background:var(--bad-soft)}
 /* Text-only Unit 7 tables: left-align every column */
 .u3tbl.u7l td,.u3tbl.u7l th{text-align:left}

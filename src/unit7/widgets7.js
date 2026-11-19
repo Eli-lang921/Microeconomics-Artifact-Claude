@@ -58,7 +58,7 @@ W.taxlab = el => {
     const steps = k => k === 1 ? '1 step' : `${k} steps`;
     $('.msg', el).innerHTML = !T ? 'With no tax, polluting is free, so the firm cuts nothing.'
       : n === 0 ? `Every step costs more than the ${usd7(T)} tax, so the firm cuts nothing and pays the tax on all 50 pounds.`
-      : `The green steps cost no more than the ${usd7(T)} tax, so the firm cuts <b>${n*10} pounds</b>` + (n < 5 ? ` and pays ${usd7(T)} on each of the other ${steps(5-n)}.` : ' and pays no tax: the tax is at or above every step.') + (tie ? ` One step costs exactly the tax, so the firm doesn\'t care which it does; this widget counts it as cut.` : '');
+      : `The green steps cost no more than the ${usd7(T)} tax, so the firm cuts <b>${n*10} pounds</b>` + (n < 5 ? ` and pays ${usd7(T)} on the pollution from ${5-n === 1 ? 'the last step' : 'the other ' + (5-n) + ' steps'}.` : ' and pays no tax: the tax is at or above every step.') + (tie ? ` One step costs exactly the tax, so the firm doesn\'t care which it does; this widget counts it as cut.` : '');
   };
   S7.addEventListener('input', draw); draw();
 };
@@ -69,7 +69,7 @@ W.remsort = el => sorterWidget(el, { title:'Which kind of remedy?', hint:'Classi
   kinds:[['cc','Command-and-control'],['tax','Market-based: tax or permits'],['sub','Market-based: subsidy or tax break']],
   items:[
     ['The EPA sets the maximum amount of a pollutant a power plant may emit (your course\'s slide 262).','cc','A direct limit enforced by penalties is command-and-control.'],
-    ['Firms receive permits for 300 tons of pollution and may sell them to each other (your course\'s slide 264).','tax','Permits put a price on pollution and let firms trade: market-based.'],
+    ['Firms receive permits for 300 tons of pollution and may sell them to each other (based on your course\'s slide 264).','tax','Permits put a price on pollution and let firms trade: market-based.'],
     ['The government pays part of the cost of each year of college.','sub','A payment that raises the private benefit of a helpful activity is a subsidy.'],
     ['Every car must have a catalytic converter installed.','cc','Requiring a particular technology is command-and-control.'],
     ['A city charges households for each bag of garbage they put out (your textbook\'s "pay as you throw").','tax','A charge per unit of waste is a pollution charge: market-based.'],

@@ -161,7 +161,7 @@ gen('l35-g-commons','l35',()=>{
   };
 });
 mc('l35-hardin','l35','Who gave the overuse of common resources the name "Tragedy of the Commons," in a 1968 article?',
-  [`Ecologist Garrett Hardin, in a 1968 article`,`Economist Ronald Coase`,`Economist Milton Friedman`,`Economist Adam Smith`,`Economist Arthur Pigou`],0,
+  [`Ecologist Garrett Hardin`,`Economist Ronald Coase`,`Economist Milton Friedman`,`Economist Adam Smith`,`Economist Arthur Pigou`],0,
   `<p>The textbook: "ecologist Garret Hardin put the tag \'Tragedy of the Commons\' to the problem in a 1968 article in the magazine Science." (The textbook spells it "Garret"; Econlib spells it "Garrett.") Coase is the property-rights economist from Lesson 34.</p>`);
 mc('l35-social','l35','Besides taxes, which of the following can reduce free riding on a local public good?',
   [`Social pressure and personal appeals, such as neighborhood associations and fundraising drives`,`Charging each person a price to use the good`,`Making everyone use the good less`,`Making the good rival`,`Raising the price of the good`],0,
